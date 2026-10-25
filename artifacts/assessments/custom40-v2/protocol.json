@@ -1,0 +1,54 @@
+{
+  "created_at_utc": "2026-10-25T15:35:49.505310+00:00",
+  "status": "frozen_for_ai_diagnostic_assessment",
+  "assessor_type": "AI",
+  "authorization": "User explicitly requested assistant document relevance judgments; human approval is not a prerequisite",
+  "query_count": 40,
+  "pool_depth_per_engine": 20,
+  "pooled_pairs": 1444,
+  "priority_top5_pairs": 372,
+  "category_counts": {
+    "vocabulary_mismatch": 10,
+    "negation": 10,
+    "homonym": 10,
+    "temporal": 10
+  },
+  "corpus_sha256": "82086c5dc9397700ca6682d19f1a1cace8ace5defa31f7990ca3c28314ec61a9",
+  "eligible_documents": 594589,
+  "query_source_sha256": "72af733828de2409e5f983e69489f54354612b98574cc40210d3f61626b65b25",
+  "historical_status": "Exact source query/rubric bytes and status fields are preserved. This protocol authorizes AI assessment; no human review is claimed.",
+  "judgment_policy": {
+    "grades": "0 irrelevant/constraint violation; 1 relevant limited detail; 2 directly relevant substantive evidence",
+    "hard_constraints": "All mandatory inclusion constraints apply; omission alone is not proof of negation",
+    "temporal": "Inclusive event windows; date must be supported in article text; publication dates unavailable",
+    "mixed_articles": "An article may discuss opposing findings; judge whether it supplies the requested evidence, not whether every passage supports it",
+    "uncertainty": "Leave unresolved candidates unassessed; do not silently turn uncertainty into grade 0",
+    "evidence": "Read full title and body; retain exact quotations and Unicode character offsets into (title + newline + body).strip()",
+    "blinding": "Article packets omit engine/rank/score. Assessor has seen some prior results; perfect blindness is not claimed.",
+    "freeze_timing": "This pool protocol is generated after retrieval. Query-design timing and prior result exposure must be documented in the source study protocol; no preregistration is claimed here.",
+    "independence": "AI diagnostic labels, not human gold. No independent inter-assessor agreement is claimed."
+  },
+  "evaluation_policy": {
+    "ndcg": "Linear 0–2 gains; report only for queries with complete top-five union judgments; ideal ranking uses assessed pool positives",
+    "map": "MAP@1000 only after the designated pool is complete; shallow-pool estimate, unassessed != confirmed irrelevant",
+    "pilot": "Partial query coverage must be explicit; never publish a partial pilot as an aggregate over the full query suite",
+    "original_qrels": "Do not change or merge the original 57-query qrels"
+  },
+  "runs": {
+    "bm25": {
+      "path": "/Users/parthraghuvanshi/Desktop/IR/artifacts/runs/bm25-custom40-v2",
+      "manifest_sha256": "b27982a35aa57602d5f66e887dfa5a63e729000e530d7bd2ee583e61cee7223e",
+      "run_sha256": "420deb227e17527e49e54ca7870ce885e66cf025df2b3882920dfaca55c05f5a"
+    },
+    "dense": {
+      "path": "/Users/parthraghuvanshi/Desktop/IR/artifacts/runs/dense-custom40-v2",
+      "manifest_sha256": "7d6072a1bb4ea9164a81624b1eb062889e7bc8f8e40f5946428a42ada2446bd9",
+      "run_sha256": "fe8aad4fd44172ac4949e586ae6a77d32241954f8d73de898046a284b77832ac"
+    }
+  },
+  "files": {
+    "articles.blinded.jsonl": "7ce9cd5ac3962cd1737ce6ba528ddb1c853f47912300e7bc679d9454515eeee8",
+    "pool.provenance.jsonl": "be25034448a3d32d17a0e5173e139b59cd7b4ff3beb68b91f7790823f0b23807",
+    "queries.jsonl": "72af733828de2409e5f983e69489f54354612b98574cc40210d3f61626b65b25"
+  }
+}

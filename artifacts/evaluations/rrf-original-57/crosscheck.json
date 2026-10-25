@@ -1,0 +1,42 @@
+{
+  "primary": {
+    "status": "passed",
+    "comparisons": 406,
+    "max_absolute_difference": 4.9864629801055216e-05,
+    "empty_query_zero_metrics_checked": 0,
+    "tolerance": 5.1e-05,
+    "precision_note": "trec_eval prints four decimal places",
+    "ranking_policy": "Derived scores 1001-rank preserve original published order, including score ties",
+    "version": "trec_eval version 9.0.4"
+  },
+  "exp2_gain": {
+    "status": "passed",
+    "comparisons": 406,
+    "max_absolute_difference": 4.9864629801055216e-05,
+    "empty_query_zero_metrics_checked": 0,
+    "tolerance": 5.1e-05,
+    "precision_note": "trec_eval prints four decimal places",
+    "ranking_policy": "Derived scores 1001-rank preserve original published order, including score ties",
+    "version": "trec_eval version 9.0.4"
+  },
+  "news2019_gain": {
+    "status": "passed",
+    "comparisons": 406,
+    "max_absolute_difference": 4.9864629801055216e-05,
+    "empty_query_zero_metrics_checked": 0,
+    "tolerance": 5.1e-05,
+    "precision_note": "trec_eval prints four decimal places",
+    "ranking_policy": "Derived scores 1001-rank preserve original published order, including score ties",
+    "version": "trec_eval version 9.0.4"
+  },
+  "available_corpus": {
+    "status": "passed",
+    "comparisons": 406,
+    "max_absolute_difference": 4.9864629801055216e-05,
+    "empty_query_zero_metrics_checked": 0,
+    "tolerance": 5.1e-05,
+    "precision_note": "trec_eval prints four decimal places",
+    "ranking_policy": "Derived scores 1001-rank preserve original published order, including score ties",
+    "version": "trec_eval version 9.0.4"
+  }
+}

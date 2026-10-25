@@ -1,0 +1,23 @@
+{
+  "name": "original-57-news-benchmark-v1",
+  "queries": "queries.jsonl",
+  "qrels": "qrel.jsonl",
+  "query_count": 57,
+  "retrieval_depth": 1000,
+  "primary_metrics": ["ndcg_at_5", "ap_at_1000"],
+  "primary_ndcg_gain": "linear: supplied grade 0,1,2,3,4",
+  "additional_ndcg_gain": "exp2: 2^grade - 1",
+  "verified_news2019_gain_sensitivity": "0 for grade 0, else 2^grade; include after independent full-pair provenance audit",
+  "binary_relevance": "grade > 0",
+  "unjudged_policy": "zero gain/relevance contribution without removing unjudged ranks; report judged coverage",
+  "missing_document_policy": "retain all original judgments in primary IDCG and AP denominators",
+  "sensitivity": "evaluate the same rankings against qrels restricted to shared eligible documents",
+  "zero_relevant_policy": "score zero and retain the query in macro averages",
+  "query_weighting": "equal weight over all 57 queries",
+  "ranking_order": "published rank order; derived strictly descending rank scores for trec_eval cross-check",
+  "self_document_policy": "no inferred exclusions based only on matching article titles; same retrieval corpus for both engines",
+  "bootstrap_samples": 10000,
+  "bootstrap_seed": 20261024,
+  "crosscheck": "independent trec_eval bundled with Anserini; four-decimal output tolerance 0.000051",
+  "status": "protocol recorded before computing comparison metrics; parameters are not tuned on these judgments"
+}

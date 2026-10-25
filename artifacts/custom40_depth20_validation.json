@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "custom_queries": 40,
+  "assessed_pairs": 1444,
+  "source_evidence_visibility_checks": 1444,
+  "extension_pairs": 707,
+  "original_pairs_byte_preserved": 737,
+  "distinct_demo_queries": 97,
+  "saved_view_rows": 117,
+  "gain_modes_recomputed": [
+    "linear",
+    "exp2"
+  ],
+  "family_bootstrap_recomputed": [
+    37,
+    35
+  ],
+  "assessment_completion_sha256": "de82276a2500a247d4c2bc9e22349eb4aefeaf0db849a43b8da8890d704622d7"
+}

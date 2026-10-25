@@ -1,0 +1,39 @@
+{
+  "created_at_utc": "2026-10-24T15:06:01.442482+00:00",
+  "engine": "lucene-bm25",
+  "run_tag": "bm25",
+  "index_path": "/Users/parthraghuvanshi/Desktop/IR/artifacts/indexes/bm25",
+  "index_manifest_sha256": "bad1d8529f8901f67d9eaa5671f87c68cce6334be7866ed83e6f86d25438605c",
+  "corpus_sha256": "82086c5dc9397700ca6682d19f1a1cace8ace5defa31f7990ca3c28314ec61a9",
+  "query_source_sha256": "e0a8d8ec3b80cc06f07cbd1a72a48b7da30a7a7e00bda085e2701cb4dfc9737f",
+  "query_snapshot_sha256": "5b126059e9b37a32af129972f9160fd1448a5e93349c260986b91f407d5deb4c",
+  "query_count": 57,
+  "top_k": 1000,
+  "total_hits": 57000,
+  "empty_query_ids": [],
+  "coverage": "full",
+  "retrieval_config": {
+    "k1": 0.9,
+    "b": 0.4
+  },
+  "latency_ms": {
+    "mean": 135.7795767477926,
+    "median": 82.90070807561278,
+    "min": 43.29983307980001,
+    "max": 580.8532908558846
+  },
+  "latency_protocol": "Sequential search including query analysis; first query is cold; excludes JVM startup and article lookup",
+  "runtime_python": "3.12.9",
+  "run_sha256": "ead8071494f6aa790c771c6927e04117dc62d978d3f4cfe338313aaaf4920cb1",
+  "results_sha256": "6e9d3d411df75d026553d5886567e70a0626cd130c464a12efdf5d3bc36b8fae",
+  "evaluation": "No relevance metrics computed; this command exports retrieval runs only",
+  "bm25": {
+    "k1": 0.9,
+    "b": 0.4
+  },
+  "analyzer": {
+    "language": "en",
+    "stemming": false,
+    "stopwords_removed": false
+  }
+}

@@ -1,0 +1,1218 @@
+{
+  "baseline": {
+    "bm25": {
+      "per_query": {
+        "V01": {
+          "fixed_reference_ndcg_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "unique_content_ndcg_at_5": 0.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 3
+        },
+        "V02": {
+          "fixed_reference_ndcg_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "unique_content_ndcg_at_5": 0.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "V03": {
+          "fixed_reference_ndcg_at_5": 0.5760497434079799,
+          "precision_at_5": 0.8,
+          "unique_content_ndcg_at_5": 0.5760497434079799,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "V04": {
+          "fixed_reference_ndcg_at_5": 0.3391602052736161,
+          "precision_at_5": 0.2,
+          "unique_content_ndcg_at_5": 0.3391602052736161,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "V05": {
+          "fixed_reference_ndcg_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "unique_content_ndcg_at_5": 0.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "N01": {
+          "fixed_reference_ndcg_at_5": 0.46927872602275644,
+          "precision_at_5": 0.2,
+          "unique_content_ndcg_at_5": 0.6131471927654584,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "N02": {
+          "fixed_reference_ndcg_at_5": 0.650392590074575,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.650392590074575,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "N03": {
+          "fixed_reference_ndcg_at_5": 0.6608397947263839,
+          "precision_at_5": 0.8,
+          "unique_content_ndcg_at_5": 0.6608397947263839,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "N04": {
+          "fixed_reference_ndcg_at_5": 0.669580102636808,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.44615333764087994,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 2
+        },
+        "N05": {
+          "fixed_reference_ndcg_at_5": 0.5730341749213532,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.5730341749213532,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H01": {
+          "fixed_reference_ndcg_at_5": 0.6843515475204855,
+          "precision_at_5": 0.6,
+          "unique_content_ndcg_at_5": 0.6843515475204855,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H02": {
+          "fixed_reference_ndcg_at_5": 0.08447695052975514,
+          "precision_at_5": 0.2,
+          "unique_content_ndcg_at_5": 0.08447695052975514,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H03": {
+          "fixed_reference_ndcg_at_5": 0.8930068676327362,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.8930068676327362,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H04": {
+          "fixed_reference_ndcg_at_5": 0.7227265726449519,
+          "precision_at_5": 0.6,
+          "unique_content_ndcg_at_5": 0.7227265726449519,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H05": {
+          "fixed_reference_ndcg_at_5": 0.7860137352654724,
+          "precision_at_5": 0.8,
+          "unique_content_ndcg_at_5": 0.7860137352654724,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T01": {
+          "fixed_reference_ndcg_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "unique_content_ndcg_at_5": 0.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T02": {
+          "fixed_reference_ndcg_at_5": 0.26481735860702105,
+          "precision_at_5": 0.6,
+          "unique_content_ndcg_at_5": 0.26481735860702105,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T03": {
+          "fixed_reference_ndcg_at_5": 0.8539316501572937,
+          "precision_at_5": 0.8,
+          "unique_content_ndcg_at_5": 0.8539316501572937,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T04": {
+          "fixed_reference_ndcg_at_5": 0.5296347172140421,
+          "precision_at_5": 0.6,
+          "unique_content_ndcg_at_5": 0.5296347172140421,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T05": {
+          "fixed_reference_ndcg_at_5": 0.48522855511632257,
+          "precision_at_5": 0.4,
+          "unique_content_ndcg_at_5": 0.48522855511632257,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        }
+      },
+      "aggregate": {
+        "fixed_reference_ndcg_at_5": 0.46212616458757766,
+        "precision_at_5": 0.53,
+        "unique_content_ndcg_at_5": 0.4581482496749164,
+        "displayed_at_5": 5.0,
+        "unique_contents_at_5": 4.75
+      }
+    },
+    "dense": {
+      "per_query": {
+        "V01": {
+          "fixed_reference_ndcg_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "unique_content_ndcg_at_5": 0.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "V02": {
+          "fixed_reference_ndcg_at_5": 0.3065735963827292,
+          "precision_at_5": 0.2,
+          "unique_content_ndcg_at_5": 0.3065735963827292,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "V03": {
+          "fixed_reference_ndcg_at_5": 0.5952372559702129,
+          "precision_at_5": 0.8,
+          "unique_content_ndcg_at_5": 0.5952372559702129,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "V04": {
+          "fixed_reference_ndcg_at_5": 0.8421757737602428,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.8421757737602428,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "V05": {
+          "fixed_reference_ndcg_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "unique_content_ndcg_at_5": 0.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "N01": {
+          "fixed_reference_ndcg_at_5": 0.7653606369886217,
+          "precision_at_5": 0.4,
+          "unique_content_ndcg_at_5": 0.6131471927654584,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 3
+        },
+        "N02": {
+          "fixed_reference_ndcg_at_5": 0.4226415848467783,
+          "precision_at_5": 0.6,
+          "unique_content_ndcg_at_5": 0.4226415848467783,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "N03": {
+          "fixed_reference_ndcg_at_5": 0.14606834984270645,
+          "precision_at_5": 0.2,
+          "unique_content_ndcg_at_5": 0.14606834984270645,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 4
+        },
+        "N04": {
+          "fixed_reference_ndcg_at_5": 0.8274043288765652,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.8274043288765652,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "N05": {
+          "fixed_reference_ndcg_at_5": 0.934397461243829,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.934397461243829,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H01": {
+          "fixed_reference_ndcg_at_5": 0.8613632863224759,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.8613632863224759,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H02": {
+          "fixed_reference_ndcg_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "unique_content_ndcg_at_5": 0.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 1
+        },
+        "H03": {
+          "fixed_reference_ndcg_at_5": 0.9269658250786468,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.9269658250786468,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H04": {
+          "fixed_reference_ndcg_at_5": 0.7469385177900298,
+          "precision_at_5": 0.8,
+          "unique_content_ndcg_at_5": 0.7469385177900298,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H05": {
+          "fixed_reference_ndcg_at_5": 1.0,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 1.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T01": {
+          "fixed_reference_ndcg_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "unique_content_ndcg_at_5": 0.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T02": {
+          "fixed_reference_ndcg_at_5": 0.6608397947263839,
+          "precision_at_5": 0.8,
+          "unique_content_ndcg_at_5": 0.6608397947263839,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T03": {
+          "fixed_reference_ndcg_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "unique_content_ndcg_at_5": 0.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 4
+        },
+        "T04": {
+          "fixed_reference_ndcg_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "unique_content_ndcg_at_5": 0.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 4
+        },
+        "T05": {
+          "fixed_reference_ndcg_at_5": 0.7573857224418388,
+          "precision_at_5": 0.8,
+          "unique_content_ndcg_at_5": 0.7573857224418388,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        }
+      },
+      "aggregate": {
+        "fixed_reference_ndcg_at_5": 0.489667606713553,
+        "precision_at_5": 0.53,
+        "unique_content_ndcg_at_5": 0.4820569345023949,
+        "displayed_at_5": 5.0,
+        "unique_contents_at_5": 4.55
+      }
+    }
+  },
+  "no_empty_body": {
+    "bm25": {
+      "per_query": {
+        "V01": {
+          "fixed_reference_ndcg_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "unique_content_ndcg_at_5": 0.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 3
+        },
+        "V02": {
+          "fixed_reference_ndcg_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "unique_content_ndcg_at_5": 0.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "V03": {
+          "fixed_reference_ndcg_at_5": 0.5760497434079799,
+          "precision_at_5": 0.8,
+          "unique_content_ndcg_at_5": 0.5760497434079799,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "V04": {
+          "fixed_reference_ndcg_at_5": 0.3391602052736161,
+          "precision_at_5": 0.2,
+          "unique_content_ndcg_at_5": 0.3391602052736161,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "V05": {
+          "fixed_reference_ndcg_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "unique_content_ndcg_at_5": 0.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "N01": {
+          "fixed_reference_ndcg_at_5": 0.46927872602275644,
+          "precision_at_5": 0.2,
+          "unique_content_ndcg_at_5": 0.6131471927654584,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "N02": {
+          "fixed_reference_ndcg_at_5": 0.650392590074575,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.650392590074575,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "N03": {
+          "fixed_reference_ndcg_at_5": 0.6608397947263839,
+          "precision_at_5": 0.8,
+          "unique_content_ndcg_at_5": 0.6608397947263839,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "N04": {
+          "fixed_reference_ndcg_at_5": 0.669580102636808,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.44615333764087994,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 2
+        },
+        "N05": {
+          "fixed_reference_ndcg_at_5": 0.5730341749213532,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.5730341749213532,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H01": {
+          "fixed_reference_ndcg_at_5": 0.6843515475204855,
+          "precision_at_5": 0.6,
+          "unique_content_ndcg_at_5": 0.6843515475204855,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H02": {
+          "fixed_reference_ndcg_at_5": 0.08447695052975514,
+          "precision_at_5": 0.2,
+          "unique_content_ndcg_at_5": 0.08447695052975514,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H03": {
+          "fixed_reference_ndcg_at_5": 0.8930068676327362,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.8930068676327362,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H04": {
+          "fixed_reference_ndcg_at_5": 0.7227265726449519,
+          "precision_at_5": 0.6,
+          "unique_content_ndcg_at_5": 0.7227265726449519,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H05": {
+          "fixed_reference_ndcg_at_5": 0.7860137352654724,
+          "precision_at_5": 0.8,
+          "unique_content_ndcg_at_5": 0.7860137352654724,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T01": {
+          "fixed_reference_ndcg_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "unique_content_ndcg_at_5": 0.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T02": {
+          "fixed_reference_ndcg_at_5": 0.26481735860702105,
+          "precision_at_5": 0.6,
+          "unique_content_ndcg_at_5": 0.26481735860702105,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T03": {
+          "fixed_reference_ndcg_at_5": 0.8539316501572937,
+          "precision_at_5": 0.8,
+          "unique_content_ndcg_at_5": 0.8539316501572937,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T04": {
+          "fixed_reference_ndcg_at_5": 0.5296347172140421,
+          "precision_at_5": 0.6,
+          "unique_content_ndcg_at_5": 0.5296347172140421,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T05": {
+          "fixed_reference_ndcg_at_5": 0.48522855511632257,
+          "precision_at_5": 0.4,
+          "unique_content_ndcg_at_5": 0.48522855511632257,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        }
+      },
+      "aggregate": {
+        "fixed_reference_ndcg_at_5": 0.46212616458757766,
+        "precision_at_5": 0.53,
+        "unique_content_ndcg_at_5": 0.4581482496749164,
+        "displayed_at_5": 5.0,
+        "unique_contents_at_5": 4.75
+      }
+    },
+    "dense": {
+      "per_query": {
+        "V01": {
+          "fixed_reference_ndcg_at_5": 0.13120507751234178,
+          "precision_at_5": 0.2,
+          "unique_content_ndcg_at_5": 0.13120507751234178,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "V02": {
+          "fixed_reference_ndcg_at_5": 0.3065735963827292,
+          "precision_at_5": 0.2,
+          "unique_content_ndcg_at_5": 0.3065735963827292,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "V03": {
+          "fixed_reference_ndcg_at_5": 0.5952372559702129,
+          "precision_at_5": 0.8,
+          "unique_content_ndcg_at_5": 0.5952372559702129,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "V04": {
+          "fixed_reference_ndcg_at_5": 0.8421757737602428,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.8421757737602428,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "V05": {
+          "fixed_reference_ndcg_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "unique_content_ndcg_at_5": 0.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "N01": {
+          "fixed_reference_ndcg_at_5": 0.7653606369886217,
+          "precision_at_5": 0.4,
+          "unique_content_ndcg_at_5": 0.6131471927654584,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 3
+        },
+        "N02": {
+          "fixed_reference_ndcg_at_5": 0.5531464700081437,
+          "precision_at_5": 0.6,
+          "unique_content_ndcg_at_5": 0.5531464700081437,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "N03": {
+          "fixed_reference_ndcg_at_5": 0.36005461457723403,
+          "precision_at_5": 0.4,
+          "unique_content_ndcg_at_5": 0.36005461457723403,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "N04": {
+          "fixed_reference_ndcg_at_5": 0.8274043288765652,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.8274043288765652,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "N05": {
+          "fixed_reference_ndcg_at_5": 0.934397461243829,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.934397461243829,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H01": {
+          "fixed_reference_ndcg_at_5": 0.8613632863224759,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.8613632863224759,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H02": {
+          "fixed_reference_ndcg_at_5": 0.47878355088085833,
+          "precision_at_5": 0.6,
+          "unique_content_ndcg_at_5": 0.47878355088085833,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H03": {
+          "fixed_reference_ndcg_at_5": 0.9269658250786468,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.9269658250786468,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H04": {
+          "fixed_reference_ndcg_at_5": 0.7469385177900298,
+          "precision_at_5": 0.8,
+          "unique_content_ndcg_at_5": 0.7469385177900298,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H05": {
+          "fixed_reference_ndcg_at_5": 1.0,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 1.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T01": {
+          "fixed_reference_ndcg_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "unique_content_ndcg_at_5": 0.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T02": {
+          "fixed_reference_ndcg_at_5": 0.6608397947263839,
+          "precision_at_5": 0.8,
+          "unique_content_ndcg_at_5": 0.6608397947263839,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T03": {
+          "fixed_reference_ndcg_at_5": 0.23518264139297895,
+          "precision_at_5": 0.4,
+          "unique_content_ndcg_at_5": 0.23518264139297895,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T04": {
+          "fixed_reference_ndcg_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "unique_content_ndcg_at_5": 0.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T05": {
+          "fixed_reference_ndcg_at_5": 0.7573857224418388,
+          "precision_at_5": 0.8,
+          "unique_content_ndcg_at_5": 0.7573857224418388,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        }
+      },
+      "aggregate": {
+        "fixed_reference_ndcg_at_5": 0.5491507276976566,
+        "precision_at_5": 0.6,
+        "unique_content_ndcg_at_5": 0.5415400554864985,
+        "displayed_at_5": 5.0,
+        "unique_contents_at_5": 4.9
+      }
+    }
+  },
+  "deduplicate": {
+    "bm25": {
+      "per_query": {
+        "V01": {
+          "fixed_reference_ndcg_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "unique_content_ndcg_at_5": 0.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "V02": {
+          "fixed_reference_ndcg_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "unique_content_ndcg_at_5": 0.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "V03": {
+          "fixed_reference_ndcg_at_5": 0.5760497434079799,
+          "precision_at_5": 0.8,
+          "unique_content_ndcg_at_5": 0.5760497434079799,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "V04": {
+          "fixed_reference_ndcg_at_5": 0.3391602052736161,
+          "precision_at_5": 0.2,
+          "unique_content_ndcg_at_5": 0.3391602052736161,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "V05": {
+          "fixed_reference_ndcg_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "unique_content_ndcg_at_5": 0.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "N01": {
+          "fixed_reference_ndcg_at_5": 0.46927872602275644,
+          "precision_at_5": 0.2,
+          "unique_content_ndcg_at_5": 0.6131471927654584,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "N02": {
+          "fixed_reference_ndcg_at_5": 0.650392590074575,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.650392590074575,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "N03": {
+          "fixed_reference_ndcg_at_5": 0.6608397947263839,
+          "precision_at_5": 0.8,
+          "unique_content_ndcg_at_5": 0.6608397947263839,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "N04": {
+          "fixed_reference_ndcg_at_5": 0.7543701539552121,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.7543701539552121,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "N05": {
+          "fixed_reference_ndcg_at_5": 0.5730341749213532,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.5730341749213532,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H01": {
+          "fixed_reference_ndcg_at_5": 0.6843515475204855,
+          "precision_at_5": 0.6,
+          "unique_content_ndcg_at_5": 0.6843515475204855,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H02": {
+          "fixed_reference_ndcg_at_5": 0.08447695052975514,
+          "precision_at_5": 0.2,
+          "unique_content_ndcg_at_5": 0.08447695052975514,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H03": {
+          "fixed_reference_ndcg_at_5": 0.8930068676327362,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.8930068676327362,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H04": {
+          "fixed_reference_ndcg_at_5": 0.7227265726449519,
+          "precision_at_5": 0.6,
+          "unique_content_ndcg_at_5": 0.7227265726449519,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H05": {
+          "fixed_reference_ndcg_at_5": 0.7860137352654724,
+          "precision_at_5": 0.8,
+          "unique_content_ndcg_at_5": 0.7860137352654724,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T01": {
+          "fixed_reference_ndcg_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "unique_content_ndcg_at_5": 0.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T02": {
+          "fixed_reference_ndcg_at_5": 0.26481735860702105,
+          "precision_at_5": 0.6,
+          "unique_content_ndcg_at_5": 0.26481735860702105,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T03": {
+          "fixed_reference_ndcg_at_5": 0.8539316501572937,
+          "precision_at_5": 0.8,
+          "unique_content_ndcg_at_5": 0.8539316501572937,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T04": {
+          "fixed_reference_ndcg_at_5": 0.5296347172140421,
+          "precision_at_5": 0.6,
+          "unique_content_ndcg_at_5": 0.5296347172140421,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T05": {
+          "fixed_reference_ndcg_at_5": 0.48522855511632257,
+          "precision_at_5": 0.4,
+          "unique_content_ndcg_at_5": 0.48522855511632257,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        }
+      },
+      "aggregate": {
+        "fixed_reference_ndcg_at_5": 0.4663656671534978,
+        "precision_at_5": 0.53,
+        "unique_content_ndcg_at_5": 0.47355909049063294,
+        "displayed_at_5": 5.0,
+        "unique_contents_at_5": 5.0
+      }
+    },
+    "dense": {
+      "per_query": {
+        "V01": {
+          "fixed_reference_ndcg_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "unique_content_ndcg_at_5": 0.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "V02": {
+          "fixed_reference_ndcg_at_5": 0.3065735963827292,
+          "precision_at_5": 0.2,
+          "unique_content_ndcg_at_5": 0.3065735963827292,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "V03": {
+          "fixed_reference_ndcg_at_5": 0.5952372559702129,
+          "precision_at_5": 0.8,
+          "unique_content_ndcg_at_5": 0.5952372559702129,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "V04": {
+          "fixed_reference_ndcg_at_5": 0.8421757737602428,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.8421757737602428,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "V05": {
+          "fixed_reference_ndcg_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "unique_content_ndcg_at_5": 0.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "N01": {
+          "fixed_reference_ndcg_at_5": 0.6508205185601091,
+          "precision_at_5": 0.4,
+          "unique_content_ndcg_at_5": 0.8503449055347546,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "N02": {
+          "fixed_reference_ndcg_at_5": 0.4226415848467783,
+          "precision_at_5": 0.6,
+          "unique_content_ndcg_at_5": 0.4226415848467783,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "N03": {
+          "fixed_reference_ndcg_at_5": 0.30078518014914984,
+          "precision_at_5": 0.4,
+          "unique_content_ndcg_at_5": 0.30078518014914984,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "N04": {
+          "fixed_reference_ndcg_at_5": 0.8274043288765652,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.8274043288765652,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "N05": {
+          "fixed_reference_ndcg_at_5": 0.934397461243829,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.934397461243829,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H01": {
+          "fixed_reference_ndcg_at_5": 0.8613632863224759,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.8613632863224759,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H02": {
+          "fixed_reference_ndcg_at_5": 0.2725704145569316,
+          "precision_at_5": 0.4,
+          "unique_content_ndcg_at_5": 0.2725704145569316,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H03": {
+          "fixed_reference_ndcg_at_5": 0.9269658250786468,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.9269658250786468,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H04": {
+          "fixed_reference_ndcg_at_5": 0.7469385177900298,
+          "precision_at_5": 0.8,
+          "unique_content_ndcg_at_5": 0.7469385177900298,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H05": {
+          "fixed_reference_ndcg_at_5": 1.0,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 1.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T01": {
+          "fixed_reference_ndcg_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "unique_content_ndcg_at_5": 0.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T02": {
+          "fixed_reference_ndcg_at_5": 0.6608397947263839,
+          "precision_at_5": 0.8,
+          "unique_content_ndcg_at_5": 0.6608397947263839,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T03": {
+          "fixed_reference_ndcg_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "unique_content_ndcg_at_5": 0.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T04": {
+          "fixed_reference_ndcg_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "unique_content_ndcg_at_5": 0.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T05": {
+          "fixed_reference_ndcg_at_5": 0.7573857224418388,
+          "precision_at_5": 0.8,
+          "unique_content_ndcg_at_5": 0.7573857224418388,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        }
+      },
+      "aggregate": {
+        "fixed_reference_ndcg_at_5": 0.5053049630352962,
+        "precision_at_5": 0.56,
+        "unique_content_ndcg_at_5": 0.5152811823840284,
+        "displayed_at_5": 5.0,
+        "unique_contents_at_5": 5.0
+      }
+    }
+  },
+  "no_empty_body_and_deduplicate": {
+    "bm25": {
+      "per_query": {
+        "V01": {
+          "fixed_reference_ndcg_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "unique_content_ndcg_at_5": 0.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "V02": {
+          "fixed_reference_ndcg_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "unique_content_ndcg_at_5": 0.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "V03": {
+          "fixed_reference_ndcg_at_5": 0.5760497434079799,
+          "precision_at_5": 0.8,
+          "unique_content_ndcg_at_5": 0.5760497434079799,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "V04": {
+          "fixed_reference_ndcg_at_5": 0.3391602052736161,
+          "precision_at_5": 0.2,
+          "unique_content_ndcg_at_5": 0.3391602052736161,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "V05": {
+          "fixed_reference_ndcg_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "unique_content_ndcg_at_5": 0.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "N01": {
+          "fixed_reference_ndcg_at_5": 0.46927872602275644,
+          "precision_at_5": 0.2,
+          "unique_content_ndcg_at_5": 0.6131471927654584,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "N02": {
+          "fixed_reference_ndcg_at_5": 0.650392590074575,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.650392590074575,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "N03": {
+          "fixed_reference_ndcg_at_5": 0.6608397947263839,
+          "precision_at_5": 0.8,
+          "unique_content_ndcg_at_5": 0.6608397947263839,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "N04": {
+          "fixed_reference_ndcg_at_5": 0.7543701539552121,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.7543701539552121,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "N05": {
+          "fixed_reference_ndcg_at_5": 0.5730341749213532,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.5730341749213532,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H01": {
+          "fixed_reference_ndcg_at_5": 0.6843515475204855,
+          "precision_at_5": 0.6,
+          "unique_content_ndcg_at_5": 0.6843515475204855,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H02": {
+          "fixed_reference_ndcg_at_5": 0.08447695052975514,
+          "precision_at_5": 0.2,
+          "unique_content_ndcg_at_5": 0.08447695052975514,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H03": {
+          "fixed_reference_ndcg_at_5": 0.8930068676327362,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.8930068676327362,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H04": {
+          "fixed_reference_ndcg_at_5": 0.7227265726449519,
+          "precision_at_5": 0.6,
+          "unique_content_ndcg_at_5": 0.7227265726449519,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H05": {
+          "fixed_reference_ndcg_at_5": 0.7860137352654724,
+          "precision_at_5": 0.8,
+          "unique_content_ndcg_at_5": 0.7860137352654724,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T01": {
+          "fixed_reference_ndcg_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "unique_content_ndcg_at_5": 0.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T02": {
+          "fixed_reference_ndcg_at_5": 0.26481735860702105,
+          "precision_at_5": 0.6,
+          "unique_content_ndcg_at_5": 0.26481735860702105,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T03": {
+          "fixed_reference_ndcg_at_5": 0.8539316501572937,
+          "precision_at_5": 0.8,
+          "unique_content_ndcg_at_5": 0.8539316501572937,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T04": {
+          "fixed_reference_ndcg_at_5": 0.5296347172140421,
+          "precision_at_5": 0.6,
+          "unique_content_ndcg_at_5": 0.5296347172140421,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T05": {
+          "fixed_reference_ndcg_at_5": 0.48522855511632257,
+          "precision_at_5": 0.4,
+          "unique_content_ndcg_at_5": 0.48522855511632257,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        }
+      },
+      "aggregate": {
+        "fixed_reference_ndcg_at_5": 0.4663656671534978,
+        "precision_at_5": 0.53,
+        "unique_content_ndcg_at_5": 0.47355909049063294,
+        "displayed_at_5": 5.0,
+        "unique_contents_at_5": 5.0
+      }
+    },
+    "dense": {
+      "per_query": {
+        "V01": {
+          "fixed_reference_ndcg_at_5": 0.13120507751234178,
+          "precision_at_5": 0.2,
+          "unique_content_ndcg_at_5": 0.13120507751234178,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "V02": {
+          "fixed_reference_ndcg_at_5": 0.3065735963827292,
+          "precision_at_5": 0.2,
+          "unique_content_ndcg_at_5": 0.3065735963827292,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "V03": {
+          "fixed_reference_ndcg_at_5": 0.5952372559702129,
+          "precision_at_5": 0.8,
+          "unique_content_ndcg_at_5": 0.5952372559702129,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "V04": {
+          "fixed_reference_ndcg_at_5": 0.8421757737602428,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.8421757737602428,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "V05": {
+          "fixed_reference_ndcg_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "unique_content_ndcg_at_5": 0.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "N01": {
+          "fixed_reference_ndcg_at_5": 0.6508205185601091,
+          "precision_at_5": 0.4,
+          "unique_content_ndcg_at_5": 0.8503449055347546,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "N02": {
+          "fixed_reference_ndcg_at_5": 0.5531464700081437,
+          "precision_at_5": 0.6,
+          "unique_content_ndcg_at_5": 0.5531464700081437,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "N03": {
+          "fixed_reference_ndcg_at_5": 0.36005461457723403,
+          "precision_at_5": 0.4,
+          "unique_content_ndcg_at_5": 0.36005461457723403,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "N04": {
+          "fixed_reference_ndcg_at_5": 0.8274043288765652,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.8274043288765652,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "N05": {
+          "fixed_reference_ndcg_at_5": 0.934397461243829,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.934397461243829,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H01": {
+          "fixed_reference_ndcg_at_5": 0.8613632863224759,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.8613632863224759,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H02": {
+          "fixed_reference_ndcg_at_5": 0.47878355088085833,
+          "precision_at_5": 0.6,
+          "unique_content_ndcg_at_5": 0.47878355088085833,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H03": {
+          "fixed_reference_ndcg_at_5": 0.9269658250786468,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 0.9269658250786468,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H04": {
+          "fixed_reference_ndcg_at_5": 0.7469385177900298,
+          "precision_at_5": 0.8,
+          "unique_content_ndcg_at_5": 0.7469385177900298,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "H05": {
+          "fixed_reference_ndcg_at_5": 1.0,
+          "precision_at_5": 1.0,
+          "unique_content_ndcg_at_5": 1.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T01": {
+          "fixed_reference_ndcg_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "unique_content_ndcg_at_5": 0.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T02": {
+          "fixed_reference_ndcg_at_5": 0.6608397947263839,
+          "precision_at_5": 0.8,
+          "unique_content_ndcg_at_5": 0.6608397947263839,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T03": {
+          "fixed_reference_ndcg_at_5": 0.23518264139297895,
+          "precision_at_5": 0.4,
+          "unique_content_ndcg_at_5": 0.23518264139297895,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T04": {
+          "fixed_reference_ndcg_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "unique_content_ndcg_at_5": 0.0,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        },
+        "T05": {
+          "fixed_reference_ndcg_at_5": 0.7573857224418388,
+          "precision_at_5": 0.8,
+          "unique_content_ndcg_at_5": 0.7573857224418388,
+          "displayed_at_5": 5,
+          "unique_contents_at_5": 5
+        }
+      },
+      "aggregate": {
+        "fixed_reference_ndcg_at_5": 0.543423721776231,
+        "precision_at_5": 0.6,
+        "unique_content_ndcg_at_5": 0.5533999411249633,
+        "displayed_at_5": 5.0,
+        "unique_contents_at_5": 5.0
+      }
+    }
+  }
+}

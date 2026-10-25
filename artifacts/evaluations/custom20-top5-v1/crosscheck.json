@@ -1,0 +1,50 @@
+{
+  "linear": {
+    "bm25": {
+      "status": "passed",
+      "comparisons": 42,
+      "max_absolute_difference": 4.974340797991861e-05,
+      "measures": [
+        "ndcg_cut_5",
+        "P_5"
+      ],
+      "gain_mode": "linear",
+      "policy": "Only top-five metrics; ordinal scores preserve published order; zero-positive topics retained"
+    },
+    "dense": {
+      "status": "passed",
+      "comparisons": 42,
+      "max_absolute_difference": 3.936301137830167e-05,
+      "measures": [
+        "ndcg_cut_5",
+        "P_5"
+      ],
+      "gain_mode": "linear",
+      "policy": "Only top-five metrics; ordinal scores preserve published order; zero-positive topics retained"
+    }
+  },
+  "exp2": {
+    "bm25": {
+      "status": "passed",
+      "comparisons": 42,
+      "max_absolute_difference": 4.719276545839257e-05,
+      "measures": [
+        "ndcg_cut_5",
+        "P_5"
+      ],
+      "gain_mode": "exp2",
+      "policy": "Only top-five metrics; ordinal scores preserve published order; zero-positive topics retained"
+    },
+    "dense": {
+      "status": "passed",
+      "comparisons": 42,
+      "max_absolute_difference": 4.8939958559923724e-05,
+      "measures": [
+        "ndcg_cut_5",
+        "P_5"
+      ],
+      "gain_mode": "exp2",
+      "policy": "Only top-five metrics; ordinal scores preserve published order; zero-positive topics retained"
+    }
+  }
+}

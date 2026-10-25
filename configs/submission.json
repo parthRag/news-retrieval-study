@@ -1,0 +1,67 @@
+{
+  "group_number": "5",
+  "members": "Parth Raghuvanshi (2023A7PS0574P); Sushruth Reddy Challa (2023A7PS0504P); Hamsini G (2023A7PS0006P); Kritika Pandey (2023A7PS0022P)",
+  "repository_url": "https://github.com/parthRag/news-ir-bm25-dense-final",
+  "short_title": "NewsIR_BM25_Dense",
+  "project_title": "News Retrieval under Vocabulary Mismatch: BM25, Dense Search and Linguistic Constraints",
+  "contributions": [
+    {
+      "member": "Parth Raghuvanshi",
+      "ownership": "data pipeline and BM25",
+      "completed": "Dataset download, Kaggle execution and result handoff documented in the project session.",
+      "completion_confirmed": true,
+      "completed_team_outputs": "Shared-corpus audit and preprocessing, Lucene BM25 index, retrieval exports and Kaggle handoff."
+    },
+    {
+      "member": "Sushruth Reddy Challa",
+      "ownership": "E5 embeddings and FAISS",
+      "completed": "Member review/completed work not yet confirmed.",
+      "completion_confirmed": false,
+      "completed_team_outputs": "Pinned E5 encoder, resumable GPU embedding workflow, exact FAISS index and dense retrieval."
+    },
+    {
+      "member": "Hamsini G",
+      "ownership": "evaluation and judgment audit",
+      "completed": "Member review/completed work not yet confirmed.",
+      "completion_confirmed": false,
+      "completed_team_outputs": "Supplied-qrel audit, nDCG/MAP evaluator, symmetric candidate pooling and evidence-validation tooling."
+    },
+    {
+      "member": "Kritika Pandey",
+      "ownership": "demo, figures and report",
+      "completed": "Member review/completed work not yet confirmed.",
+      "completion_confirmed": false,
+      "completed_team_outputs": "Side-by-side search demo, result figures, failure-analysis presentation and reproducible report package."
+    }
+  ],
+  "course": "Information Retrieval",
+  "faculty_mentor": "Abhinav Kumar",
+  "github_username": "parthRag",
+  "repository_name": "news-ir-bm25-dense-final",
+  "repository_status": "created",
+  "ownership_basis": "Assigned responsibility for completed team components; this allocation does not certify individual historical authorship or hours.",
+  "member_details": [
+    {
+      "name": "Parth Raghuvanshi",
+      "student_id": "2023A7PS0574P"
+    },
+    {
+      "name": "Sushruth Reddy Challa",
+      "student_id": "2023A7PS0504P"
+    },
+    {
+      "name": "Hamsini G",
+      "student_id": "2023A7PS0006P"
+    },
+    {
+      "name": "Kritika Pandey",
+      "student_id": "2023A7PS0022P"
+    }
+  ],
+  "repository_visibility": "public",
+  "repository_default_branch": "main",
+  "repository_verified_at_utc": "2026-10-25T18:04:00.143459+00:00",
+  "development_repository_url": "https://github.com/parthRag/news-ir-bm25-dense",
+  "development_repository_visibility": "private",
+  "public_repository_kind": "Final submission snapshot"
+}

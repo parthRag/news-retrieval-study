@@ -1,0 +1,207 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>5_NewsIR_BM25_Dense</title><style>@page{size:A4;margin:15mm 16mm 16mm}*{box-sizing:border-box}body{margin:0;color:#172b3e;font:10.3pt/1.38 Georgia,"Times New Roman",serif}h1,h2,h3,h4,th,.meta{font-family:Arial,sans-serif}h1{font-size:23pt;line-height:1.12;margin:0 0 12pt;letter-spacing:-.4pt}h2{font-size:15pt;line-height:1.2;margin:0 0 10pt;padding-bottom:6pt;border-bottom:1pt solid #b5c6d0;color:#164f70}h3{font-size:11.5pt;margin:12pt 0 5pt}p{margin:0 0 8pt}table{border-collapse:collapse;width:100%;font-size:9pt;margin:9pt 0 12pt;break-inside:auto}th,td{text-align:left;vertical-align:top;padding:5pt 6pt;border-bottom:.5pt solid #d4dfe5}th{background:#edf3f6;font-weight:700}tr{break-inside:avoid}thead{display:table-header-group}ul,ol{padding-left:17pt;margin:5pt 0 10pt}li{margin:0 0 5pt}a{color:#185d80;overflow-wrap:anywhere;text-decoration:none}code{font:8.1pt/1.4 Menlo,monospace;overflow-wrap:anywhere}pre{white-space:pre-wrap;padding:8pt;background:#f1f4f6;overflow-wrap:anywhere}blockquote{margin:8pt 0;padding:4pt 10pt;border-left:2pt solid #acbfc9;color:#425768}img{display:block;max-width:100%;max-height:75mm;object-fit:contain;margin:10pt auto}section.page{break-after:page}section.page:last-child{break-after:auto}.meta{font-size:9pt;color:#4e6574;padding:7pt 0 12pt}.notice{background:#fff3db;border-left:3pt solid #c18b2f;padding:8pt 10pt;margin:9pt 0;font:9.2pt/1.4 Arial,sans-serif}.compact{font-size:10.2pt}.compact table{font-size:9pt}.architecture{width:100%;margin:12pt 0}strong{font-weight:bold}small{font-size:8pt}.caption{font-size:8.5pt;color:#506775} .query-page table{font-size:8.8pt}.query-page td:first-child{width:8%}.query-page td:nth-child(2){width:46%}.query-page td:nth-child(3){width:46%}</style></head><body class="compact"><section class="page"><h1>News Retrieval under Vocabulary Mismatch</h1>
+<h3>BM25, neural search and hybrid retrieval</h3>
+<p><strong>Group 5 · Information Retrieval</strong><br />
+<strong>Faculty mentor:</strong> Abhinav Kumar<br />
+Parth Raghuvanshi — 2023A7PS0574P<br>Sushruth Reddy Challa — 2023A7PS0504P<br>Hamsini G — 2023A7PS0006P<br>Kritika Pandey — 2023A7PS0022P</p>
+<h2>1. Primary objective</h2>
+<p>Find out when a news search engine benefits from semantic matching and when exact wording still matters. We compare BM25 with E5 dense retrieval over the same articles, focusing on vocabulary mismatch, negation, ambiguous words and event dates. The aim is a working comparison demo and an evidence-based account of their strengths and failures. E5 is a neural bi-encoder; the findings concern this model and setup, rather than all LLMs.</p>
+<h2>2. Dataset and evaluation criteria</h2>
+<p><strong>Selected dataset:</strong> <a href="https://huggingface.co/datasets/liuqi6777/trec-news">TREC-News mirror — liuqi6777/trec-news</a>. The downloaded corpus has <strong>594,977 records</strong>. Excluding 388 records with no title or body leaves <strong>594,589 articles</strong> for both engines. Title-only articles remain in the baseline so the two systems search the same IDs.</p>
+<p>We evaluate two distinct tasks. The <strong>57 original background-linking topics</strong> have <strong>15,655 supplied relevance judgments</strong>. Our <strong>40 custom queries</strong> have ten questions per category: vocabulary mismatch, negation, word sense and temporal constraints. The original 20 are preserved; 20 follow-up questions add ransomware, bail reform, Java/Mercury senses and dated disaster responses. Wording, inclusion rules and event windows were frozen before follow-up retrieval, after viewing the initial results. This is an exploratory extension, not an independent held-out replication.</p>
+<p><strong>Success measures:</strong> nDCG@5 measures how well the first five results are ordered by relevance; MAP@1000 measures recovery and ordering of known relevant articles across the saved top 1,000. We also report Precision@5, category means, judged coverage and paired query-bootstrap intervals. AP divides by all known positives for the query. Main nDCG gains equal relevance grades: 0–4 for supplied judgments and 0–2 for the custom study.</p>
+<p><strong>Assessment scope and next validation:</strong> the current comparison uses thorough, full-article <strong>AI judgments</strong> for all <strong>1,444 query–article pairs</strong> in the equal-depth top-20 union: 737 preserved initial decisions and 707 added decisions. Each judgment follows a frozen 0–2 rubric and has a rationale, source hash and quoted evidence. <strong>Human review is planned next</strong>, beginning with balanced cases across all 40 queries and adjudication of disagreements; it has not yet been completed. The custom results are therefore preliminary. Grade 0 fails a mandatory constraint, 1 gives limited qualifying detail, and 2 gives substantive support. Every top-20 hit is assessed, but only about 3% of each top-1,000 list is judged, so custom MAP is a <strong>shallow-pool estimate</strong>. Unjudged hits keep their ranks with zero contribution; all 40 queries remain in the averages, including V05 with no pooled positive.</p>
+</section><section class="page"><h2>3. Related research: approach, findings and relevance</h2>
+<p><strong>Thakur et al. (2021), <a href="https://arxiv.org/abs/2104.08663">BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models</a>.</strong> The paper evaluates ten retrieval systems across 18 datasets. BM25 is a robust baseline; reranking and late-interaction methods have strong average quality at greater computational cost. This supports keeping BM25 as a serious comparator and examining different query types.</p>
+<p><strong>Wang et al. (2022; revised 2024), <a href="https://arxiv.org/abs/2212.03533">Text Embeddings by Weakly-Supervised Contrastive Pre-training</a>.</strong> E5 learns text embeddings through contrastive training on text pairs and reports strong transfer on BEIR/MTEB tasks. We use a released E5 checkpoint to test whether this semantic representation helps with news queries whose wording differs from relevant articles.</p>
+<p><strong>Weller, Lawrie and Van Durme (2024), <a href="https://aclanthology.org/2024.eacl-long.139/">NevIR: Negation in Neural Information Retrieval</a>.</strong> The authors compare documents differing in negation. Many retrievers struggle with polarity; cross-encoders perform better than bi-encoders. This motivates explicit negation tests instead of assuming that semantic similarity enforces a negative constraint.</p>
+<p><strong>Cormack, Clarke and Büttcher (2009), <a href="https://cormack.uwaterloo.ca/cormacksigir09-rrf.pdf">Reciprocal Rank Fusion outperforms Condorcet and individual Rank Learning Methods</a>.</strong> The paper combines ranked lists through reciprocal-rank contributions and reports gains over individual systems in its experiments. We test fixed RRF with k=60 as an extension, without fitting weights to our judgments.</p>
+<h2>4. Approach and architectural reasoning</h2>
+<div class="architecture"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 270" role="img" aria-label="Shared corpus to BM25 and E5, saved runs, evaluation, demo and reports"><defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="#506c80"/></marker></defs><g font-family="Arial,sans-serif" font-size="14" fill="#16354b"><line x1="178" y1="135" x2="232" y2="135" stroke="#506c80" stroke-width="2" marker-end="url(#a)"/><line x1="412" y1="135" x2="458" y2="62" stroke="#506c80" stroke-width="2" marker-end="url(#a)"/><line x1="412" y1="135" x2="458" y2="200" stroke="#506c80" stroke-width="2" marker-end="url(#a)"/><line x1="650" y1="62" x2="700" y2="135" stroke="#506c80" stroke-width="2" marker-end="url(#a)"/><line x1="650" y1="200" x2="700" y2="135" stroke="#506c80" stroke-width="2" marker-end="url(#a)"/><line x1="846" y1="135" x2="880" y2="54" stroke="#506c80" stroke-width="2" marker-end="url(#a)"/><line x1="846" y1="135" x2="880" y2="135" stroke="#506c80" stroke-width="2" marker-end="url(#a)"/><line x1="846" y1="135" x2="880" y2="216" stroke="#506c80" stroke-width="2" marker-end="url(#a)"/><rect x="4" y="100" width="174" height="70" rx="7" fill="#eef3f6" stroke="#7491a5"/><text x="91.0" y="126.5" text-anchor="middle" dominant-baseline="middle">News corpus</text><text x="91.0" y="143.5" text-anchor="middle" dominant-baseline="middle">594,977 records</text><rect x="232" y="100" width="180" height="70" rx="7" fill="#eef3f6" stroke="#7491a5"/><text x="322.0" y="126.5" text-anchor="middle" dominant-baseline="middle">Shared title + body</text><text x="322.0" y="143.5" text-anchor="middle" dominant-baseline="middle">594,589 eligible</text><rect x="458" y="26" width="192" height="72" rx="7" fill="#eef3f6" stroke="#7491a5"/><text x="554.0" y="53.5" text-anchor="middle" dominant-baseline="middle">BM25 inverted index</text><text x="554.0" y="70.5" text-anchor="middle" dominant-baseline="middle">Full article</text><rect x="458" y="164" width="192" height="72" rx="7" fill="#eef3f6" stroke="#7491a5"/><text x="554.0" y="191.5" text-anchor="middle" dominant-baseline="middle">E5 → exact FAISS</text><text x="554.0" y="208.5" text-anchor="middle" dominant-baseline="middle">First 512 tokens</text><rect x="700" y="100" width="146" height="70" rx="7" fill="#eef3f6" stroke="#7491a5"/><text x="773.0" y="126.5" text-anchor="middle" dominant-baseline="middle">Saved top 1,000</text><text x="773.0" y="143.5" text-anchor="middle" dominant-baseline="middle">+ fixed RRF</text><rect x="880" y="16" width="116" height="68" rx="7" fill="#eef3f6" stroke="#7491a5"/><text x="938.0" y="41.5" text-anchor="middle" dominant-baseline="middle">57 original topics</text><text x="938.0" y="58.5" text-anchor="middle" dominant-baseline="middle">40 custom queries</text><rect x="880" y="101" width="116" height="68" rx="7" fill="#eef3f6" stroke="#7491a5"/><text x="938.0" y="126.5" text-anchor="middle" dominant-baseline="middle">Local demo</text><text x="938.0" y="143.5" text-anchor="middle" dominant-baseline="middle">+ full articles</text><rect x="880" y="182" width="116" height="68" rx="7" fill="#eef3f6" stroke="#7491a5"/><text x="938.0" y="207.5" text-anchor="middle" dominant-baseline="middle">Metrics, figures</text><text x="938.0" y="224.5" text-anchor="middle" dominant-baseline="middle">+ report</text></g></svg></div>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Method and reason for the choice</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BM25</td>
+<td>Lucene inverted index; k1=0.9, b=0.4. A strong term-based baseline makes exact-name and wording effects visible.</td>
+</tr>
+<tr>
+<td>Dense retrieval</td>
+<td>E5-base-v2: query:/passage: prefixes, mean pooling, normalized 768-D vectors; exact FAISS cosine ranking. Tests semantic matching without approximate-index error.</td>
+</tr>
+<tr>
+<td>Hybrid and inspection</td>
+<td>Fixed equal-weight RRF, sum(1/(60+rank)); no tuning. Article lookup and the demo connect ranked IDs to full text and relevance evidence.</td>
+</tr>
+</tbody>
+</table>
+<p>Both engines use title plus body. English lexical analysis lowercases and tokenizes, preserves stopwords and does not stem. BM25 reads full bodies; E5 retains the first <strong>512 tokens</strong>, including its prefix and special tokens. This difference is audited and remains a limitation of the comparison. BM25 treats “NOT” as a term, with no Boolean negation or date filter. The lexical foundations follow Manning et al., <em>Introduction to Information Retrieval</em>, Chapters 6 and 11.</p>
+</section><section class="page"><h2>5. Current findings and what they mean</h2>
+<p>Both engines, fixed RRF and the comparison demo are implemented. Supplied-qrels and custom tasks remain separate; custom MAP below uses pooled positives.</p>
+<table>
+<thead>
+<tr>
+<th>Evaluation set</th>
+<th>BM25 nDCG@5</th>
+<th>E5 nDCG@5</th>
+<th>BM25 MAP</th>
+<th>E5 MAP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Original 57 supplied qrels</td>
+<td>0.3975</td>
+<td>0.4576</td>
+<td>0.2329</td>
+<td>0.2765</td>
+</tr>
+<tr>
+<td>Initial custom 20</td>
+<td>0.4621</td>
+<td>0.4897</td>
+<td>0.4006</td>
+<td>0.4683</td>
+</tr>
+<tr>
+<td>Added custom 20</td>
+<td>0.5645</td>
+<td>0.3828</td>
+<td>0.4849</td>
+<td>0.3460</td>
+</tr>
+<tr>
+<td>Combined custom 40</td>
+<td>0.5133</td>
+<td>0.4362</td>
+<td>0.4428</td>
+<td>0.4072</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Category (10 each)</th>
+<th>BM25 nDCG@5</th>
+<th>E5 nDCG@5</th>
+<th>BM25 MAP</th>
+<th>E5 MAP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vocabulary mismatch</td>
+<td>0.4757</td>
+<td>0.4000</td>
+<td>0.4007</td>
+<td>0.3343</td>
+</tr>
+<tr>
+<td>Negation</td>
+<td>0.7270</td>
+<td>0.6322</td>
+<td>0.6767</td>
+<td>0.5469</td>
+</tr>
+<tr>
+<td>Word sense</td>
+<td>0.5526</td>
+<td>0.5198</td>
+<td>0.4113</td>
+<td>0.5389</td>
+</tr>
+<tr>
+<td>Temporal</td>
+<td>0.2980</td>
+<td>0.1930</td>
+<td>0.2823</td>
+<td>0.2085</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The larger suite changes the comparison.</strong> E5 leads the initial 20, while BM25 leads the added 20 and the combined 40. BM25 wins 21 queries at nDCG@5, E5 wins 15, and four tie. The combined vocabulary-mismatch result also reverses the initial pattern. More queries expose topic and wording sensitivity; they do not guarantee the expected neural advantage. RRF remains an original-benchmark extension: nDCG@5 <strong>0.4900</strong>, MAP <strong>0.3332</strong>.</p>
+<p><strong>Failure modes:</strong> exact entities and detailed constraints can help BM25. E5 sometimes retrieves the broad topic while missing a required cause, response or date. In the word-sense category, BM25 has slightly higher nDCG@5 but E5 higher pooled MAP; early ranking and recovery measure different behavior. Neither ranker enforces negation or time as a logical constraint. Temporal exclusions include missing date evidence, not only known out-of-window events.</p>
+<p><strong>Uncertainty:</strong> the combined E5−BM25 nDCG difference is <strong>−0.0771</strong>, with a descriptive 95% family-bootstrap interval <strong>[-0.1729, +0.0150]</strong> (37 topic families; 10,000 draws). Query and broader 35-family analyses also include zero for nDCG and MAP. These intervals do not measure label accuracy or establish a general winner.</p>
+<p><strong>A practical improvement:</strong> on the preserved initial 20, removing empty-body candidates raises E5 nDCG@5 <strong>0.4897 → 0.5492</strong>, P@5 <strong>0.53 → 0.60</strong>, with BM25 unchanged. This bounded, post-hoc top-20 ablation has not been rerun on the added queries.</p>
+<p><strong>Resources and checks:</strong> BM25 index <strong>367.6 MiB</strong>, dense index <strong>1.72 GiB</strong>, model about <strong>418 MiB</strong> on disk. BM25 built in <strong>66.55 s</strong> locally; T4 encoding took <strong>5 h 43 min</strong>. One cold CPU query took <strong>1.4/48.6 s</strong> (BM25/E5), including startup; hardware/stages differ. Peak RAM and controlled warm latency remain unmeasured. Verification: <strong>153 passing tests</strong>, <strong>7,196 native metric comparisons</strong>, and verified saved demo views; no new GPU encoding was required.</p>
+</section><section class="page"><h2>6. Key innovations and stretch objectives</h2>
+<p>The project adds a constraint-focused evaluation and transparent inspection tools to established rankers. Three additions make it useful: a query suite with explicit linguistic constraints; evidence-linked judgments that explain why an article qualifies; and an input-visibility audit showing what text E5 retained. A symmetric quality experiment measures how article quality affects the rankings.</p>
+<p><strong>Completed stretch objectives:</strong> fixed RRF on the original 57 topics; exact-content deduplication and empty-body filtering within judged candidates; gain/confidence sensitivity; and a full-article demo with an E5 input toggle. <strong>Further work:</strong> complete the planned human-review stage, then test controlled polarity pairs, equal-input or passage-based retrieval, and a cross-encoder reranker. These extensions need fresh validation; no results for them are claimed.</p>
+<p><strong>Expanded evaluation completed:</strong> 40 queries, ten per category; all 1,444 designated pairs assessed. Initial, added and combined results are retained separately, with topic-family uncertainty and full-text evidence.</p>
+<h2>7. Key milestones and tentative timeline</h2>
+<p>Completed dates below follow saved artifact timestamps in India time. Remaining durations are planning estimates, not a new submission deadline.</p>
+<table>
+<thead>
+<tr>
+<th>Milestone</th>
+<th>Timing and status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Shared corpus and BM25 index</td>
+<td>19 Oct 2026 · completed.</td>
+</tr>
+<tr>
+<td>Full E5 index and original 57-topic evaluation</td>
+<td>24 Oct 2026 · completed.</td>
+</tr>
+<tr>
+<td>Hybrid, 40-query study, demo and report</td>
+<td>25 Oct 2026 · completed.</td>
+</tr>
+<tr>
+<td>Begin human review and member checks</td>
+<td>Next session: 2–3 hours for an initial sample; tentative.</td>
+</tr>
+<tr>
+<td>Public repository and demo rehearsal</td>
+<td>Repository published; allow about 1 hour for rehearsal.</td>
+</tr>
+<tr>
+<td>Final link, page-count and submission checks</td>
+<td>Allow 30 minutes before the course deadline; one member submits.</td>
+</tr>
+</tbody>
+</table>
+<h2>8. Contribution matrix and delivery</h2>
+<table>
+<thead>
+<tr>
+<th>Member</th>
+<th>Assigned ownership</th>
+<th>Completed team component</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Parth Raghuvanshi</td>
+<td>data/BM25</td>
+<td>Corpus audit, preprocessing, BM25 index and GPU handoff.</td>
+</tr>
+<tr>
+<td>Sushruth Reddy Challa</td>
+<td>E5/FAISS</td>
+<td>E5 encoder, GPU workflow, vector index and dense search.</td>
+</tr>
+<tr>
+<td>Hamsini G</td>
+<td>evaluation</td>
+<td>Qrel audit, metrics, candidate pooling and evidence checks.</td>
+</tr>
+<tr>
+<td>Kritika Pandey</td>
+<td>demo/report</td>
+<td>Comparison demo, figures, failure analysis and report package.</td>
+</tr>
+</tbody>
+</table>
+<p>Rows assign responsibility for completed team components; individual work is confirmed separately.</p>
+<p><strong>Working demo:</strong> run <code>.venv/bin/python -m news_ir.demo</code> and open <code>http://127.0.0.1:8765</code>. Saved views show scores and evidence; new live queries are explicitly unjudged. No additional GPU job is needed. <a href="https://github.com/parthRag/news-ir-bm25-dense-final">GitHub repository</a></p>
+<p><strong>Submission file:</strong> <code>5_NewsIR_BM25_Dense.pdf</code>. Only one group member submits this single four-page PDF.</p>
+</section></body></html>

@@ -1,0 +1,460 @@
+{
+  "scope": "All custom queries; complete top-five union only; depth-20 pool incomplete",
+  "assessor_type": "AI",
+  "query_ids": [
+    "V01",
+    "V02",
+    "V03",
+    "V04",
+    "V05",
+    "N01",
+    "N02",
+    "N03",
+    "N04",
+    "N05",
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "T01",
+    "T02",
+    "T03",
+    "T04",
+    "T05"
+  ],
+  "query_count": 20,
+  "suite_query_count": 20,
+  "pending_query_ids": [],
+  "assessed_pairs": 188,
+  "pool_pairs": 737,
+  "per_query": {
+    "V01": {
+      "bm25": {
+        "ndcg_at_5": 0.0,
+        "precision_at_5": 0.0,
+        "judged_at_5": 1.0
+      },
+      "dense": {
+        "ndcg_at_5": 0.0,
+        "precision_at_5": 0.0,
+        "judged_at_5": 1.0
+      }
+    },
+    "V02": {
+      "bm25": {
+        "ndcg_at_5": 0.0,
+        "precision_at_5": 0.0,
+        "judged_at_5": 1.0
+      },
+      "dense": {
+        "ndcg_at_5": 0.5,
+        "precision_at_5": 0.2,
+        "judged_at_5": 1.0
+      }
+    },
+    "V03": {
+      "bm25": {
+        "ndcg_at_5": 0.5760497434079799,
+        "precision_at_5": 0.8,
+        "judged_at_5": 1.0
+      },
+      "dense": {
+        "ndcg_at_5": 0.5952372559702129,
+        "precision_at_5": 0.8,
+        "judged_at_5": 1.0
+      }
+    },
+    "V04": {
+      "bm25": {
+        "ndcg_at_5": 0.36297209628774124,
+        "precision_at_5": 0.2,
+        "judged_at_5": 1.0
+      },
+      "dense": {
+        "ndcg_at_5": 0.9013035765734799,
+        "precision_at_5": 1.0,
+        "judged_at_5": 1.0
+      }
+    },
+    "V05": {
+      "bm25": {
+        "ndcg_at_5": 0.0,
+        "precision_at_5": 0.0,
+        "judged_at_5": 1.0
+      },
+      "dense": {
+        "ndcg_at_5": 0.0,
+        "precision_at_5": 0.0,
+        "judged_at_5": 1.0
+      }
+    },
+    "N01": {
+      "bm25": {
+        "ndcg_at_5": 0.46927872602275644,
+        "precision_at_5": 0.2,
+        "judged_at_5": 1.0
+      },
+      "dense": {
+        "ndcg_at_5": 0.7653606369886217,
+        "precision_at_5": 0.4,
+        "judged_at_5": 1.0
+      }
+    },
+    "N02": {
+      "bm25": {
+        "ndcg_at_5": 0.6960556048694746,
+        "precision_at_5": 1.0,
+        "judged_at_5": 1.0
+      },
+      "dense": {
+        "ndcg_at_5": 0.4523145688818292,
+        "precision_at_5": 0.6,
+        "judged_at_5": 1.0
+      }
+    },
+    "N03": {
+      "bm25": {
+        "ndcg_at_5": 0.6608397947263839,
+        "precision_at_5": 0.8,
+        "judged_at_5": 1.0
+      },
+      "dense": {
+        "ndcg_at_5": 0.14606834984270645,
+        "precision_at_5": 0.2,
+        "judged_at_5": 1.0
+      }
+    },
+    "N04": {
+      "bm25": {
+        "ndcg_at_5": 0.7773492477204695,
+        "precision_at_5": 1.0,
+        "judged_at_5": 1.0
+      },
+      "dense": {
+        "ndcg_at_5": 0.9605753368118396,
+        "precision_at_5": 1.0,
+        "judged_at_5": 1.0
+      }
+    },
+    "N05": {
+      "bm25": {
+        "ndcg_at_5": 0.6132659801521241,
+        "precision_at_5": 1.0,
+        "judged_at_5": 1.0
+      },
+      "dense": {
+        "ndcg_at_5": 1.0,
+        "precision_at_5": 1.0,
+        "judged_at_5": 1.0
+      }
+    },
+    "H01": {
+      "bm25": {
+        "ndcg_at_5": 0.7944981616784152,
+        "precision_at_5": 0.6,
+        "judged_at_5": 1.0
+      },
+      "dense": {
+        "ndcg_at_5": 1.0,
+        "precision_at_5": 1.0,
+        "judged_at_5": 1.0
+      }
+    },
+    "H02": {
+      "bm25": {
+        "ndcg_at_5": 0.38685280723454163,
+        "precision_at_5": 0.2,
+        "judged_at_5": 1.0
+      },
+      "dense": {
+        "ndcg_at_5": 0.0,
+        "precision_at_5": 0.0,
+        "judged_at_5": 1.0
+      }
+    },
+    "H03": {
+      "bm25": {
+        "ndcg_at_5": 0.8930068676327362,
+        "precision_at_5": 1.0,
+        "judged_at_5": 1.0
+      },
+      "dense": {
+        "ndcg_at_5": 0.9269658250786468,
+        "precision_at_5": 1.0,
+        "judged_at_5": 1.0
+      }
+    },
+    "H04": {
+      "bm25": {
+        "ndcg_at_5": 0.773468039695752,
+        "precision_at_5": 0.6,
+        "judged_at_5": 1.0
+      },
+      "dense": {
+        "ndcg_at_5": 0.7993798664604009,
+        "precision_at_5": 0.8,
+        "judged_at_5": 1.0
+      }
+    },
+    "H05": {
+      "bm25": {
+        "ndcg_at_5": 0.7860137352654724,
+        "precision_at_5": 0.8,
+        "judged_at_5": 1.0
+      },
+      "dense": {
+        "ndcg_at_5": 1.0,
+        "precision_at_5": 1.0,
+        "judged_at_5": 1.0
+      }
+    },
+    "T01": {
+      "bm25": {
+        "ndcg_at_5": 0.0,
+        "precision_at_5": 0.0,
+        "judged_at_5": 1.0
+      },
+      "dense": {
+        "ndcg_at_5": 0.0,
+        "precision_at_5": 0.0,
+        "judged_at_5": 1.0
+      }
+    },
+    "T02": {
+      "bm25": {
+        "ndcg_at_5": 0.30743980247595454,
+        "precision_at_5": 0.6,
+        "judged_at_5": 1.0
+      },
+      "dense": {
+        "ndcg_at_5": 0.7672021842813714,
+        "precision_at_5": 0.8,
+        "judged_at_5": 1.0
+      }
+    },
+    "T03": {
+      "bm25": {
+        "ndcg_at_5": 0.9828920819566879,
+        "precision_at_5": 0.8,
+        "judged_at_5": 1.0
+      },
+      "dense": {
+        "ndcg_at_5": 0.0,
+        "precision_at_5": 0.0,
+        "judged_at_5": 1.0
+      }
+    },
+    "T04": {
+      "bm25": {
+        "ndcg_at_5": 0.7328286204777911,
+        "precision_at_5": 0.6,
+        "judged_at_5": 1.0
+      },
+      "dense": {
+        "ndcg_at_5": 0.0,
+        "precision_at_5": 0.0,
+        "judged_at_5": 1.0
+      }
+    },
+    "T05": {
+      "bm25": {
+        "ndcg_at_5": 0.48522855511632257,
+        "precision_at_5": 0.4,
+        "judged_at_5": 1.0
+      },
+      "dense": {
+        "ndcg_at_5": 0.7573857224418388,
+        "precision_at_5": 0.8,
+        "judged_at_5": 1.0
+      }
+    }
+  },
+  "primary_gain": "linear grade 0–2",
+  "exp2_gain_sensitivity_ndcg_at_5": {
+    "V01": {
+      "bm25": 0.0,
+      "dense": 0.0
+    },
+    "V02": {
+      "bm25": 0.0,
+      "dense": 0.5
+    },
+    "V03": {
+      "bm25": 0.547786392968512,
+      "dense": 0.5733697430514895
+    },
+    "V04": {
+      "bm25": 0.3716702184910474,
+      "dense": 0.8652512718034021
+    },
+    "V05": {
+      "bm25": 0.0,
+      "dense": 0.0
+    },
+    "N01": {
+      "bm25": 0.4692787260227565,
+      "dense": 0.7653606369886218
+    },
+    "N02": {
+      "bm25": 0.5850293327314489,
+      "dense": 0.4240706928044361
+    },
+    "N03": {
+      "bm25": 0.660839794726384,
+      "dense": 0.14606834984270647
+    },
+    "N04": {
+      "bm25": 0.6863024195657901,
+      "dense": 0.9444537180991301
+    },
+    "N05": {
+      "bm25": 0.47199791526734847,
+      "dense": 1.0
+    },
+    "H01": {
+      "bm25": 0.8395395538515096,
+      "dense": 1.0
+    },
+    "H02": {
+      "bm25": 0.38685280723454163,
+      "dense": 0.0
+    },
+    "H03": {
+      "bm25": 0.8573424901769817,
+      "dense": 0.9026211001048624
+    },
+    "H04": {
+      "bm25": 0.7920031270989775,
+      "dense": 0.7794529282461103
+    },
+    "H05": {
+      "bm25": 0.7860137352654726,
+      "dense": 1.0
+    },
+    "T01": {
+      "bm25": 0.0,
+      "dense": 0.0
+    },
+    "T02": {
+      "bm25": 0.21657937639662075,
+      "dense": 0.74135106004144
+    },
+    "T03": {
+      "bm25": 0.9828920819566878,
+      "dense": 0.0
+    },
+    "T04": {
+      "bm25": 0.7328286204777912,
+      "dense": 0.0
+    },
+    "T05": {
+      "bm25": 0.4852285551163227,
+      "dense": 0.7330409974680543
+    }
+  },
+  "macro_over_completed_queries_only": {
+    "bm25": {
+      "ndcg_at_5": 0.5149019932360301,
+      "precision_at_5": 0.53,
+      "judged_at_5": 1.0
+    },
+    "dense": {
+      "ndcg_at_5": 0.5285896661665473,
+      "precision_at_5": 0.53,
+      "judged_at_5": 1.0
+    }
+  },
+  "map_status": "Withheld: the depth-20 pool is incomplete; no full-suite MAP claim",
+  "limitations": "Linear gains 0–2; IDCG from assessed positives only and may change with deeper assessment. AI labels are not independent human gold. Top-five coverage does not establish corpus recall.",
+  "protocol_sha256": "3c02c8324aa80c3fffae6ef0068bcc7e58ae683ee6560c0e4ec5d93655fbd12e",
+  "assessments_sha256": "f3fed74bdbe277c8a11e42ac2927528123734219c15e79b857e02edacca3e649",
+  "zero_positive_queries_in_assessed_pool": [
+    "V01",
+    "V05",
+    "T01"
+  ],
+  "zero_positive_policy": "Retain these queries with nDCG/P equal to zero; no claim of no relevant articles in the corpus",
+  "by_category": {
+    "vocabulary_mismatch": {
+      "query_ids": [
+        "V01",
+        "V02",
+        "V03",
+        "V04",
+        "V05"
+      ],
+      "query_count": 5,
+      "bm25": {
+        "ndcg_at_5": 0.1878043679391442,
+        "precision_at_5": 0.2,
+        "judged_at_5": 1.0
+      },
+      "dense": {
+        "ndcg_at_5": 0.39930816650873857,
+        "precision_at_5": 0.4,
+        "judged_at_5": 1.0
+      }
+    },
+    "negation": {
+      "query_ids": [
+        "N01",
+        "N02",
+        "N03",
+        "N04",
+        "N05"
+      ],
+      "query_count": 5,
+      "bm25": {
+        "ndcg_at_5": 0.6433578706982417,
+        "precision_at_5": 0.8,
+        "judged_at_5": 1.0
+      },
+      "dense": {
+        "ndcg_at_5": 0.6648637785049993,
+        "precision_at_5": 0.64,
+        "judged_at_5": 1.0
+      }
+    },
+    "homonym": {
+      "query_ids": [
+        "H01",
+        "H02",
+        "H03",
+        "H04",
+        "H05"
+      ],
+      "query_count": 5,
+      "bm25": {
+        "ndcg_at_5": 0.7267679223013834,
+        "precision_at_5": 0.64,
+        "judged_at_5": 1.0
+      },
+      "dense": {
+        "ndcg_at_5": 0.7452691383078095,
+        "precision_at_5": 0.76,
+        "judged_at_5": 1.0
+      }
+    },
+    "temporal": {
+      "query_ids": [
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T05"
+      ],
+      "query_count": 5,
+      "bm25": {
+        "ndcg_at_5": 0.5016778120053512,
+        "precision_at_5": 0.48,
+        "judged_at_5": 1.0
+      },
+      "dense": {
+        "ndcg_at_5": 0.30491758134464203,
+        "precision_at_5": 0.32,
+        "judged_at_5": 1.0
+      }
+    }
+  }
+}

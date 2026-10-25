@@ -1,0 +1,21 @@
+query_id,category,query,known_pool_positives,bm25_ndcg_at_5,dense_ndcg_at_5,bm25_precision_at_5,dense_precision_at_5
+V01,vocabulary_mismatch,"Find news about workforce reductions at technology firms, explaining why employees lost their positions and how many were affected.",0,0.0,0.0,0.0,0.0
+V02,vocabulary_mismatch,How could depletion of the U.S. old-age insurance reserve affect retirees’ monthly payments?,1,0.0,0.5,0.0,0.2
+V03,vocabulary_mismatch,Find reporting on repeated blows to the head in professional American football and lasting damage to memory and thinking.,8,0.5760497434079799,0.5952372559702129,0.8,0.8
+V04,vocabulary_mismatch,What practical arrangements help older adults keep living in their own houses as their mobility declines instead of moving into residential care?,6,0.36297209628774124,0.9013035765734799,0.2,1.0
+V05,vocabulary_mismatch,Find reports about verifying an airline passenger’s identity using facial features or fingerprints in place of conventional boarding documents.,0,0.0,0.0,0.0,0.0
+N01,negation,"Find studies that did NOT find a decline in employment after Seattle increased its minimum wage, including the evidence behind that conclusion.",3,0.46927872602275644,0.7653606369886217,0.2,0.4
+N02,negation,Find U.S. court decisions that did NOT uphold bans on same-sex marriage and instead allowed same-sex couples to marry.,8,0.6960556048694746,0.4523145688818292,1.0,0.6
+N03,negation,Find reporting explaining that Ebola is NOT airborne and describing the direct-contact conditions through which transmission occurs.,5,0.6608397947263839,0.14606834984270645,0.8,0.2
+N04,negation,"Find reports of research concluding that vaccines do NOT cause autism, including the evidence used to reject the claimed connection.",9,0.7773492477204695,0.9605753368118396,1.0,1.0
+N05,negation,"Find reports confirming that George Zimmerman was found NOT guilty in the shooting of Trayvon Martin, excluding predictions made before the verdict.",9,0.6132659801521241,1.0,1.0,1.0
+H01,homonym,"Find reporting on cricket farming for human food, including nutritional benefits or environmental costs.",5,0.7944981616784152,1.0,0.6,1.0
+H02,homonym,Find reports of international cricket matches involving India that explain match results and player performances.,1,0.38685280723454163,0.0,0.2,0.0
+H03,homonym,Find reporting on Apple’s dispute with the FBI over unlocking the iPhone involved in the San Bernardino investigation.,9,0.8930068676327362,0.9269658250786468,1.0,1.0
+H04,homonym,"Find news about jaguar conservation and habitat loss in the Americas, focusing on the animal’s survival.",5,0.773468039695752,0.7993798664604009,0.6,0.8
+H05,homonym,How did Federal Reserve interest-rate decisions affect bank lending and borrowing costs?,8,0.7860137352654724,1.0,0.8,1.0
+T01,temporal,"Find events in the United Kingdom during the first 30 days after the June 23, 2016 vote to leave the European Union.",0,0.0,0.0,0.0,0.0
+T02,temporal,"Find actions taken by U.S. authorities in the first seven days after the April 15, 2013 Boston Marathon bombings.",7,0.30743980247595454,0.7672021842813714,0.6,0.8
+T03,temporal,"Find state-level changes to U.S. same-sex marriage laws from January 1, 2013 through June 25, 2015, before the Supreme Court’s nationwide ruling.",4,0.9828920819566879,0.0,0.8,0.0
+T04,temporal,"Find U.S. public-health responses in the first 60 days after the September 30, 2014 announcement of the first Ebola diagnosis in the United States.",3,0.7328286204777911,0.0,0.6,0.0
+T05,temporal,"Find developments in U.S.–Cuba relations after the December 17, 2014 normalization announcement but before the July 20, 2015 embassy reopenings.",6,0.48522855511632257,0.7573857224418388,0.4,0.8

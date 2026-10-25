@@ -1,0 +1,29 @@
+{
+  "direction": "dense minus bm25",
+  "samples": 10000,
+  "seed": 20261025,
+  "unit": "query; percentile intervals are descriptive for this 20-query set",
+  "metrics": {
+    "ndcg_at_5": {
+      "mean_dense_minus_bm25": 0.027541442125975403,
+      "paired_bootstrap_95_percentile_ci": [
+        -0.1263781746646432,
+        0.1650488439292753
+      ],
+      "dense_wins": 12,
+      "ties": 3,
+      "bm25_wins": 5
+    },
+    "ap_at_1000": {
+      "mean_dense_minus_bm25": 0.06771807562247238,
+      "paired_bootstrap_95_percentile_ci": [
+        -0.08771552227857188,
+        0.22201291688515387
+      ],
+      "dense_wins": 12,
+      "ties": 1,
+      "bm25_wins": 7
+    }
+  },
+  "interpretation": "Descriptive bootstrap of a small AI-assessed suite; related needs/shared documents limit query independence. Not label-accuracy intervals."
+}

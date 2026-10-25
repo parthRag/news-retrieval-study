@@ -1,0 +1,55 @@
+{
+  "samples": 10000,
+  "seed": 20261025,
+  "interpretation": "Descriptive paired query bootstrap; exploratory third-system comparison",
+  "comparisons": {
+    "bm25": {
+      "ndcg_at_5": {
+        "direction": "rrf minus bm25",
+        "mean_difference": 0.09256360757291117,
+        "paired_bootstrap_95_percentile_ci": [
+          0.04343722408988997,
+          0.14190731757730823
+        ],
+        "rrf_wins": 35,
+        "baseline_wins": 16,
+        "ties": 6
+      },
+      "ap_at_1000": {
+        "direction": "rrf minus bm25",
+        "mean_difference": 0.1003246698444339,
+        "paired_bootstrap_95_percentile_ci": [
+          0.07674006616736602,
+          0.125850204684969
+        ],
+        "rrf_wins": 50,
+        "baseline_wins": 6,
+        "ties": 1
+      }
+    },
+    "dense": {
+      "ndcg_at_5": {
+        "direction": "rrf minus dense",
+        "mean_difference": 0.0324404605494299,
+        "paired_bootstrap_95_percentile_ci": [
+          -0.015395774071911611,
+          0.07899760124907274
+        ],
+        "rrf_wins": 32,
+        "baseline_wins": 19,
+        "ties": 6
+      },
+      "ap_at_1000": {
+        "direction": "rrf minus dense",
+        "mean_difference": 0.056701125457965094,
+        "paired_bootstrap_95_percentile_ci": [
+          0.033320246397238705,
+          0.08096132342677596
+        ],
+        "rrf_wins": 44,
+        "baseline_wins": 13,
+        "ties": 0
+      }
+    }
+  }
+}

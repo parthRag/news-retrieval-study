@@ -1,0 +1,39 @@
+{
+  "status": "complete",
+  "assessor_type": "AI",
+  "extension_pairs": 707,
+  "combined_pairs": 1444,
+  "original_records_preserved": 737,
+  "parallel_category_sources": {
+    "assessments.vocabulary.jsonl": {
+      "sha256": "85ca29fa5ebcc9f2bf049179c975816a2d1e66a726757891e336a8b77ffb2a18",
+      "pairs": 183
+    },
+    "assessments.negation.jsonl": {
+      "sha256": "dfa7a8718c7c0bf314aaf4f8ecddf67eee545b1190e00fe1c3310913df2e68f3",
+      "pairs": 174
+    },
+    "assessments.homonym.jsonl": {
+      "sha256": "7dfa56414a5990d6f6366bba864a16168d885052b0614eeb983940b9dedf33a7",
+      "pairs": 179
+    },
+    "assessments.temporal.jsonl": {
+      "sha256": "02312540db00c268012116ee84b194a943315ca2bfa4d64be87f25b0f695edd4",
+      "pairs": 171
+    }
+  },
+  "adjudication_sha256": "0b5f1243304be77ebf202bcd09b9ebcddea263a9f2e82493fdc755fac6579e30",
+  "extension_grade_distribution": {
+    "1": 57,
+    "2": 183,
+    "0": 467
+  },
+  "extension_confidence_distribution": {
+    "high": 592,
+    "medium": 115
+  },
+  "top5_snapshot_timing": "Derived at complete-pool integration; not a separate earlier pilot",
+  "design_protocol_sha256": "93bf2ec0e834480589e24b782559c6ced495266258a9b3f1addd6eeccc29adf6",
+  "assessments_extension_sha256": "0565cbb609fa69caefaf2cb7e5d64f40b4a935be660fd7d955cf143a3dc73022",
+  "assessments_all40_sha256": "0ed2607ff66264666a32745a518afa589b00b97c45c05a94c0e6429622abfe64"
+}

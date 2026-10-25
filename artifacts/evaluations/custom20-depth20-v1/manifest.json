@@ -1,0 +1,81 @@
+{
+  "created_at_utc": "2026-10-24T20:58:25.821577+00:00",
+  "query_count": 20,
+  "assessment_pairs": 737,
+  "preserved_top5_pairs": 188,
+  "assessor_type": "AI",
+  "judgment_scope": "Complete union of both engines' top 20; saved runs evaluated to 1000",
+  "corpus_sha256": "82086c5dc9397700ca6682d19f1a1cace8ace5defa31f7990ca3c28314ec61a9",
+  "query_source_sha256": "2ba74dbfb53f1d69e17aade424d9cfabc32fcb4443533b37661c477987c32a77",
+  "assessments_sha256": "d23c2fbd4b0b85f49420a0d65a4af1e7da19eb4eb9418a1da212aefecbc52536",
+  "protocol_sha256": "3c02c8324aa80c3fffae6ef0068bcc7e58ae683ee6560c0e4ec5d93655fbd12e",
+  "grade_distribution": {
+    "2": 229,
+    "1": 110,
+    "0": 398
+  },
+  "confidence_distribution": {
+    "high": 625,
+    "medium": 112
+  },
+  "runs": {
+    "bm25": {
+      "path": "/Users/parthraghuvanshi/Desktop/IR/artifacts/runs/bm25-custom-draft-depth1000",
+      "manifest_sha256": "b6bc4e84be8448a24faa5d74383ae563d874ff3353b09d6845457bf979c4a9cc",
+      "run_sha256": "12529ca1e49f0e8394042c4bef4971022c789475ba55ab864b74dcc1cb7eef3b"
+    },
+    "dense": {
+      "path": "/Users/parthraghuvanshi/Desktop/IR/artifacts/runs/dense-custom-draft",
+      "manifest_sha256": "b05c53ae22311f80516463b171a1711cd445285f78b2bdbb4e7be9e21d57500b",
+      "run_sha256": "d3648f3ff6c956907e1ce2ca3bcb4b7e3e28ca1a596b082b4d85e6e79099d2bb"
+    }
+  },
+  "input_hashes": {
+    "/Users/parthraghuvanshi/Desktop/IR/annotations/ai_study_v1/assessments.depth20.jsonl": "d23c2fbd4b0b85f49420a0d65a4af1e7da19eb4eb9418a1da212aefecbc52536",
+    "/Users/parthraghuvanshi/Desktop/IR/annotations/ai_study_v1/assessments.top5.jsonl": "f3fed74bdbe277c8a11e42ac2927528123734219c15e79b857e02edacca3e649",
+    "/Users/parthraghuvanshi/Desktop/IR/artifacts/assessments/custom20-v1/protocol.json": "3c02c8324aa80c3fffae6ef0068bcc7e58ae683ee6560c0e4ec5d93655fbd12e",
+    "/Users/parthraghuvanshi/Desktop/IR/artifacts/assessments/custom20-v1/articles.blinded.jsonl": "6aa1c8674aa3113c8e41c9710e853e79ca09fcd6470db6c185f9e16f875219bb",
+    "/Users/parthraghuvanshi/Desktop/IR/artifacts/assessments/custom20-v1/pool.provenance.jsonl": "dbd4c10466ef96424bd45feadb55273e9101668c0ccef8ee4e46899fc13ac118",
+    "/Users/parthraghuvanshi/Desktop/IR/artifacts/assessments/custom20-v1/queries.jsonl": "2ba74dbfb53f1d69e17aade424d9cfabc32fcb4443533b37661c477987c32a77",
+    "/Users/parthraghuvanshi/Desktop/IR/artifacts/runs/bm25-custom-draft-depth1000/manifest.json": "b6bc4e84be8448a24faa5d74383ae563d874ff3353b09d6845457bf979c4a9cc",
+    "/Users/parthraghuvanshi/Desktop/IR/artifacts/runs/bm25-custom-draft-depth1000/run.trec": "12529ca1e49f0e8394042c4bef4971022c789475ba55ab864b74dcc1cb7eef3b",
+    "/Users/parthraghuvanshi/Desktop/IR/artifacts/runs/bm25-custom-draft-depth1000/results.jsonl": "e07a178c8f3365a248d04a799863c8b0f786ccc0af994bfbaf6c72e592102517",
+    "/Users/parthraghuvanshi/Desktop/IR/artifacts/runs/bm25-custom-draft-depth1000/queries.jsonl": "ec14c3f21ed8c8c87bf3db07139898b97ee39b463bc8620c25bf8cb3ab72587b",
+    "/Users/parthraghuvanshi/Desktop/IR/artifacts/runs/dense-custom-draft/manifest.json": "b05c53ae22311f80516463b171a1711cd445285f78b2bdbb4e7be9e21d57500b",
+    "/Users/parthraghuvanshi/Desktop/IR/artifacts/runs/dense-custom-draft/run.trec": "d3648f3ff6c956907e1ce2ca3bcb4b7e3e28ca1a596b082b4d85e6e79099d2bb",
+    "/Users/parthraghuvanshi/Desktop/IR/artifacts/runs/dense-custom-draft/results.jsonl": "09df2a13a6590e9a6d563d85a9f36a4e79b7b74f09f623500b15f5a2ca98865c",
+    "/Users/parthraghuvanshi/Desktop/IR/artifacts/runs/dense-custom-draft/queries.jsonl": "ec14c3f21ed8c8c87bf3db07139898b97ee39b463bc8620c25bf8cb3ab72587b"
+  },
+  "independent_metric_comparisons": 588,
+  "policies": {
+    "primary_gain": "linear 0,1,2",
+    "gain_sensitivity": "exp2: 0,1,3",
+    "binary_relevance": "grade > 0",
+    "map": "Pooled MAP@1000; denominator is every known positive in the complete designated shallow pool, not all corpus positives",
+    "unjudged": "Zero metric contribution at original rank; not confirmed irrelevant",
+    "zero_positive": "Keep all queries in macro average with zero scores",
+    "baseline": "Frozen queries, labels and rankings; no filtering, deduplication or tuning"
+  },
+  "files": {
+    "metrics.json": "217b81707c3db422cb69f6a80c3a516a441c0d41f1b02d13ebef4179fab41212",
+    "paired_comparison.json": "2c78440023105405e605cef07f6724ed4ace7fc5de98ed6f30d92a09108f44d5",
+    "per_query.csv": "66a3d800970505578c4fca217804b3b8c0c8c0ba1abce81412bdfd83c1f215e4",
+    "crosscheck.json": "ab094a2e1ea484c9aa1cba68e90121c046f631118dac7f55e1cbd9db5c57188a",
+    "sensitivity.json": "1bb0aa39b88577e78d1be211759e2c813c9f8927420859b1407afbf18dae0580",
+    "validation.json": "1f6b2a368d2ce6bfcf06925ee8228a5a1f6ae48ff506c7179c1b8bf2ddeef28b",
+    "qrels.depth20.jsonl": "72630040f6badaf97bc80f62bec3de980da0f90c81f0b1e063f328323254492d",
+    "by_category.json": "3c31138665bcf71e0b5d57040c89669aa875380d2da5fc20b45d7dcf7cee8e00",
+    "crosscheck/exp2-dense.qrels": "1b3dc731a9d971c08869247c72d46000396e74a126d082c812302d192cfb1d7c",
+    "crosscheck/linear-bm25.trec_eval.txt": "2672e91edff564c776b72ee514585a3d6c4f7ab5e1e972d9f0f9b2872a4b45e6",
+    "crosscheck/exp2-bm25.trec_eval.txt": "4fbe62a5064551f908a6927376eb3f4092b647ad97d73baf06627b098d6d72d8",
+    "crosscheck/linear-bm25.run": "b8248598a44845d0859637adc2c0fd7f639af66d303b5a2a4f0a976387ba996a",
+    "crosscheck/linear-dense.run": "5cdb2e528aabf0c88c8466b7e5fb035b377f40eebb1f554d4859f7795410007d",
+    "crosscheck/exp2-bm25.run": "b8248598a44845d0859637adc2c0fd7f639af66d303b5a2a4f0a976387ba996a",
+    "crosscheck/linear-dense.qrels": "12ce25eae67c4304d0bc915b037fc009bb9e6c4005a6b6cd63df3c9fedcda225",
+    "crosscheck/linear-dense.trec_eval.txt": "cc0c19b635e751af56d8601ca0554f6f2ece816a46db540c1c7c5e48f524e301",
+    "crosscheck/exp2-dense.trec_eval.txt": "e2c0cb4cd2b08299fc16e25a1110c2c649c0257cf57c3f931b76487628e3d8d2",
+    "crosscheck/exp2-dense.run": "5cdb2e528aabf0c88c8466b7e5fb035b377f40eebb1f554d4859f7795410007d",
+    "crosscheck/linear-bm25.qrels": "12ce25eae67c4304d0bc915b037fc009bb9e6c4005a6b6cd63df3c9fedcda225",
+    "crosscheck/exp2-bm25.qrels": "1b3dc731a9d971c08869247c72d46000396e74a126d082c812302d192cfb1d7c"
+  }
+}

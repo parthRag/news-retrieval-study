@@ -1,0 +1,40 @@
+{
+  "status": "passed",
+  "combined_query_count": 40,
+  "extension_query_count": 20,
+  "category_counts": {
+    "vocabulary_mismatch": 10,
+    "negation": 10,
+    "homonym": 10,
+    "temporal": 10
+  },
+  "retrieved_hits_per_engine": 20000,
+  "extension_pooled_pairs": 707,
+  "extension_priority_top5_pairs": 184,
+  "extension_pool_counts_by_query": {
+    "H06": 35,
+    "H07": 35,
+    "H08": 39,
+    "H09": 32,
+    "H10": 38,
+    "N06": 34,
+    "N07": 33,
+    "N08": 36,
+    "N09": 34,
+    "N10": 37,
+    "T06": 31,
+    "T07": 35,
+    "T08": 39,
+    "T09": 31,
+    "T10": 35,
+    "V06": 32,
+    "V07": 37,
+    "V08": 38,
+    "V09": 37,
+    "V10": 39
+  },
+  "extension_assessment_status": "complete",
+  "original20_queries_and_737_assessments": "byte-identical",
+  "design_protocol_sha256": "93bf2ec0e834480589e24b782559c6ced495266258a9b3f1addd6eeccc29adf6",
+  "pool_protocol_sha256": "fa001e5e2045241978fd60644ab2c5a1ec116ffba7d1ed50a31ac9a5ee9847f9"
+}

@@ -1,0 +1,15 @@
+{
+  "direction": "dense minus bm25",
+  "metric": "ndcg_at_5",
+  "mean_difference": 0.01368767293051723,
+  "paired_bootstrap_95_percentile_ci": [
+    -0.16622982879481873,
+    0.1783142720120288
+  ],
+  "dense_wins": 12,
+  "bm25_wins": 5,
+  "ties": 3,
+  "samples": 10000,
+  "seed": 20261025,
+  "interpretation": "Descriptive query bootstrap on a small AI-assessed suite; related needs and shared documents limit independence"
+}

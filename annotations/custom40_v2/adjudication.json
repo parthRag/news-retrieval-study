@@ -1,0 +1,43 @@
+{
+  "reviewer_type": "AI",
+  "timing": "Before extension evaluation; no metric/rank consultation",
+  "scope": "Targeted primary-assistant full-article audit; no independent human validation or agreement statistic",
+  "parallel_followup": "Additional cross-assessor audit attempts were unavailable; initial full-article category assessments are complete.",
+  "decisions": [
+    {
+      "query_id": "T06",
+      "doc_id": "6f881660-5ccf-11e1-8c28-8f1c9e65d2ac",
+      "original_grade": 1,
+      "final_grade": 0,
+      "reason": "The article establishes that Japanese evacuation advice already existed on March16, but not that it was issued after March11. The mandatory completed-action event date is unsupported."
+    },
+    {
+      "query_id": "T10",
+      "doc_id": "bbe97d5a-d1a6-11e5-90d3-34c2c42653ac",
+      "original_grade": 0,
+      "final_grade": 0,
+      "reason": "Full article describes deployment on Saturday without a calendar anchor; retain0 under the frozen event-date constraint."
+    },
+    {
+      "query_id": "N06",
+      "doc_id": "0781f084-d96f-11e4-8103-fa84725dbf9d",
+      "original_grade": 0,
+      "final_grade": 0,
+      "reason": "Full article concerns adolescent violence/conflict and teacher-rated behavior, without establishing violent criminal acts; retain conservative0."
+    },
+    {
+      "query_id": "H09",
+      "doc_id": "d8e87e62-1b74-11e5-ab92-c75ae6ab94b5",
+      "original_grade": 0,
+      "final_grade": 0,
+      "reason": "Full article lists mercury among coal-ash hazards but does not establish mercury contamination in fish/drinking water; retain0."
+    },
+    {
+      "query_id": "H10",
+      "doc_id": "a887e2a22cd30a90f2874e48b07ff227",
+      "original_grade": 1,
+      "final_grade": 1,
+      "reason": "Full article establishes actual pay/contract stoppage and limited district consequences; retain1, medium confidence."
+    }
+  ]
+}

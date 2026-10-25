@@ -1,0 +1,49 @@
+{
+  "page_count" : 4,
+  "pages" : [
+    {
+      "characters" : 2945,
+      "height" : 841.91998000000001,
+      "links" : [
+        "https:\/\/huggingface.co\/datasets\/liuqi6777\/trec-news"
+      ],
+      "page" : 1,
+      "width" : 594.95996000000002
+    },
+    {
+      "characters" : 2775,
+      "height" : 841.91998000000001,
+      "links" : [
+        "https:\/\/arxiv.org\/abs\/2104.08663",
+        "https:\/\/arxiv.org\/abs\/2104.08663",
+        "https:\/\/arxiv.org\/abs\/2212.03533",
+        "https:\/\/arxiv.org\/abs\/2212.03533",
+        "https:\/\/aclanthology.org\/2024.eacl-long.139\/",
+        "https:\/\/cormack.uwaterloo.ca\/cormacksigir09-rrf.pdf",
+        "https:\/\/cormack.uwaterloo.ca\/cormacksigir09-rrf.pdf"
+      ],
+      "page" : 2,
+      "width" : 594.95996000000002
+    },
+    {
+      "characters" : 2553,
+      "height" : 841.91998000000001,
+      "links" : [
+
+      ],
+      "page" : 3,
+      "width" : 594.95996000000002
+    },
+    {
+      "characters" : 2702,
+      "height" : 841.91998000000001,
+      "links" : [
+        "https:\/\/github.com\/parthRag\/news-ir-bm25-dense-final",
+        "https:\/\/github.com\/parthRag\/news-ir-bm25-dense-final"
+      ],
+      "page" : 4,
+      "width" : 594.95996000000002
+    }
+  ],
+  "pdf_sha256" : "ecc56d946dfe9b6a9acb124d0941435177247291c9be846131e8384992ad5673"
+}

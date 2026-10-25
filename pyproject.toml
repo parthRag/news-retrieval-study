@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "news-ir"
+version = "0.1.0"
+description = "Reproducible lexical and neural news retrieval experiments"
+requires-python = ">=3.12,<3.13"
+dependencies = ["pyserini==1.5.0"]
+
+[project.optional-dependencies]
+test = ["pytest==8.4.2"]
+dense = ["faiss-cpu==1.13.2", "torch>=2.9", "transformers>=4.57", "huggingface-hub>=1"]
+
+[project.scripts]
+news-ir = "news_ir.cli:main"
+news-ir-demo = "news_ir.demo:main"
+
+[tool.setuptools.package-data]
+news_ir = ["web/*.html", "web/*.css", "web/*.js"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-ra"

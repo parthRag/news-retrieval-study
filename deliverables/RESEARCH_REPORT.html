@@ -1,0 +1,753 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>RESEARCH_REPORT</title><style>@page{size:A4;margin:15mm 16mm 16mm}*{box-sizing:border-box}body{margin:0;color:#172b3e;font:10.3pt/1.38 Georgia,"Times New Roman",serif}h1,h2,h3,h4,th,.meta{font-family:Arial,sans-serif}h1{font-size:23pt;line-height:1.12;margin:0 0 12pt;letter-spacing:-.4pt}h2{font-size:15pt;line-height:1.2;margin:0 0 10pt;padding-bottom:6pt;border-bottom:1pt solid #b5c6d0;color:#164f70}h3{font-size:11.5pt;margin:12pt 0 5pt}p{margin:0 0 8pt}table{border-collapse:collapse;width:100%;font-size:9pt;margin:9pt 0 12pt;break-inside:auto}th,td{text-align:left;vertical-align:top;padding:5pt 6pt;border-bottom:.5pt solid #d4dfe5}th{background:#edf3f6;font-weight:700}tr{break-inside:avoid}thead{display:table-header-group}ul,ol{padding-left:17pt;margin:5pt 0 10pt}li{margin:0 0 5pt}a{color:#185d80;overflow-wrap:anywhere;text-decoration:none}code{font:8.1pt/1.4 Menlo,monospace;overflow-wrap:anywhere}pre{white-space:pre-wrap;padding:8pt;background:#f1f4f6;overflow-wrap:anywhere}blockquote{margin:8pt 0;padding:4pt 10pt;border-left:2pt solid #acbfc9;color:#425768}img{display:block;max-width:100%;max-height:75mm;object-fit:contain;margin:10pt auto}section.page{break-after:page}section.page:last-child{break-after:auto}.meta{font-size:9pt;color:#4e6574;padding:7pt 0 12pt}.notice{background:#fff3db;border-left:3pt solid #c18b2f;padding:8pt 10pt;margin:9pt 0;font:9.2pt/1.4 Arial,sans-serif}.compact{font-size:10.2pt}.compact table{font-size:9pt}.architecture{width:100%;margin:12pt 0}strong{font-weight:bold}small{font-size:8pt}.caption{font-size:8.5pt;color:#506775} .query-page table{font-size:8.8pt}.query-page td:first-child{width:8%}.query-page td:nth-child(2){width:46%}.query-page td:nth-child(3){width:46%}</style></head><body class="paper"><section class="page"><h1>News Retrieval under Vocabulary Mismatch: BM25, Dense Search and Linguistic Constraints</h1>
+<p><strong>Group:</strong> 5 · <strong>Course:</strong> Information Retrieval<br />
+<strong>Faculty mentor:</strong> Abhinav Kumar<br />
+<strong>Members:</strong> Parth Raghuvanshi (2023A7PS0574P); Sushruth Reddy Challa (2023A7PS0504P); Hamsini G (2023A7PS0006P); Kritika Pandey (2023A7PS0022P)<br />
+<strong>GitHub repository:</strong> https://github.com/parthRag/news-ir-bm25-dense-final (verified repository)</p>
+<div class="meta">Research implementation report · 25 October 2026 · Local reproducible artifacts</div>
+<h2>Abstract</h2>
+<p>We compare lexical BM25 and E5-base-v2 dense retrieval over 594,589 eligible news articles. Evaluation separates a 57-topic supplied-qrels benchmark from a 40-query stress suite covering vocabulary mismatch, negation, word sense and temporal constraints. The expanded custom evaluation uses 1,444 evidence-backed AI assessments of the equal-depth top-20 union for a preliminary comparison, with human review planned as the next validation stage. On the original benchmark, BM25, E5 and fixed reciprocal-rank fusion achieve nDCG@5 of 0.3975, 0.4576 and 0.4900. On the expanded custom suite, BM25 and E5 achieve nDCG@5 of 0.5133 and 0.4362, with pooled MAP@1000 of 0.4428 and 0.4072. Both query and topic-family difference intervals include zero. This reverses the initial 20 means; combined category behavior favors BM25 at nDCG@5, while E5 has higher word-sense pooled MAP. The follow-up was designed after initial outcomes were known. A bounded post-hoc empty-body filter raises E5 nDCG@5 to 0.5492. We supply a working local demo, independent native metric checks, explicit evidence provenance and reproducibility scripts. Findings are specific to these engines, queries, input budgets and incomplete relevance sets.</p>
+<p><strong>Keywords:</strong> information retrieval; BM25; dense embeddings; E5; negation; pooled evaluation; news search.</p>
+<h2>1. Introduction and research questions</h2>
+<p>News queries often describe a concept using vocabulary absent from a headline, but may also impose exact entities, polarity or event dates. A dense representation can bridge wording differences while blurring such constraints. A lexical ranker can reward the right names yet miss paraphrases or promote articles expressing the opposite assertion. Neither behavior should be assumed from the technology label alone.</p>
+<p>We ask: <strong>RQ1</strong>, how do BM25 and E5 compare against supplied news judgments? <strong>RQ2</strong>, where do their relative rankings differ across four linguistic categories? <strong>RQ3</strong>, how much do empty records, duplicates, input truncation and assessment policy affect interpretation? <strong>RQ4</strong>, can the implemented system support transparent inspection and live demonstration on limited hardware?</p>
+<p>The contribution is an implemented, auditable comparative study and a diagnostic query suite. It is not a new trained retrieval model. The supplied 57 topics provide a separate supporting benchmark; they cannot label the newly written information needs. The stress suite supplies assignment-specific evidence, with the assessment and validation plan in Section 5. The earlier proposal's hybrid and robustness ideas are retained as explicit extensions.</p>
+</section><section class="page"><h2>2. Related work and retrieval foundations</h2>
+<h3>2.1 Lexical ranking</h3>
+<p>Manning, Raghavan and Schütze [1] introduce term weighting and probabilistic retrieval foundations. BM25 rewards query-term occurrence with saturation and document-length normalization. It is attractive as a strong interpretable baseline, but a bag of analyzed terms does not encode argument structure, temporal arithmetic or truth conditions. Preserving a negation word merely makes it available for lexical matching.</p>
+<h3>2.2 Dense representations</h3>
+<p>E5 [2] learns text representations with contrastive training. We use the released E5-base-v2 checkpoint rather than training on this project. The model card [3] supplies the query/passage formatting, pooling and normalization procedure implemented here. Dense ranking compares vectors and can associate paraphrases, but representation similarity does not itself enforce all mandatory constraints. E5 is a bi-encoder, not an interactive generative answer system. Claims about its rankings should not be generalized to every LLM.</p>
+<p>BEIR [4] motivates evaluation across varied retrieval settings and the continued use of strong lexical baselines. Our two reference sets serve different purposes: supplied background-linking relevance versus deliberately constrained news information needs. Their macro scores are not interchangeable and are never combined into one average.</p>
+<h3>2.3 Negation and fusion</h3>
+<p>NevIR [6] studies document pairs differing in negation and finds architecture-dependent weaknesses. It motivates testing polarity rather than predicting that every dense model will outperform BM25. Our natural news queries are not a replication of NevIR's controlled minimal-pair benchmark: they have multiple constraints and heterogeneous articles. Consequently, winning one negation query is not direct evidence of compositional negation understanding.</p>
+<p>RRF [5] combines ranks without requiring comparable raw score scales. Our extension fixes the usual k=60 and equal engine weights, using no labels to fit fusion. Its empirical advantage is evaluated separately on the original 57 topics.</p>
+<h3>2.4 Assessment validity</h3>
+<p>Soboroff [7] discusses risks in treating model-generated relevance labels as ground truth. Our preliminary reference enables an initial engine comparison; human review is the next validation stage. Source hashes and literal quotations support inspection and reproducibility. Section 5 describes the assessment process and review plan; supplied benchmark judgments remain a separate evidence source.</p>
+<p>All system conclusions are therefore conditional: the encoder, preprocessing, query design, available article text and reference labels jointly define the experiment. No causal account of an embedding's internal reasoning is inferred from a ranking alone.</p>
+</section><section class="page"><h2>3. Corpus and query design</h2>
+<h3>3.1 Corpus provenance and eligibility</h3>
+<p>The downloaded mirror is <code>liuqi6777/trec-news</code> [10]. The local corpus contains 594,977 JSONL records with string ID, title and text fields. Shared contents are <code>(title + newline + text).strip()</code>. Only 388 records empty in both fields are excluded from retrieval, leaving 594,589 eligible articles. All original IDs remain in the lookup store. The 15,984 title-only articles are retained in the baseline, because silently dropping them from one engine would change the comparison corpus.</p>
+<p>The corpus SHA-256 is recorded in every index/run manifest. Source records are streamed into Lucene and a SQLite byte-offset table, avoiding another complete text copy. Both engines are validated against the same eligible IDs, not only an equal document count. Empty bodies and extraction artifacts remain visible, rather than being repaired with external web content. Source distribution rights must be checked before publishing corpus text; the code package excludes the corpus and article packets.</p>
+<h3>3.2 Supplied benchmark</h3>
+<p>The downloaded 57 queries are headline/background-linking topics. The 15,655 supplied qrel pairs were previously audited against the official NIST 2019 judgments [8]; the supplied 0–4 grades correspond to the official gain-valued form. Sixty topics exist in official metadata, but this local judged subset has 57. None of their canonical source-article IDs occurs in the local corpus, so there is no inferred source-document exclusion.</p>
+<p>Sixty-five judgments refer to 57 unavailable article IDs, including three positive query–article pairs. Main evaluation retains them in reference denominators; a separate available-corpus sensitivity reuses unchanged rankings and removes those qrels. This avoids improving main scores merely by hiding unavailable positives.</p>
+<h3>3.3 Twenty linguistic information needs</h3>
+<p>Five queries each cover vocabulary mismatch (V01–V05), negation (N01–N05), word sense/homonyms (H01–H05) and temporal constraints (T01–T05). Each has inclusion, exclusion and graded-relevance rules. Queries use news-compatible needs, rather than transplanting movie or ancient-history examples into an unsuitable corpus. The exact queries and rubrics are frozen under <code>annotations/ai_study_v1/</code>; the original draft status field is preserved for hash compatibility, while the later protocol records the assessment method.</p>
+<p>The suite includes workforce reductions, retirement reserves, cricket insects versus international sport, jaguar conservation, Apple’s device-unlocking dispute, and bounded event windows. A missing assertion never proves its negation. Event windows concern dates evidenced in article text, not guessed publication dates. The suite is small and intentionally difficult; it is not a random sample of user traffic. Appendix A supplies all twenty texts and inclusion rules; full exclusion rules remain in the versioned JSONL.</p>
+</section><section class="page"><h2>4. System architecture and implemented retrieval</h2>
+<div class="architecture"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 270" role="img" aria-label="Shared corpus to BM25 and E5, saved runs, evaluation, demo and reports"><defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="#506c80"/></marker></defs><g font-family="Arial,sans-serif" font-size="14" fill="#16354b"><line x1="178" y1="135" x2="232" y2="135" stroke="#506c80" stroke-width="2" marker-end="url(#a)"/><line x1="412" y1="135" x2="458" y2="62" stroke="#506c80" stroke-width="2" marker-end="url(#a)"/><line x1="412" y1="135" x2="458" y2="200" stroke="#506c80" stroke-width="2" marker-end="url(#a)"/><line x1="650" y1="62" x2="700" y2="135" stroke="#506c80" stroke-width="2" marker-end="url(#a)"/><line x1="650" y1="200" x2="700" y2="135" stroke="#506c80" stroke-width="2" marker-end="url(#a)"/><line x1="846" y1="135" x2="880" y2="54" stroke="#506c80" stroke-width="2" marker-end="url(#a)"/><line x1="846" y1="135" x2="880" y2="135" stroke="#506c80" stroke-width="2" marker-end="url(#a)"/><line x1="846" y1="135" x2="880" y2="216" stroke="#506c80" stroke-width="2" marker-end="url(#a)"/><rect x="4" y="100" width="174" height="70" rx="7" fill="#eef3f6" stroke="#7491a5"/><text x="91.0" y="126.5" text-anchor="middle" dominant-baseline="middle">News corpus</text><text x="91.0" y="143.5" text-anchor="middle" dominant-baseline="middle">594,977 records</text><rect x="232" y="100" width="180" height="70" rx="7" fill="#eef3f6" stroke="#7491a5"/><text x="322.0" y="126.5" text-anchor="middle" dominant-baseline="middle">Shared title + body</text><text x="322.0" y="143.5" text-anchor="middle" dominant-baseline="middle">594,589 eligible</text><rect x="458" y="26" width="192" height="72" rx="7" fill="#eef3f6" stroke="#7491a5"/><text x="554.0" y="53.5" text-anchor="middle" dominant-baseline="middle">BM25 inverted index</text><text x="554.0" y="70.5" text-anchor="middle" dominant-baseline="middle">Full article</text><rect x="458" y="164" width="192" height="72" rx="7" fill="#eef3f6" stroke="#7491a5"/><text x="554.0" y="191.5" text-anchor="middle" dominant-baseline="middle">E5 → exact FAISS</text><text x="554.0" y="208.5" text-anchor="middle" dominant-baseline="middle">First 512 tokens</text><rect x="700" y="100" width="146" height="70" rx="7" fill="#eef3f6" stroke="#7491a5"/><text x="773.0" y="126.5" text-anchor="middle" dominant-baseline="middle">Saved top 1,000</text><text x="773.0" y="143.5" text-anchor="middle" dominant-baseline="middle">+ fixed RRF</text><rect x="880" y="16" width="116" height="68" rx="7" fill="#eef3f6" stroke="#7491a5"/><text x="938.0" y="41.5" text-anchor="middle" dominant-baseline="middle">57 original topics</text><text x="938.0" y="58.5" text-anchor="middle" dominant-baseline="middle">40 custom queries</text><rect x="880" y="101" width="116" height="68" rx="7" fill="#eef3f6" stroke="#7491a5"/><text x="938.0" y="126.5" text-anchor="middle" dominant-baseline="middle">Local demo</text><text x="938.0" y="143.5" text-anchor="middle" dominant-baseline="middle">+ full articles</text><rect x="880" y="182" width="116" height="68" rx="7" fill="#eef3f6" stroke="#7491a5"/><text x="938.0" y="207.5" text-anchor="middle" dominant-baseline="middle">Metrics, figures</text><text x="938.0" y="224.5" text-anchor="middle" dominant-baseline="middle">+ report</text></g></svg></div>
+<h3>4.1 BM25 implementation</h3>
+<p>Pyserini 1.5.0/Lucene indexes the full shared article contents with English tokenization and lowercasing, no stemming, no stopword removal and no title boost. Fixed parameters are <strong>k1=0.9, b=0.4</strong>. Conceptually, the score is proportional to a sum of IDF-weighted saturated term frequencies:</p>
+<p><code>sum_t IDF(t) * tf(t,d) / (tf(t,d) + k1 * (1-b+b*len(d)/avg_len))</code>.</p>
+<p>The implementation and independent score tests use Lucene's actual scoring conventions. Anserini's exported scores are rounded/adjusted for deterministic ordering; evaluation preserves the published rank order. A natural-language <code>NOT</code> is an analyzed term, not a hard Boolean operation; no hidden date filter is applied.</p>
+<h3>4.2 Dense implementation</h3>
+<p>The checkpoint is <code>intfloat/e5-base-v2</code>, revision <code>f52bf8ec8c7124536f0efb74aca902b2995e5bcd</code>. Inputs use <code>query: </code> and <code>passage: </code> prefixes, a total 512-token budget including prefix/special tokens, masked mean pooling and L2 normalization. Document vectors are 768-dimensional float32. Exact FAISS inner-product search over normalized vectors implements cosine ranking, without approximate-neighbor recall error.</p>
+<p>Only the prefix of a long article is represented. BM25 sees full bodies, so shared corpus coverage does not mean equal text coverage. A pinned-tokenizer audit records retained character endpoints and visibility of every saved evidence span. It finds truncation in 568 of the initial 737 assessed pairs (expanded audit: 1,117 of 1,444); these are pair counts, not independent article counts or causal model explanations.</p>
+<h3>4.3 Fusion, manifests and lookup</h3>
+<p>Each engine exports up to 1,000 hits per query as JSONL and TREC files, alongside query snapshots, parameters and content hashes. RRF scores each unique ID by <code>sum(1/(60+rank))</code>, keeps 1,000 results and resolves score ties by ID. Original indexes/runs are never silently overwritten. The demo uses the same search CLI and a read-only article store; saved evaluation replay is labeled separately from new retrieval. On this Mac, JVM, model encoding and FAISS execution are isolated to avoid memory/OpenMP conflicts.</p>
+</section><section class="page"><h2>5. Assessment protocol and evaluation definitions</h2>
+<h3>5.1 Candidate pooling and reading</h3>
+<p>The current custom comparison uses full-article AI judgments as a preliminary reference. Human review is planned next and has not yet been completed. The review will begin with balanced cases across all 40 queries, independent overlap and adjudication, with achieved coverage reported before separate human-reviewed scores are produced. The detailed plan is in <code>reports/ASSESSMENT_METHOD.md</code>.</p>
+<p>The union of each engine's top 20 contains 737 query–article pairs, including 188 in either top five. All 737 are assessed. Article packets use deterministic randomized order without engine, rank or score; however, earlier results had been seen, so perfect blindness and preregistration are not claimed. Every full available title/body was read, including long texts in explicit consecutive chunks. Only an exact repeated extraction glossary was removed from the reading display; evidence offsets always refer to original source contents.</p>
+<p>Grades are <strong>0</strong> for failure of the information need or a mandatory constraint, <strong>1</strong> for limited detail while satisfying the need, and <strong>2</strong> for substantive directly relevant evidence. Each record includes rationale, literal quotations, Unicode start/end offsets, source hash, reading acknowledgment, assessor provenance and confidence. The distribution is 398 grade 0, 110 grade 1 and 229 grade 2; 625 decisions are self-rated high confidence, 112 medium. Confidence is not calibrated accuracy. Thirteen same-query exact-content reuses identify a source decision; no identical same-query contents have conflicting grades. Earlier pilot and top-five judgments are preserved.</p>
+<h3>5.2 Metrics</h3>
+<p>For cutoff K, <code>DCG@K = sum(gain_i/log2(i+1))</code>; <code>nDCG@K = DCG@K/IDCG@K</code>. Main gains equal grades: 0–4 for the original benchmark and 0–2 for custom queries. Exponential gains are a sensitivity analysis. IDCG uses all known reference positives, including positives absent from the retrieved ranks.</p>
+<p>AP@1000 sums precision at each positively judged hit among the first 1,000 ranks, then divides by <strong>all known relevant documents for the query</strong>. MAP is the equal-weight macro mean. Binary relevance is grade &gt; 0. P@5 divides by five, including when fewer results exist. Unjudged documents keep their ranks with zero contribution; this numerical convention is not a factual irrelevance judgment. Queries without known positives receive zero and stay in averages.</p>
+<p>Custom MAP is explicitly <strong>pooled MAP@1000</strong>. Its reference set is the completed designated shallow pool, not exhaustive corpus labels. About 3% of the saved top-1,000 lists are judged. No claim of complete recall follows from complete assessment of top 20. V05's zero-positive pool does not prove there is no relevant corpus article.</p>
+<h3>5.3 Uncertainty and verification</h3>
+<p>Ten thousand paired query-bootstrap resamples produce descriptive percentile intervals, with recorded seeds. Related queries/shared articles and uncertainty in the preliminary reference limit interpretation. These are not label-accuracy intervals. Native <code>trec_eval</code> [9] independently cross-checks seven measures per query and macro mean. Ordinal scores preserve published rank order, including tied original scores, during those checks.</p>
+</section><section class="page"><h2>6. Results on the original 57 topics</h2>
+<table>
+<thead>
+<tr>
+<th>Measure</th>
+<th>BM25</th>
+<th>E5 dense</th>
+<th>RRF k=60</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nDCG@5</td>
+<td>0.3975</td>
+<td>0.4576</td>
+<td>0.4900</td>
+</tr>
+<tr>
+<td>MAP@1000</td>
+<td>0.2329</td>
+<td>0.2765</td>
+<td>0.3332</td>
+</tr>
+<tr>
+<td>P@5</td>
+<td>0.5298</td>
+<td>0.5579</td>
+<td>0.6421</td>
+</tr>
+<tr>
+<td>Recall@1000</td>
+<td>0.6681</td>
+<td>0.7738</td>
+<td>0.8044</td>
+</tr>
+</tbody>
+</table>
+<p>E5 has higher means than BM25, but BM25 wins 21 of 57 nDCG@5 comparisons; E5 wins 31 and five tie. The paired E5-minus-BM25 nDCG@5 difference is <strong>+0.0601</strong>, with descriptive 95% interval <strong>[−0.0046, +0.1294]</strong>. Its AP difference is <strong>+0.0436</strong>, interval <strong>[+0.0032, +0.0852]</strong>. These conditional estimates support complementarity rather than universal superiority.</p>
+<p><img src="../reports/figures/current-study/original_57_three_engines.png" alt="Original three-engine results" /></p>
+<p>RRF has the highest means. Its nDCG@5 difference against BM25 is +0.0926, interval [+0.0434, +0.1419]; against E5 it is +0.0324, interval [−0.0154, +0.0790]. AP differences are +0.1003 versus BM25 and +0.0567 versus E5, with positive descriptive intervals. Fixed fusion was not fitted on these qrels, but examining a third system remains exploratory rather than a new held-out confirmation.</p>
+<h3>Judgment coverage and gain sensitivity</h3>
+<p>At rank five, judged fractions are <strong>96.49% BM25</strong>, <strong>79.30% E5</strong>, and <strong>92.63% RRF</strong>. Lower reference coverage can penalize genuinely useful unjudged results, especially for dense retrieval. It is incorrect to label every zero metric contribution a confirmed failure. Exponential-gain nDCG@5 is 0.3369/0.3959/0.4140; the NIST gain-valued sensitivity is 0.3546/0.4118/0.4369. Available-corpus sensitivity changes E5 to 0.4582, while BM25/RRF nDCG remain 0.3975/0.4900.</p>
+<h3>Measured cases</h3>
+<p>For topic 870, E5's 0.9294 versus BM25's 0.0000 matches a contrast between reports of transgender killings and lexical distraction by political entities. Topic 830 similarly connects miniature frogs with a fingernail-sized description. Conversely, topic 852 favors BM25 (0.5353 versus 0.0457), but three dense top-five hits are unjudged; the observed difference mixes topical focus and coverage. These cases identify plausible explanations, not internal neural reasoning. Full IDs, supplied grades and inspected evidence remain in <code>reports/ORIGINAL_57_CASE_STUDIES.md</code>.</p>
+</section><section class="page"><h2>7. Results on the custom linguistic suite</h2>
+<table>
+<thead>
+<tr>
+<th>Measure</th>
+<th>BM25</th>
+<th>E5 dense</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nDCG@5</td>
+<td>0.4621</td>
+<td>0.4897</td>
+</tr>
+<tr>
+<td>nDCG@10</td>
+<td>0.4634</td>
+<td>0.5083</td>
+</tr>
+<tr>
+<td>Pooled MAP@1000</td>
+<td>0.4006</td>
+<td>0.4683</td>
+</tr>
+<tr>
+<td>P@5</td>
+<td>0.5300</td>
+<td>0.5300</td>
+</tr>
+<tr>
+<td>Judged fraction @1000</td>
+<td>0.0299</td>
+<td>0.0321</td>
+</tr>
+</tbody>
+</table>
+<p>All 20 queries and all top-20 retrieved slots are judged. The only zero-positive pooled query is V05; V01 and T01 have relevant deeper results. Both systems have P@5=0.53, even though the ordering and grades of useful results differ.</p>
+<table>
+<thead>
+<tr>
+<th>Category (5 each)</th>
+<th>BM25 nDCG@5</th>
+<th>E5 nDCG@5</th>
+<th>BM25 pooled MAP</th>
+<th>E5 pooled MAP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vocabulary mismatch</td>
+<td>0.1830</td>
+<td>0.3488</td>
+<td>0.1265</td>
+<td>0.3630</td>
+</tr>
+<tr>
+<td>Negation</td>
+<td>0.6046</td>
+<td>0.6192</td>
+<td>0.6922</td>
+<td>0.5409</td>
+</tr>
+<tr>
+<td>Word sense</td>
+<td>0.6341</td>
+<td>0.7071</td>
+<td>0.4165</td>
+<td>0.6956</td>
+</tr>
+<tr>
+<td>Temporal</td>
+<td>0.4267</td>
+<td>0.2836</td>
+<td>0.3671</td>
+<td>0.2738</td>
+</tr>
+</tbody>
+</table>
+<p><img src="../reports/figures/custom20-depth20/category_metrics.png" alt="Category metrics" /></p>
+<p><strong>Uncertainty.</strong> E5−BM25 nDCG@5 is +0.0275, interval [−0.1264,+0.1650], with 12 E5 wins, five BM25 wins and three ties. Pooled MAP difference is +0.0677, interval [−0.0877,+0.2220], with 12/7/1 wins/losses/ties. Both intervals include zero. Five hand-authored queries per category are insufficient for broad category-level significance claims.</p>
+<p>The earlier top-five-only nDCG was 0.5149/0.5286. Deeper relevant judgments increase ideal-ranking denominators, changing nDCG despite identical original top-five grades and rankings. The frozen historical snapshot remains valid for its original scope. It must not be substituted for the current complete-designated-pool results merely because it is larger.</p>
+<p><strong>Sensitivity.</strong> Exponential 0/1/3 gains yield nDCG@5=0.4350/0.4708. Removing medium-confidence positive credit gives 0.4181/0.4645; keeping only grade-2 positives gives 0.3797/0.4332. These specified scenarios preserve the average direction but do not bound label error, establish significance or validate high-confidence judgments.</p>
+</section><section class="page"><h2>8. Failure analysis: linguistic boundaries and competing explanations</h2>
+<h3>8.1 Vocabulary mismatch</h3>
+<p>The category means favor E5, with nDCG@5=0.3488 versus 0.1830. V04 is a strong individual dense case, while V01 shows that finding workforce-cutting language is insufficient if the required technology sector or explanatory detail is missing. Both V01 top-five lists fail, yet the deeper pool has relevant articles. Better semantic association is helpful but does not enforce every constraint.</p>
+<h3>8.2 Negation</h3>
+<p>E5 wins three of five negation queries at nDCG@5, BM25 two. Means are close: 0.6192 versus 0.6046. The pooled MAP ordering reverses, with BM25 0.6922 versus E5 0.5409. Thus the answer depends on whether we ask about a few early graded hits or recovery of all known pooled positives. N03 is a strong BM25 case (0.6608 versus 0.1461). Retrieved reports can contain the right topic yet fail the required assertion. Mixed articles can still qualify when they explicitly describe the requested condition. Absence of an airborne-transmission assertion alone is not an explicit rejection of airborne transmission. These are judgments of what the requested reporting states, not current clinical guidance.</p>
+<p>This does not prove BM25 understands negation: its bag-of-terms formulation has no truth-condition mechanism. Nor does an E5 win prove polarity understanding. Entity matches, correlated wording, input coverage, article quality and the query's other constraints remain competing explanations. A controlled polarity-flip study needs changed-query judgments and is future work.</p>
+<h3>8.3 Word sense and extraction quality</h3>
+<p>H02 asks about India international cricket results and player performance. Dense top-five results are empty-body records titled <code>Results</code>, all grade 0. BM25 also makes errors: its lead previews India–Pakistan rather than reporting a match result. Deeper candidates include wrong teams, domestic cricket and previews. H04 retrieves conservation articles about other species; H03 instead concerns Apple’s iPhone-unlocking dispute with the FBI. Correct broad context is insufficient for the precise entity/sense need.</p>
+<h3>8.4 Temporal constraints</h3>
+<p>BM25 leads temporal category means (0.4267 versus 0.2836 nDCG@5). T03 and T04 are prominent dense failures. Judgments distinguish actual state rulings from stayed decisions and the excluded national event. T01's deeper retrospectives can satisfy an earlier window even if the article itself is later. Undated relevant-looking text does not establish the requested bounded event date. One T01 retrospective contains a questionable relative date and has medium confidence; this is a source-quality limitation.</p>
+<h3>8.5 Evidence visibility</h3>
+<p>The audit records whether quoted support lies within E5's retained prefix. It can identify unavailable evidence, but visibility does not establish use by the model. BM25's full-body coverage and E5's prefix coverage confound architecture with input budget. Neither causal attribution to truncation nor a general model-family claim is warranted without a controlled equal-input or passage-indexing experiment.</p>
+</section><section class="page"><h2>9. Post-hoc content-quality ablation</h2>
+<h3>9.1 Protocol</h3>
+<p>After observing empty records and duplicate articles, we applied the same four deterministic policies to each engine's original top 20: retain all; remove whitespace-empty bodies; suppress exact title-plus-body duplicates after the first occurrence; apply both. Rankings preserve remaining original order, use no score/label threshold and never refill beyond rank 20. All candidates are already judged, so no unjudged replacement is silently treated as an observed negative. The baseline files and relevance labels remain unchanged.</p>
+<p>Main nDCG uses the original document-level reference IDCG; P@5 always divides by five. MAP is not reported for these bounded candidate lists. Because repeated positively judged document IDs can receive repeated ordinary nDCG credit, we additionally report a separate <strong>unique-content nDCG@5</strong>: only the first occurrence of a content hash earns gain, duplicate positions remain, and IDCG uses all unique pooled contents. Same-query content grades are consistent. This additional measure is not standard document-level nDCG and cannot be compared numerically as if it used the same reference.</p>
+<table>
+<thead>
+<tr>
+<th>Rule within original top 20</th>
+<th>BM25 nDCG@5</th>
+<th>E5 nDCG@5</th>
+<th>BM25 P@5</th>
+<th>E5 P@5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Frozen baseline</td>
+<td>0.4621</td>
+<td>0.4897</td>
+<td>0.5300</td>
+<td>0.5300</td>
+</tr>
+<tr>
+<td>Remove empty bodies</td>
+<td>0.4621</td>
+<td>0.5492</td>
+<td>0.5300</td>
+<td>0.6000</td>
+</tr>
+<tr>
+<td>Exact content deduplication</td>
+<td>0.4664</td>
+<td>0.5053</td>
+<td>0.5300</td>
+<td>0.5600</td>
+</tr>
+<tr>
+<td>Both rules</td>
+<td>0.4664</td>
+<td>0.5434</td>
+<td>0.5300</td>
+<td>0.6000</td>
+</tr>
+</tbody>
+</table>
+<h3>9.2 Interpretation</h3>
+<p>Empty-body removal improves E5 nDCG@5 by <strong>+0.0595</strong> and P@5 by <strong>+0.07</strong>, with BM25 unchanged. H02 rises from 0 to 0.4788 within the retained horizon. N03 improves from 0.1461 to 0.3601 but remains below BM25's baseline. This demonstrates sensitivity to available-record quality; it does not establish that empty records fully explain polarity failures.</p>
+<p>Unique-content nDCG rises with exact deduplication: BM25 <strong>0.4581 → 0.4736</strong>, E5 <strong>0.4821 → 0.5153</strong>. Both rules yield <strong>0.4736 / 0.5534</strong>. Ordinary E5 nDCG with both rules (0.5434) is slightly lower than empty-body removal alone (0.5492), while the unique-content measure improves. The difference reflects what each reference rewards and illustrates why diversity cannot be inferred from document-ID metrics alone.</p>
+<p>These rules were motivated by observed failures, not preregistered or validated on a fresh test set. No optimal threshold was searched, but post-hoc selection still limits generalization. The experiment measures filtering within a depth-20 horizon, not reindexing/searching a cleaned full corpus. Future work should test the frozen rule on new queries, include longer refilling pools with proper labels, and compare passage representations while controlling input coverage.</p>
+<p>Outputs include every candidate/retained ID, per-query CSV, aggregate metrics and source-bound hashes in <code>artifacts/evaluations/quality-top20-v1/</code>.</p>
+</section><section class="page"><h2>10. Engineering, efficiency and reproducibility</h2>
+<h3>10.1 Resource measurements</h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Measured requirement or time</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BM25 index folder</td>
+<td>385,483,844 bytes (367.6 MiB)</td>
+<td>Includes local lookup metadata; disk, not RAM</td>
+</tr>
+<tr>
+<td>Dense index folder</td>
+<td>1,848,335,569 bytes (1.72 GiB)</td>
+<td>Excludes separate model weights</td>
+</tr>
+<tr>
+<td>E5 weights</td>
+<td>About 418 MiB</td>
+<td>Additional disk requirement</td>
+</tr>
+<tr>
+<td>BM25 index build</td>
+<td>66.55 seconds, local Mac</td>
+<td>Different stage/hardware from encoding</td>
+</tr>
+<tr>
+<td>Full dense job</td>
+<td>20,574.8 seconds, Kaggle T4</td>
+<td>About 5 h 43 min, including job work</td>
+</tr>
+<tr>
+<td>RRF computation</td>
+<td>About 0.69 ms/query</td>
+<td>Saved rank fusion only, excluding searches/startup</td>
+</tr>
+<tr>
+<td>Live CPU smoke query</td>
+<td>BM25 1.39 s; E5 48.59 s</td>
+<td>Includes separate process/model startup; single-run observation</td>
+</tr>
+</tbody>
+</table>
+<p>The local machine has 8 GiB RAM. GPU document encoding used one T4 and checkpointed float32 shards, which were validated for complete unique IDs, finite normalized vectors and source/model identity. It is completed work; the demo needs no GPU. Peak resident RAM and representative warmed query-latency distributions have not been measured under a controlled protocol. Disk sizes are not substitutes for RAM measurements, and disparate build stages are not a speedup comparison.</p>
+<h3>10.2 Working demo</h3>
+<p>A standard-library local HTTP server serves packaged HTML/CSS/JavaScript. Startup verifies query/run/evaluation hashes and corpus identity. Saved custom views show two engines, relevance rules, per-query metrics, full articles, rationale and highlighted evidence. The input toggle displays the exact E5-retained passage text. Original views additionally show RRF and supplied grades.</p>
+<p>Live searches run BM25 then E5 in separate processes, combine complete top-1,000 lists by RRF, and return explicitly unjudged results without fabricated metrics. FAISS remains isolated. One job at a time, bounded in-memory history, literal query arguments and subprocess timeouts support operation on the limited machine. Saved comparisons remain available during live retrieval and are never overwritten.</p>
+<h3>10.3 Checks and artifact integrity</h3>
+<p>The initial release had 140 passing tests (the expanded suite is reported in Section 13), covering real Lucene behavior, independent scoring, Unicode offsets, malformed inputs, atomic publication, source identity, retrieval exports, metric definitions, assessment preservation, exact-content handling, HTTP routes, live-job recovery and quality-metric behavior. Initial-release native checks total <strong>5,460</strong>: 3,248 original baseline comparisons, 1,624 RRF comparisons and 588 custom comparisons. Native four-decimal output uses tolerance 0.000051. The custom artifact validator recomputes saved scores and checks all 737 source/evidence records. Real-browser verification covers all 77 saved queries, article views, 390-pixel layout and actual BM25/E5/RRF retrieval, with no observed JavaScript exceptions.</p>
+</section><section class="page"><h2>11. Limitations, conclusions and remaining review</h2>
+<h3>11.1 Validity limits</h3>
+<p><strong>Assessment.</strong> The current reference supports preliminary comparison. Full-text evidence and self-rated confidence help inspection, but do not establish decision accuracy; earlier outcomes were also visible during study development. The planned human-review stage will check relevant cases, hard negatives, temporal bounds and borderline grades. Review coverage and agreement will be reported only after that work is completed.</p>
+<p><strong>Pooling.</strong> Completing the designated pool does not label the whole corpus. Only about 3% of each top-1,000 list is judged. Custom AP/recall depend on pooled known positives; V05's zero cannot establish answer absence. RRF is evaluated on original supplied qrels only. A custom RRF run could promote articles outside the judged top-20 union, so a comparable custom evaluation would require attention to additional coverage.</p>
+<p><strong>Comparability.</strong> Both engines share article IDs, but BM25 sees full bodies and E5 only a prefix. The exact search removes approximate-index error but not encoder truncation. Extraction glitches, title-only records and exact duplicates interact with representation. The bounded post-hoc quality experiment demonstrates sensitivity without fully separating these causes.</p>
+<p><strong>Generalization.</strong> The initial twenty authored queries, five per category, were too few for broad claims about linguistic competence. Query dependence and model-specific behavior limit bootstrap interpretation. No held-out tuning set, new dataset or controlled polarity-pair benchmark was added. Original supplied judgments also have unequal coverage and a small number of unavailable positives.</p>
+<p>A separate extension now defines <strong>40 queries, ten per category</strong>, preserving the original 20 exactly and adding 20 new information needs. Assessment and evaluation are now complete; Sections 12–13 report the added and combined samples. Sections 7–9 preserve the initial 20 results and ablations. The extension was designed after viewing those results and is not an independent held-out study. Shared-topic families are recorded for grouped uncertainty analysis. Its frozen rubrics and protocol are in <code>annotations/custom40_v2/</code>; see <code>reports/CUSTOM_40_EXTENSION.md</code>.</p>
+<p><strong>Efficiency.</strong> One GPU encoding job and a few cold local searches do not supply a controlled systems benchmark. End-to-end latency includes startup and memory pressure; peak RAM is unmeasured. The demo is a local research prototype, not a deployed concurrent service.</p>
+<h3>11.2 Initial-study interpretation</h3>
+<p>The initial 20-query comparison shows complementary strengths under transparent evaluation. E5 improves original-benchmark averages and performs well on vocabulary mismatch and word sense; BM25 retains substantial per-query wins and stronger temporal category means. Negation has no simple technology-level winner: near-top graded retrieval and pooled recovery can favor different engines. Fixed RRF improves original averages, while uncertainty and judgment coverage qualify the claim. Article-quality filtering materially changes dense outcomes, supporting explicit data-quality diagnosis alongside model analysis.</p>
+<p>The deliverable combines a functioning dual-engine system, a 40-query challenge suite, complete designated-pool judgments, nDCG/MAP evaluation, evidence-linked failures, uncertainty, a measured stretch experiment and a local demo. The preliminary comparison is complete, with the human-review stage planned as described above.</p>
+<h3>11.3 Submission and authorship</h3>
+<p>Group 5 member and mentor details appear on the first page. The brief records responsibility for completed team components; actual personal work is confirmed separately. The verified public repository, linked on page 1, publishes source, notebooks, preprocessing scripts and reports. Assessment provenance and the next validation stage are described in Section 5. Submit the four-page brief; this longer report is supporting research material.</p>
+</section><section class="page"><h2>References and reproduction index</h2>
+<ol>
+<li>Manning, Raghavan and Schütze (2008). <em>Introduction to Information Retrieval</em>. Cambridge University Press. Chapters 6 and 11. https://nlp.stanford.edu/IR-book/</li>
+<li>Wang et al. (2022; revised 2024). <em>Text Embeddings by Weakly-Supervised Contrastive Pre-training</em>. https://arxiv.org/abs/2212.03533</li>
+<li>intfloat. <em>E5-base-v2 model card</em>. https://huggingface.co/intfloat/e5-base-v2</li>
+<li>Thakur et al. (2021). <em>BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models</em>. https://arxiv.org/abs/2104.08663</li>
+<li>Cormack, Clarke and Büttcher (2009). <em>Reciprocal Rank Fusion outperforms Condorcet and individual Rank Learning Methods</em>. SIGIR. https://cormack.uwaterloo.ca/cormacksigir09-rrf.pdf</li>
+<li>Weller, Lawrie and Van Durme (2024). <em>NevIR: Negation in Neural Information Retrieval</em>. EACL, pp. 2274–2287. https://aclanthology.org/2024.eacl-long.139/</li>
+<li>Soboroff (2025). <em>Don't Use LLMs to Make Relevance Judgments</em>. Information Retrieval Research 1, 29–46. https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=958495</li>
+<li>NIST. <em>TREC 2019 News track data</em>. https://trec.nist.gov/data/news2019.html</li>
+<li>NIST. <em>trec_eval source</em>. https://github.com/usnistgov/trec_eval</li>
+<li>Dataset mirror used locally: https://huggingface.co/datasets/liuqi6777/trec-news</li>
+</ol>
+<h3>Reproduction commands</h3>
+<p>Use Python 3.12 and Java 21. In the existing environment, from the repository root:</p>
+<pre><code class="language-sh">.venv/bin/python -m news_ir.demo
+.venv/bin/python -m pytest -q
+.venv/bin/python scripts/validate_custom_depth20.py
+.venv/bin/python scripts/evaluate_quality_ablation.py --output artifacts/evaluations/quality-recheck
+.venv/bin/python scripts/build_final_documents.py
+</code></pre>
+<p>The locked environment and <code>README.md</code> document setup, source/index construction, Kaggle encoding, independent evaluation and saved-run reproduction. <code>reports/DEMO_GUIDE.md</code> provides the presentation sequence. <code>DELIVERABLES.md</code> maps submission artifacts and local data dependencies.</p>
+<p><strong>Provenance anchors.</strong> Corpus SHA-256: <code>82086c5dc9397700ca6682d19f1a1cace8ace5defa31f7990ca3c28314ec61a9</code>. Custom queries: <code>2ba74dbfb53f1d69e17aade424d9cfabc32fcb4443533b37661c477987c32a77</code>. Custom assessments: <code>d23c2fbd4b0b85f49420a0d65a4af1e7da19eb4eb9418a1da212aefecbc52536</code>. Full revision/configuration hashes remain in manifests; frozen inputs are not modified to regenerate the report.</p>
+<p><strong>Evidence location.</strong> The 737-decision appendix is <code>reports/CUSTOM_20_DEPTH20_EVIDENCE.md</code>; full article packets remain local under <code>artifacts/assessments/</code>. The longer appendix is not reproduced in the four-page brief. Selected article excerpts remain evidence for the judgments, rather than a substitute for full-document review.</p>
+</section><section class="page"><h2>12. Expanded scope: 40-query follow-up and combined results</h2>
+<p>This section supersedes the initial-20 interpretation in Sections 7–8. Those tables and the quality ablation remain unchanged historical results. We added five information needs per category without altering the original queries, rankings or 737 decisions. The follow-up was designed after observing initial results; it is not a preregistered or independent held-out test. All new rubrics were frozen before follow-up retrieval. No model retraining or test-driven parameter tuning was performed.</p>
+<table>
+<thead>
+<tr>
+<th>Evaluation set</th>
+<th>BM25 nDCG@5</th>
+<th>E5 nDCG@5</th>
+<th>BM25 MAP</th>
+<th>E5 MAP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Original 57 supplied qrels</td>
+<td>0.3975</td>
+<td>0.4576</td>
+<td>0.2329</td>
+<td>0.2765</td>
+</tr>
+<tr>
+<td>Initial custom 20</td>
+<td>0.4621</td>
+<td>0.4897</td>
+<td>0.4006</td>
+<td>0.4683</td>
+</tr>
+<tr>
+<td>Added custom 20</td>
+<td>0.5645</td>
+<td>0.3828</td>
+<td>0.4849</td>
+<td>0.3460</td>
+</tr>
+<tr>
+<td>Combined custom 40</td>
+<td>0.5133</td>
+<td>0.4362</td>
+<td>0.4428</td>
+<td>0.4072</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Category (10 each)</th>
+<th>BM25 nDCG@5</th>
+<th>E5 nDCG@5</th>
+<th>BM25 MAP</th>
+<th>E5 MAP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vocabulary mismatch</td>
+<td>0.4757</td>
+<td>0.4000</td>
+<td>0.4007</td>
+<td>0.3343</td>
+</tr>
+<tr>
+<td>Negation</td>
+<td>0.7270</td>
+<td>0.6322</td>
+<td>0.6767</td>
+<td>0.5469</td>
+</tr>
+<tr>
+<td>Word sense</td>
+<td>0.5526</td>
+<td>0.5198</td>
+<td>0.4113</td>
+<td>0.5389</td>
+</tr>
+<tr>
+<td>Temporal</td>
+<td>0.2980</td>
+<td>0.1930</td>
+<td>0.2823</td>
+<td>0.2085</td>
+</tr>
+</tbody>
+</table>
+<p>The added 20 favor BM25 strongly enough to reverse both combined mean measures. The initial advantage of E5 on vocabulary mismatch and word sense is therefore not stable across this authored sample. BM25 leads all four combined category nDCG means, while E5 retains higher word-sense pooled MAP. Combined P@5 is <strong>0.555 BM25 / 0.460 E5</strong>. Per-query nDCG wins are <strong>21 BM25 / 15 E5 / 4 ties</strong>. The result does not show that lexical retrieval generally solves semantic mismatch: long queries contain useful matching terms, constraints differ, and the E5 representation has a shorter input budget.</p>
+<p>Assessment now covers <strong>1,444 pairs</strong>, including <strong>707 added decisions</strong>. Four disjoint assessment batches used the protocol in Section 5; no agreement score is inferred from this division. Every unique available article in each assignment was read; exact same-query/full-content duplicates could reuse a documented decision. A targeted primary-assistant audit reviewed five borderline cases before metrics and downgraded one Japanese evacuation-advice judgment because issuance after March 11 was not established. Original category files and the audit trail are retained. All 737 initial decisions are byte-preserved.</p>
+<p>Temporal judgments require article-supported event dates. A report of a Brazilian deployment on “Saturday” without a calendar anchor can be topically appropriate but fail this evidence requirement. Such zeros should not all be interpreted as wrong-event retrieval. Relevance concerns the article's assertions and the frozen need; it does not certify every factual assertion in the source.</p>
+</section><section class="page"><h2>13. Robustness of the expanded comparison</h2>
+<p>The all-40 E5−BM25 mean differences are <strong>−0.0771 nDCG@5</strong> and <strong>−0.0356 pooled MAP</strong>. We retain the initial query-bootstrap analysis and add paired topic-family resampling to avoid treating the cricket, Java and Mercury sense pairs as fully independent topics. Each resampled family carries all its queries; the ratio of summed differences to the resampled query count preserves the query-weighted estimand.</p>
+<table>
+<thead>
+<tr>
+<th>Resampling unit</th>
+<th>nDCG@5 95% interval</th>
+<th>Pooled MAP 95% interval</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>40 queries</td>
+<td>[-0.1703, +0.0148]</td>
+<td>[-0.1301, +0.0609]</td>
+</tr>
+<tr>
+<td>37 design families</td>
+<td>[-0.1729, +0.0150]</td>
+<td>[-0.1315, +0.0588]</td>
+</tr>
+<tr>
+<td>35 broader topic groups</td>
+<td>[-0.1767, +0.0212]</td>
+<td>[-0.1362, +0.0678]</td>
+</tr>
+</tbody>
+</table>
+<p>All intervals include zero. The broader grouping additionally joins marriage-law and Ebola topics across categories. Neither grouping guarantees independent topic families; the intervals describe resampling variability, not judgment accuracy or generalization to an external query population. Category groups contain ten queries each and remain exploratory. Gain and confidence sensitivities are saved alongside each evaluation.</p>
+<p><strong>Coverage and reproducibility.</strong> Both engines' complete top 20 are judged. Mean judged fraction at 1000 is <strong>2.9175% BM25 / 3.1500% E5</strong>. Custom MAP remains incomplete-pool MAP; higher recall of pooled positives does not demonstrate corpus-wide completeness. V05 remains the sole zero-positive pool. Combined saved runs concatenate unchanged component ranks and scores, with component manifest hashes. Earlier E5 query encoding ran on a GPU, while follow-up query encoding used the CPU; combined timing is not a controlled benchmark. The document vectors, model revision and corpus remain the same.</p>
+<p><strong>Concrete follow-up cases.</strong> For V08, BM25 nDCG@5 is <strong>0.9270</strong>, E5 <strong>0.3008</strong>. BM25's first article (<code>5b0dbbda-5c3e-11e7-9fc6-c7ef4bc58d13</code>, grade 2) connects wealthy arrivals, rising rents and forced moves in Bloomingdale; E5's first (<code>d056a7e2-f5df-11e5-8b23-538270a1ca31</code>, grade 0) contains only a link to earlier columns. That is an article-content failure as well as a ranking observation. For N08, BM25's lead (<code>d29a85bb3643b94fb5ad7fb7bc77a1a4</code>, grade 2) explains completed Keystone rejection, while E5's lead (<code>8d3f8976-41f0-11e1-8f2d-87a67739d0d2</code>, grade 0) predicts an announcement later that day: the decisive constraint is completed versus pending action. V07 is a counterexample: E5 leads <strong>0.3392 vs 0.3156</strong>, with a detailed D.C. risk-assessment article at rank 1; BM25's first discusses cash bail without establishing the required alternative. These evidence-backed distinctions describe observed rankings, without proving a causal model mechanism.</p>
+<p><strong>Validation.</strong> Added and combined metrics contribute <strong>588 + 1,148</strong> independent native comparisons, giving <strong>7,196</strong> across the project. The current test suite has <strong>153 passing tests</strong>. The expanded report, saved demo, all 40 frozen query texts, 1,444 decisions, targeted adjudication, source-run lineage and uncertainty artifacts are included in the local package. Full article packets, corpus, model and indexes are excluded from the portable archive and remain local dependencies.</p>
+<p><strong>Next validation stage.</strong> Human review is planned, starting with a balanced sample of positives, hard negatives and date-unsupported cases. After review, we will test passage-based or equal-input retrieval with fresh judgments. Controlled polarity pairs would isolate negation better than these natural multi-constraint queries. The larger suite supplies more diagnostic cases, while the reversal warns against assuming a model-level winner from the first five examples per category.</p>
+</section><section class="page"><h2>Appendix A. Frozen custom queries (V01–N05)</h2>
+<p>Each information need has the shared 0/1/2 rubric: fails a mandatory constraint; limited qualifying detail; substantive qualifying evidence. Exact exclusion rules and status/protocol fields are in the frozen JSONL. Temporal grading requires article-evidenced event bounds.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Query text</th>
+<th>Inclusion rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>V01</td>
+<td>Find news about workforce reductions at technology firms, explaining why employees lost their positions and how many were affected.</td>
+<td>Technology-sector layoffs or job cuts, with reasons or scale.</td>
+</tr>
+<tr>
+<td>V02</td>
+<td>How could depletion of the U.S. old-age insurance reserve affect retirees’ monthly payments?</td>
+<td>U.S. Social Security retirement trust-fund depletion and consequences for benefits.</td>
+</tr>
+<tr>
+<td>V03</td>
+<td>Find reporting on repeated blows to the head in professional American football and lasting damage to memory and thinking.</td>
+<td>Repeated football head trauma and long-term cognitive impairment, including CTE.</td>
+</tr>
+<tr>
+<td>V04</td>
+<td>What practical arrangements help older adults keep living in their own houses as their mobility declines instead of moving into residential care?</td>
+<td>Aging in place with practical housing adaptations, assistance or support for declining mobility.</td>
+</tr>
+<tr>
+<td>V05</td>
+<td>Find reports about verifying an airline passenger’s identity using facial features or fingerprints in place of conventional boarding documents.</td>
+<td>Airport or airline biometric identity/boarding systems using face or fingerprint recognition.</td>
+</tr>
+<tr>
+<td>N01</td>
+<td>Find studies that did NOT find a decline in employment after Seattle increased its minimum wage, including the evidence behind that conclusion.</td>
+<td>An empirical Seattle minimum-wage study explicitly reporting no employment decline, with findings/method evidence.</td>
+</tr>
+<tr>
+<td>N02</td>
+<td>Find U.S. court decisions that did NOT uphold bans on same-sex marriage and instead allowed same-sex couples to marry.</td>
+<td>Court rulings striking down or refusing to uphold marriage bans and permitting marriage.</td>
+</tr>
+<tr>
+<td>N03</td>
+<td>Find reporting explaining that Ebola is NOT airborne and describing the direct-contact conditions through which transmission occurs.</td>
+<td>Explicit rejection of airborne spread alongside an explanation of direct-contact transmission.</td>
+</tr>
+<tr>
+<td>N04</td>
+<td>Find reports of research concluding that vaccines do NOT cause autism, including the evidence used to reject the claimed connection.</td>
+<td>Research or evidence explicitly rejecting a causal vaccine-autism link.</td>
+</tr>
+<tr>
+<td>N05</td>
+<td>Find reports confirming that George Zimmerman was found NOT guilty in the shooting of Trayvon Martin, excluding predictions made before the verdict.</td>
+<td>Reports confirming the actual acquittal and identifying the Zimmerman/Martin case.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Scope:</strong> All pairs in the BM25/E5 top-20 union are assessed, with full-available-text evidence. Query labels are not transferred from the original 57 topics. Hard constraints remain part of the relevance decision; topically related contradictory or undated articles do not automatically qualify.</p>
+</section><section class="page"><h2>Appendix A. Frozen custom queries (H01–T05)</h2>
+<p>Each information need has the shared 0/1/2 rubric: fails a mandatory constraint; limited qualifying detail; substantive qualifying evidence. Exact exclusion rules and status/protocol fields are in the frozen JSONL. Temporal grading requires article-evidenced event bounds.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Query text</th>
+<th>Inclusion rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H01</td>
+<td>Find reporting on cricket farming for human food, including nutritional benefits or environmental costs.</td>
+<td>Cricket insects bred/consumed as food with nutrition or environmental evidence.</td>
+</tr>
+<tr>
+<td>H02</td>
+<td>Find reports of international cricket matches involving India that explain match results and player performances.</td>
+<td>The sport: an international match involving India, with a result or performance account.</td>
+</tr>
+<tr>
+<td>H03</td>
+<td>Find reporting on Apple’s dispute with the FBI over unlocking the iPhone involved in the San Bernardino investigation.</td>
+<td>Apple the technology company, FBI device access and the San Bernardino case.</td>
+</tr>
+<tr>
+<td>H04</td>
+<td>Find news about jaguar conservation and habitat loss in the Americas, focusing on the animal’s survival.</td>
+<td>Jaguar the animal: conservation, habitat threats or survival in the Americas.</td>
+</tr>
+<tr>
+<td>H05</td>
+<td>How did Federal Reserve interest-rate decisions affect bank lending and borrowing costs?</td>
+<td>Bank as a financial institution, with a connection between Fed interest rates and lending/borrowing.</td>
+</tr>
+<tr>
+<td>T01</td>
+<td>Find events in the United Kingdom during the first 30 days after the June 23, 2016 vote to leave the European Union.</td>
+<td>A substantive UK event dated June 24–July 23, 2016, connected to the referendum aftermath.</td>
+</tr>
+<tr>
+<td>T02</td>
+<td>Find actions taken by U.S. authorities in the first seven days after the April 15, 2013 Boston Marathon bombings.</td>
+<td>An actual authorities’ action dated April 16–22, 2013 and connected to the Boston bombings.</td>
+</tr>
+<tr>
+<td>T03</td>
+<td>Find state-level changes to U.S. same-sex marriage laws from January 1, 2013 through June 25, 2015, before the Supreme Court’s nationwide ruling.</td>
+<td>An actual state-level legal change effective/decided in the stated inclusive window.</td>
+</tr>
+<tr>
+<td>T04</td>
+<td>Find U.S. public-health responses in the first 60 days after the September 30, 2014 announcement of the first Ebola diagnosis in the United States.</td>
+<td>A U.S. public-health response dated October 1–November 29, 2014, connected to that diagnosis/outbreak.</td>
+</tr>
+<tr>
+<td>T05</td>
+<td>Find developments in U.S.–Cuba relations after the December 17, 2014 normalization announcement but before the July 20, 2015 embassy reopenings.</td>
+<td>A development dated December 18, 2014–July 19, 2015, in normalization of U.S.–Cuba relations.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Scope:</strong> All pairs in the BM25/E5 top-20 union are assessed, with full-available-text evidence. Query labels are not transferred from the original 57 topics. Hard constraints remain part of the relevance decision; topically related contradictory or undated articles do not automatically qualify.</p>
+</section><section class="page"><h2>Appendix B. Traceable failure-analysis evidence</h2>
+<p>These selected saved assessments connect the discussion to exact article IDs and literal source text. The grades evaluate the frozen query need, not the scientific or legal truth of every article assertion. Full rationales, all evidence offsets and source hashes remain in the 737-decision appendix.</p>
+<table>
+<thead>
+<tr>
+<th>Query / saved rank / grade</th>
+<th>Document ID, quotation and assessment rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>V04 · E5 rank 1 · grade 2</td>
+<td><code>2f33cb3e-46a6-11e1-865e-8d7745453554</code> — “seniors who are eschewing nursing homes in favor of independent living” — Detailed aging-in-place services include senior transport, fall-prevention devices and medication support, with examples of people unable to drive who avoid nursing homes.</td>
+</tr>
+<tr>
+<td>N03 · BM25 rank 2 · grade 2</td>
+<td><code>6e21bdec-561b-11e4-809b-8cc0a295c773</code> — “Ebola in humans is spread only through direct contact with virus-laden bodily fluids” — Despite discussing speculative future mutation, the full article explicitly rejects present airborne transmission and explains direct contact with virus-laden fluids, including the Dallas nurses.</td>
+</tr>
+<tr>
+<td>N03 · E5 rank 1 · grade 0</td>
+<td><code>48ba826e85ce81d1399fc6636b1e8c23</code> — ““Limited airborne transmission of Ebola is ‘very likely,'” new study says” — The available record is a headline asserting likely limited airborne transmission and a short attribution stub.</td>
+</tr>
+<tr>
+<td>H02 · BM25 rank 1 · grade 0</td>
+<td><code>0731a894-b080-11e4-bf39-5560f3918d4b</code> — “when Pakistan and India meet for their first game” — Primarily previews India-Pakistan and tournament rivalries before play.</td>
+</tr>
+<tr>
+<td>H02 · E5 rank 1 · grade 0</td>
+<td><code>614571525868fac3ac742d8699e9c7b6</code> — “Results” — Exact duplicate of the one-word Results record with empty body, not a cricket match report.</td>
+</tr>
+<tr>
+<td>T03 · BM25 rank 1 · grade 2</td>
+<td><code>ee0edaf8-9513-11e4-aabd-d0b93ff613d5</code> — “remain legal in the majority of states through 2015” — Detailed Florida state-level licensing change is bounded to the New Year period before the coming June decision, with the text explicitly discussing legality through 2015.</td>
+</tr>
+<tr>
+<td>T03 · E5 rank 1 · grade 0</td>
+<td><code>cd2d15a93cdce9a5bdec350e450afcfe</code> — “These maps show just how much the landscape has changed recently” — Timeline/chart introduction says the country changed after 2013, but the maps and concrete state events are absent from the extracted record.</td>
+</tr>
+</tbody>
+</table>
+<p>V04 demonstrates a qualifying dense hit, not a failed lexical lead: BM25 rank 1 is also grade 2, while its lower early ranks explain the query-level difference. For N03, the BM25 positive above has support far beyond the E5 prefix; lexical specificity and coverage remain competing explanations. For T03, a qualifying date must be established from the full narrative; the brief quotation alone is not sufficient temporal proof.</p>
+</section><section class="page"><h2>Appendix C. Frozen follow-up queries (V06–N10)</h2>
+<p>Each new query uses the same strict 0/1/2 rubric. Wording and bounds were frozen before retrieval; frozen pending-status fields are historical, with completion recorded separately.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Query text</th>
+<th>Inclusion rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>V06</td>
+<td>Find reports about hospitals whose computer files were locked by attackers demanding payment to restore access.</td>
+<td>A hospital or healthcare provider suffered a ransomware incident: files or systems were encrypted or locked and payment was demanded to restore access.</td>
+</tr>
+<tr>
+<td>V07</td>
+<td>Find reports on replacing money paid to leave jail before trial with assessments of whether defendants will return to court.</td>
+<td>A concrete implemented or proposed pretrial reform replaces or reduces cash bail and uses a risk assessment that considers court appearance.</td>
+</tr>
+<tr>
+<td>V08</td>
+<td>Find reports about longtime neighborhood residents being pushed out as wealthier newcomers move in and rents rise.</td>
+<td>A specific neighborhood or community links wealthier incoming residents and rising housing costs to displacement or a documented threat of displacement of existing residents.</td>
+</tr>
+<tr>
+<td>V09</td>
+<td>Find reports about companies moving their legal home or booking profits abroad to reduce taxes owed in their home country.</td>
+<td>A company shifts profits or corporate tax residence across borders with an explicitly stated purpose or consequence of reducing home-country corporate tax.</td>
+</tr>
+<tr>
+<td>V10</td>
+<td>Find reports about school pupils unable to finish internet-based homework because their homes lack reliable online access.</td>
+<td>School-age pupils face a homework barrier caused by unavailable, unaffordable or unreliable home internet; reports on responses qualify if they explain this barrier.</td>
+</tr>
+<tr>
+<td>N06</td>
+<td>Find reports explaining that research did NOT establish that playing violent video games causes real-world violent crime.</td>
+<td>The article explicitly reports an absence of established causal evidence connecting violent video-game play to real-world violent crime; distinctions from short-term aggression qualify when the violent-crime claim is addressed.</td>
+</tr>
+<tr>
+<td>N07</td>
+<td>Find reports stating that Malaysia Airlines Flight MH370 had NOT been located despite search efforts or discoveries of possible debris.</td>
+<td>The article explicitly states that the missing aircraft or its main wreckage had not been located at the time described, and discusses search efforts or debris evidence.</td>
+</tr>
+<tr>
+<td>N08</td>
+<td>Find reports about the Obama administration NOT approving the Keystone XL cross-border permit and instead rejecting it.</td>
+<td>A completed Obama-administration decision rejects the Keystone XL cross-border permit; the rejection must be explicit.</td>
+</tr>
+<tr>
+<td>N09</td>
+<td>Find reports explaining that antibiotics do NOT treat viral infections and discussing why they are still prescribed for them.</td>
+<td>The article explicitly distinguishes viruses from bacteria, states antibiotics do not treat viral infections, and discusses prescribing or misuse for viral illness.</td>
+</tr>
+<tr>
+<td>N10</td>
+<td>Find reports explaining why the FBI did NOT recommend criminal charges against Hillary Clinton in its private-email-server investigation.</td>
+<td>The article explicitly reports the FBI recommendation against criminal charges in the Clinton private-email-server case and supplies the stated reason.</td>
+</tr>
+</tbody>
+</table>
+</section><section class="page"><h2>Appendix C. Frozen follow-up queries (H06–T10)</h2>
+<p>Each new query uses the same strict 0/1/2 rubric. Wording and bounds were frozen before retrieval; frozen pending-status fields are historical, with completion recorded separately.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Query text</th>
+<th>Inclusion rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H06</td>
+<td>Find reports about security vulnerabilities in Java software and efforts to patch or disable it.</td>
+<td>Java means the software platform or programming language; an actual vulnerability and a patch, mitigation or disabling response are discussed.</td>
+</tr>
+<tr>
+<td>H07</td>
+<td>Find reports about volcanic eruptions on the Indonesian island of Java that caused evacuations or disrupted travel.</td>
+<td>Java means the Indonesian island; a volcanic eruption there causes evacuations or travel disruption.</td>
+</tr>
+<tr>
+<td>H08</td>
+<td>Find reports discussing astronauts or missions in NASA's Mercury human spaceflight program.</td>
+<td>Mercury refers to the NASA human spaceflight program and the article substantively discusses its astronauts or missions.</td>
+</tr>
+<tr>
+<td>H09</td>
+<td>Find reports about mercury contamination in fish or drinking water and the public-health response.</td>
+<td>Mercury means the chemical element; fish or drinking water contamination and an actual warning, advisory, regulatory action or other public-health response are discussed.</td>
+</tr>
+<tr>
+<td>H10</td>
+<td>Find reports about teachers going on strike over pay or working conditions and the effects on schools.</td>
+<td>Strike means a teacher labor stoppage over pay or working conditions; the article discusses effects on schools or pupils.</td>
+</tr>
+<tr>
+<td>T06</td>
+<td>Find emergency-response actions in Japan during the first 14 days after the March 11, 2011 earthquake and tsunami.</td>
+<td>A completed emergency-response action by Japanese authorities or responders in Japan addressing the earthquake, tsunami or resulting nuclear emergency. The action must occur during 2011-03-12–2011-03-25, inclusive, with its event date supported by the article text.</td>
+</tr>
+<tr>
+<td>T07</td>
+<td>Find security or investigative actions taken by French authorities during the first 14 days after the November 13, 2015 Paris attacks.</td>
+<td>French authorities carry out a security, policing or investigative action in response to the November 13 Paris attacks. The action must occur during 2015-11-14–2015-11-27, inclusive, with its event date supported by the article text.</td>
+</tr>
+<tr>
+<td>T08</td>
+<td>Find U.S. federal immigration-policy measures announced during the first 30 days after Donald Trump's January 20, 2017 inauguration.</td>
+<td>The U.S. federal administration formally announces, signs or issues a specific immigration-policy measure; the announcement or issuance is the dated target event. The action must occur during 2017-01-21–2017-02-19, inclusive, with its event date supported by the article text.</td>
+</tr>
+<tr>
+<td>T09</td>
+<td>Find actions Volkswagen took during the first 30 days after the EPA's September 18, 2015 diesel-emissions violation notice.</td>
+<td>Volkswagen takes a concrete corporate response to the emissions scandal, such as an admission, apology, leadership change, sales suspension or formally announced remediation plan. The action must occur during 2015-09-19–2015-10-18, inclusive, with its event date supported by the article text.</td>
+</tr>
+<tr>
+<td>T10</td>
+<td>Find public-health actions in Brazil during the first 30 days after the WHO's February 1, 2016 Zika-linked emergency declaration.</td>
+<td>Brazilian authorities or public-health responders take a specific action in Brazil addressing Zika or its linked neurological or congenital risks. The action must occur during 2016-02-02–2016-03-02, inclusive, with its event date supported by the article text.</td>
+</tr>
+</tbody>
+</table>
+</section></body></html>

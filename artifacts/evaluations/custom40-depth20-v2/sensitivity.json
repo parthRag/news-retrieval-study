@@ -1,0 +1,65 @@
+{
+  "interpretation": "Specified sensitivity scenarios, not exhaustive bounds, new judgments, or confidence intervals. High-confidence AI judgments may also be wrong.",
+  "definitions": {
+    "medium_as_zero": "Set every medium-confidence grade to zero, including existing zeros; retain all queries.",
+    "grade2_only": "Treat limited-detail grade 1 as nonrelevant; keep grade 2 and all queries."
+  },
+  "scenarios": {
+    "medium_as_zero": {
+      "bm25": {
+        "ndcg_at_5": 0.44970982156222605,
+        "ndcg_at_10": 0.4528366432767923,
+        "ap_at_1000": 0.40069020767368685,
+        "recall_at_1000": 0.9020627604137834,
+        "precision_at_5": 0.47500000000000003,
+        "precision_at_10": 0.4225,
+        "reciprocal_rank_at_1000": 0.6419318458467231,
+        "judged_at_5": 1.0,
+        "judged_at_10": 1.0,
+        "judged_at_20": 1.0,
+        "judged_at_1000": 0.029175
+      },
+      "dense": {
+        "ndcg_at_5": 0.40123985440980386,
+        "ndcg_at_10": 0.41985196259849256,
+        "ap_at_1000": 0.3615404498686526,
+        "recall_at_1000": 0.9087369506240474,
+        "precision_at_5": 0.4,
+        "precision_at_10": 0.39,
+        "reciprocal_rank_at_1000": 0.5519221085153462,
+        "judged_at_5": 1.0,
+        "judged_at_10": 1.0,
+        "judged_at_20": 1.0,
+        "judged_at_1000": 0.0315
+      }
+    },
+    "grade2_only": {
+      "bm25": {
+        "ndcg_at_5": 0.44067151545036837,
+        "ndcg_at_10": 0.44398474509880026,
+        "ap_at_1000": 0.3852645169024942,
+        "recall_at_1000": 0.9157130624537914,
+        "precision_at_5": 0.425,
+        "precision_at_10": 0.3875,
+        "reciprocal_rank_at_1000": 0.5800568458467231,
+        "judged_at_5": 1.0,
+        "judged_at_10": 1.0,
+        "judged_at_20": 1.0,
+        "judged_at_1000": 0.029175
+      },
+      "dense": {
+        "ndcg_at_5": 0.3901069530380641,
+        "ndcg_at_10": 0.4093513769250875,
+        "ap_at_1000": 0.3408737016508505,
+        "recall_at_1000": 0.9110075354928296,
+        "precision_at_5": 0.365,
+        "precision_at_10": 0.3525,
+        "reciprocal_rank_at_1000": 0.5373005456108197,
+        "judged_at_5": 1.0,
+        "judged_at_10": 1.0,
+        "judged_at_20": 1.0,
+        "judged_at_1000": 0.0315
+      }
+    }
+  }
+}

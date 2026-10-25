@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "checked_at_utc": "2026-10-25T16:10:48.337189+00:00",
+  "assessed_pairs": 737,
+  "preserved_top5_pairs": 188,
+  "saved_queries_bound_to_demo": 77,
+  "recomputed_metric_policies": [
+    "linear",
+    "exp2"
+  ],
+  "independent_native_comparisons": 588,
+  "same_query_content_grade_conflicts": 0,
+  "source_and_visibility_checks": 737,
+  "research_figures": 6,
+  "evaluation_manifest_sha256": "541303bba3c59c3980c37c244842bf96debde89b3d8f53929180a2af50f2f083"
+}

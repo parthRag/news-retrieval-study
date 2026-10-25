@@ -1,0 +1,19 @@
+{
+  "created_at_utc": "2026-10-24T21:28:00.042590+00:00",
+  "query_count": 20,
+  "candidate_depth": 20,
+  "assessor_type": "AI",
+  "input_hashes": {
+    "artifacts/assessments/custom20-v1/articles.blinded.jsonl": "6aa1c8674aa3113c8e41c9710e853e79ca09fcd6470db6c185f9e16f875219bb",
+    "annotations/ai_study_v1/assessments.depth20.jsonl": "d23c2fbd4b0b85f49420a0d65a4af1e7da19eb4eb9418a1da212aefecbc52536"
+  },
+  "baseline_manifest_sha256": "541303bba3c59c3980c37c244842bf96debde89b3d8f53929180a2af50f2f083",
+  "policy": "Post-hoc symmetric rules; preserve rank order; full-body whitespace empty check; exact title+body SHA256 deduplication; no score or label threshold; no refilling beyond original top 20",
+  "metrics": "Fixed-reference nDCG@5 and P@5 use unchanged original pool labels/IDCG; unique-content nDCG@5 gives gain only to first occurrence and uses all unique pool contents for IDCG. These are separate measures. No MAP reported.",
+  "limitations": "Exploratory analysis motivated by observed errors, not held-out tuning validation. Candidate horizon is fixed at 20; fewer than five retained results receive no padding credit. No corpus reindexing or new judgments.",
+  "files": {
+    "metrics.json": "50b6be7f3c377150059cc0c1159e72b20ead73e577eaac8537155f280071a8c4",
+    "per_query.csv": "511fff6e339e6f7572c765735fed12184ad1bf5c1248210d8828e787d7b698ef",
+    "rankings.jsonl": "0ca916a50b2b8ed54546e8ce4eb71c01c25c457081c2cfb214e021e7d6bd2dab"
+  }
+}

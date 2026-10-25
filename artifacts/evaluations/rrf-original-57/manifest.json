@@ -1,0 +1,35 @@
+{
+  "created_at_utc": "2026-10-24T19:19:52.929686+00:00",
+  "query_count": 57,
+  "corpus_sha256": "82086c5dc9397700ca6682d19f1a1cace8ace5defa31f7990ca3c28314ec61a9",
+  "queries_sha256": "e0a8d8ec3b80cc06f07cbd1a72a48b7da30a7a7e00bda085e2701cb4dfc9737f",
+  "qrels_sha256": "88b1da4ce3ec808287528218020199cd7c3c795b4690ab33acca4e4aca762a9a",
+  "bootstrap_samples": 10000,
+  "seed": 20261025,
+  "independent_crosscheck": "passed for RRF under all four policies",
+  "policy": "Same original-57 policies: linear primary gains, exp2/NIST sensitivity, available-corpus sensitivity; grade>0 binary AP; unjudged retained at zero contribution; all known positives in AP denominator",
+  "scope": "Original benchmark only; no custom AI labels used; fixed RRF k, no parameter search",
+  "runs": {
+    "bm25": {
+      "path": "/Users/parthraghuvanshi/Desktop/IR/artifacts/runs/bm25-original-benchmark",
+      "manifest_sha256": "53979c6e58e7bf21ed23653dd43c7a20be7cf8f6cafff4337b7e2100be0910e3",
+      "run_sha256": "ead8071494f6aa790c771c6927e04117dc62d978d3f4cfe338313aaaf4920cb1"
+    },
+    "dense": {
+      "path": "/Users/parthraghuvanshi/Desktop/IR/artifacts/runs/dense-original",
+      "manifest_sha256": "445cc2e8afe9303e5d457a0c7d33033506d981a4c13052d67f87852d3274e87f",
+      "run_sha256": "a2d48c9c24f9d3a9b9389cd9f9719e77389c5fe0227154edfdfa9cf0b2c890a0"
+    },
+    "rrf": {
+      "path": "/Users/parthraghuvanshi/Desktop/IR/artifacts/runs/rrf-original-k60",
+      "manifest_sha256": "06104c896401ef5a15062857ac9dc76304c8aed4698e4cc65c0b675f3a174ef8",
+      "run_sha256": "3bf8f476d0beded134f0b492e133843300fc1bd14359c22445a00d1d2e5aeb4e"
+    }
+  },
+  "files": {
+    "metrics.json": "7b50552579959305215c1f0cb8a489cc531871c3a6fd5d1693a6b65359341781",
+    "paired_comparison.json": "cde4b9318ff5db7d1bcc2efc66d48fd657c738296e604e9876f5c72ad5a75999",
+    "per_query.csv": "14eb82a2e38823411cb910da85cf6e294f1161aa63263e1ba65258d7fb099e1e",
+    "crosscheck.json": "c69be41602caba8628f96dd5b231ea66a063b3de0626e15a293c7606cf33a3a6"
+  }
+}

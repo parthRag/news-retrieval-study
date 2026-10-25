@@ -1,0 +1,57 @@
+{
+  "version": "custom40_v2",
+  "created_at_utc": "2026-10-25T13:26:14.943157+00:00",
+  "status": "queries_frozen_before_extension_retrieval; extension_unassessed",
+  "original_query_count": 20,
+  "extension_query_count": 20,
+  "combined_query_count": 40,
+  "category_counts": {
+    "vocabulary_mismatch": 10,
+    "negation": 10,
+    "homonym": 10,
+    "temporal": 10
+  },
+  "design_timing": "Prospective extension designed after examining original20 results. New texts, rubrics and temporal windows frozen before running the new20. No preregistration or statistically independent held-out study is claimed.",
+  "original_queries": {
+    "path": "annotations/ai_study_v1/queries.jsonl",
+    "sha256": "2ba74dbfb53f1d69e17aade424d9cfabc32fcb4443533b37661c477987c32a77",
+    "preservation": "Original bytes are the exact prefix of queries.all40.jsonl; original runs and all 737 assessments remain untouched."
+  },
+  "original_assessments_sha256": "d23c2fbd4b0b85f49420a0d65a4af1e7da19eb4eb9418a1da212aefecbc52536",
+  "files": {
+    "queries.extension20.jsonl": "1cab30af52797b93e8c684d271ad6581a0df922f10884efa0513de86905ce893",
+    "topic_families.json": "04f2c17f11f072b5a42b0f35d852202e8219596235b4e892dd21ea6fc51275fd",
+    "queries.all40.jsonl": "72af733828de2409e5f983e69489f54354612b98574cc40210d3f61626b65b25"
+  },
+  "retrieval": {
+    "engines": [
+      "BM25 k1=0.9 b=0.4",
+      "pinned E5-base-v2 exact cosine"
+    ],
+    "top_k": 1000,
+    "new_queries_only": true,
+    "reencode_corpus": false,
+    "pool_depth_per_engine": 20
+  },
+  "assessment": {
+    "status": "not_started",
+    "scale": [
+      0,
+      1,
+      2
+    ],
+    "source": "Read full available title and body; store article hash, rationale and verbatim evidence with offsets. Disclose assessor origin. No transfer of original-qrel labels to different information needs.",
+    "negation": "Explicit supporting assertion required; silence is not evidence of negation.",
+    "temporal": "Start=anchor+1 day; end=anchor+specified days, inclusive. Event-time evidence required in article. No publication-date or UUID inference.",
+    "pooling": "Union both engines' top20; deduplicate by query/document ID. Rank/engine metadata stored separately from articles. No perfect blindness claimed.",
+    "retain_all_queries": "Keep every frozen query including zero-positive pools; never replace a query based on its winner or its score."
+  },
+  "analysis_plan": {
+    "primary": "nDCG@5 with linear gains and pooled MAP@1000 after complete designated-pool assessment; binary relevance grade>0 for AP.",
+    "reporting": "Report original20, extension20 and combined40 separately. Do not replace completed20 metrics with unassessed40 claims. Report P@5, per-query differences, category means, wins/ties/losses and judged coverage.",
+    "uncertainty": "Paired differences at query level; additionally bootstrap shared topic families together. Ten queries/category remain exploratory, purposively selected and not representative of all news searches.",
+    "topic_families": 37,
+    "dependency_caveat": "Shared families include cricket, Java and Mercury. Family labels are a conservative design aid, not proof that all remaining topics are independent.",
+    "no_tuning": "Keep engines/model/input limits unchanged. Any passage indexing, filtering or reranking remains a separately named experiment."
+  }
+}

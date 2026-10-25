@@ -1,0 +1,129 @@
+{
+  "5_NewsIR_BM25_Dense": {
+    "sections": [
+      {
+        "page": 1,
+        "height": 861.578125,
+        "width": 673
+      },
+      {
+        "page": 2,
+        "height": 924.234375,
+        "width": 673
+      },
+      {
+        "page": 3,
+        "height": 872.796875,
+        "width": 673
+      },
+      {
+        "page": 4,
+        "height": 944.078125,
+        "width": 673
+      }
+    ],
+    "brokenImages": [],
+    "horizontalOverflow": false
+  },
+  "RESEARCH_REPORT": {
+    "sections": [
+      {
+        "page": 1,
+        "height": 860.046875,
+        "width": 673
+      },
+      {
+        "page": 2,
+        "height": 770.84375,
+        "width": 673
+      },
+      {
+        "page": 3,
+        "height": 708.09375,
+        "width": 673
+      },
+      {
+        "page": 4,
+        "height": 778.078125,
+        "width": 673
+      },
+      {
+        "page": 5,
+        "height": 794.5625,
+        "width": 673
+      },
+      {
+        "page": 6,
+        "height": 965.09375,
+        "width": 673
+      },
+      {
+        "page": 7,
+        "height": 985.609375,
+        "width": 673
+      },
+      {
+        "page": 8,
+        "height": 812.28125,
+        "width": 673
+      },
+      {
+        "page": 9,
+        "height": 822.296875,
+        "width": 673
+      },
+      {
+        "page": 10,
+        "height": 874.375,
+        "width": 673
+      },
+      {
+        "page": 11,
+        "height": 1005.40625,
+        "width": 673
+      },
+      {
+        "page": 12,
+        "height": 845.546875,
+        "width": 673
+      },
+      {
+        "page": 13,
+        "height": 818.25,
+        "width": 673
+      },
+      {
+        "page": 14,
+        "height": 884.796875,
+        "width": 673
+      },
+      {
+        "page": 15,
+        "height": 841.890625,
+        "width": 673
+      },
+      {
+        "page": 16,
+        "height": 759.15625,
+        "width": 673
+      },
+      {
+        "page": 17,
+        "height": 735.171875,
+        "width": 673
+      },
+      {
+        "page": 18,
+        "height": 832.8125,
+        "width": 673
+      },
+      {
+        "page": 19,
+        "height": 865.90625,
+        "width": 673
+      }
+    ],
+    "brokenImages": [],
+    "horizontalOverflow": false
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "supplied_query_count": 57,
+  "official_topic_count": 60,
+  "judgment_pairs_checked": 15655,
+  "same_judgment_pairs": true,
+  "all_gains_match": true,
+  "gain_mapping": {
+    "0": 0,
+    "1": 2,
+    "2": 4,
+    "3": 8,
+    "4": 16
+  },
+  "canonical_query_source_articles_present": [],
+  "self_article_policy": "No canonical query article is present; do not infer exclusions from title equality",
+  "corpus_sha256": "82086c5dc9397700ca6682d19f1a1cace8ace5defa31f7990ca3c28314ec61a9",
+  "supplied_qrels_sha256": "88b1da4ce3ec808287528218020199cd7c3c795b4690ab33acca4e4aca762a9a",
+  "official_qrels_sha256": "ea1eda887554ed673acbf8c22f027c78020319b843fba2de4df1db1056f3d662",
+  "official_topics_sha256": "69883eede9124b3e95a5e10c8e91e8863083cc4423d1f6d585ecfaabdd2c9815",
+  "reference_sources": [
+    "https://trec.nist.gov/data/news/2019/newsir19-qrels-background.txt",
+    "https://trec.nist.gov/data/news/2019/newsir19-background-linking-topics.xml"
+  ],
+  "scope": "Judgment/topic provenance verified; this does not establish full corpus or official protocol equivalence"
+}

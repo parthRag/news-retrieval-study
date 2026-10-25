@@ -1,0 +1,5 @@
+member,assigned_ownership,completed_team_outputs,confirmed_individual_work,individual_completion_confirmed
+Parth Raghuvanshi,data pipeline and BM25,"Shared-corpus audit and preprocessing, Lucene BM25 index, retrieval exports and Kaggle handoff.","Dataset download, Kaggle execution and result handoff documented in the project session.",True
+Sushruth Reddy Challa,E5 embeddings and FAISS,"Pinned E5 encoder, resumable GPU embedding workflow, exact FAISS index and dense retrieval.",Member review/completed work not yet confirmed.,False
+Hamsini G,evaluation and judgment audit,"Supplied-qrel audit, nDCG/MAP evaluator, symmetric candidate pooling and evidence-validation tooling.",Member review/completed work not yet confirmed.,False
+Kritika Pandey,"demo, figures and report","Side-by-side search demo, result figures, failure-analysis presentation and reproducible report package.",Member review/completed work not yet confirmed.,False

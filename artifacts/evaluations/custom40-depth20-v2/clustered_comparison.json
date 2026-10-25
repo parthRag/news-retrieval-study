@@ -1,0 +1,132 @@
+{
+  "design_families": {
+    "query_count": 40,
+    "family_count": 37,
+    "families": {
+      "V01": "tech_layoffs",
+      "V02": "social_security_depletion",
+      "V03": "football_head_trauma",
+      "V04": "aging_in_place",
+      "V05": "biometric_boarding",
+      "N01": "seattle_minimum_wage",
+      "N02": "marriage_ban_rulings",
+      "N03": "ebola_transmission",
+      "N04": "vaccines_autism",
+      "N05": "zimmerman_verdict",
+      "H01": "cricket",
+      "H02": "cricket",
+      "H03": "apple_fbi_phone",
+      "H04": "jaguar_conservation",
+      "H05": "fed_bank_rates",
+      "T01": "brexit_response",
+      "T02": "boston_response",
+      "T03": "marriage_rulings_before_obergefell",
+      "T04": "us_ebola_response",
+      "T05": "us_cuba_normalization",
+      "V06": "hospital_ransomware",
+      "V07": "pretrial_bail_reform",
+      "V08": "gentrification_displacement",
+      "V09": "corporate_tax_shifting",
+      "V10": "homework_connectivity_gap",
+      "N06": "video_games_violent_crime",
+      "N07": "mh370_search",
+      "N08": "keystone_permit_rejection",
+      "N09": "antibiotics_viral_illness",
+      "N10": "clinton_email_recommendation",
+      "H06": "java",
+      "H07": "java",
+      "H08": "mercury",
+      "H09": "mercury",
+      "H10": "teacher_labor_strikes",
+      "T06": "japan_2011_disaster_response",
+      "T07": "paris_2015_security_response",
+      "T08": "trump_2017_immigration",
+      "T09": "volkswagen_2015_response",
+      "T10": "brazil_2016_zika_response"
+    },
+    "samples": 10000,
+    "seed": 20261025,
+    "metrics": {
+      "ndcg_at_5": {
+        "mean_dense_minus_bm25": -0.07712654539678347,
+        "cluster_bootstrap_95_percentile_ci": [
+          -0.17287960208093636,
+          0.015034012541696097
+        ]
+      },
+      "ap_at_1000": {
+        "mean_dense_minus_bm25": -0.0355944001812408,
+        "cluster_bootstrap_95_percentile_ci": [
+          -0.1315298124933462,
+          0.05876473118775677
+        ]
+      }
+    },
+    "interpretation": "Descriptive paired-family resampling; query-weighted mean; not label-accuracy intervals or proof of independent families"
+  },
+  "broader_topic_sensitivity": {
+    "query_count": 40,
+    "family_count": 35,
+    "families": {
+      "V01": "tech_layoffs",
+      "V02": "social_security_depletion",
+      "V03": "football_head_trauma",
+      "V04": "aging_in_place",
+      "V05": "biometric_boarding",
+      "N01": "seattle_minimum_wage",
+      "N02": "marriage_law",
+      "N03": "ebola",
+      "N04": "vaccines_autism",
+      "N05": "zimmerman_verdict",
+      "H01": "cricket",
+      "H02": "cricket",
+      "H03": "apple_fbi_phone",
+      "H04": "jaguar_conservation",
+      "H05": "fed_bank_rates",
+      "T01": "brexit_response",
+      "T02": "boston_response",
+      "T03": "marriage_law",
+      "T04": "ebola",
+      "T05": "us_cuba_normalization",
+      "V06": "hospital_ransomware",
+      "V07": "pretrial_bail_reform",
+      "V08": "gentrification_displacement",
+      "V09": "corporate_tax_shifting",
+      "V10": "homework_connectivity_gap",
+      "N06": "video_games_violent_crime",
+      "N07": "mh370_search",
+      "N08": "keystone_permit_rejection",
+      "N09": "antibiotics_viral_illness",
+      "N10": "clinton_email_recommendation",
+      "H06": "java",
+      "H07": "java",
+      "H08": "mercury",
+      "H09": "mercury",
+      "H10": "teacher_labor_strikes",
+      "T06": "japan_2011_disaster_response",
+      "T07": "paris_2015_security_response",
+      "T08": "trump_2017_immigration",
+      "T09": "volkswagen_2015_response",
+      "T10": "brazil_2016_zika_response"
+    },
+    "samples": 10000,
+    "seed": 20261025,
+    "metrics": {
+      "ndcg_at_5": {
+        "mean_dense_minus_bm25": -0.07712654539678347,
+        "cluster_bootstrap_95_percentile_ci": [
+          -0.1767318668293861,
+          0.021235640275397715
+        ]
+      },
+      "ap_at_1000": {
+        "mean_dense_minus_bm25": -0.0355944001812408,
+        "cluster_bootstrap_95_percentile_ci": [
+          -0.1362425175691653,
+          0.06782163757699572
+        ]
+      }
+    },
+    "interpretation": "Descriptive paired-family resampling; query-weighted mean; not label-accuracy intervals or proof of independent families"
+  }
+}

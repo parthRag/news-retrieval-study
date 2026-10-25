@@ -1,0 +1,22 @@
+{
+  "created_at_utc": "2026-10-24T19:51:37.629082+00:00",
+  "query_count": 20,
+  "assessment_pairs": 188,
+  "assessor_type": "AI",
+  "judgment_scope": "top-five union only",
+  "protocol_sha256": "3c02c8324aa80c3fffae6ef0068bcc7e58ae683ee6560c0e4ec5d93655fbd12e",
+  "assessments_sha256": "f3fed74bdbe277c8a11e42ac2927528123734219c15e79b857e02edacca3e649",
+  "query_source_sha256": "2ba74dbfb53f1d69e17aade424d9cfabc32fcb4443533b37661c477987c32a77",
+  "corpus_sha256": "82086c5dc9397700ca6682d19f1a1cace8ace5defa31f7990ca3c28314ec61a9",
+  "independent_metric_comparisons": 168,
+  "map_status": "Withheld until depth-20 pool is complete",
+  "files": {
+    "metrics.json": "0f1a61e90714413cef80ac4812eb68927dba916506a15d36d68907724e5bd429",
+    "qrels.top5.jsonl": "91f9844bf73d77d89af9b9f2077908ac2fc924965da1c9477ecc5f345fc0d45d",
+    "paired_comparison.json": "ef87465bce4c6d9a5bcf0bdfb1fc1d7b332176726e49cf12180d7abb8782a74b",
+    "per_query.csv": "94f2a2805d5152754c4beac3ba56c21e559df93a1d2fbf5a055ab5d8ad2f2622",
+    "crosscheck.json": "39502e70c34dd949d783a672b3b9300b0a1425b2cf359b48075bb7f20c8e6e8e",
+    "grade_uncertainty.json": "09a20074a8e8880bb9312181c5c25a5ad870b09791dda37e940e24223564375a",
+    "validation.json": "b1ce491c838528f20c531d43dd055eeb19e2953eb05888ed633dfd57d9db5199"
+  }
+}

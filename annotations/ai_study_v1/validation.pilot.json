@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "assessor_type": "AI",
+  "assessed_pairs": 16,
+  "pooled_pairs": 737,
+  "remaining_pairs": 721,
+  "priority_top5_pairs": 188,
+  "priority_top5_assessed": 16,
+  "complete_top5_query_ids": [
+    "N03",
+    "H01"
+  ],
+  "complete_pool": false
+}

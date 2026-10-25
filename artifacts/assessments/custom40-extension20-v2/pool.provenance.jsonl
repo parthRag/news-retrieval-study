@@ -1,0 +1,707 @@
+{"query_id": "V06", "doc_id": "16265198-3958-11e7-9e48-c4f199710b69", "priority_top5": false, "component_ranks": {"bm25": 10}}
+{"query_id": "V06", "doc_id": "fedf9365a924d7a8349fd1ee84dc9c89", "priority_top5": true, "component_ranks": {"bm25": 8, "dense": 3}}
+{"query_id": "V06", "doc_id": "1020bbc1ca7695dab729cec9571385ca", "priority_top5": true, "component_ranks": {"bm25": 3, "dense": 1}}
+{"query_id": "V06", "doc_id": "8f0c57f10ece35a2e16f78ebcda1d573", "priority_top5": false, "component_ranks": {"bm25": 7}}
+{"query_id": "V06", "doc_id": "7adc44952c4590866a4251d15d3cca6b", "priority_top5": false, "component_ranks": {"bm25": 17}}
+{"query_id": "V06", "doc_id": "1a2e2494-eba9-11e5-bc08-3e03a5b41910", "priority_top5": true, "component_ranks": {"bm25": 1, "dense": 12}}
+{"query_id": "V06", "doc_id": "6fdec44403400ad5b9ba67180b11090a", "priority_top5": true, "component_ranks": {"bm25": 5, "dense": 11}}
+{"query_id": "V06", "doc_id": "f6e5e992-3803-11e7-b412-62beef8121f7", "priority_top5": false, "component_ranks": {"bm25": 6}}
+{"query_id": "V06", "doc_id": "8198cf9a3119738a75dc6e142a22c484", "priority_top5": false, "component_ranks": {"dense": 15}}
+{"query_id": "V06", "doc_id": "1c224df47cae21cbf7b1ab6233da65bb", "priority_top5": false, "component_ranks": {"bm25": 11}}
+{"query_id": "V06", "doc_id": "e2fa416f35f5480c889bc7a9e2cabb3a", "priority_top5": false, "component_ranks": {"bm25": 20}}
+{"query_id": "V06", "doc_id": "72933598-3e50-11e2-ae43-cf491b837f7b", "priority_top5": true, "component_ranks": {"dense": 4}}
+{"query_id": "V06", "doc_id": "6117599a-fa02-11e5-813a-90ab563f0dde", "priority_top5": true, "component_ranks": {"dense": 2}}
+{"query_id": "V06", "doc_id": "e7deddcea6893847d80b050328b060c8", "priority_top5": false, "component_ranks": {"dense": 13}}
+{"query_id": "V06", "doc_id": "84e3dc5e-3723-11e7-b373-418f6849a004", "priority_top5": false, "component_ranks": {"dense": 10}}
+{"query_id": "V06", "doc_id": "f2eba359a35838d428aab231ff81749c", "priority_top5": false, "component_ranks": {"dense": 17}}
+{"query_id": "V06", "doc_id": "d8b33bc8-376d-11e7-ab03-aa29f656f13e", "priority_top5": true, "component_ranks": {"bm25": 2}}
+{"query_id": "V06", "doc_id": "8c8ed5719d7e29fd5f9acdbffae569fc", "priority_top5": false, "component_ranks": {"bm25": 15, "dense": 8}}
+{"query_id": "V06", "doc_id": "01e1b554-f117-11e5-89c3-a647fcce95e0", "priority_top5": false, "component_ranks": {"dense": 9}}
+{"query_id": "V06", "doc_id": "a82c9fa8-f687-11e5-8b23-538270a1ca31", "priority_top5": false, "component_ranks": {"bm25": 12, "dense": 6}}
+{"query_id": "V06", "doc_id": "5091465e-3899-11e7-9e48-c4f199710b69", "priority_top5": true, "component_ranks": {"bm25": 4}}
+{"query_id": "V06", "doc_id": "94df3c26ca9a3dcb05cee99946432d3f", "priority_top5": false, "component_ranks": {"dense": 19}}
+{"query_id": "V06", "doc_id": "fa008471a76a408ee7280851ae2929f2", "priority_top5": false, "component_ranks": {"bm25": 16}}
+{"query_id": "V06", "doc_id": "1d697c88-5c2f-11e7-a9f6-7c3296387341", "priority_top5": false, "component_ranks": {"dense": 16}}
+{"query_id": "V06", "doc_id": "beccd46575034f202fd21b7c868372ce", "priority_top5": false, "component_ranks": {"bm25": 18}}
+{"query_id": "V06", "doc_id": "252626ae-f5bc-11e5-a3ce-f06b5ba21f33", "priority_top5": false, "component_ranks": {"bm25": 9, "dense": 7}}
+{"query_id": "V06", "doc_id": "1d7a4583a9384884f7a0d36382c80d38", "priority_top5": false, "component_ranks": {"bm25": 13, "dense": 20}}
+{"query_id": "V06", "doc_id": "a6ea91db0abd991b030e49d1a8584ffc", "priority_top5": false, "component_ranks": {"bm25": 19}}
+{"query_id": "V06", "doc_id": "9615b5bf2610102aaea8d23068af73f8", "priority_top5": false, "component_ranks": {"dense": 14}}
+{"query_id": "V06", "doc_id": "b79cc0fe-d370-11e2-b05f-3ea3f0e7bb5a", "priority_top5": false, "component_ranks": {"bm25": 14}}
+{"query_id": "V06", "doc_id": "480f7d66-f515-11e5-a3ce-f06b5ba21f33", "priority_top5": false, "component_ranks": {"dense": 18}}
+{"query_id": "V06", "doc_id": "dd1332be-ac07-11e1-93e5-222602b337cd", "priority_top5": true, "component_ranks": {"dense": 5}}
+{"query_id": "V07", "doc_id": "906931e26aac3ce6f6776b9a3368ebc5", "priority_top5": false, "component_ranks": {"dense": 9}}
+{"query_id": "V07", "doc_id": "fe438b67a3d512291b8ba5d15165e114", "priority_top5": false, "component_ranks": {"bm25": 9}}
+{"query_id": "V07", "doc_id": "597e0170-0f50-11e7-ab07-07d9f521f6b5", "priority_top5": false, "component_ranks": {"bm25": 6}}
+{"query_id": "V07", "doc_id": "2e060116-541e-11e1-8941-727ff558a2ff", "priority_top5": false, "component_ranks": {"bm25": 17}}
+{"query_id": "V07", "doc_id": "9237be1e-6c8b-11e2-ada0-5ca5fa7ebe79", "priority_top5": false, "component_ranks": {"bm25": 10}}
+{"query_id": "V07", "doc_id": "aa0ba64c-465e-11e3-bf0c-cebf37c6f484", "priority_top5": false, "component_ranks": {"dense": 18}}
+{"query_id": "V07", "doc_id": "8ef77f5c-e28c-11e6-a547-5fb9411d332c", "priority_top5": false, "component_ranks": {"bm25": 13}}
+{"query_id": "V07", "doc_id": "92093f7a9b518092689bc5114c8c1454", "priority_top5": false, "component_ranks": {"dense": 10}}
+{"query_id": "V07", "doc_id": "bcc36504-ac04-11e6-8b45-f8e493f06fcd", "priority_top5": true, "component_ranks": {"bm25": 1}}
+{"query_id": "V07", "doc_id": "e0e74816c186b9c339c32dd1ef8f5150", "priority_top5": true, "component_ranks": {"dense": 2}}
+{"query_id": "V07", "doc_id": "cdaad0be-5506-11e6-b7de-dfe509430c39", "priority_top5": false, "component_ranks": {"dense": 19}}
+{"query_id": "V07", "doc_id": "1bb909ca9000c0666966572557764629", "priority_top5": true, "component_ranks": {"dense": 5}}
+{"query_id": "V07", "doc_id": "1bf8451e-bcc5-11e6-91ee-1adddfe36cbe", "priority_top5": false, "component_ranks": {"dense": 11}}
+{"query_id": "V07", "doc_id": "36188114-ed78-11e6-9973-c5efb7ccfb0d", "priority_top5": false, "component_ranks": {"bm25": 14}}
+{"query_id": "V07", "doc_id": "2cbf1b453f75ca5d1035e585462da45e", "priority_top5": false, "component_ranks": {"dense": 15}}
+{"query_id": "V07", "doc_id": "4dc322a8-5afb-11e5-8475-781cc9851652", "priority_top5": false, "component_ranks": {"dense": 20}}
+{"query_id": "V07", "doc_id": "db57a084-5a8c-11e7-9b7d-14576dc0f39d", "priority_top5": true, "component_ranks": {"bm25": 3}}
+{"query_id": "V07", "doc_id": "bac7fc75631649ca530e14a8ebf0000a", "priority_top5": false, "component_ranks": {"dense": 6}}
+{"query_id": "V07", "doc_id": "dd689a98-1d44-11e2-b647-bb1668e64058", "priority_top5": false, "component_ranks": {"bm25": 11}}
+{"query_id": "V07", "doc_id": "0aad3ac8cdcfdfe9a5f8f379a89f6471", "priority_top5": false, "component_ranks": {"bm25": 15}}
+{"query_id": "V07", "doc_id": "6fe11ed4-c621-11e6-85b5-76616a33048d", "priority_top5": false, "component_ranks": {"bm25": 16, "dense": 16}}
+{"query_id": "V07", "doc_id": "b2b1ecb8-8f15-11e6-a6a3-d50061aa9fae", "priority_top5": true, "component_ranks": {"bm25": 2}}
+{"query_id": "V07", "doc_id": "7df6a5524db607613c1db65dd3392a3e", "priority_top5": true, "component_ranks": {"bm25": 5}}
+{"query_id": "V07", "doc_id": "8eb52134-e7d3-11e5-b0fd-073d5930a7b7", "priority_top5": true, "component_ranks": {"bm25": 7, "dense": 1}}
+{"query_id": "V07", "doc_id": "89f9bed2-e786-11e4-9767-6276fc9b0ada", "priority_top5": false, "component_ranks": {"bm25": 18}}
+{"query_id": "V07", "doc_id": "9c572838-c797-11e6-85b5-76616a33048d", "priority_top5": false, "component_ranks": {"dense": 13}}
+{"query_id": "V07", "doc_id": "ce27c0c0-db11-11e5-891a-4ed04f4213e8", "priority_top5": true, "component_ranks": {"dense": 3}}
+{"query_id": "V07", "doc_id": "a1ab1da6250d23743c3b6779192bafd2", "priority_top5": false, "component_ranks": {"dense": 14}}
+{"query_id": "V07", "doc_id": "42e4547172e70a5e129b454d3826d495", "priority_top5": false, "component_ranks": {"dense": 7}}
+{"query_id": "V07", "doc_id": "5a26252254b0f24820845143a3c781a9", "priority_top5": false, "component_ranks": {"dense": 17}}
+{"query_id": "V07", "doc_id": "374c5340-ac22-11e6-8b45-f8e493f06fcd", "priority_top5": false, "component_ranks": {"bm25": 12}}
+{"query_id": "V07", "doc_id": "7ea9b95c-5168-11e3-a7f0-b790929232e1", "priority_top5": true, "component_ranks": {"bm25": 4, "dense": 12}}
+{"query_id": "V07", "doc_id": "c18a7ed6-7082-11e7-9eac-d56bd5568db8", "priority_top5": false, "component_ranks": {"bm25": 8}}
+{"query_id": "V07", "doc_id": "90d9cd9c-f7a1-11e5-9804-537defcc3cf6", "priority_top5": false, "component_ranks": {"dense": 8}}
+{"query_id": "V07", "doc_id": "1cbe6b878951899514ad78741577d9a3", "priority_top5": false, "component_ranks": {"bm25": 20}}
+{"query_id": "V07", "doc_id": "0f9c5121ff7979fc3e271ab516b2d772", "priority_top5": true, "component_ranks": {"dense": 4}}
+{"query_id": "V07", "doc_id": "e4418c6c-d69f-11e6-9a36-1d296534b31e", "priority_top5": false, "component_ranks": {"bm25": 19}}
+{"query_id": "V08", "doc_id": "f017d2e73636a571fad5bb33925cfc31", "priority_top5": false, "component_ranks": {"dense": 7}}
+{"query_id": "V08", "doc_id": "1ff01348-b0b0-11e6-be1c-8cec35b1ad25", "priority_top5": false, "component_ranks": {"bm25": 6, "dense": 11}}
+{"query_id": "V08", "doc_id": "a92827ba-0689-11e3-88d6-d5795fab4637", "priority_top5": false, "component_ranks": {"bm25": 20}}
+{"query_id": "V08", "doc_id": "21f28604-dbde-11e1-af1d-753c613ff6d8", "priority_top5": false, "component_ranks": {"dense": 17}}
+{"query_id": "V08", "doc_id": "2798d9799e8572738ef040190e26de06", "priority_top5": false, "component_ranks": {"dense": 20}}
+{"query_id": "V08", "doc_id": "f85553e0-9dc1-11e5-a3c5-c77f2cc5a43c", "priority_top5": false, "component_ranks": {"bm25": 18}}
+{"query_id": "V08", "doc_id": "12a36a1e-8342-11e1-994a-e58f7869f9d3", "priority_top5": false, "component_ranks": {"bm25": 15}}
+{"query_id": "V08", "doc_id": "892d1364-41a6-11e3-a751-f032898f2dbc", "priority_top5": true, "component_ranks": {"bm25": 5}}
+{"query_id": "V08", "doc_id": "fd8d9f28-64a6-11e1-ad1b-84e7c463da1d", "priority_top5": true, "component_ranks": {"bm25": 3}}
+{"query_id": "V08", "doc_id": "8c2dba92-c550-11e6-bf4b-2c064d32a4bf", "priority_top5": true, "component_ranks": {"dense": 3}}
+{"query_id": "V08", "doc_id": "00d8cbdc-7d8a-11e3-93c1-0e888170b723", "priority_top5": false, "component_ranks": {"bm25": 11}}
+{"query_id": "V08", "doc_id": "a6905278-9c91-11e2-9bda-edd1a7fb557d", "priority_top5": true, "component_ranks": {"dense": 5}}
+{"query_id": "V08", "doc_id": "1ecaad34-6c9b-11e5-9bfe-e59f5e244f92", "priority_top5": false, "component_ranks": {"bm25": 9}}
+{"query_id": "V08", "doc_id": "5b0dbbda-5c3e-11e7-9fc6-c7ef4bc58d13", "priority_top5": true, "component_ranks": {"bm25": 1}}
+{"query_id": "V08", "doc_id": "eab63b5a-842f-11e6-ac72-a29979381495", "priority_top5": false, "component_ranks": {"dense": 14}}
+{"query_id": "V08", "doc_id": "4ebb7140e862bf924f6cc64c906c3e70", "priority_top5": false, "component_ranks": {"bm25": 7}}
+{"query_id": "V08", "doc_id": "825e4308-eb67-11e3-9f5c-9075d5508f0a", "priority_top5": true, "component_ranks": {"bm25": 4}}
+{"query_id": "V08", "doc_id": "a0c18947136e53481eb19012c804c3d0", "priority_top5": false, "component_ranks": {"dense": 16}}
+{"query_id": "V08", "doc_id": "789f1070-bc03-11e2-97d4-a479289a31f9", "priority_top5": false, "component_ranks": {"bm25": 13}}
+{"query_id": "V08", "doc_id": "7e0be828e7bfdf5dbea896456346f956", "priority_top5": false, "component_ranks": {"dense": 10}}
+{"query_id": "V08", "doc_id": "8b5a9d1e-95e0-11e1-a17e-3e4d0e03fb4a", "priority_top5": false, "component_ranks": {"bm25": 12}}
+{"query_id": "V08", "doc_id": "e65e979cd08fcfcd67d0a39c3a13a573", "priority_top5": false, "component_ranks": {"dense": 12}}
+{"query_id": "V08", "doc_id": "d056a7e2-f5df-11e5-8b23-538270a1ca31", "priority_top5": true, "component_ranks": {"dense": 1}}
+{"query_id": "V08", "doc_id": "fa7b0a2a75dcf191555815d9cc84c580", "priority_top5": false, "component_ranks": {"dense": 9}}
+{"query_id": "V08", "doc_id": "40db25a0-1ef1-11e4-9b6c-12e30cbe86a3", "priority_top5": false, "component_ranks": {"dense": 15}}
+{"query_id": "V08", "doc_id": "1e340eae-08eb-11e7-93dc-00f9bdd74ed1", "priority_top5": false, "component_ranks": {"dense": 19}}
+{"query_id": "V08", "doc_id": "23b338d0-8bbb-11e6-bf8a-3d26847eeed4", "priority_top5": false, "component_ranks": {"bm25": 14}}
+{"query_id": "V08", "doc_id": "96901d94-6718-11e7-a1d7-9a32c91c6f40", "priority_top5": false, "component_ranks": {"bm25": 10}}
+{"query_id": "V08", "doc_id": "8af0410c7867d3a29abfeefa22776837", "priority_top5": true, "component_ranks": {"bm25": 2}}
+{"query_id": "V08", "doc_id": "256235fa-64a1-11e1-ad1b-84e7c463da1d", "priority_top5": false, "component_ranks": {"bm25": 17}}
+{"query_id": "V08", "doc_id": "f7cc1b6e-487c-11e1-bfd9-c630ec256905", "priority_top5": true, "component_ranks": {"dense": 2}}
+{"query_id": "V08", "doc_id": "49051fc93576074ace82b55992f52016", "priority_top5": false, "component_ranks": {"dense": 6}}
+{"query_id": "V08", "doc_id": "0970287c-8dc5-11e2-9838-d62f083ba93f", "priority_top5": false, "component_ranks": {"bm25": 19}}
+{"query_id": "V08", "doc_id": "a1247940-ada4-11e6-a31b-4b6397e625d0", "priority_top5": false, "component_ranks": {"bm25": 16, "dense": 13}}
+{"query_id": "V08", "doc_id": "4b6ef750-929f-11e3-b46a-5a3d0d2130da", "priority_top5": false, "component_ranks": {"dense": 18}}
+{"query_id": "V08", "doc_id": "6d263c6e-7910-11e1-96fc-4e3f9a8561ee", "priority_top5": true, "component_ranks": {"dense": 4}}
+{"query_id": "V08", "doc_id": "b6c80e56-1ba5-11e6-8c7b-6931e66333e7", "priority_top5": false, "component_ranks": {"bm25": 8}}
+{"query_id": "V08", "doc_id": "abb6a98e5a9756480c7ec76a99c9ae3b", "priority_top5": false, "component_ranks": {"dense": 8}}
+{"query_id": "V09", "doc_id": "9c1b1854-cf8c-11e2-8f6b-67f40e176f03", "priority_top5": true, "component_ranks": {"bm25": 5}}
+{"query_id": "V09", "doc_id": "fbf44929d998f01a5d29d77e9192d4a1", "priority_top5": false, "component_ranks": {"dense": 12}}
+{"query_id": "V09", "doc_id": "b1245a43e1fe7cbeb36db3fc6ab5c9d0", "priority_top5": false, "component_ranks": {"bm25": 13}}
+{"query_id": "V09", "doc_id": "ef9352ebb5b88e9a12dbeae47493c12f", "priority_top5": false, "component_ranks": {"bm25": 10}}
+{"query_id": "V09", "doc_id": "3dfe5132-7b9a-11e2-82e8-61a46c2cde3d", "priority_top5": true, "component_ranks": {"bm25": 2}}
+{"query_id": "V09", "doc_id": "00da40e73bffa6fa3dd3fa663718d314", "priority_top5": false, "component_ranks": {"dense": 14}}
+{"query_id": "V09", "doc_id": "257933acc7b43b0a64de87ff4b8afca2", "priority_top5": false, "component_ranks": {"bm25": 18}}
+{"query_id": "V09", "doc_id": "5969871e-6a31-11e6-8225-fbb8a6fc65bc", "priority_top5": true, "component_ranks": {"bm25": 1}}
+{"query_id": "V09", "doc_id": "9f762c27c21a3089a2224ea584b58e2e", "priority_top5": false, "component_ranks": {"bm25": 8}}
+{"query_id": "V09", "doc_id": "1f7a199a-18aa-11e4-88f7-96ed767bb747", "priority_top5": true, "component_ranks": {"dense": 2}}
+{"query_id": "V09", "doc_id": "179d34a15f86bdcd45800fc945fe9e6f", "priority_top5": true, "component_ranks": {"dense": 3}}
+{"query_id": "V09", "doc_id": "cf43a2bc-fb41-11e5-886f-a037dba38301", "priority_top5": false, "component_ranks": {"dense": 13}}
+{"query_id": "V09", "doc_id": "51d726164d4e3676632abf4c7092ad46", "priority_top5": false, "component_ranks": {"dense": 10}}
+{"query_id": "V09", "doc_id": "d8588c1a-2f56-11e2-a30e-5ca76eeec857", "priority_top5": false, "component_ranks": {"bm25": 20, "dense": 20}}
+{"query_id": "V09", "doc_id": "d6b437b2ee204979bc9e14208caa445a", "priority_top5": true, "component_ranks": {"dense": 1}}
+{"query_id": "V09", "doc_id": "460aea0c-135b-11e4-9285-4243a40ddc97", "priority_top5": true, "component_ranks": {"bm25": 3}}
+{"query_id": "V09", "doc_id": "9fde7d5c-127d-11e4-9285-4243a40ddc97", "priority_top5": true, "component_ranks": {"bm25": 4, "dense": 8}}
+{"query_id": "V09", "doc_id": "d62fa254e2d3aeb54266b7cac70f14ea", "priority_top5": false, "component_ranks": {"dense": 11}}
+{"query_id": "V09", "doc_id": "72d500be-e593-11e2-aef3-339619eab080", "priority_top5": false, "component_ranks": {"bm25": 11}}
+{"query_id": "V09", "doc_id": "23474938af5cc540c26bee643bc05f10", "priority_top5": false, "component_ranks": {"bm25": 19, "dense": 16}}
+{"query_id": "V09", "doc_id": "fd972fd4745a3a4463138410be888135", "priority_top5": false, "component_ranks": {"bm25": 6}}
+{"query_id": "V09", "doc_id": "e5294e0a-429d-11e4-b437-1a7368204804", "priority_top5": false, "component_ranks": {"dense": 6}}
+{"query_id": "V09", "doc_id": "ea78467ce81cf27b4e419732e0cd2243", "priority_top5": false, "component_ranks": {"dense": 17}}
+{"query_id": "V09", "doc_id": "45673ad2e01c4682c3d06c17fafb8dbf", "priority_top5": false, "component_ranks": {"bm25": 14}}
+{"query_id": "V09", "doc_id": "e3d43ab6f436b57b9d2851928122cb26", "priority_top5": false, "component_ranks": {"bm25": 16}}
+{"query_id": "V09", "doc_id": "0fa1f6c6-0e68-11e2-bd1a-b868e65d57eb", "priority_top5": false, "component_ranks": {"bm25": 15}}
+{"query_id": "V09", "doc_id": "463d7a10-0360-11e2-91e7-2962c74e7738", "priority_top5": false, "component_ranks": {"dense": 15}}
+{"query_id": "V09", "doc_id": "e68f4a6368e77bfc11183847a98443b8", "priority_top5": false, "component_ranks": {"bm25": 9}}
+{"query_id": "V09", "doc_id": "09199634-f664-11e3-a606-946fd632f9f1", "priority_top5": false, "component_ranks": {"bm25": 12}}
+{"query_id": "V09", "doc_id": "f772d38d25b35a245da85f513981d31c", "priority_top5": false, "component_ranks": {"dense": 9}}
+{"query_id": "V09", "doc_id": "093f2aeb5025d4dcff612e50f352bd45", "priority_top5": false, "component_ranks": {"bm25": 17}}
+{"query_id": "V09", "doc_id": "238f95ceb1d95eba40c59bbb96d344d5", "priority_top5": false, "component_ranks": {"bm25": 7}}
+{"query_id": "V09", "doc_id": "856766a0-1e58-11e4-9b6c-12e30cbe86a3", "priority_top5": false, "component_ranks": {"dense": 7}}
+{"query_id": "V09", "doc_id": "40827b52-84ae-11e5-8bd2-680fff868306", "priority_top5": false, "component_ranks": {"dense": 18}}
+{"query_id": "V09", "doc_id": "c23dfcca-4364-11e4-8042-aaff1640082e", "priority_top5": false, "component_ranks": {"dense": 19}}
+{"query_id": "V09", "doc_id": "f843d32c8986da95ba1c4515ce2ed70d", "priority_top5": true, "component_ranks": {"dense": 4}}
+{"query_id": "V09", "doc_id": "19d00c82-e747-11e3-a86b-362fd5443d19", "priority_top5": true, "component_ranks": {"dense": 5}}
+{"query_id": "V10", "doc_id": "7d8988ae-4bcd-11e3-be6b-d3d28122e6d4", "priority_top5": true, "component_ranks": {"dense": 4}}
+{"query_id": "V10", "doc_id": "e57cfdb6462856122852f24021abdfc7", "priority_top5": false, "component_ranks": {"bm25": 17}}
+{"query_id": "V10", "doc_id": "c7b5dfd1bf856abdcabca04e003fe8c1", "priority_top5": false, "component_ranks": {"dense": 8}}
+{"query_id": "V10", "doc_id": "cb36e7d20e5fbfb3a33e0289f337d720", "priority_top5": false, "component_ranks": {"dense": 9}}
+{"query_id": "V10", "doc_id": "5941b504-4658-11e3-a196-3544a03c2351", "priority_top5": false, "component_ranks": {"dense": 10}}
+{"query_id": "V10", "doc_id": "85599130d8a0a26a8da63fa749d216fb", "priority_top5": false, "component_ranks": {"bm25": 16}}
+{"query_id": "V10", "doc_id": "45853d2d826277fd77f8445b9788821f", "priority_top5": false, "component_ranks": {"dense": 20}}
+{"query_id": "V10", "doc_id": "b5d44e5a78f4add8481aededad32fe55", "priority_top5": false, "component_ranks": {"dense": 7}}
+{"query_id": "V10", "doc_id": "40ac37dc8d146b4dece7c1bbad805866", "priority_top5": false, "component_ranks": {"bm25": 9}}
+{"query_id": "V10", "doc_id": "861209cf4d6c5bf1127256b854476afb", "priority_top5": false, "component_ranks": {"bm25": 19}}
+{"query_id": "V10", "doc_id": "f73dd31949c9f3db7c5303c8bc6d30d3", "priority_top5": false, "component_ranks": {"bm25": 18}}
+{"query_id": "V10", "doc_id": "0c62fb2508fd06d019fc0dd8b3337c7e", "priority_top5": false, "component_ranks": {"dense": 14}}
+{"query_id": "V10", "doc_id": "609af434-5c54-11e3-bc56-c6ca94801fac", "priority_top5": false, "component_ranks": {"bm25": 12}}
+{"query_id": "V10", "doc_id": "8b30fb69bedfc7cbcefd197d6911cd50", "priority_top5": false, "component_ranks": {"dense": 6}}
+{"query_id": "V10", "doc_id": "50a03622-768b-11e5-a958-d889faf561dc", "priority_top5": false, "component_ranks": {"dense": 17}}
+{"query_id": "V10", "doc_id": "2db93b3b316635164cd0e3cac92395fa", "priority_top5": false, "component_ranks": {"dense": 15}}
+{"query_id": "V10", "doc_id": "623ac168-7375-11e5-8248-98e0f5a2e830", "priority_top5": false, "component_ranks": {"bm25": 7}}
+{"query_id": "V10", "doc_id": "e10bc176-7b71-11e2-9a75-dab0201670da", "priority_top5": true, "component_ranks": {"dense": 5}}
+{"query_id": "V10", "doc_id": "378f1b11ec432a950fa6d2b335b42d51", "priority_top5": false, "component_ranks": {"dense": 18}}
+{"query_id": "V10", "doc_id": "95c14966-4b28-11e3-be6b-d3d28122e6d4", "priority_top5": false, "component_ranks": {"dense": 13}}
+{"query_id": "V10", "doc_id": "a348519c-6475-11e1-8941-dbe3cd6caa03", "priority_top5": false, "component_ranks": {"bm25": 6}}
+{"query_id": "V10", "doc_id": "371dd982bee8575b0e118faeeb45284c", "priority_top5": false, "component_ranks": {"bm25": 14}}
+{"query_id": "V10", "doc_id": "3d093152-f112-11e5-a61f-e9c95c06edca", "priority_top5": false, "component_ranks": {"dense": 11}}
+{"query_id": "V10", "doc_id": "ccccff38633e9acc9d823fe728b62ed8", "priority_top5": false, "component_ranks": {"dense": 12}}
+{"query_id": "V10", "doc_id": "3d21283cef0d3c0a6731fd9a6967b16c", "priority_top5": true, "component_ranks": {"bm25": 5}}
+{"query_id": "V10", "doc_id": "fd7cb418902160c6c89fd1a9271f4010", "priority_top5": false, "component_ranks": {"bm25": 10}}
+{"query_id": "V10", "doc_id": "3718ca4c-8152-11e2-a350-49866afab584", "priority_top5": true, "component_ranks": {"dense": 2}}
+{"query_id": "V10", "doc_id": "7a551676b690b5b4abe99c5976babbda", "priority_top5": false, "component_ranks": {"bm25": 8}}
+{"query_id": "V10", "doc_id": "faa27ba4-dbbd-11e3-8009-71de85b9c527", "priority_top5": true, "component_ranks": {"bm25": 3}}
+{"query_id": "V10", "doc_id": "6e58f4cd0f9c517364e77e3040ba89fc", "priority_top5": false, "component_ranks": {"bm25": 15}}
+{"query_id": "V10", "doc_id": "ed8001c2-7453-11e6-be4f-3f42f2e5a49e", "priority_top5": true, "component_ranks": {"bm25": 1}}
+{"query_id": "V10", "doc_id": "b4cef7b821759d3afe331492a372ca10", "priority_top5": true, "component_ranks": {"dense": 1}}
+{"query_id": "V10", "doc_id": "6e0246175ddb96cf48594e768bcb2c04", "priority_top5": false, "component_ranks": {"dense": 16}}
+{"query_id": "V10", "doc_id": "798c9882-07d1-11e6-bdcb-0133da18418d", "priority_top5": true, "component_ranks": {"bm25": 2, "dense": 3}}
+{"query_id": "V10", "doc_id": "d3eb1aa8-7345-11e1-b747-ee64265ae6c6", "priority_top5": false, "component_ranks": {"bm25": 20}}
+{"query_id": "V10", "doc_id": "4a9c1f22-61d2-11e3-8beb-3f9a9942850f", "priority_top5": true, "component_ranks": {"bm25": 4}}
+{"query_id": "V10", "doc_id": "c4e97264d326f82b3e9ea99e3ed76dd4", "priority_top5": false, "component_ranks": {"dense": 19}}
+{"query_id": "V10", "doc_id": "db704ca4-13d5-11e7-9e4f-09aa75d3ec57", "priority_top5": false, "component_ranks": {"bm25": 13}}
+{"query_id": "V10", "doc_id": "c2ac8144-121b-11e2-ba83-a7a396e6b2a7", "priority_top5": false, "component_ranks": {"bm25": 11}}
+{"query_id": "N06", "doc_id": "7455ccde-7d24-11e2-a044-676856536b40", "priority_top5": false, "component_ranks": {"bm25": 17}}
+{"query_id": "N06", "doc_id": "3ed44bac-165e-11e3-804b-d3a1a3a18f2c", "priority_top5": true, "component_ranks": {"dense": 5}}
+{"query_id": "N06", "doc_id": "a9d1b1970ec6e2d52ed62282a9a00091", "priority_top5": false, "component_ranks": {"bm25": 12}}
+{"query_id": "N06", "doc_id": "eec7fd1dd16383ea606d1f9a4b062270", "priority_top5": false, "component_ranks": {"dense": 18}}
+{"query_id": "N06", "doc_id": "3dabec7547ab20d201379ecfa7b8e826", "priority_top5": false, "component_ranks": {"dense": 10}}
+{"query_id": "N06", "doc_id": "611dcb955fd2b58e943ec67bd47d60bc", "priority_top5": false, "component_ranks": {"bm25": 19, "dense": 7}}
+{"query_id": "N06", "doc_id": "19229cba-4ba7-11e2-9a42-d1ce6d0ed278", "priority_top5": true, "component_ranks": {"bm25": 5, "dense": 4}}
+{"query_id": "N06", "doc_id": "16e2c976-8cd3-11e2-9838-d62f083ba93f", "priority_top5": true, "component_ranks": {"bm25": 1, "dense": 12}}
+{"query_id": "N06", "doc_id": "ad1dfc6b982addea9fc896125b42ae2d", "priority_top5": false, "component_ranks": {"dense": 14}}
+{"query_id": "N06", "doc_id": "6a6ee550-5e59-11e2-9940-6fc488f3fecd", "priority_top5": false, "component_ranks": {"dense": 16}}
+{"query_id": "N06", "doc_id": "0781f084-d96f-11e4-8103-fa84725dbf9d", "priority_top5": false, "component_ranks": {"bm25": 7}}
+{"query_id": "N06", "doc_id": "3757725da7a38b7fd0c997aef8e099af", "priority_top5": false, "component_ranks": {"bm25": 9}}
+{"query_id": "N06", "doc_id": "2cc146d4-5c16-11e2-9fa9-5fbdc9530eb9", "priority_top5": false, "component_ranks": {"bm25": 13}}
+{"query_id": "N06", "doc_id": "d76d0896-c6d6-11e1-aa3a-f3dfb7ea106c", "priority_top5": false, "component_ranks": {"bm25": 10}}
+{"query_id": "N06", "doc_id": "2a8016b44a1f0373f3af84a3f1c930eb", "priority_top5": false, "component_ranks": {"bm25": 11}}
+{"query_id": "N06", "doc_id": "e497cd16570759b9cacadc988679cf6c", "priority_top5": false, "component_ranks": {"bm25": 8}}
+{"query_id": "N06", "doc_id": "46829d4f0d2bed394a82d430a1aee0cf", "priority_top5": false, "component_ranks": {"bm25": 18, "dense": 6}}
+{"query_id": "N06", "doc_id": "cb84350af735c728e4ff7d9b32040cb0", "priority_top5": true, "component_ranks": {"dense": 1}}
+{"query_id": "N06", "doc_id": "0f17f03f0420f3fb54b6e633f56e9232", "priority_top5": true, "component_ranks": {"bm25": 4}}
+{"query_id": "N06", "doc_id": "f33b415e-9df2-11e5-9ad2-568d814bbf3b", "priority_top5": false, "component_ranks": {"dense": 9}}
+{"query_id": "N06", "doc_id": "8282eada0085e1c36653d333ef56b3dd", "priority_top5": false, "component_ranks": {"dense": 13}}
+{"query_id": "N06", "doc_id": "6d59fd32-556f-11e3-bdbf-097ab2a3dc2b", "priority_top5": false, "component_ranks": {"dense": 11}}
+{"query_id": "N06", "doc_id": "863d485012ac73644b42e18b7500412c", "priority_top5": false, "component_ranks": {"dense": 17}}
+{"query_id": "N06", "doc_id": "40a683a79d3c94af7c5b41322294603a", "priority_top5": false, "component_ranks": {"dense": 20}}
+{"query_id": "N06", "doc_id": "6d7bc4446c99ce1e0d5a2f43399512d5", "priority_top5": false, "component_ranks": {"bm25": 20}}
+{"query_id": "N06", "doc_id": "68b55e52-3325-11e6-95c0-2a6873031302", "priority_top5": false, "component_ranks": {"bm25": 6}}
+{"query_id": "N06", "doc_id": "9363c008-56c8-11e3-8304-caf30787c0a9", "priority_top5": false, "component_ranks": {"dense": 8}}
+{"query_id": "N06", "doc_id": "e9b4bce1bb95ae12a2593d636673947b", "priority_top5": true, "component_ranks": {"bm25": 3, "dense": 3}}
+{"query_id": "N06", "doc_id": "c1f8da4fd3a71433e41ac073e0a5c2a7", "priority_top5": false, "component_ranks": {"bm25": 14}}
+{"query_id": "N06", "doc_id": "208edea80fa05d48076417a88a9b7e0c", "priority_top5": false, "component_ranks": {"dense": 19}}
+{"query_id": "N06", "doc_id": "47145694-add3-11e6-8b45-f8e493f06fcd", "priority_top5": false, "component_ranks": {"bm25": 15}}
+{"query_id": "N06", "doc_id": "0758b65c-4795-11e1-95ea-d3d7baa6debe", "priority_top5": false, "component_ranks": {"dense": 15}}
+{"query_id": "N06", "doc_id": "44f43c82c791aa54b445938ad1a1d1de", "priority_top5": false, "component_ranks": {"bm25": 16}}
+{"query_id": "N06", "doc_id": "dd5d1ba6598384795aa3d97f7444a8b7", "priority_top5": true, "component_ranks": {"bm25": 2, "dense": 2}}
+{"query_id": "N07", "doc_id": "5aa638a4-b811-11e3-96ae-f2c36d2b1245", "priority_top5": true, "component_ranks": {"dense": 1}}
+{"query_id": "N07", "doc_id": "2669f16a-a822-11e3-b61e-8051b8b52d06", "priority_top5": false, "component_ranks": {"dense": 17}}
+{"query_id": "N07", "doc_id": "27b0d4ae-acea-11e3-a49e-76adc9210f19", "priority_top5": false, "component_ranks": {"bm25": 17}}
+{"query_id": "N07", "doc_id": "685e8fc8-3704-11e5-ab7b-6416d97c73c2", "priority_top5": false, "component_ranks": {"dense": 7}}
+{"query_id": "N07", "doc_id": "2c9c1cd47cdb939c6fc6c7b50ea3180f", "priority_top5": false, "component_ranks": {"bm25": 20}}
+{"query_id": "N07", "doc_id": "80a11ba2-3789-11e5-9739-170df8af8eb9", "priority_top5": false, "component_ranks": {"dense": 19}}
+{"query_id": "N07", "doc_id": "1b7e390e-a94f-11e3-b61e-8051b8b52d06", "priority_top5": true, "component_ranks": {"bm25": 3, "dense": 14}}
+{"query_id": "N07", "doc_id": "be1a6bb4-b189-11e3-a49e-76adc9210f19", "priority_top5": false, "component_ranks": {"bm25": 14}}
+{"query_id": "N07", "doc_id": "59981710-b40c-11e3-b899-20667de76985", "priority_top5": false, "component_ranks": {"dense": 12}}
+{"query_id": "N07", "doc_id": "9711f06b-28ee-40e8-88c5-c91277f211da", "priority_top5": false, "component_ranks": {"dense": 20}}
+{"query_id": "N07", "doc_id": "4f760d06-b43d-11e3-8cb6-284052554d74", "priority_top5": true, "component_ranks": {"dense": 4}}
+{"query_id": "N07", "doc_id": "cb28ffc6-b370-11e3-8020-b2d790b3c9e1", "priority_top5": false, "component_ranks": {"bm25": 6}}
+{"query_id": "N07", "doc_id": "f5f3048dfc786f68800a85c23ca9debf", "priority_top5": true, "component_ranks": {"dense": 2}}
+{"query_id": "N07", "doc_id": "72688034-aa68-11e3-b61e-8051b8b52d06", "priority_top5": false, "component_ranks": {"bm25": 16}}
+{"query_id": "N07", "doc_id": "1bb8d138-afec-11e3-95e8-39bef8e9a48b", "priority_top5": false, "component_ranks": {"bm25": 8, "dense": 11}}
+{"query_id": "N07", "doc_id": "1934cf4472f7853ed0426abc8019b4d9", "priority_top5": true, "component_ranks": {"bm25": 5}}
+{"query_id": "N07", "doc_id": "1f24b7a6b61f6a79976be2d99dfd38f9", "priority_top5": false, "component_ranks": {"dense": 8}}
+{"query_id": "N07", "doc_id": "fec0d0635993f4697a80d4e0d71602fd", "priority_top5": false, "component_ranks": {"bm25": 11}}
+{"query_id": "N07", "doc_id": "47695b50-b063-11e3-9627-c65021d6d572", "priority_top5": true, "component_ranks": {"bm25": 2, "dense": 6}}
+{"query_id": "N07", "doc_id": "3d112454-ae91-11e3-96dc-d6ea14c099f9", "priority_top5": true, "component_ranks": {"bm25": 1}}
+{"query_id": "N07", "doc_id": "27b2d405753c8a6515b9ddc5736a2860", "priority_top5": false, "component_ranks": {"bm25": 7, "dense": 18}}
+{"query_id": "N07", "doc_id": "fea6df4a-a8e8-11e3-8599-ce7295b6851c", "priority_top5": false, "component_ranks": {"bm25": 10}}
+{"query_id": "N07", "doc_id": "d5d59f5a-af7f-11e3-9627-c65021d6d572", "priority_top5": false, "component_ranks": {"dense": 9}}
+{"query_id": "N07", "doc_id": "334edf74-a9d2-11e3-8599-ce7295b6851c", "priority_top5": false, "component_ranks": {"bm25": 15, "dense": 15}}
+{"query_id": "N07", "doc_id": "1a722a1a98c8c4e854553e82a8f1fad2", "priority_top5": false, "component_ranks": {"bm25": 12}}
+{"query_id": "N07", "doc_id": "f3043a6a-b5a0-11e3-8cb6-284052554d74", "priority_top5": true, "component_ranks": {"dense": 5}}
+{"query_id": "N07", "doc_id": "4b0d8a8c-a763-11e3-b61e-8051b8b52d06", "priority_top5": true, "component_ranks": {"bm25": 19, "dense": 3}}
+{"query_id": "N07", "doc_id": "3662d778-dc84-11e6-ad42-f3375f271c9c", "priority_top5": false, "component_ranks": {"dense": 10}}
+{"query_id": "N07", "doc_id": "43173468574f4f69dc618dfc61d94c9c", "priority_top5": false, "component_ranks": {"bm25": 9}}
+{"query_id": "N07", "doc_id": "e93be726-add5-11e3-96dc-d6ea14c099f9", "priority_top5": false, "component_ranks": {"bm25": 18}}
+{"query_id": "N07", "doc_id": "94d8d940-3c05-11e5-8e98-115a3cf7d7ae", "priority_top5": true, "component_ranks": {"bm25": 4, "dense": 16}}
+{"query_id": "N07", "doc_id": "66cf570c-ac52-11e3-a06a-e3230a43d6cb", "priority_top5": false, "component_ranks": {"dense": 13}}
+{"query_id": "N07", "doc_id": "f7e6d722-3ba5-11e5-9c2d-ed991d848c48", "priority_top5": false, "component_ranks": {"bm25": 13}}
+{"query_id": "N08", "doc_id": "4facc288-6151-11e1-a0f4-75b4ea5213c1", "priority_top5": false, "component_ranks": {"bm25": 13}}
+{"query_id": "N08", "doc_id": "87dd982c0c8c479b42f2d3906ef3dd1e", "priority_top5": false, "component_ranks": {"bm25": 6}}
+{"query_id": "N08", "doc_id": "56d5f512-3e23-11e1-861f-2c3eff5ce2df", "priority_top5": false, "component_ranks": {"dense": 17}}
+{"query_id": "N08", "doc_id": "87efd2525209ee343ad8c72955756a68", "priority_top5": false, "component_ranks": {"dense": 10}}
+{"query_id": "N08", "doc_id": "71e787cab7472c25fb97c3cb95396ec6", "priority_top5": true, "component_ranks": {"bm25": 3, "dense": 4}}
+{"query_id": "N08", "doc_id": "3faf667969857c7738c7345049b799e9", "priority_top5": false, "component_ranks": {"bm25": 19}}
+{"query_id": "N08", "doc_id": "d588bed8a864a0643aab6318bf5cc108", "priority_top5": false, "component_ranks": {"bm25": 9}}
+{"query_id": "N08", "doc_id": "671e184b5ae9dc3f2c7ee8b27b2ed70a", "priority_top5": false, "component_ranks": {"bm25": 15}}
+{"query_id": "N08", "doc_id": "5601e916-99a7-11e3-b88d-f36c07223d88", "priority_top5": false, "component_ranks": {"bm25": 18}}
+{"query_id": "N08", "doc_id": "3f30368af157c9111f5862e62ad4ccac", "priority_top5": false, "component_ranks": {"bm25": 14}}
+{"query_id": "N08", "doc_id": "fbf474fc-5353-11e1-8b3f-981af5242cff", "priority_top5": false, "component_ranks": {"dense": 19}}
+{"query_id": "N08", "doc_id": "df7c9266-0777-11e4-a0dd-f2b22a257353", "priority_top5": false, "component_ranks": {"bm25": 17}}
+{"query_id": "N08", "doc_id": "be35bb6c76265fa8c77935b562718f40", "priority_top5": false, "component_ranks": {"dense": 16}}
+{"query_id": "N08", "doc_id": "bf002b34-41f3-11e1-8f2d-87a67739d0d2", "priority_top5": true, "component_ranks": {"bm25": 12, "dense": 2}}
+{"query_id": "N08", "doc_id": "d6ffa91cc2f8dc815af2cd72a2217891", "priority_top5": true, "component_ranks": {"bm25": 4}}
+{"query_id": "N08", "doc_id": "0c8d9f04-c72a-11e3-8b9a-8e0977a24aeb", "priority_top5": false, "component_ranks": {"dense": 12}}
+{"query_id": "N08", "doc_id": "8d3f8976-41f0-11e1-8f2d-87a67739d0d2", "priority_top5": true, "component_ranks": {"dense": 1}}
+{"query_id": "N08", "doc_id": "ae82cf7a-8d21-11e3-95dd-36ff657a4dae", "priority_top5": false, "component_ranks": {"dense": 13}}
+{"query_id": "N08", "doc_id": "e584fa6aff1773eb3ec206cd1f6ac087", "priority_top5": false, "component_ranks": {"dense": 6}}
+{"query_id": "N08", "doc_id": "da852e6927f6ae38a1fa61e7d7a24d33", "priority_top5": false, "component_ranks": {"dense": 18}}
+{"query_id": "N08", "doc_id": "d29a85bb3643b94fb5ad7fb7bc77a1a4", "priority_top5": true, "component_ranks": {"bm25": 1, "dense": 15}}
+{"query_id": "N08", "doc_id": "678acff8-9781-11e4-8005-1924ede3e54a", "priority_top5": false, "component_ranks": {"dense": 14}}
+{"query_id": "N08", "doc_id": "999eacdc-4223-11e1-9022-0d2194331bfe", "priority_top5": true, "component_ranks": {"dense": 3}}
+{"query_id": "N08", "doc_id": "3b6ec6ce-4223-11e1-9022-0d2194331bfe", "priority_top5": false, "component_ranks": {"dense": 8}}
+{"query_id": "N08", "doc_id": "205558a7d0e06889220ef2ea9c8c4d2f", "priority_top5": false, "component_ranks": {"bm25": 10, "dense": 9}}
+{"query_id": "N08", "doc_id": "c8bb1148e7f0094ac6ff1e3fead474ca", "priority_top5": true, "component_ranks": {"dense": 5}}
+{"query_id": "N08", "doc_id": "8bd7a77132fa68a444129c638338b585", "priority_top5": false, "component_ranks": {"bm25": 7}}
+{"query_id": "N08", "doc_id": "2f28b586-84bf-11e5-a7ca-6ab6ec20f839", "priority_top5": false, "component_ranks": {"dense": 20}}
+{"query_id": "N08", "doc_id": "2ba32858-4b7d-11e1-a4d1-23c1d0ce2e96", "priority_top5": false, "component_ranks": {"bm25": 11}}
+{"query_id": "N08", "doc_id": "2128a376-42c2-11e1-9091-3ad6d04900db", "priority_top5": false, "component_ranks": {"dense": 11}}
+{"query_id": "N08", "doc_id": "e3083958af810bc88cbcad162534db7b", "priority_top5": true, "component_ranks": {"bm25": 2}}
+{"query_id": "N08", "doc_id": "3625f209b1008b57068821bab2f56721", "priority_top5": true, "component_ranks": {"bm25": 5}}
+{"query_id": "N08", "doc_id": "0157ba30dce983b14ba7c9cdb55e96ad", "priority_top5": false, "component_ranks": {"bm25": 20}}
+{"query_id": "N08", "doc_id": "5a04aef4-42b5-11e1-ad78-52434cb020f0", "priority_top5": false, "component_ranks": {"dense": 7}}
+{"query_id": "N08", "doc_id": "e35623a54e580867382a837d67f14919", "priority_top5": false, "component_ranks": {"bm25": 16}}
+{"query_id": "N08", "doc_id": "c6a1eb5b7cf15e9e702a2b592c9f1cdb", "priority_top5": false, "component_ranks": {"bm25": 8}}
+{"query_id": "N09", "doc_id": "04dddf78-e728-11e6-b82f-687d6e6a3e7c", "priority_top5": false, "component_ranks": {"dense": 20}}
+{"query_id": "N09", "doc_id": "c9f9543a2e557ae9ec8ce2301eae95ab", "priority_top5": true, "component_ranks": {"bm25": 1, "dense": 6}}
+{"query_id": "N09", "doc_id": "16bc6026e9c579dec632b2d9a716a375", "priority_top5": false, "component_ranks": {"bm25": 14}}
+{"query_id": "N09", "doc_id": "9d78bc26-aad1-11e3-98f6-8e3c562f9996", "priority_top5": false, "component_ranks": {"bm25": 9, "dense": 7}}
+{"query_id": "N09", "doc_id": "afa14dddc9d893bdcf94250a7ddb274b", "priority_top5": true, "component_ranks": {"bm25": 2}}
+{"query_id": "N09", "doc_id": "b6a08072-f5bb-11e4-b2f3-af5479e6bbdd", "priority_top5": false, "component_ranks": {"bm25": 11}}
+{"query_id": "N09", "doc_id": "7a5651f6-200f-11e3-94a2-6c66b668ea55", "priority_top5": true, "component_ranks": {"dense": 2}}
+{"query_id": "N09", "doc_id": "1047d3f81c1a4784859996c63e80253c", "priority_top5": false, "component_ranks": {"dense": 9}}
+{"query_id": "N09", "doc_id": "0f9c5121ff7979fc3e271ab516b2d772", "priority_top5": false, "component_ranks": {"dense": 16}}
+{"query_id": "N09", "doc_id": "77f6a1ec-e0ec-11e3-9743-bb9b59cde7b9", "priority_top5": false, "component_ranks": {"bm25": 15}}
+{"query_id": "N09", "doc_id": "6071f0935f82548a90c5d250924bd5b2", "priority_top5": false, "component_ranks": {"bm25": 8, "dense": 8}}
+{"query_id": "N09", "doc_id": "cbd7ec8e-370d-11e1-9ee3-fd35588e7629", "priority_top5": false, "component_ranks": {"bm25": 17}}
+{"query_id": "N09", "doc_id": "a29e11b4-d70e-11e4-b3f2-607bd612aeac", "priority_top5": false, "component_ranks": {"bm25": 7}}
+{"query_id": "N09", "doc_id": "f9315302570ccb5032b07749ac9344fa", "priority_top5": false, "component_ranks": {"dense": 13}}
+{"query_id": "N09", "doc_id": "c94b1a6d9f562fa15a60a88c27248432", "priority_top5": false, "component_ranks": {"bm25": 19}}
+{"query_id": "N09", "doc_id": "4cd2d482-1ed6-11e3-b7d1-7153ad47b549", "priority_top5": true, "component_ranks": {"bm25": 4}}
+{"query_id": "N09", "doc_id": "1bb909ca9000c0666966572557764629", "priority_top5": false, "component_ranks": {"dense": 17}}
+{"query_id": "N09", "doc_id": "ba09cd4a-162b-11e6-9e16-2e5a123aac62", "priority_top5": true, "component_ranks": {"bm25": 3, "dense": 10}}
+{"query_id": "N09", "doc_id": "e64ca05c-61e8-11e3-8beb-3f9a9942850f", "priority_top5": false, "component_ranks": {"bm25": 18}}
+{"query_id": "N09", "doc_id": "3848653b3bf04c831371b159bfad0067", "priority_top5": true, "component_ranks": {"dense": 5}}
+{"query_id": "N09", "doc_id": "091d3de94bdb0066103940d17fac2e19", "priority_top5": false, "component_ranks": {"bm25": 12}}
+{"query_id": "N09", "doc_id": "a809d94e2b812c190d8e9cadbd591495", "priority_top5": false, "component_ranks": {"bm25": 6}}
+{"query_id": "N09", "doc_id": "554b3a038465973b69bdadd9930d8a4c", "priority_top5": false, "component_ranks": {"dense": 14}}
+{"query_id": "N09", "doc_id": "feb4ee30-b649-11e5-a842-0feb51d1d124", "priority_top5": false, "component_ranks": {"dense": 18}}
+{"query_id": "N09", "doc_id": "6a7ffbc6e4cfd867fc13bd2df4c879a2", "priority_top5": false, "component_ranks": {"dense": 12}}
+{"query_id": "N09", "doc_id": "6fc10ba0-8953-11e5-be8b-1ae2e4f50f76", "priority_top5": false, "component_ranks": {"dense": 11}}
+{"query_id": "N09", "doc_id": "0a574ac315ce4e2b97ae8d420cfc5438", "priority_top5": false, "component_ranks": {"bm25": 10, "dense": 19}}
+{"query_id": "N09", "doc_id": "ca68c61e-0d9c-11e2-a310-2363842b7057", "priority_top5": false, "component_ranks": {"dense": 15}}
+{"query_id": "N09", "doc_id": "0e95b2c0-a3b5-11e3-8466-d34c451760b9", "priority_top5": false, "component_ranks": {"bm25": 16}}
+{"query_id": "N09", "doc_id": "b6aca2e0-130a-11e6-8967-7ac733c56f12", "priority_top5": true, "component_ranks": {"dense": 1}}
+{"query_id": "N09", "doc_id": "6103189a-3804-11e2-b01f-5f55b193f58f", "priority_top5": true, "component_ranks": {"dense": 4}}
+{"query_id": "N09", "doc_id": "6c9958ef96e875b1a4d6943f5a5cb2ac", "priority_top5": true, "component_ranks": {"bm25": 5, "dense": 3}}
+{"query_id": "N09", "doc_id": "e89ff86a-c347-11e4-ad5c-3b8ce89f1b89", "priority_top5": false, "component_ranks": {"bm25": 20}}
+{"query_id": "N09", "doc_id": "38e94370-25a9-11e6-ae4a-3cdd5fe74204", "priority_top5": false, "component_ranks": {"bm25": 13}}
+{"query_id": "N10", "doc_id": "341c3786-e557-11e5-b0fd-073d5930a7b7", "priority_top5": false, "component_ranks": {"dense": 7}}
+{"query_id": "N10", "doc_id": "5bbeb7c8-4498-11e6-88d0-6adee48be8bc", "priority_top5": false, "component_ranks": {"dense": 8}}
+{"query_id": "N10", "doc_id": "bc293d8d07de2cabe9b0ab940a7a0b32", "priority_top5": true, "component_ranks": {"bm25": 2}}
+{"query_id": "N10", "doc_id": "f6276b18-a45e-11e6-ba59-a7d93165c6d4", "priority_top5": false, "component_ranks": {"dense": 11}}
+{"query_id": "N10", "doc_id": "7824d00a-c5fd-11e6-85b5-76616a33048d", "priority_top5": false, "component_ranks": {"bm25": 18}}
+{"query_id": "N10", "doc_id": "98c823ec-9ee9-11e6-8d63-3e0a660f1f04", "priority_top5": false, "component_ranks": {"dense": 20}}
+{"query_id": "N10", "doc_id": "cd4562347d6da3b48eb22dbb9d5eec2f", "priority_top5": false, "component_ranks": {"bm25": 17}}
+{"query_id": "N10", "doc_id": "79b6f712-42c8-11e6-bc99-7d269f8719b1", "priority_top5": false, "component_ranks": {"bm25": 15}}
+{"query_id": "N10", "doc_id": "a00483133ecc5bd38edcf43badbc8c06", "priority_top5": false, "component_ranks": {"dense": 16}}
+{"query_id": "N10", "doc_id": "2929979eea8dc99b7f164d1569f729d9", "priority_top5": false, "component_ranks": {"dense": 15}}
+{"query_id": "N10", "doc_id": "eb43ec7e-43c1-11e6-88d0-6adee48be8bc", "priority_top5": false, "component_ranks": {"bm25": 9}}
+{"query_id": "N10", "doc_id": "3c41daf2-437f-11e6-bc99-7d269f8719b1", "priority_top5": false, "component_ranks": {"bm25": 13}}
+{"query_id": "N10", "doc_id": "d85ba064-42d8-11e6-8856-f26de2537a9d", "priority_top5": false, "component_ranks": {"dense": 19}}
+{"query_id": "N10", "doc_id": "a76a230a-47af-11e6-90a8-fb84201e0645", "priority_top5": false, "component_ranks": {"bm25": 14}}
+{"query_id": "N10", "doc_id": "3b02f9ce-b0b1-11e6-840f-e3ebab6bcdd3", "priority_top5": true, "component_ranks": {"bm25": 1}}
+{"query_id": "N10", "doc_id": "5bd0cab4bdf2f01819981bd6c8cafd95", "priority_top5": false, "component_ranks": {"bm25": 16}}
+{"query_id": "N10", "doc_id": "54fce40e-9df4-11e6-a0ed-ab0774c1eaa5", "priority_top5": false, "component_ranks": {"bm25": 10}}
+{"query_id": "N10", "doc_id": "365f15b31453646dd540b78811985235", "priority_top5": true, "component_ranks": {"dense": 4}}
+{"query_id": "N10", "doc_id": "b67bd83a49daae2cba11a42a014aed2a", "priority_top5": true, "component_ranks": {"bm25": 5}}
+{"query_id": "N10", "doc_id": "f938f735689794771e22c680472eae94", "priority_top5": false, "component_ranks": {"bm25": 19}}
+{"query_id": "N10", "doc_id": "6f0f5d5c-a468-11e6-8fc0-7be8f848c492", "priority_top5": false, "component_ranks": {"bm25": 11, "dense": 13}}
+{"query_id": "N10", "doc_id": "d630c086dd52c43641387799693bcaca", "priority_top5": false, "component_ranks": {"dense": 17}}
+{"query_id": "N10", "doc_id": "a53513c4-42b9-11e6-bc99-7d269f8719b1", "priority_top5": true, "component_ranks": {"bm25": 3, "dense": 1}}
+{"query_id": "N10", "doc_id": "dbd968a4-348b-11e5-adf6-7227f3b7b338", "priority_top5": false, "component_ranks": {"dense": 18}}
+{"query_id": "N10", "doc_id": "735a4c009f56083c52c15b35931b5862", "priority_top5": true, "component_ranks": {"dense": 5}}
+{"query_id": "N10", "doc_id": "b964813c-42e0-11e6-8856-f26de2537a9d", "priority_top5": true, "component_ranks": {"bm25": 4}}
+{"query_id": "N10", "doc_id": "04229fb556bf0252cf73d9fc85529270", "priority_top5": false, "component_ranks": {"dense": 14}}
+{"query_id": "N10", "doc_id": "6e2717cf6c456d40de1a1ecad9164531", "priority_top5": false, "component_ranks": {"dense": 6}}
+{"query_id": "N10", "doc_id": "58c4e0ae0ed085eeababb00681f1046f", "priority_top5": true, "component_ranks": {"dense": 3}}
+{"query_id": "N10", "doc_id": "bba81498acbe7a13a17a84a45802c9f6", "priority_top5": false, "component_ranks": {"bm25": 6}}
+{"query_id": "N10", "doc_id": "0ad8feda-43c2-11e6-88d0-6adee48be8bc", "priority_top5": true, "component_ranks": {"bm25": 7, "dense": 2}}
+{"query_id": "N10", "doc_id": "692947d0-75fc-11e6-8149-b8d05321db62", "priority_top5": false, "component_ranks": {"bm25": 12}}
+{"query_id": "N10", "doc_id": "d319c70e-44a2-11e6-a76d-3550dba926ac", "priority_top5": false, "component_ranks": {"dense": 10}}
+{"query_id": "N10", "doc_id": "074c1c7e-34bd-11e7-b373-418f6849a004", "priority_top5": false, "component_ranks": {"bm25": 20}}
+{"query_id": "N10", "doc_id": "edad6cc65af58839a78a4d2b3ad92677", "priority_top5": false, "component_ranks": {"dense": 12}}
+{"query_id": "N10", "doc_id": "7a61550f95e30818015b334b76b23166", "priority_top5": false, "component_ranks": {"dense": 9}}
+{"query_id": "N10", "doc_id": "79426d94-aaa5-11e6-8f19-21a1c65d2043", "priority_top5": false, "component_ranks": {"bm25": 8}}
+{"query_id": "H06", "doc_id": "1d9483eb925edac3e1ffa4a3935af594", "priority_top5": true, "component_ranks": {"bm25": 5}}
+{"query_id": "H06", "doc_id": "9273cebe3f5ee901d8df910af7dfaf51", "priority_top5": false, "component_ranks": {"dense": 16}}
+{"query_id": "H06", "doc_id": "678ea3c2-e6e8-11e1-936a-b801f1abab19", "priority_top5": false, "component_ranks": {"dense": 12}}
+{"query_id": "H06", "doc_id": "0e7206a4ad06c9d2b9912bab935561db", "priority_top5": false, "component_ranks": {"bm25": 20}}
+{"query_id": "H06", "doc_id": "8c035ac2-7fe6-11e1-9877-d2a289f31732", "priority_top5": false, "component_ranks": {"bm25": 8, "dense": 11}}
+{"query_id": "H06", "doc_id": "0b5ae97e-ff62-11e2-9711-3708310f6f4d", "priority_top5": false, "component_ranks": {"bm25": 19}}
+{"query_id": "H06", "doc_id": "553a7b68-cd13-11e1-8bcb-202fdaafb096", "priority_top5": false, "component_ranks": {"bm25": 17}}
+{"query_id": "H06", "doc_id": "ae57e0a680316964b8d2f7b88058c314", "priority_top5": true, "component_ranks": {"bm25": 4}}
+{"query_id": "H06", "doc_id": "72fab558-6af0-11e1-b756-60ee4e23a039", "priority_top5": false, "component_ranks": {"bm25": 18}}
+{"query_id": "H06", "doc_id": "bdd1e28d76357a86f2bd1c4ee6e92ae6", "priority_top5": false, "component_ranks": {"dense": 15}}
+{"query_id": "H06", "doc_id": "4b5fe658b435d639215215db1edaaca9", "priority_top5": true, "component_ranks": {"bm25": 12, "dense": 5}}
+{"query_id": "H06", "doc_id": "50670b16-3978-11e7-a058-ddbb23c75d82", "priority_top5": false, "component_ranks": {"bm25": 7}}
+{"query_id": "H06", "doc_id": "170df924-5e8a-11e2-9940-6fc488f3fecd", "priority_top5": true, "component_ranks": {"bm25": 2, "dense": 1}}
+{"query_id": "H06", "doc_id": "376aee6dc7634384f8d5a8c96202f87e", "priority_top5": false, "component_ranks": {"bm25": 13}}
+{"query_id": "H06", "doc_id": "2c07e0357f75ae3c2d05c9d0a86f798c", "priority_top5": false, "component_ranks": {"dense": 20}}
+{"query_id": "H06", "doc_id": "454389ec-5e55-11e2-9940-6fc488f3fecd", "priority_top5": true, "component_ranks": {"bm25": 1, "dense": 2}}
+{"query_id": "H06", "doc_id": "3764e024-6d41-11e1-84f1-5fcffff7c5e6", "priority_top5": false, "component_ranks": {"bm25": 14}}
+{"query_id": "H06", "doc_id": "5397814a-00de-11e6-9d36-33d198ea26c5", "priority_top5": false, "component_ranks": {"bm25": 11}}
+{"query_id": "H06", "doc_id": "0f9c5121ff7979fc3e271ab516b2d772", "priority_top5": true, "component_ranks": {"dense": 3}}
+{"query_id": "H06", "doc_id": "17955fcd7c92f2cfbd626de8d16864bd", "priority_top5": true, "component_ranks": {"bm25": 3}}
+{"query_id": "H06", "doc_id": "8b30fb69bedfc7cbcefd197d6911cd50", "priority_top5": false, "component_ranks": {"dense": 6}}
+{"query_id": "H06", "doc_id": "5e68049087b30f8533614b4cbad7d748", "priority_top5": false, "component_ranks": {"dense": 13}}
+{"query_id": "H06", "doc_id": "43e9ee19f098c385c8ed1e5c120d0c30", "priority_top5": false, "component_ranks": {"dense": 19}}
+{"query_id": "H06", "doc_id": "fc9ba61a-7ac5-11e2-82e8-61a46c2cde3d", "priority_top5": false, "component_ranks": {"bm25": 6}}
+{"query_id": "H06", "doc_id": "3853e92d93f76c276d96e6c81ca7ebe5", "priority_top5": false, "component_ranks": {"dense": 14}}
+{"query_id": "H06", "doc_id": "a244d1e0cfd916a2af76b6a6c785b017", "priority_top5": false, "component_ranks": {"bm25": 10}}
+{"query_id": "H06", "doc_id": "da3197ae-8563-11e1-abb4-839961045500", "priority_top5": false, "component_ranks": {"dense": 17}}
+{"query_id": "H06", "doc_id": "b5d44e5a78f4add8481aededad32fe55", "priority_top5": false, "component_ranks": {"dense": 7}}
+{"query_id": "H06", "doc_id": "a39c7d4169dd6dc5c3894ff474cee12b", "priority_top5": false, "component_ranks": {"dense": 9}}
+{"query_id": "H06", "doc_id": "11de58b8-28f2-11e2-96b6-8e6a7524553f", "priority_top5": false, "component_ranks": {"dense": 18}}
+{"query_id": "H06", "doc_id": "1cf0d9b500504e613bd2d151744761fd", "priority_top5": false, "component_ranks": {"bm25": 9}}
+{"query_id": "H06", "doc_id": "13974056-83d5-11e1-abb4-839961045500", "priority_top5": false, "component_ranks": {"bm25": 15, "dense": 10}}
+{"query_id": "H06", "doc_id": "1bb909ca9000c0666966572557764629", "priority_top5": true, "component_ranks": {"dense": 4}}
+{"query_id": "H06", "doc_id": "1a35840f821dc251ff0dcaa581cc11a2", "priority_top5": false, "component_ranks": {"dense": 8}}
+{"query_id": "H06", "doc_id": "905e08c8c4187f3b7b22ca6867f3d163", "priority_top5": false, "component_ranks": {"bm25": 16}}
+{"query_id": "H07", "doc_id": "9cbc73335a572b7f9f5e8446f08b102b", "priority_top5": false, "component_ranks": {"bm25": 17}}
+{"query_id": "H07", "doc_id": "01a74026-90b6-11e4-ba53-a477d66580ed", "priority_top5": false, "component_ranks": {"bm25": 18}}
+{"query_id": "H07", "doc_id": "a9989905c4c68373dd07e2d29045360f", "priority_top5": false, "component_ranks": {"bm25": 6}}
+{"query_id": "H07", "doc_id": "607f1aa2-8b7f-11e3-a5bd-844629433ba3", "priority_top5": true, "component_ranks": {"bm25": 14, "dense": 3}}
+{"query_id": "H07", "doc_id": "2930e660-8f15-11e1-92ab-05054aebd40d", "priority_top5": false, "component_ranks": {"dense": 15}}
+{"query_id": "H07", "doc_id": "f37b12330b667c4b77c1355163b96ff8", "priority_top5": true, "component_ranks": {"bm25": 1}}
+{"query_id": "H07", "doc_id": "8c73129ccafa9a027765d1df1ba7685d", "priority_top5": false, "component_ranks": {"dense": 12}}
+{"query_id": "H07", "doc_id": "cf3e707e3a5cd80e137d0d5ec7329b5f", "priority_top5": false, "component_ranks": {"bm25": 12}}
+{"query_id": "H07", "doc_id": "4e604c60-53ac-11e4-809b-8cc0a295c773", "priority_top5": true, "component_ranks": {"bm25": 5}}
+{"query_id": "H07", "doc_id": "e57b6db0-2ccc-11e5-a250-42bd812efc09", "priority_top5": true, "component_ranks": {"bm25": 2, "dense": 1}}
+{"query_id": "H07", "doc_id": "8debb2fa2e37263cbbf6a76ae186a4b9", "priority_top5": true, "component_ranks": {"dense": 5}}
+{"query_id": "H07", "doc_id": "3a5d34e4ff2e0d6dd52fdace00142401", "priority_top5": false, "component_ranks": {"dense": 18}}
+{"query_id": "H07", "doc_id": "740a9d07a3fdd639bf2e88602ac32fe4", "priority_top5": false, "component_ranks": {"bm25": 9}}
+{"query_id": "H07", "doc_id": "428ca2341cbfaaeb9bd3622a6f3d91d4", "priority_top5": false, "component_ranks": {"dense": 6}}
+{"query_id": "H07", "doc_id": "f69938fedaf7d86a0b20c9f397e2fe43", "priority_top5": false, "component_ranks": {"dense": 20}}
+{"query_id": "H07", "doc_id": "c4e75cdf92934fd61b61a7d47337ed1e", "priority_top5": false, "component_ranks": {"dense": 19}}
+{"query_id": "H07", "doc_id": "6996cd3ac3e291602645f51cea5a0544", "priority_top5": true, "component_ranks": {"dense": 2}}
+{"query_id": "H07", "doc_id": "3f440fe96ecea9143820ee5db3384585", "priority_top5": false, "component_ranks": {"bm25": 11}}
+{"query_id": "H07", "doc_id": "944821c1aac7cfed421985c44844e343", "priority_top5": false, "component_ranks": {"dense": 14}}
+{"query_id": "H07", "doc_id": "708843b8cdf9c66a3eec3c49f96d03bd", "priority_top5": true, "component_ranks": {"bm25": 4, "dense": 17}}
+{"query_id": "H07", "doc_id": "bdd1e28d76357a86f2bd1c4ee6e92ae6", "priority_top5": false, "component_ranks": {"dense": 11}}
+{"query_id": "H07", "doc_id": "69c84a015c5fd462d925a937633bc5ce", "priority_top5": true, "component_ranks": {"dense": 4}}
+{"query_id": "H07", "doc_id": "02710ab1ae32badc56ad015312224b34", "priority_top5": false, "component_ranks": {"bm25": 16}}
+{"query_id": "H07", "doc_id": "37fa61a8-2af9-11e4-958c-268a320a60ce", "priority_top5": false, "component_ranks": {"bm25": 15}}
+{"query_id": "H07", "doc_id": "283078941dba4e097551b55cf7d32224", "priority_top5": false, "component_ranks": {"bm25": 7, "dense": 8}}
+{"query_id": "H07", "doc_id": "3b577b10-8f15-11e6-a6a3-d50061aa9fae", "priority_top5": false, "component_ranks": {"bm25": 19}}
+{"query_id": "H07", "doc_id": "cddbdbef72bb64e75dff73ee942e5fd6", "priority_top5": false, "component_ranks": {"bm25": 10}}
+{"query_id": "H07", "doc_id": "268c0fa8e8ccc462b2aa4248c3f531e5", "priority_top5": false, "component_ranks": {"dense": 9}}
+{"query_id": "H07", "doc_id": "f88dabcc7df76305ecc676d4b4b29408", "priority_top5": true, "component_ranks": {"bm25": 3}}
+{"query_id": "H07", "doc_id": "3853e92d93f76c276d96e6c81ca7ebe5", "priority_top5": false, "component_ranks": {"dense": 10}}
+{"query_id": "H07", "doc_id": "1625f0b0e8bdea1423d9e463152e7e1a", "priority_top5": false, "component_ranks": {"bm25": 8}}
+{"query_id": "H07", "doc_id": "d551577c882f50cfb1ee11038919b6a6", "priority_top5": false, "component_ranks": {"dense": 13}}
+{"query_id": "H07", "doc_id": "3e1f119457877233eb0e60b70e58f89a", "priority_top5": false, "component_ranks": {"bm25": 13, "dense": 16}}
+{"query_id": "H07", "doc_id": "cda06a3325bb8d351ee88900a6e253b3", "priority_top5": false, "component_ranks": {"bm25": 20}}
+{"query_id": "H07", "doc_id": "f51c2d06c6b72ee5b77d398d02bd2299", "priority_top5": false, "component_ranks": {"dense": 7}}
+{"query_id": "H08", "doc_id": "a791f276-34d0-11e3-89db-8002ba99b894", "priority_top5": false, "component_ranks": {"dense": 17}}
+{"query_id": "H08", "doc_id": "4193f1be-002d-11e7-8f41-ea6ed597e4ca", "priority_top5": false, "component_ranks": {"bm25": 18}}
+{"query_id": "H08", "doc_id": "279aa426-f820-11e5-a3ce-f06b5ba21f33", "priority_top5": false, "component_ranks": {"dense": 14}}
+{"query_id": "H08", "doc_id": "43269ad0-ab5f-11e2-a198-99893f10d6dd", "priority_top5": false, "component_ranks": {"bm25": 14}}
+{"query_id": "H08", "doc_id": "437e4dbe-e48e-11e5-a9ce-681055c7a05f", "priority_top5": false, "component_ranks": {"dense": 20}}
+{"query_id": "H08", "doc_id": "8b30fb69bedfc7cbcefd197d6911cd50", "priority_top5": false, "component_ranks": {"dense": 9}}
+{"query_id": "H08", "doc_id": "f185230d127a9124b08273e11dd4f336", "priority_top5": false, "component_ranks": {"bm25": 9}}
+{"query_id": "H08", "doc_id": "c567901ea81c0f3e2a641e246942c33a", "priority_top5": false, "component_ranks": {"bm25": 12}}
+{"query_id": "H08", "doc_id": "667f6e0670afc0372ee886059b96d4c6", "priority_top5": false, "component_ranks": {"bm25": 20}}
+{"query_id": "H08", "doc_id": "c057ee66c5ca096307512a32f5299d53", "priority_top5": false, "component_ranks": {"bm25": 11}}
+{"query_id": "H08", "doc_id": "0aaf5a32e7ec6e8300ab22d286a62b30", "priority_top5": false, "component_ranks": {"bm25": 15}}
+{"query_id": "H08", "doc_id": "0f9c5121ff7979fc3e271ab516b2d772", "priority_top5": true, "component_ranks": {"dense": 5}}
+{"query_id": "H08", "doc_id": "f4590e6480d50fa93f83f9f027848988", "priority_top5": false, "component_ranks": {"dense": 12}}
+{"query_id": "H08", "doc_id": "9d05bf82-6b82-11e5-9bfe-e59f5e244f92", "priority_top5": false, "component_ranks": {"dense": 15}}
+{"query_id": "H08", "doc_id": "36d2846027b4ef619e92a4c909335be5", "priority_top5": true, "component_ranks": {"dense": 3}}
+{"query_id": "H08", "doc_id": "367b8d75e5fa4abee7b0beade46a1ff7", "priority_top5": true, "component_ranks": {"bm25": 4}}
+{"query_id": "H08", "doc_id": "b037f6ee-5414-11e1-a656-3c2e396d3c46", "priority_top5": true, "component_ranks": {"bm25": 1, "dense": 7}}
+{"query_id": "H08", "doc_id": "d2f4aa497db1a8087a258c879b6fc9be", "priority_top5": false, "component_ranks": {"dense": 11}}
+{"query_id": "H08", "doc_id": "1488981da63877d65815044502b66820", "priority_top5": true, "component_ranks": {"dense": 2}}
+{"query_id": "H08", "doc_id": "3821f8c91acbb5da540f0a9e6672cbf0", "priority_top5": false, "component_ranks": {"bm25": 6}}
+{"query_id": "H08", "doc_id": "7df363d2-31ec-11e3-8627-c5d7de0a046b", "priority_top5": true, "component_ranks": {"bm25": 2}}
+{"query_id": "H08", "doc_id": "0285f14996ced104a5ce3e65cf343501", "priority_top5": false, "component_ranks": {"bm25": 10}}
+{"query_id": "H08", "doc_id": "bebf15dffd47270c7727e276563af71f", "priority_top5": true, "component_ranks": {"dense": 4}}
+{"query_id": "H08", "doc_id": "c6cee130-ddd7-11e2-b797-cbd4cb13f9c6", "priority_top5": false, "component_ranks": {"dense": 19}}
+{"query_id": "H08", "doc_id": "28f4e8928a2a5ff74957bbcd4962220d", "priority_top5": true, "component_ranks": {"bm25": 3}}
+{"query_id": "H08", "doc_id": "08a9ad7d55b4b721e6e3e72380758a6b", "priority_top5": true, "component_ranks": {"dense": 1}}
+{"query_id": "H08", "doc_id": "eb64fe2fa0ce52749c3db28acd51f3ad", "priority_top5": false, "component_ranks": {"bm25": 19}}
+{"query_id": "H08", "doc_id": "f4b92e1a1f9e6379750109a0196356f8", "priority_top5": false, "component_ranks": {"bm25": 17}}
+{"query_id": "H08", "doc_id": "1bb909ca9000c0666966572557764629", "priority_top5": false, "component_ranks": {"dense": 6}}
+{"query_id": "H08", "doc_id": "f20fb9a6-41f1-11e6-88d0-6adee48be8bc", "priority_top5": false, "component_ranks": {"bm25": 16}}
+{"query_id": "H08", "doc_id": "2cba064168b167a88a9e94d5439d63d9", "priority_top5": false, "component_ranks": {"dense": 13}}
+{"query_id": "H08", "doc_id": "530a5ceb23a950520e44ed67ba005f4a", "priority_top5": false, "component_ranks": {"bm25": 8}}
+{"query_id": "H08", "doc_id": "127db588-7435-11e1-862c-76c4e0e725cd", "priority_top5": false, "component_ranks": {"dense": 8}}
+{"query_id": "H08", "doc_id": "e6e6060c-ebd6-11e3-9f5c-9075d5508f0a", "priority_top5": false, "component_ranks": {"bm25": 7}}
+{"query_id": "H08", "doc_id": "2687263f149fe58c0e8fee0d82fe70c6", "priority_top5": false, "component_ranks": {"dense": 18}}
+{"query_id": "H08", "doc_id": "6edd18b0-5ceb-11e2-beee-6e38f5215402", "priority_top5": false, "component_ranks": {"dense": 16}}
+{"query_id": "H08", "doc_id": "9031247e27d310d3f7538939474b8274", "priority_top5": true, "component_ranks": {"bm25": 5}}
+{"query_id": "H08", "doc_id": "b5d44e5a78f4add8481aededad32fe55", "priority_top5": false, "component_ranks": {"dense": 10}}
+{"query_id": "H08", "doc_id": "2eb5899697ce01979b0adfb9c50df54b", "priority_top5": false, "component_ranks": {"bm25": 13}}
+{"query_id": "H09", "doc_id": "6049fcf9f2d91aac610e89b7ade21cf4", "priority_top5": true, "component_ranks": {"bm25": 9, "dense": 4}}
+{"query_id": "H09", "doc_id": "46294ea91bf87736803201113c611c21", "priority_top5": false, "component_ranks": {"bm25": 14}}
+{"query_id": "H09", "doc_id": "ded09d3a-ebbe-11e5-b0fd-073d5930a7b7", "priority_top5": false, "component_ranks": {"bm25": 20}}
+{"query_id": "H09", "doc_id": "1bb909ca9000c0666966572557764629", "priority_top5": true, "component_ranks": {"dense": 3}}
+{"query_id": "H09", "doc_id": "a3279d26-d686-11e5-9823-02b905009f99", "priority_top5": true, "component_ranks": {"bm25": 2}}
+{"query_id": "H09", "doc_id": "81a0fd88-b961-11e5-829c-26ffb874a18d", "priority_top5": false, "component_ranks": {"bm25": 18}}
+{"query_id": "H09", "doc_id": "a91dd714-965f-11e2-8b4e-0b56f26f28de", "priority_top5": false, "component_ranks": {"dense": 20}}
+{"query_id": "H09", "doc_id": "d53d59e27b990c2dc30482ab2c44b65c", "priority_top5": false, "component_ranks": {"bm25": 19, "dense": 8}}
+{"query_id": "H09", "doc_id": "008dc952-d073-11e3-a6b1-45c4dffb85a6", "priority_top5": false, "component_ranks": {"dense": 12}}
+{"query_id": "H09", "doc_id": "8801900492dc2500719212cd7e0b2016", "priority_top5": false, "component_ranks": {"bm25": 10}}
+{"query_id": "H09", "doc_id": "13e2ce42-5ba9-11e3-a66d-156b463c78aa", "priority_top5": false, "component_ranks": {"bm25": 7, "dense": 6}}
+{"query_id": "H09", "doc_id": "d8e87e62-1b74-11e5-ab92-c75ae6ab94b5", "priority_top5": false, "component_ranks": {"bm25": 15}}
+{"query_id": "H09", "doc_id": "8a8f78b4-664b-11e2-889b-f23c246aa446", "priority_top5": false, "component_ranks": {"dense": 16}}
+{"query_id": "H09", "doc_id": "a73ed488-c6a0-11e5-8965-0607e0e265ce", "priority_top5": true, "component_ranks": {"bm25": 4, "dense": 19}}
+{"query_id": "H09", "doc_id": "8d25bb12-0de9-11e6-bfa1-4efa856caf2a", "priority_top5": false, "component_ranks": {"bm25": 12}}
+{"query_id": "H09", "doc_id": "c270743e-56e3-11e3-8304-caf30787c0a9", "priority_top5": true, "component_ranks": {"bm25": 1, "dense": 5}}
+{"query_id": "H09", "doc_id": "5c09a1bc-5186-11e5-933e-7d06c647a395", "priority_top5": false, "component_ranks": {"dense": 13}}
+{"query_id": "H09", "doc_id": "9270290f89c75719754005e2cc94e3d2", "priority_top5": false, "component_ranks": {"dense": 17}}
+{"query_id": "H09", "doc_id": "a2062f4a-2390-11e7-a1b3-faff0034e2de", "priority_top5": false, "component_ranks": {"bm25": 13}}
+{"query_id": "H09", "doc_id": "c86d43c6-3113-11e3-9c68-1cf643210300", "priority_top5": true, "component_ranks": {"bm25": 5, "dense": 7}}
+{"query_id": "H09", "doc_id": "24cbb910-01c0-11e2-b257-e1c2b3548a4a", "priority_top5": false, "component_ranks": {"dense": 14}}
+{"query_id": "H09", "doc_id": "6629e160be23da99cbf6de69df4fa752", "priority_top5": false, "component_ranks": {"bm25": 16}}
+{"query_id": "H09", "doc_id": "73483c5a-2cd9-11e2-9ac2-1c61452669c3", "priority_top5": false, "component_ranks": {"dense": 9}}
+{"query_id": "H09", "doc_id": "f30d9c0933c80d8c7bb8ab25a1880fce", "priority_top5": false, "component_ranks": {"dense": 18}}
+{"query_id": "H09", "doc_id": "2210fe74-f2d4-11e6-8d72-263470bf0401", "priority_top5": false, "component_ranks": {"bm25": 8, "dense": 10}}
+{"query_id": "H09", "doc_id": "0f9c5121ff7979fc3e271ab516b2d772", "priority_top5": true, "component_ranks": {"dense": 2}}
+{"query_id": "H09", "doc_id": "c07ae0ce-87bb-11e4-9534-f79a23c40e6c", "priority_top5": true, "component_ranks": {"bm25": 3}}
+{"query_id": "H09", "doc_id": "3b7551ca-8011-11e1-a0b6-d7a82554f2ac", "priority_top5": true, "component_ranks": {"dense": 1}}
+{"query_id": "H09", "doc_id": "b42da9b2-6326-11e1-a188-efde484a8688", "priority_top5": false, "component_ranks": {"bm25": 6, "dense": 15}}
+{"query_id": "H09", "doc_id": "c4b22d3c-3895-11e6-9ccd-d6005beac8b3", "priority_top5": false, "component_ranks": {"bm25": 11}}
+{"query_id": "H09", "doc_id": "5b1ad82b2f93078902751b49934bcca3", "priority_top5": false, "component_ranks": {"bm25": 17}}
+{"query_id": "H09", "doc_id": "78e7d8ab01013e9f05b5181314ce7180", "priority_top5": false, "component_ranks": {"dense": 11}}
+{"query_id": "H10", "doc_id": "5ebc051cfeb64daec5e4a4f989f60a1e", "priority_top5": false, "component_ranks": {"bm25": 11}}
+{"query_id": "H10", "doc_id": "ad3ee650-00fd-11e2-b257-e1c2b3548a4a", "priority_top5": false, "component_ranks": {"dense": 16}}
+{"query_id": "H10", "doc_id": "4753244e-fdbc-11e1-8adc-499661afe377", "priority_top5": false, "component_ranks": {"bm25": 6}}
+{"query_id": "H10", "doc_id": "f385ddf3871ebc250bbe696e46c1e94b", "priority_top5": true, "component_ranks": {"bm25": 4, "dense": 4}}
+{"query_id": "H10", "doc_id": "b079599645bf826af6db13e9d04595d2", "priority_top5": false, "component_ranks": {"dense": 8}}
+{"query_id": "H10", "doc_id": "9fb3edf8-0518-11e3-9259-e2aafe5a5f84", "priority_top5": false, "component_ranks": {"bm25": 16}}
+{"query_id": "H10", "doc_id": "307567819fc82af691d5d15c34317787", "priority_top5": false, "component_ranks": {"bm25": 15}}
+{"query_id": "H10", "doc_id": "0a6b776e-fcd8-11e1-98c6-ec0a0a93f8eb", "priority_top5": false, "component_ranks": {"dense": 11}}
+{"query_id": "H10", "doc_id": "940098920ba657a047105227720bcab6", "priority_top5": true, "component_ranks": {"bm25": 5}}
+{"query_id": "H10", "doc_id": "12f2a0cb454691cc24a479f0e93b9617", "priority_top5": true, "component_ranks": {"bm25": 1}}
+{"query_id": "H10", "doc_id": "b7a42bbc44135c01c943ab9f7f54a542", "priority_top5": false, "component_ranks": {"bm25": 18}}
+{"query_id": "H10", "doc_id": "c817a960-fc1d-11e1-98c6-ec0a0a93f8eb", "priority_top5": true, "component_ranks": {"dense": 3}}
+{"query_id": "H10", "doc_id": "035d54728a985c3bf39b908adde5b014", "priority_top5": false, "component_ranks": {"dense": 19}}
+{"query_id": "H10", "doc_id": "72631f6a04540caa0a6d93c772624662", "priority_top5": false, "component_ranks": {"dense": 12}}
+{"query_id": "H10", "doc_id": "3af1c47cf5ffafba3552f11cb087e46e", "priority_top5": false, "component_ranks": {"dense": 17}}
+{"query_id": "H10", "doc_id": "8976595b283114a929236ad9931a96ea", "priority_top5": false, "component_ranks": {"bm25": 7}}
+{"query_id": "H10", "doc_id": "11f66e30-03fe-11e2-91e7-2962c74e7738", "priority_top5": false, "component_ranks": {"bm25": 20}}
+{"query_id": "H10", "doc_id": "61473ce69ed8943ccac6eb14a2d60ba6", "priority_top5": false, "component_ranks": {"dense": 13}}
+{"query_id": "H10", "doc_id": "cc78b174-a55f-11e3-84d4-e59b1709222c", "priority_top5": false, "component_ranks": {"dense": 7}}
+{"query_id": "H10", "doc_id": "679514c557164de43a0c2f6d1a8c0a78", "priority_top5": true, "component_ranks": {"bm25": 3}}
+{"query_id": "H10", "doc_id": "af0a3bcc-334a-11e2-bfd5-e202b6d7b501", "priority_top5": false, "component_ranks": {"dense": 9}}
+{"query_id": "H10", "doc_id": "c472cebe-1264-11e6-a9b5-bf703a5a7191", "priority_top5": true, "component_ranks": {"dense": 5}}
+{"query_id": "H10", "doc_id": "45a54650-fcdf-11e1-8adc-499661afe377", "priority_top5": false, "component_ranks": {"dense": 20}}
+{"query_id": "H10", "doc_id": "50c3f4403ad5ac5d695a8c85aff7d93a", "priority_top5": false, "component_ranks": {"bm25": 13}}
+{"query_id": "H10", "doc_id": "20e735c2ed00d70a089d866a834baf7b", "priority_top5": false, "component_ranks": {"bm25": 8}}
+{"query_id": "H10", "doc_id": "d4fb64b464cc75046cad4ee8c1d58dbd", "priority_top5": false, "component_ranks": {"bm25": 17}}
+{"query_id": "H10", "doc_id": "c7af6132bbe09b5e4d08ffee535ad3e3", "priority_top5": true, "component_ranks": {"dense": 2}}
+{"query_id": "H10", "doc_id": "a887e2a22cd30a90f2874e48b07ff227", "priority_top5": false, "component_ranks": {"bm25": 19, "dense": 10}}
+{"query_id": "H10", "doc_id": "a7ebe6e0-0296-11e2-8102-ebee9c66e190", "priority_top5": false, "component_ranks": {"dense": 6}}
+{"query_id": "H10", "doc_id": "1b07e51e-fd0d-11e1-a31e-804fccb658f9", "priority_top5": false, "component_ranks": {"dense": 14}}
+{"query_id": "H10", "doc_id": "6015389e-f4bf-11e4-bcc4-e8141e5eb0c9", "priority_top5": false, "component_ranks": {"dense": 15}}
+{"query_id": "H10", "doc_id": "eb70576bcc7e366a483752ebbded5961", "priority_top5": false, "component_ranks": {"bm25": 9}}
+{"query_id": "H10", "doc_id": "cf4715fafcb3e026cba6a9bc3822f0d3", "priority_top5": false, "component_ranks": {"bm25": 10}}
+{"query_id": "H10", "doc_id": "0328e066-fd0c-11e1-98c6-ec0a0a93f8eb", "priority_top5": true, "component_ranks": {"dense": 1}}
+{"query_id": "H10", "doc_id": "cf396964-fc44-11e1-8adc-499661afe377", "priority_top5": false, "component_ranks": {"bm25": 14}}
+{"query_id": "H10", "doc_id": "8d386aca8725ca50459aa9e01f5a99c5", "priority_top5": true, "component_ranks": {"bm25": 2}}
+{"query_id": "H10", "doc_id": "7e3a2b06-fb78-11e1-b2af-1f7d12fe907a", "priority_top5": false, "component_ranks": {"bm25": 12}}
+{"query_id": "H10", "doc_id": "58faf558-fedf-11e2-9a3e-916de805f65d", "priority_top5": false, "component_ranks": {"dense": 18}}
+{"query_id": "T06", "doc_id": "f30aaaf0-b032-11e6-bc2d-19b3d759cfe7", "priority_top5": true, "component_ranks": {"bm25": 10, "dense": 2}}
+{"query_id": "T06", "doc_id": "581876c6-147c-11e3-880b-7503237cc69d", "priority_top5": true, "component_ranks": {"bm25": 4}}
+{"query_id": "T06", "doc_id": "ab381342-47a9-11e3-95a9-3f15b5618ba8", "priority_top5": false, "component_ranks": {"dense": 19}}
+{"query_id": "T06", "doc_id": "720b674b96df606ae09454f2b3e1b0bd", "priority_top5": true, "component_ranks": {"dense": 3}}
+{"query_id": "T06", "doc_id": "96e5ba62dc81024c55c2f7fda651ed3f", "priority_top5": false, "component_ranks": {"bm25": 16}}
+{"query_id": "T06", "doc_id": "bdc62ebe-e96b-11e2-8f22-de4bd2a2bd39", "priority_top5": false, "component_ranks": {"dense": 15}}
+{"query_id": "T06", "doc_id": "b7a6d48536e403b05f3d877b758b074b", "priority_top5": false, "component_ranks": {"bm25": 15}}
+{"query_id": "T06", "doc_id": "578b0236-d5b4-11e5-a65b-587e721fb231", "priority_top5": false, "component_ranks": {"bm25": 7, "dense": 8}}
+{"query_id": "T06", "doc_id": "863d3b9279aa5b72b1df8711f8a5347c", "priority_top5": false, "component_ranks": {"dense": 18}}
+{"query_id": "T06", "doc_id": "e22aefa84f50d1959ecf648fc4f7a63d", "priority_top5": false, "component_ranks": {"dense": 11}}
+{"query_id": "T06", "doc_id": "f62a8bd8-c0fd-446f-bc1f-c6f769d83a80", "priority_top5": false, "component_ranks": {"bm25": 20}}
+{"query_id": "T06", "doc_id": "3425b580-c68a-11e1-aa3a-f3dfb7ea106c", "priority_top5": false, "component_ranks": {"bm25": 8}}
+{"query_id": "T06", "doc_id": "ce7cf1e8-e8ad-11e2-a301-ea5a8116d211", "priority_top5": true, "component_ranks": {"bm25": 3}}
+{"query_id": "T06", "doc_id": "a977c394-6165-11e1-a541-d31d90d3a645", "priority_top5": false, "component_ranks": {"dense": 9}}
+{"query_id": "T06", "doc_id": "9221aaa4-696f-11e1-8970-1c405b6eaeac", "priority_top5": false, "component_ranks": {"bm25": 19, "dense": 14}}
+{"query_id": "T06", "doc_id": "6f881660-5ccf-11e1-8c28-8f1c9e65d2ac", "priority_top5": true, "component_ranks": {"bm25": 2, "dense": 17}}
+{"query_id": "T06", "doc_id": "019b4fbda286edde53f7918cfc93e6c9", "priority_top5": false, "component_ranks": {"dense": 12}}
+{"query_id": "T06", "doc_id": "d55bfc8e-3ae9-11e1-9ff8-fab9392b31bf", "priority_top5": true, "component_ranks": {"bm25": 5, "dense": 10}}
+{"query_id": "T06", "doc_id": "ecba0132-6b59-11e1-acc6-32fefc7ccd67", "priority_top5": false, "component_ranks": {"bm25": 6, "dense": 13}}
+{"query_id": "T06", "doc_id": "f4636388-68d4-11e1-acc6-32fefc7ccd67", "priority_top5": false, "component_ranks": {"bm25": 13, "dense": 6}}
+{"query_id": "T06", "doc_id": "bff3c858-68a3-11e1-8970-1c405b6eaeac", "priority_top5": false, "component_ranks": {"dense": 16}}
+{"query_id": "T06", "doc_id": "406f4d78-2cba-11e3-b141-298f46539716", "priority_top5": false, "component_ranks": {"bm25": 11}}
+{"query_id": "T06", "doc_id": "d0763478-b550-4373-bfcf-b44fcb31329f", "priority_top5": true, "component_ranks": {"bm25": 1, "dense": 7}}
+{"query_id": "T06", "doc_id": "2e1e1da79d5380f32f1ee885264be7e3", "priority_top5": false, "component_ranks": {"dense": 20}}
+{"query_id": "T06", "doc_id": "5af389ac-2374-11e2-8448-81b1ce7d6978", "priority_top5": false, "component_ranks": {"bm25": 12}}
+{"query_id": "T06", "doc_id": "900b24843a99d9e79361307cdd3548d3", "priority_top5": false, "component_ranks": {"bm25": 18}}
+{"query_id": "T06", "doc_id": "36e30eb6-5f07-11e1-8b6e-74ac9a4649eb", "priority_top5": false, "component_ranks": {"bm25": 14}}
+{"query_id": "T06", "doc_id": "939f7ca2e12d51845d2e2aa101df2cd4", "priority_top5": true, "component_ranks": {"dense": 5}}
+{"query_id": "T06", "doc_id": "b423740c-bfce-11e5-bcda-62a36b394160", "priority_top5": false, "component_ranks": {"bm25": 17}}
+{"query_id": "T06", "doc_id": "7b45e8ea-4056-11e2-ae43-cf491b837f7b", "priority_top5": true, "component_ranks": {"bm25": 9, "dense": 4}}
+{"query_id": "T06", "doc_id": "64089a56-f209-11e6-b9c9-e83fce42fb61", "priority_top5": true, "component_ranks": {"dense": 1}}
+{"query_id": "T07", "doc_id": "b65b8006-ee96-11e5-a2a3-d4e9697917d1", "priority_top5": false, "component_ranks": {"bm25": 17, "dense": 14}}
+{"query_id": "T07", "doc_id": "2f2fa1a2-b326-11e6-be1c-8cec35b1ad25", "priority_top5": true, "component_ranks": {"dense": 2}}
+{"query_id": "T07", "doc_id": "3d7390e46dfbeb96891f575730176ebe", "priority_top5": false, "component_ranks": {"dense": 15}}
+{"query_id": "T07", "doc_id": "13daab91-8fdb-4a33-8c79-013458373bdb", "priority_top5": false, "component_ranks": {"bm25": 20}}
+{"query_id": "T07", "doc_id": "e542f600-2524-11e6-b944-52f7b1793dae", "priority_top5": false, "component_ranks": {"bm25": 13}}
+{"query_id": "T07", "doc_id": "d596d7fe-7a78-11e6-8064-c1ddc8a724bb", "priority_top5": false, "component_ranks": {"dense": 18}}
+{"query_id": "T07", "doc_id": "60a68558-f2dc-11e5-a2a3-d4e9697917d1", "priority_top5": false, "component_ranks": {"bm25": 16}}
+{"query_id": "T07", "doc_id": "a083bc2a-3b17-11e7-a59b-26e0451a96fd", "priority_top5": true, "component_ranks": {"bm25": 4, "dense": 11}}
+{"query_id": "T07", "doc_id": "c0f82606-8afd-11e5-be39-0034bb576eee", "priority_top5": false, "component_ranks": {"dense": 7}}
+{"query_id": "T07", "doc_id": "1ac15e42-f8d5-11e5-9804-537defcc3cf6", "priority_top5": false, "component_ranks": {"bm25": 12}}
+{"query_id": "T07", "doc_id": "5e68ec8d2e2e8aa8d0c6d5b8a35a021c", "priority_top5": true, "component_ranks": {"dense": 4}}
+{"query_id": "T07", "doc_id": "bba62ed6-8d88-11e5-934c-a369c80822c2", "priority_top5": false, "component_ranks": {"dense": 16}}
+{"query_id": "T07", "doc_id": "ec8a7231-062d-4185-bb27-cc7295d35415", "priority_top5": false, "component_ranks": {"bm25": 10}}
+{"query_id": "T07", "doc_id": "9fced5ce-9823-11e4-927a-4fa2638cd1b0", "priority_top5": false, "component_ranks": {"dense": 9}}
+{"query_id": "T07", "doc_id": "98d1c406-c2de-11e6-92e8-c07f4f671da4", "priority_top5": true, "component_ranks": {"bm25": 2, "dense": 13}}
+{"query_id": "T07", "doc_id": "13d56ede-ed4f-11e5-a9ce-681055c7a05f", "priority_top5": false, "component_ranks": {"bm25": 11}}
+{"query_id": "T07", "doc_id": "26a71d1e-752c-4150-85e3-3c5c52f0f805", "priority_top5": true, "component_ranks": {"bm25": 3}}
+{"query_id": "T07", "doc_id": "963bbd90-ff0d-11e5-9d36-33d198ea26c5", "priority_top5": false, "component_ranks": {"dense": 12}}
+{"query_id": "T07", "doc_id": "48b181da-9393-11e5-befa-99ceebcbb272", "priority_top5": false, "component_ranks": {"dense": 17}}
+{"query_id": "T07", "doc_id": "133f5bc2-8a50-11e5-bd91-d385b244482f", "priority_top5": false, "component_ranks": {"dense": 19}}
+{"query_id": "T07", "doc_id": "6c291cf7-7fd9-4961-9cd8-813d88ca6fde", "priority_top5": false, "component_ranks": {"dense": 8}}
+{"query_id": "T07", "doc_id": "a03362f6097c5eacfb8de23947291106", "priority_top5": false, "component_ranks": {"bm25": 19}}
+{"query_id": "T07", "doc_id": "a5996bd40a45009412c69ffcec8cad97", "priority_top5": true, "component_ranks": {"dense": 1}}
+{"query_id": "T07", "doc_id": "9d810352a5b7e4dc9830cffe484fbaf5", "priority_top5": false, "component_ranks": {"dense": 10}}
+{"query_id": "T07", "doc_id": "d0a62558-4cf9-11e6-bf27-405106836f96", "priority_top5": false, "component_ranks": {"bm25": 6}}
+{"query_id": "T07", "doc_id": "db1d8392-0c57-11e6-bfa1-4efa856caf2a", "priority_top5": true, "component_ranks": {"bm25": 5}}
+{"query_id": "T07", "doc_id": "db71760f-68be-48d3-96e9-df35dc5d7e5b", "priority_top5": false, "component_ranks": {"bm25": 9}}
+{"query_id": "T07", "doc_id": "9b729164-f042-11e5-a61f-e9c95c06edca", "priority_top5": false, "component_ranks": {"bm25": 18}}
+{"query_id": "T07", "doc_id": "66bce472-fc47-11e5-9140-e61d062438bb", "priority_top5": false, "component_ranks": {"bm25": 8}}
+{"query_id": "T07", "doc_id": "d01854fc-b5f1-11e5-a76a-0b5145e8679a", "priority_top5": false, "component_ranks": {"dense": 20}}
+{"query_id": "T07", "doc_id": "bf3a1f9e-8e41-11e5-934c-a369c80822c2", "priority_top5": true, "component_ranks": {"dense": 5}}
+{"query_id": "T07", "doc_id": "75dcb090-fd9b-11e5-80e4-c381214de1a3", "priority_top5": true, "component_ranks": {"bm25": 1}}
+{"query_id": "T07", "doc_id": "edc19464-8ee6-11e5-934c-a369c80822c2", "priority_top5": false, "component_ranks": {"bm25": 15}}
+{"query_id": "T07", "doc_id": "273f7924-a15b-11e4-903f-9f2faf7cd9fe", "priority_top5": false, "component_ranks": {"bm25": 14, "dense": 6}}
+{"query_id": "T07", "doc_id": "eb336374-21b4-11e6-b944-52f7b1793dae", "priority_top5": true, "component_ranks": {"bm25": 7, "dense": 3}}
+{"query_id": "T08", "doc_id": "7104e2b0154cca1b5ac5fab288cbd1f9", "priority_top5": true, "component_ranks": {"dense": 3}}
+{"query_id": "T08", "doc_id": "a2a695a8-f847-11e6-bf01-d47f8cf9b643", "priority_top5": false, "component_ranks": {"dense": 16}}
+{"query_id": "T08", "doc_id": "36fb187bcd8c3cc57217532cefebc887", "priority_top5": false, "component_ranks": {"bm25": 8}}
+{"query_id": "T08", "doc_id": "556218d85d07b00e7d0ada42cf214820", "priority_top5": false, "component_ranks": {"bm25": 13}}
+{"query_id": "T08", "doc_id": "4457c8a8fc6fc4a0911b3b0c882cf1df", "priority_top5": false, "component_ranks": {"bm25": 10}}
+{"query_id": "T08", "doc_id": "74254aabffdd949d81a9ea203019dd1c", "priority_top5": true, "component_ranks": {"bm25": 4, "dense": 11}}
+{"query_id": "T08", "doc_id": "33c594d1c5976cd3d741d8f80041ac91", "priority_top5": false, "component_ranks": {"bm25": 7}}
+{"query_id": "T08", "doc_id": "dc2f94e0b3bd4c055943df16afb4d9a3", "priority_top5": false, "component_ranks": {"dense": 10}}
+{"query_id": "T08", "doc_id": "8820cbc28e6d6135370293d8be42cfbc", "priority_top5": true, "component_ranks": {"dense": 4}}
+{"query_id": "T08", "doc_id": "086bb769a4974917cbc61525fc08196e", "priority_top5": true, "component_ranks": {"bm25": 2}}
+{"query_id": "T08", "doc_id": "34fc8596-1550-11e7-833c-503e1f6394c9", "priority_top5": false, "component_ranks": {"bm25": 16}}
+{"query_id": "T08", "doc_id": "d5fea42b67e6b9daa5efc6967fccbeb5", "priority_top5": true, "component_ranks": {"bm25": 3}}
+{"query_id": "T08", "doc_id": "bda7e7648bd206fc6fabc495fe628145", "priority_top5": false, "component_ranks": {"bm25": 6}}
+{"query_id": "T08", "doc_id": "22d4606066926abd8bd7becde001ac8a", "priority_top5": true, "component_ranks": {"bm25": 5}}
+{"query_id": "T08", "doc_id": "57ac88b8-8f80-11e5-ae1f-af46b7df8483", "priority_top5": false, "component_ranks": {"bm25": 18}}
+{"query_id": "T08", "doc_id": "d4234a7fc1704e40f59865da146e91fe", "priority_top5": false, "component_ranks": {"dense": 14}}
+{"query_id": "T08", "doc_id": "4f25bac515ff567e3c1759dc640579bd", "priority_top5": false, "component_ranks": {"bm25": 11}}
+{"query_id": "T08", "doc_id": "43b7959f242c343244f5f32dfc01c6a7", "priority_top5": false, "component_ranks": {"dense": 6}}
+{"query_id": "T08", "doc_id": "ddad0dc386f49bf5442088349dc8c77c", "priority_top5": true, "component_ranks": {"dense": 2}}
+{"query_id": "T08", "doc_id": "0fd428eebc69181618b5caad62033f9e", "priority_top5": false, "component_ranks": {"dense": 17}}
+{"query_id": "T08", "doc_id": "57230da2ca4f594bb233cb259e19c1d5", "priority_top5": false, "component_ranks": {"dense": 9}}
+{"query_id": "T08", "doc_id": "bef34cd253c413e7538a6eff7362e52d", "priority_top5": false, "component_ranks": {"dense": 7}}
+{"query_id": "T08", "doc_id": "5fb59647decffbf2f0feddae2a27e461", "priority_top5": false, "component_ranks": {"dense": 18}}
+{"query_id": "T08", "doc_id": "7538c072-f62c-11e6-8d72-263470bf0401", "priority_top5": false, "component_ranks": {"dense": 12}}
+{"query_id": "T08", "doc_id": "f588cf2714c26b360550e5521a3e04db", "priority_top5": false, "component_ranks": {"bm25": 15}}
+{"query_id": "T08", "doc_id": "5ccd3674b14dffcd82fcaec264820825", "priority_top5": false, "component_ranks": {"bm25": 14}}
+{"query_id": "T08", "doc_id": "34f5e116-987c-11e5-b499-76cbec161973", "priority_top5": false, "component_ranks": {"bm25": 17}}
+{"query_id": "T08", "doc_id": "401ab7dd09a7e1c1aaf6d2844dc128f7", "priority_top5": false, "component_ranks": {"bm25": 9}}
+{"query_id": "T08", "doc_id": "3d7baafe02ed0bf97ce531940776facc", "priority_top5": false, "component_ranks": {"bm25": 19}}
+{"query_id": "T08", "doc_id": "30f56b4a-d8f9-11e6-9a36-1d296534b31e", "priority_top5": false, "component_ranks": {"bm25": 20}}
+{"query_id": "T08", "doc_id": "2eaf427ad123596fd72fcfbd00a751a8", "priority_top5": true, "component_ranks": {"dense": 5}}
+{"query_id": "T08", "doc_id": "aba22b7a-e287-11e6-a453-19ec4b3d09ba", "priority_top5": false, "component_ranks": {"dense": 20}}
+{"query_id": "T08", "doc_id": "89e83061d10a207bc3f6fdbbd340853f", "priority_top5": true, "component_ranks": {"bm25": 1}}
+{"query_id": "T08", "doc_id": "4fe0ba351b770d57e9f6fbb4ffb07b95", "priority_top5": false, "component_ranks": {"bm25": 12}}
+{"query_id": "T08", "doc_id": "eaf12922be9e741d758ff20d56956f9d", "priority_top5": false, "component_ranks": {"dense": 15}}
+{"query_id": "T08", "doc_id": "f23d4a45b302778960595f16fadffd2b", "priority_top5": false, "component_ranks": {"dense": 8}}
+{"query_id": "T08", "doc_id": "cf389b188d0872ee81293aad74350d48", "priority_top5": false, "component_ranks": {"dense": 13}}
+{"query_id": "T08", "doc_id": "fb190a5c1562d960d228c986a5ed3c4b", "priority_top5": false, "component_ranks": {"dense": 19}}
+{"query_id": "T08", "doc_id": "45763d9aa35ba606b0f14c94afb0611e", "priority_top5": true, "component_ranks": {"dense": 1}}
+{"query_id": "T09", "doc_id": "f710536e-9f91-11e5-a3c5-c77f2cc5a43c", "priority_top5": false, "component_ranks": {"bm25": 12, "dense": 17}}
+{"query_id": "T09", "doc_id": "bb40f10cc5e93efa21710eb1ce93ced0", "priority_top5": false, "component_ranks": {"dense": 9}}
+{"query_id": "T09", "doc_id": "30f59bca-6126-11e5-9757-e49273f05f65", "priority_top5": false, "component_ranks": {"bm25": 14}}
+{"query_id": "T09", "doc_id": "dfaa8045411001c08e6b05e9324f4d6f", "priority_top5": false, "component_ranks": {"dense": 13}}
+{"query_id": "T09", "doc_id": "b65e4610-7371-11e5-8248-98e0f5a2e830", "priority_top5": false, "component_ranks": {"bm25": 11}}
+{"query_id": "T09", "doc_id": "eb389a2e-d8f2-11e6-9f9f-5cdb4b7f8dd7", "priority_top5": false, "component_ranks": {"bm25": 10}}
+{"query_id": "T09", "doc_id": "3e91a9e4-05d1-11e7-b9fa-ed727b644a0b", "priority_top5": false, "component_ranks": {"bm25": 20}}
+{"query_id": "T09", "doc_id": "e52696fffeb2e9ad47c67592c4d7f70c", "priority_top5": true, "component_ranks": {"bm25": 3, "dense": 3}}
+{"query_id": "T09", "doc_id": "3c7b2f2e-607b-11e5-8e9e-dce8a2a2a679", "priority_top5": false, "component_ranks": {"dense": 7}}
+{"query_id": "T09", "doc_id": "367ad69c84370dacdc5ed406d94a6d32", "priority_top5": false, "component_ranks": {"dense": 8}}
+{"query_id": "T09", "doc_id": "2a89ecb50d8358655580927a80e9620f", "priority_top5": false, "component_ranks": {"dense": 14}}
+{"query_id": "T09", "doc_id": "b022d3817d6985b89b7dfb3c29203036", "priority_top5": true, "component_ranks": {"bm25": 1}}
+{"query_id": "T09", "doc_id": "e3456150dc80731b8a7a8fbda72e2382", "priority_top5": false, "component_ranks": {"bm25": 8, "dense": 6}}
+{"query_id": "T09", "doc_id": "a42d47ba82dd5cc0fe31c192cba5680b", "priority_top5": false, "component_ranks": {"bm25": 6}}
+{"query_id": "T09", "doc_id": "f20fa39a-6393-11e5-8e9e-dce8a2a2a679", "priority_top5": false, "component_ranks": {"dense": 20}}
+{"query_id": "T09", "doc_id": "c9d089e4803fc8c464ecf5becaea9c68", "priority_top5": true, "component_ranks": {"bm25": 9, "dense": 1}}
+{"query_id": "T09", "doc_id": "18c19022-78dc-11e5-b9c1-f03c48c96ac2", "priority_top5": false, "component_ranks": {"dense": 10}}
+{"query_id": "T09", "doc_id": "348b522fd6545db6eec905bb59507bf4", "priority_top5": true, "component_ranks": {"bm25": 2, "dense": 2}}
+{"query_id": "T09", "doc_id": "9c64342bcd71a34665ea5e14b287a4e6", "priority_top5": true, "component_ranks": {"bm25": 5}}
+{"query_id": "T09", "doc_id": "6b09e540-6203-11e5-8e9e-dce8a2a2a679", "priority_top5": false, "component_ranks": {"bm25": 18}}
+{"query_id": "T09", "doc_id": "5f94f474-9ad9-11e6-b3c9-f662adaa0048", "priority_top5": false, "component_ranks": {"dense": 12}}
+{"query_id": "T09", "doc_id": "a971adac-6868-11e5-9223-70cb36460919", "priority_top5": false, "component_ranks": {"dense": 18}}
+{"query_id": "T09", "doc_id": "c12d9f5a-b552-11e5-9388-466021d971de", "priority_top5": false, "component_ranks": {"bm25": 15}}
+{"query_id": "T09", "doc_id": "eeffc0e70e6d12fd3ba981d5e52e0db5", "priority_top5": true, "component_ranks": {"bm25": 4, "dense": 4}}
+{"query_id": "T09", "doc_id": "7b0852ca6e7c1d35382b5b1db5007c29", "priority_top5": false, "component_ranks": {"dense": 16}}
+{"query_id": "T09", "doc_id": "30a88f88-8fb6-11e5-baf4-bdf37355da0c", "priority_top5": false, "component_ranks": {"bm25": 13}}
+{"query_id": "T09", "doc_id": "6ff6e2c4-60a5-11e5-9757-e49273f05f65", "priority_top5": false, "component_ranks": {"bm25": 19, "dense": 15}}
+{"query_id": "T09", "doc_id": "7b75f5b0-d44c-11e6-9cb0-54ab630851e8", "priority_top5": false, "component_ranks": {"dense": 11}}
+{"query_id": "T09", "doc_id": "aea640a0c8eac8d48b8ec21f006b4fbb", "priority_top5": false, "component_ranks": {"bm25": 17, "dense": 19}}
+{"query_id": "T09", "doc_id": "acbb066fb880193cc18ae8010da0feae", "priority_top5": true, "component_ranks": {"bm25": 7, "dense": 5}}
+{"query_id": "T09", "doc_id": "8f1c10a7338f3ccfaed451a3f3201a94", "priority_top5": false, "component_ranks": {"bm25": 16}}
+{"query_id": "T10", "doc_id": "7f1938db1f468298550cb75193169a95", "priority_top5": false, "component_ranks": {"bm25": 14}}
+{"query_id": "T10", "doc_id": "402f09bc-cf3c-11e5-90d3-34c2c42653ac", "priority_top5": false, "component_ranks": {"dense": 10}}
+{"query_id": "T10", "doc_id": "dfc2d87759ec4d6f170771742f2e88e4", "priority_top5": false, "component_ranks": {"dense": 15}}
+{"query_id": "T10", "doc_id": "6d102f4155358e71f121179cde115b74", "priority_top5": false, "component_ranks": {"dense": 17}}
+{"query_id": "T10", "doc_id": "682a022c-387e-11e6-a254-2b336e293a3c", "priority_top5": false, "component_ranks": {"bm25": 11}}
+{"query_id": "T10", "doc_id": "8ee04668497521bb301b740bd8d81226", "priority_top5": false, "component_ranks": {"bm25": 18}}
+{"query_id": "T10", "doc_id": "374cddac-33e0-11e6-8758-d58e76e11b12", "priority_top5": false, "component_ranks": {"dense": 7}}
+{"query_id": "T10", "doc_id": "a33ee3dcb1b86289d15c236342d5e049", "priority_top5": true, "component_ranks": {"dense": 5}}
+{"query_id": "T10", "doc_id": "1a0602f2-d1b4-11e5-90d3-34c2c42653ac", "priority_top5": false, "component_ranks": {"dense": 14}}
+{"query_id": "T10", "doc_id": "2e2e0f817f4736cb952b21026bef97b3", "priority_top5": false, "component_ranks": {"bm25": 13}}
+{"query_id": "T10", "doc_id": "872d303228c91e964022924a75d0c9a3", "priority_top5": false, "component_ranks": {"dense": 19}}
+{"query_id": "T10", "doc_id": "c2aac122-d119-11e5-abc9-ea152f0b9561", "priority_top5": true, "component_ranks": {"bm25": 3}}
+{"query_id": "T10", "doc_id": "d8c91e60-3d78-11e6-9e16-4cf01a41decb", "priority_top5": false, "component_ranks": {"bm25": 9}}
+{"query_id": "T10", "doc_id": "7edffc7f3ba2515272379b33534bcd91", "priority_top5": true, "component_ranks": {"bm25": 1, "dense": 8}}
+{"query_id": "T10", "doc_id": "bbe97d5a-d1a6-11e5-90d3-34c2c42653ac", "priority_top5": false, "component_ranks": {"dense": 12}}
+{"query_id": "T10", "doc_id": "92d355ee-59a0-11e6-831d-0324760ca856", "priority_top5": false, "component_ranks": {"bm25": 17}}
+{"query_id": "T10", "doc_id": "9f2c49fc-31c0-11e6-ab9d-1da2b0f24f93", "priority_top5": true, "component_ranks": {"bm25": 5}}
+{"query_id": "T10", "doc_id": "22cfb4aa-cb47-11e5-b9ab-26591104bb19", "priority_top5": false, "component_ranks": {"bm25": 12}}
+{"query_id": "T10", "doc_id": "32c84a5b196064f1937bd2a85533ab4c", "priority_top5": true, "component_ranks": {"dense": 2}}
+{"query_id": "T10", "doc_id": "96cb67dfc71a7b93b54999bf397a740e", "priority_top5": false, "component_ranks": {"bm25": 20}}
+{"query_id": "T10", "doc_id": "b174f828-c6a1-11e5-b933-31c93021392a", "priority_top5": false, "component_ranks": {"dense": 20}}
+{"query_id": "T10", "doc_id": "26182d3c84c5e9c481dda5de5399243b", "priority_top5": false, "component_ranks": {"bm25": 6, "dense": 9}}
+{"query_id": "T10", "doc_id": "8571395eaf2aad712b11a6fb37ff3b0e", "priority_top5": true, "component_ranks": {"bm25": 7, "dense": 1}}
+{"query_id": "T10", "doc_id": "cc204000368c97eed33df9ffb090eae3", "priority_top5": false, "component_ranks": {"bm25": 19}}
+{"query_id": "T10", "doc_id": "b0d2e4e267061ceae0e4ac1ccb521b03", "priority_top5": false, "component_ranks": {"dense": 18}}
+{"query_id": "T10", "doc_id": "e0101e6090b91d47c31b38f2fa5b6aaf", "priority_top5": false, "component_ranks": {"dense": 16}}
+{"query_id": "T10", "doc_id": "845c6edd9285e9f6a3a334663fa9ddac", "priority_top5": true, "component_ranks": {"dense": 4}}
+{"query_id": "T10", "doc_id": "2a89ecb50d8358655580927a80e9620f", "priority_top5": false, "component_ranks": {"dense": 6}}
+{"query_id": "T10", "doc_id": "19b2ca1e-31c3-11e6-ab9d-1da2b0f24f93", "priority_top5": false, "component_ranks": {"bm25": 16}}
+{"query_id": "T10", "doc_id": "1dc2dadc-c11f-11e5-98c8-7fab78677d51", "priority_top5": false, "component_ranks": {"bm25": 10}}
+{"query_id": "T10", "doc_id": "82136da458020955d4d80c3bb51de962", "priority_top5": true, "component_ranks": {"dense": 3}}
+{"query_id": "T10", "doc_id": "55a7a9876d84f3d3bc0ba70e974a600c", "priority_top5": false, "component_ranks": {"bm25": 15}}
+{"query_id": "T10", "doc_id": "5250b3791684c063a2c67de0e1cf9bc5", "priority_top5": false, "component_ranks": {"bm25": 8}}
+{"query_id": "T10", "doc_id": "ecdfcb67e46db0b66a809f5b5d2c6a34", "priority_top5": true, "component_ranks": {"bm25": 4, "dense": 11}}
+{"query_id": "T10", "doc_id": "4b853efeca2851427f5dda96ae6f2075", "priority_top5": true, "component_ranks": {"bm25": 2, "dense": 13}}

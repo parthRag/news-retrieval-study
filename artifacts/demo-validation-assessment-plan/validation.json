@@ -1,0 +1,23 @@
+{
+  "base_url": "http://127.0.0.1:8767",
+  "saved_queries_checked": 117,
+  "article_endpoints_checked": 117,
+  "distinct_queries_checked": 97,
+  "browser_exceptions": [],
+  "ui_checks": [
+    "two-engine custom comparison",
+    "evidence highlights equal literal quotes",
+    "full body equals source",
+    "512-token retained text toggle",
+    "three-engine original comparison",
+    "20 results per engine",
+    "390px responsive layout without horizontal overflow"
+  ],
+  "live_test_this_run": false,
+  "assessment_status_checks": [
+    "one context notice for preliminary full-article AI judgments and planned human review",
+    "assessor provenance retained in article details",
+    "custom notice hidden for supplied-qrels benchmark"
+  ],
+  "status": "passed"
+}

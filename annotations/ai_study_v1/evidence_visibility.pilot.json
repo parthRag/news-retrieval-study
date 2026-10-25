@@ -1,0 +1,407 @@
+{
+  "model_revision": "f52bf8ec8c7124536f0efb74aca902b2995e5bcd",
+  "tokenizer_sha256": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66",
+  "passage_prefix": "passage: ",
+  "total_token_budget": 512,
+  "scope": "16 assessed pilot pairs only; no new model inference or relevance decisions",
+  "interpretation": "Visibility concerns exact retained input text, not model attention or a causal explanation of scores",
+  "documents": [
+    {
+      "query_id": "H01",
+      "doc_id": "93c510bebbb8f9a0a57eb28aa54f47aa",
+      "title": "Gateway bug: How crickets could hook America on eating insects",
+      "grade": 2,
+      "contents_sha256": "631315c1262f08c4bfbb7a05efcf32d6a999e145707fdf73379d188fb63d7113",
+      "body_characters": 6196,
+      "contents_characters": 6259,
+      "retained_contents_end_exclusive": 2281,
+      "truncated": true,
+      "empty_body": false,
+      "evidence": [
+        {
+          "start": 2110,
+          "end": 2195,
+          "quote": "A cricket needs 12 times less feed than cattle to produce the same amount of protein.",
+          "fully_visible_to_e5": true
+        }
+      ]
+    },
+    {
+      "query_id": "H01",
+      "doc_id": "c8a6a344-bd7a-11e2-89c9-3be8095fe767",
+      "title": "Food for thought: Would you eat an insect?",
+      "grade": 1,
+      "contents_sha256": "a826dc3a065eb3562b5fa8be0f4c125514bb46e113f01a54a81600d5fca6c5e4",
+      "body_characters": 2365,
+      "contents_characters": 2408,
+      "retained_contents_end_exclusive": 2408,
+      "truncated": false,
+      "empty_body": false,
+      "evidence": [
+        {
+          "start": 1615,
+          "end": 1700,
+          "quote": "Other popular insect foods are bees, wasps, ants, grasshoppers, locusts and crickets.",
+          "fully_visible_to_e5": true
+        },
+        {
+          "start": 1922,
+          "end": 2057,
+          "quote": "Most insects raised for food are likely to produce fewer environmentally harmful greenhouse gases than livestock, the U.N. agency says.",
+          "fully_visible_to_e5": true
+        }
+      ]
+    },
+    {
+      "query_id": "H01",
+      "doc_id": "308441f54df1e4903dcaec2249706824",
+      "title": "Here’s what two passionate cricket entrepreneurs plan to do with $1.2 million",
+      "grade": 1,
+      "contents_sha256": "e537e73042fb6157eb28988325e4f95ea5941934641133fa8fe04833ab8a3db5",
+      "body_characters": 1932,
+      "contents_characters": 2010,
+      "retained_contents_end_exclusive": 2010,
+      "truncated": false,
+      "empty_body": false,
+      "evidence": [
+        {
+          "start": 78,
+          "end": 235,
+          "quote": "The burgeoning cricket scene received a boost Tuesday when Exo, a maker of cricket-based energy bars, announced it had received $1.2 million in seed funding.",
+          "fully_visible_to_e5": true
+        },
+        {
+          "start": 1627,
+          "end": 1696,
+          "quote": "more sustainable and nutritious than the vast majority of what we eat",
+          "fully_visible_to_e5": true
+        }
+      ]
+    },
+    {
+      "query_id": "H01",
+      "doc_id": "e1fd11fc-9f94-11e6-8832-23a007c77bb4",
+      "title": "What does the insect industry want? A cricket in every pot.",
+      "grade": 2,
+      "contents_sha256": "418cacc0b28cfb05b0d99df2fa349156401517f5b21dc92020caa3785caf026a",
+      "body_characters": 11593,
+      "contents_characters": 11653,
+      "retained_contents_end_exclusive": 2372,
+      "truncated": true,
+      "empty_body": false,
+      "evidence": [
+        {
+          "start": 3373,
+          "end": 3495,
+          "quote": "It’s only in recent years that demand has surged for insects bred and farmed to human food standards in the United States.",
+          "fully_visible_to_e5": false
+        },
+        {
+          "start": 5170,
+          "end": 5388,
+          "quote": "They don’t emit troublesome levels of methane as cows do, and it takes just a single gallon of water to raise a pound of cricket protein — compared with 500 gallons for a pound of chicken and 2,000 for a pound of beef.",
+          "fully_visible_to_e5": false
+        }
+      ]
+    },
+    {
+      "query_id": "H01",
+      "doc_id": "47c460ee-3a72-11e7-9e48-c4f199710b69",
+      "title": "Why your humble bowl of oatmeal could help feed a growing planet",
+      "grade": 0,
+      "contents_sha256": "8331828fe0f9e2d72b44a5bbd1520af51a9da30b7b43f2ae6f1e18ec19add44c",
+      "body_characters": 7575,
+      "contents_characters": 7640,
+      "retained_contents_end_exclusive": 2008,
+      "truncated": true,
+      "empty_body": false,
+      "evidence": [
+        {
+          "start": 1068,
+          "end": 1124,
+          "quote": "And it is met by one of the most prosaic of foods: oats.",
+          "fully_visible_to_e5": true
+        },
+        {
+          "start": 2074,
+          "end": 2145,
+          "quote": "Oats have an important job in fixing what ails our agricultural system.",
+          "fully_visible_to_e5": false
+        }
+      ]
+    },
+    {
+      "query_id": "H01",
+      "doc_id": "776ad970-2769-11e2-b4f2-8320a9f00869",
+      "title": "Organic vs. conventional farming: Which uses less energy?",
+      "grade": 0,
+      "contents_sha256": "9e371e65653e308235c112818c87f601259f44cdff9359a3b17da2f06e89e59c",
+      "body_characters": 5084,
+      "contents_characters": 5142,
+      "retained_contents_end_exclusive": 2613,
+      "truncated": true,
+      "empty_body": false,
+      "evidence": [
+        {
+          "start": 1888,
+          "end": 2009,
+          "quote": "It grows organic and conventional corn, wheat and soy side by side on test plots and measures the energy inputs for each.",
+          "fully_visible_to_e5": true
+        }
+      ]
+    },
+    {
+      "query_id": "H01",
+      "doc_id": "109e66bca6a8cce1e7418b08a4b442e2",
+      "title": "Cricket kick: Newest health food craze is bugs",
+      "grade": 2,
+      "contents_sha256": "10208b439eb5e42760d4f3313a7d30b3c06a245070d4a07d0696db7feff091d9",
+      "body_characters": 7298,
+      "contents_characters": 7345,
+      "retained_contents_end_exclusive": 2198,
+      "truncated": true,
+      "empty_body": false,
+      "evidence": [
+        {
+          "start": 1909,
+          "end": 2090,
+          "quote": "Typically, they buy the crickets from farms in the U.S. and Canada; the bugs are usually slow-roasted, then milled into a fine powder that many companies like to call cricket flour.",
+          "fully_visible_to_e5": true
+        },
+        {
+          "start": 3412,
+          "end": 3485,
+          "quote": "That same amount of feed can produce 60 pounds of edible cricket protein.",
+          "fully_visible_to_e5": false
+        }
+      ]
+    },
+    {
+      "query_id": "N03",
+      "doc_id": "685a196d46f057a0548aa904ab451a13",
+      "title": "Should we worry about Ebola becoming airborne?",
+      "grade": 2,
+      "contents_sha256": "e4fb445c2c468f73c12d5c6d38b8839f7069baa15640a0f8d0efc012549a261d",
+      "body_characters": 5241,
+      "contents_characters": 5288,
+      "retained_contents_end_exclusive": 2466,
+      "truncated": true,
+      "empty_body": false,
+      "evidence": [
+        {
+          "start": 1006,
+          "end": 1228,
+          "quote": "Ebola is _not_ spread through respiratory transmission, in which people can be infected through inhalation or direct contact with the eyes, nose, or mouth from virus present in large droplets or smaller airborne particles.",
+          "fully_visible_to_e5": true
+        },
+        {
+          "start": 879,
+          "end": 914,
+          "quote": "it’s via contaminated bodily fluids",
+          "fully_visible_to_e5": true
+        }
+      ]
+    },
+    {
+      "query_id": "N03",
+      "doc_id": "e0101e6090b91d47c31b38f2fa5b6aaf",
+      "title": "ebola",
+      "grade": 0,
+      "contents_sha256": "e46b26fcf420acf922ab254a037a536947e0d02cc232740f7f48d9d12645bdc8",
+      "body_characters": 0,
+      "contents_characters": 5,
+      "retained_contents_end_exclusive": 5,
+      "truncated": false,
+      "empty_body": true,
+      "evidence": [
+        {
+          "start": 0,
+          "end": 5,
+          "quote": "ebola",
+          "fully_visible_to_e5": true
+        }
+      ]
+    },
+    {
+      "query_id": "N03",
+      "doc_id": "48ba826e85ce81d1399fc6636b1e8c23",
+      "title": "“Limited airborne transmission of Ebola is ‘very likely,'” new study says",
+      "grade": 0,
+      "contents_sha256": "30948e8e3d7902c749173d7d61fce1bfc4133ba6e85e9e48c6d3ec565900055f",
+      "body_characters": 174,
+      "contents_characters": 248,
+      "retained_contents_end_exclusive": 248,
+      "truncated": false,
+      "empty_body": false,
+      "evidence": [
+        {
+          "start": 0,
+          "end": 73,
+          "quote": "“Limited airborne transmission of Ebola is ‘very likely,'” new study says",
+          "fully_visible_to_e5": true
+        },
+        {
+          "start": 74,
+          "end": 104,
+          "quote": "So reports The Washington Post",
+          "fully_visible_to_e5": true
+        }
+      ]
+    },
+    {
+      "query_id": "N03",
+      "doc_id": "d763fe26adcbd9cfbe98c23aeef590ae",
+      "title": "Will I get Ebola?",
+      "grade": 2,
+      "contents_sha256": "9161ce4f5a32412acfad6f9b74c5ff62c9d78588556dae08c86ed0d3da80e313",
+      "body_characters": 6088,
+      "contents_characters": 6106,
+      "retained_contents_end_exclusive": 2165,
+      "truncated": true,
+      "empty_body": false,
+      "evidence": [
+        {
+          "start": 1456,
+          "end": 1607,
+          "quote": "Ebola spreads through the transmission of bodily fluids, like blood or vomit, so simply breathing the same air as Duncan wouldn't lead to an infection.",
+          "fully_visible_to_e5": true
+        },
+        {
+          "start": 3476,
+          "end": 3587,
+          "quote": "A person can become sick with Ebola if he or she is exposed to contaminated objects, like a needle or a syringe",
+          "fully_visible_to_e5": false
+        }
+      ]
+    },
+    {
+      "query_id": "N03",
+      "doc_id": "8583b3abb035814a1f2092d0931ac962",
+      "title": "Sex in a time of Ebola",
+      "grade": 2,
+      "contents_sha256": "28248db1247db0cca63e98b5b70f086f033d3f0af1422a6f15bc60f366e4801c",
+      "body_characters": 4404,
+      "contents_characters": 4427,
+      "retained_contents_end_exclusive": 2304,
+      "truncated": true,
+      "empty_body": false,
+      "evidence": [
+        {
+          "start": 2544,
+          "end": 2596,
+          "quote": "Ebola is not an airborne virus, like SARS or the flu",
+          "fully_visible_to_e5": false
+        },
+        {
+          "start": 2184,
+          "end": 2266,
+          "quote": "Some body fluids and excretions clearly transmit the virus: Blood, vomit and feces",
+          "fully_visible_to_e5": true
+        }
+      ]
+    },
+    {
+      "query_id": "N03",
+      "doc_id": "6e21bdec-561b-11e4-809b-8cc0a295c773",
+      "title": "How the microscopic Ebola virus kills thousands",
+      "grade": 2,
+      "contents_sha256": "f6424ae7db43b2f448c4c7daeb18e67234da85720bea9e061acbf3f7083dcfeb",
+      "body_characters": 13032,
+      "contents_characters": 13080,
+      "retained_contents_end_exclusive": 2330,
+      "truncated": true,
+      "empty_body": false,
+      "evidence": [
+        {
+          "start": 6831,
+          "end": 6915,
+          "quote": "Ebola in humans is spread only through direct contact with virus-laden bodily fluids",
+          "fully_visible_to_e5": false
+        },
+        {
+          "start": 11504,
+          "end": 11586,
+          "quote": "Ebola’s not transmitted by the air. Fear and ignorance are transmitted by the air.",
+          "fully_visible_to_e5": false
+        }
+      ]
+    },
+    {
+      "query_id": "N03",
+      "doc_id": "dbb46f6240ef188add6c6cf14b5e2acf",
+      "title": "Limited airborne transmission of Ebola is ‘very likely,’ new analysis says",
+      "grade": 0,
+      "contents_sha256": "c010dd44f6c5aff0493aa7038bf744b205ff952a1ff26550baf2894f6ef6f760",
+      "body_characters": 7529,
+      "contents_characters": 7604,
+      "retained_contents_end_exclusive": 2365,
+      "truncated": true,
+      "empty_body": false,
+      "evidence": [
+        {
+          "start": 75,
+          "end": 197,
+          "quote": "A team of prominent researchers suggested Thursday that limited airborne transmission of the Ebola virus is \"very likely,\"",
+          "fully_visible_to_e5": true
+        },
+        {
+          "start": 2419,
+          "end": 2480,
+          "quote": "But we're saying you can’t rule out respiratory transmission.",
+          "fully_visible_to_e5": false
+        }
+      ]
+    },
+    {
+      "query_id": "N03",
+      "doc_id": "a8389b1f22a913eb987ceea3f4716d67",
+      "title": "From the CDC, on how Ebola can be transmitted",
+      "grade": 2,
+      "contents_sha256": "23974443970041b726ed218974031456b1bd1edd7ce6b5ef533663ee8afe3993",
+      "body_characters": 1369,
+      "contents_characters": 1415,
+      "retained_contents_end_exclusive": 1415,
+      "truncated": false,
+      "empty_body": false,
+      "evidence": [
+        {
+          "start": 74,
+          "end": 198,
+          "quote": "Ebola apparently can’t be spread through the air simply by suspended particles remaining in the air after a cough or sneeze.",
+          "fully_visible_to_e5": true
+        },
+        {
+          "start": 325,
+          "end": 411,
+          "quote": "someone touching the surface and then touching their eyes, nose, mouth or an open cut.",
+          "fully_visible_to_e5": true
+        }
+      ]
+    },
+    {
+      "query_id": "N03",
+      "doc_id": "dfc2d87759ec4d6f170771742f2e88e4",
+      "title": "ebola",
+      "grade": 0,
+      "contents_sha256": "e46b26fcf420acf922ab254a037a536947e0d02cc232740f7f48d9d12645bdc8",
+      "body_characters": 0,
+      "contents_characters": 5,
+      "retained_contents_end_exclusive": 5,
+      "truncated": false,
+      "empty_body": true,
+      "evidence": [
+        {
+          "start": 0,
+          "end": 5,
+          "quote": "ebola",
+          "fully_visible_to_e5": true
+        }
+      ]
+    }
+  ],
+  "empty_body_pairs": 2,
+  "truncated_pairs": 10,
+  "duplicate_content_hashes": {
+    "e46b26fcf420acf922ab254a037a536947e0d02cc232740f7f48d9d12645bdc8": 2
+  }
+}

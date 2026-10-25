@@ -1,0 +1,21 @@
+.venv/
+__pycache__/
+.pytest_cache/
+*.egg-info/
+.DS_Store
+corpus.jsonl
+qrel.jsonl
+queries.jsonl
+artifacts/indexes/
+artifacts/runs/
+artifacts/logs/
+artifacts/models/
+artifacts/encodings/
+artifacts/bundles/
+dense-results.zip
+dense-checkpoints.zip
+artifacts/plot-cache/
+artifacts/assessments/
+deliverables/*.zip
+IR Proposal - Robust Lexical Neural and Hybrid Retrieval.docx
+artifacts/previous-deliverables/

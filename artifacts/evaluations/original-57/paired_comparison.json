@@ -1,0 +1,28 @@
+{
+  "direction": "dense minus bm25",
+  "samples": 10000,
+  "seed": 20261024,
+  "unit": "query; percentile intervals are descriptive for this 57-query set",
+  "metrics": {
+    "ndcg_at_5": {
+      "mean_dense_minus_bm25": 0.060123147023481274,
+      "paired_bootstrap_95_percentile_ci": [
+        -0.004628649759205794,
+        0.1294244123383817
+      ],
+      "dense_wins": 31,
+      "ties": 5,
+      "bm25_wins": 21
+    },
+    "ap_at_1000": {
+      "mean_dense_minus_bm25": 0.0436235443864688,
+      "paired_bootstrap_95_percentile_ci": [
+        0.0031964320254569316,
+        0.08517895035749058
+      ],
+      "dense_wins": 36,
+      "ties": 0,
+      "bm25_wins": 21
+    }
+  }
+}

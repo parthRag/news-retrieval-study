@@ -1,0 +1,22 @@
+{
+  "scope": "Descriptive top-20 counts; no filtering or reranking",
+  "engines": {
+    "bm25": {
+      "top20_slots": 400,
+      "empty_body_slots": 0,
+      "body_under_200_characters_slots": 0,
+      "duplicate_content_slots_within_query": 27
+    },
+    "dense": {
+      "top20_slots": 400,
+      "empty_body_slots": 38,
+      "body_under_200_characters_slots": 43,
+      "duplicate_content_slots_within_query": 29
+    }
+  },
+  "assessed_pairs": 737,
+  "unique_document_ids": 725,
+  "unique_contents_hashes": 672,
+  "same_query_exact_content_grade_conflicts": 0,
+  "explicit_hash_reuses": 13
+}

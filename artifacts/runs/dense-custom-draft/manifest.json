@@ -1,0 +1,56 @@
+{
+  "created_at_utc": "2026-10-24T13:34:54.563969+00:00",
+  "engine": "e5-cosine",
+  "run_tag": "e5-kaggle-draft",
+  "index_path": "/kaggle/working/news_ir_job/indexes/dense",
+  "index_manifest_sha256": "42c747f915d66d398df609b4e2919cf050f98e483334cc590075bc774eebf73a",
+  "corpus_sha256": "82086c5dc9397700ca6682d19f1a1cace8ace5defa31f7990ca3c28314ec61a9",
+  "query_source_sha256": "2ba74dbfb53f1d69e17aade424d9cfabc32fcb4443533b37661c477987c32a77",
+  "query_snapshot_sha256": "ec14c3f21ed8c8c87bf3db07139898b97ee39b463bc8620c25bf8cb3ab72587b",
+  "query_count": 20,
+  "top_k": 1000,
+  "total_hits": 20000,
+  "empty_query_ids": [],
+  "coverage": "full",
+  "retrieval_config": {
+    "model": {
+      "model_id": "intfloat/e5-base-v2",
+      "revision": "f52bf8ec8c7124536f0efb74aca902b2995e5bcd",
+      "dimension": 768,
+      "max_length": 512,
+      "query_prefix": "query: ",
+      "passage_prefix": "passage: ",
+      "pooling": "attention-mask-aware mean",
+      "normalization": "L2",
+      "files": {
+        "config.json": "01cc39aa39538a8179aa131c8a16adc03b506c92009f091502e4eb0c702f5f78",
+        "model.safetensors": "d0d559c47d5f71b1d280b13b62a2657f3e3bc70c0786f9ab91a36545e6a8f693",
+        "special_tokens_map.json": "b6d346be366a7d1d48332dbc9fdf3bf8960b5d879522b7799ddba59e76237ee3",
+        "tokenizer.json": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66",
+        "tokenizer_config.json": "ae83fa6ca0333117ff12606020af925d648667ef70d92ff7f27d781ba0ca4544",
+        "vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+      }
+    },
+    "runtime": {
+      "torch": "2.9.1+cu126",
+      "device": "cuda",
+      "threads": 4,
+      "precision": "float32",
+      "attention_implementation": "sdpa",
+      "transformers": "5.20.1",
+      "platform": "Linux-6.18.55+-x86_64-with-glibc2.39",
+      "device_name": "Tesla T4"
+    }
+  },
+  "latency_ms": {
+    "mean": 220.78454904985847,
+    "median": 167.38978250032233,
+    "min": 163.4190770018904,
+    "max": 320.44298500113655
+  },
+  "latency_protocol": "Sequential query encoding and FAISS IPC/search; excludes model/index startup and article lookup",
+  "runtime_python": "3.13.15",
+  "run_sha256": "d3648f3ff6c956907e1ce2ca3bcb4b7e3e28ca1a596b082b4d85e6e79099d2bb",
+  "results_sha256": "09df2a13a6590e9a6d563d85a9f36a4e79b7b74f09f623500b15f5a2ca98865c",
+  "evaluation": "No relevance metrics computed; this command exports retrieval runs only"
+}

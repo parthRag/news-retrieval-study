@@ -1,0 +1,85 @@
+{
+  "scope": "AI-assessed top-five pilot; not the complete 20-query study",
+  "assessor_type": "AI",
+  "query_ids": [
+    "N03",
+    "H01"
+  ],
+  "query_count": 2,
+  "suite_query_count": 20,
+  "pending_query_ids": [
+    "V01",
+    "V02",
+    "V03",
+    "V04",
+    "V05",
+    "N01",
+    "N02",
+    "N04",
+    "N05",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "T01",
+    "T02",
+    "T03",
+    "T04",
+    "T05"
+  ],
+  "assessed_pairs": 16,
+  "pool_pairs": 737,
+  "per_query": {
+    "N03": {
+      "bm25": {
+        "ndcg_at_5": 0.6608397947263839,
+        "precision_at_5": 0.8,
+        "judged_at_5": 1.0
+      },
+      "dense": {
+        "ndcg_at_5": 0.14606834984270645,
+        "precision_at_5": 0.2,
+        "judged_at_5": 1.0
+      }
+    },
+    "H01": {
+      "bm25": {
+        "ndcg_at_5": 0.7944981616784152,
+        "precision_at_5": 0.6,
+        "judged_at_5": 1.0
+      },
+      "dense": {
+        "ndcg_at_5": 1.0,
+        "precision_at_5": 1.0,
+        "judged_at_5": 1.0
+      }
+    }
+  },
+  "primary_gain": "linear grade 0–2",
+  "exp2_gain_sensitivity_ndcg_at_5": {
+    "N03": {
+      "bm25": 0.660839794726384,
+      "dense": 0.14606834984270647
+    },
+    "H01": {
+      "bm25": 0.8395395538515096,
+      "dense": 1.0
+    }
+  },
+  "macro_over_completed_queries_only": {
+    "bm25": {
+      "ndcg_at_5": 0.7276689782023995,
+      "precision_at_5": 0.7,
+      "judged_at_5": 1.0
+    },
+    "dense": {
+      "ndcg_at_5": 0.5730341749213532,
+      "precision_at_5": 0.6,
+      "judged_at_5": 1.0
+    }
+  },
+  "map_status": "Withheld: the depth-20 pool is incomplete; no full-suite MAP claim",
+  "limitations": "Linear gains 0–2; IDCG from assessed positives only and may change with deeper assessment. AI labels are not independent human gold. Top-five coverage does not establish corpus recall.",
+  "protocol_sha256": "3c02c8324aa80c3fffae6ef0068bcc7e58ae683ee6560c0e4ec5d93655fbd12e",
+  "assessments_sha256": "41375f24e0c6e63d6d35834917f2624346355b1c5b999824f1dc53b2754c2f39"
+}

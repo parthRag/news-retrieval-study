@@ -1,0 +1,105 @@
+{
+  "created_at_utc": "2026-10-24T15:09:50.905468+00:00",
+  "query_count": 57,
+  "eligible_documents": 594589,
+  "corpus_sha256": "82086c5dc9397700ca6682d19f1a1cace8ace5defa31f7990ca3c28314ec61a9",
+  "queries_sha256": "e0a8d8ec3b80cc06f07cbd1a72a48b7da30a7a7e00bda085e2701cb4dfc9737f",
+  "qrels_sha256": "88b1da4ce3ec808287528218020199cd7c3c795b4690ab33acca4e4aca762a9a",
+  "judgment_count": 15655,
+  "grade_distribution": {
+    "0": 12614,
+    "1": 1677,
+    "2": 660,
+    "3": 431,
+    "4": 273
+  },
+  "unavailable_judgments": 65,
+  "unavailable_positive_judgments": 3,
+  "unavailable_unique_documents": 57,
+  "unavailable_grade_distribution": {
+    "0": 62,
+    "1": 1,
+    "2": 1,
+    "3": 1
+  },
+  "policies": {
+    "primary_gain": "supplied relevance grade (linear), following BEIR/trec_eval ndcg_cut",
+    "exp2_sensitivity_gain": "2^grade - 1; same positive/nonpositive distinction for AP",
+    "news2019_sensitivity_gain": "zero for grade 0, else 2^grade; matches original NIST gain-valued qrels",
+    "binary_relevance": "grade > 0",
+    "unjudged": "zero contribution; retain positions; not a claim of irrelevance",
+    "missing_documents": "original qrels retained in primary AP denominators and nDCG ideal ranking",
+    "available_corpus_sensitivity": "same runs; remove only unavailable judgments from denominators/IDCG",
+    "zero_relevant_queries": "retain with zero scores",
+    "average": "macro over all supplied queries",
+    "retrieval_depth": 1000,
+    "map_label": "MAP@1000: mean AP of depth-1000 runs, denominator is all known positives",
+    "ranking_ties": "evaluate published rank order; derived ordinal-score run used only for independent cross-check",
+    "filters": "no date filtering or inferred source-article exclusion; no tuning on qrels"
+  },
+  "independent_crosscheck": "passed",
+  "paired_comparison": {
+    "direction": "dense minus bm25",
+    "samples": 10000,
+    "seed": 20261024,
+    "unit": "query; percentile intervals are descriptive for this 57-query set",
+    "metrics": {
+      "ndcg_at_5": {
+        "mean_dense_minus_bm25": 0.060123147023481274,
+        "paired_bootstrap_95_percentile_ci": [
+          -0.004628649759205794,
+          0.1294244123383817
+        ],
+        "dense_wins": 31,
+        "ties": 5,
+        "bm25_wins": 21
+      },
+      "ap_at_1000": {
+        "mean_dense_minus_bm25": 0.0436235443864688,
+        "paired_bootstrap_95_percentile_ci": [
+          0.0031964320254569316,
+          0.08517895035749058
+        ],
+        "dense_wins": 36,
+        "ties": 0,
+        "bm25_wins": 21
+      }
+    }
+  },
+  "runs": {
+    "bm25": {
+      "path": "/Users/parthraghuvanshi/Desktop/IR/artifacts/runs/bm25-original-benchmark",
+      "manifest_sha256": "53979c6e58e7bf21ed23653dd43c7a20be7cf8f6cafff4337b7e2100be0910e3",
+      "run_sha256": "ead8071494f6aa790c771c6927e04117dc62d978d3f4cfe338313aaaf4920cb1",
+      "total_hits": 57000,
+      "runtime_python": "3.12.9",
+      "latency_ms": {
+        "mean": 135.7795767477926,
+        "median": 82.90070807561278,
+        "min": 43.29983307980001,
+        "max": 580.8532908558846
+      }
+    },
+    "dense": {
+      "path": "/Users/parthraghuvanshi/Desktop/IR/artifacts/runs/dense-original",
+      "manifest_sha256": "445cc2e8afe9303e5d457a0c7d33033506d981a4c13052d67f87852d3274e87f",
+      "run_sha256": "a2d48c9c24f9d3a9b9389cd9f9719e77389c5fe0227154edfdfa9cf0b2c890a0",
+      "total_hits": 57000,
+      "runtime_python": "3.12.9",
+      "latency_ms": {
+        "mean": 12951.169526294332,
+        "median": 13241.387374931946,
+        "min": 145.54029214195907,
+        "max": 35318.37625009939
+      }
+    }
+  },
+  "files": {
+    "metrics.json": "01e2e30f70dd80df0c25fd7088a33824411ed0b8b3fea4883b2c0bc2d67651ea",
+    "unavailable_judgments.json": "0ae3d42c9ab65efad70b5f756ff59e9c9ce9f7763b4e02824fa77bc09d2e7916",
+    "paired_comparison.json": "f9fa0c35708dda263230fa6d613dcec62fda006f0b070b0e5ce5afe38e8fe5ee",
+    "per_query.csv": "57f7743556a4eba2aa6966f9b2e83074910a483bb9af970f1e574da90e4951c4",
+    "crosscheck.json": "006f3dbc2b236671f839590b207cabad1235c26407ad50804e07cfce24d4eb4e"
+  },
+  "scope": "Original headline/background-linking queries; separate from the unjudged 20 custom challenges"
+}

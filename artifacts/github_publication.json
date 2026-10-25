@@ -1,0 +1,15 @@
+{
+  "status": "published",
+  "owner": "parthRag",
+  "repository": "news-ir-bm25-dense-final",
+  "url": "https://github.com/parthRag/news-ir-bm25-dense-final",
+  "visibility": "public",
+  "default_branch": "main",
+  "initial_uploaded_commit": "9bce3d68836e47524faac35f37ee7649f4d149a5",
+  "verified_at_utc": "2026-10-25T18:04:00.143459+00:00",
+  "method": "Separate final-submission repository created publicly and initialized on main; final source/report snapshot is published separately from the private development history.",
+  "development_repository": {
+    "url": "https://github.com/parthRag/news-ir-bm25-dense",
+    "visibility": "private"
+  }
+}

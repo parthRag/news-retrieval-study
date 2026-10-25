@@ -1,0 +1,42 @@
+{
+  "status": "passed",
+  "submission_ready": false,
+  "verification_mode": "extracted package members; archive itself is external",
+  "remaining_metadata": [
+    "Confirm completed contribution: Sushruth Reddy Challa",
+    "Confirm completed contribution: Hamsini G",
+    "Confirm completed contribution: Kritika Pandey"
+  ],
+  "repository_url": "https://github.com/parthRag/news-ir-bm25-dense-final",
+  "repository_status": "created",
+  "brief_pages": 4,
+  "research_report_pages": 19,
+  "automated_tests": 153,
+  "native_metric_comparisons": 7196,
+  "expanded_queries": 40,
+  "custom_assessed_pairs": 1444,
+  "original_decisions_byte_preserved": 737,
+  "archive_files": 397,
+  "archive_bytes": null,
+  "numeric_reproduction": "Original primary metrics; initial20/added20/combined40 linear+exp2; both family bootstraps; four original20 quality policies. Per-query and macro values reproduce exactly.",
+  "pdf_checks": "PDFKit page counts/text tied to PDF SHA256; current HTML contains no malformed table separator rows",
+  "four_page_requirement_sections": [
+    "Primary objective",
+    "Dataset and evaluation criteria",
+    "Related research: approach, findings and relevance",
+    "Approach and architectural reasoning",
+    "Current findings and what they mean",
+    "Key innovations and stretch objectives",
+    "Key milestones and tentative timeline",
+    "Contribution matrix and delivery"
+  ],
+  "verified_clickable_dataset_and_paper_links": [
+    "https://huggingface.co/datasets/liuqi6777/trec-news",
+    "https://arxiv.org/abs/2104.08663",
+    "https://arxiv.org/abs/2212.03533",
+    "https://aclanthology.org/2024.eacl-long.139",
+    "https://cormack.uwaterloo.ca/cormacksigir09-rrf.pdf",
+    "https://github.com/parthRag/news-ir-bm25-dense-final"
+  ],
+  "archive_sha256": null
+}

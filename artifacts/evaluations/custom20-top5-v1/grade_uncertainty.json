@@ -1,0 +1,149 @@
+{
+  "interpretation": "Extreme grade-uncertainty scenarios, not confidence intervals or adjudicated relevance labels",
+  "per_query": {
+    "V01": {
+      "medium_confidence_pairs": 1,
+      "scenarios": 3,
+      "minimum_dense_minus_bm25": 0.0,
+      "maximum_dense_minus_bm25": 1.0,
+      "winner_stable": "not_strictly_stable"
+    },
+    "V02": {
+      "medium_confidence_pairs": 0,
+      "scenarios": 1,
+      "minimum_dense_minus_bm25": 0.5,
+      "maximum_dense_minus_bm25": 0.5,
+      "winner_stable": "dense"
+    },
+    "V03": {
+      "medium_confidence_pairs": 3,
+      "scenarios": 27,
+      "minimum_dense_minus_bm25": -0.3855752314675539,
+      "maximum_dense_minus_bm25": 0.4239502565920201,
+      "winner_stable": "not_strictly_stable"
+    },
+    "V04": {
+      "medium_confidence_pairs": 3,
+      "scenarios": 27,
+      "minimum_dense_minus_bm25": 0.05817090259098867,
+      "maximum_dense_minus_bm25": 0.5878056198050307,
+      "winner_stable": "dense"
+    },
+    "V05": {
+      "medium_confidence_pairs": 0,
+      "scenarios": 1,
+      "minimum_dense_minus_bm25": 0.0,
+      "maximum_dense_minus_bm25": 0.0,
+      "winner_stable": "not_strictly_stable"
+    },
+    "N01": {
+      "medium_confidence_pairs": 0,
+      "scenarios": 1,
+      "minimum_dense_minus_bm25": 0.2960819109658652,
+      "maximum_dense_minus_bm25": 0.2960819109658652,
+      "winner_stable": "dense"
+    },
+    "N02": {
+      "medium_confidence_pairs": 2,
+      "scenarios": 9,
+      "minimum_dense_minus_bm25": -0.3582459836197153,
+      "maximum_dense_minus_bm25": 0.010447204651808928,
+      "winner_stable": "not_strictly_stable"
+    },
+    "N03": {
+      "medium_confidence_pairs": 1,
+      "scenarios": 3,
+      "minimum_dense_minus_bm25": -0.7227265726449518,
+      "maximum_dense_minus_bm25": -0.5147714448836774,
+      "winner_stable": "bm25"
+    },
+    "N04": {
+      "medium_confidence_pairs": 0,
+      "scenarios": 1,
+      "minimum_dense_minus_bm25": 0.18322608909137006,
+      "maximum_dense_minus_bm25": 0.18322608909137006,
+      "winner_stable": "dense"
+    },
+    "N05": {
+      "medium_confidence_pairs": 0,
+      "scenarios": 1,
+      "minimum_dense_minus_bm25": 0.3867340198478759,
+      "maximum_dense_minus_bm25": 0.3867340198478759,
+      "winner_stable": "dense"
+    },
+    "H01": {
+      "medium_confidence_pairs": 2,
+      "scenarios": 9,
+      "minimum_dense_minus_bm25": 0.053097570474025524,
+      "maximum_dense_minus_bm25": 0.31564845247951445,
+      "winner_stable": "dense"
+    },
+    "H02": {
+      "medium_confidence_pairs": 0,
+      "scenarios": 1,
+      "minimum_dense_minus_bm25": -0.38685280723454163,
+      "maximum_dense_minus_bm25": -0.38685280723454163,
+      "winner_stable": "bm25"
+    },
+    "H03": {
+      "medium_confidence_pairs": 0,
+      "scenarios": 1,
+      "minimum_dense_minus_bm25": 0.0339589574459106,
+      "maximum_dense_minus_bm25": 0.0339589574459106,
+      "winner_stable": "dense"
+    },
+    "H04": {
+      "medium_confidence_pairs": 2,
+      "scenarios": 9,
+      "minimum_dense_minus_bm25": -0.09528277051292477,
+      "maximum_dense_minus_bm25": 0.2772734273550481,
+      "winner_stable": "not_strictly_stable"
+    },
+    "H05": {
+      "medium_confidence_pairs": 0,
+      "scenarios": 1,
+      "minimum_dense_minus_bm25": 0.21398626473452764,
+      "maximum_dense_minus_bm25": 0.21398626473452764,
+      "winner_stable": "dense"
+    },
+    "T01": {
+      "medium_confidence_pairs": 1,
+      "scenarios": 3,
+      "minimum_dense_minus_bm25": -0.6309297535714575,
+      "maximum_dense_minus_bm25": 0.0,
+      "winner_stable": "not_strictly_stable"
+    },
+    "T02": {
+      "medium_confidence_pairs": 3,
+      "scenarios": 27,
+      "minimum_dense_minus_bm25": 0.10699313236726382,
+      "maximum_dense_minus_bm25": 0.642988470896787,
+      "winner_stable": "dense"
+    },
+    "T03": {
+      "medium_confidence_pairs": 3,
+      "scenarios": 27,
+      "minimum_dense_minus_bm25": -1.0,
+      "maximum_dense_minus_bm25": -0.6240505200038379,
+      "winner_stable": "bm25"
+    },
+    "T04": {
+      "medium_confidence_pairs": 2,
+      "scenarios": 9,
+      "minimum_dense_minus_bm25": -0.7606395682357036,
+      "maximum_dense_minus_bm25": -0.5706417189553201,
+      "winner_stable": "bm25"
+    },
+    "T05": {
+      "medium_confidence_pairs": 1,
+      "scenarios": 3,
+      "minimum_dense_minus_bm25": 0.05817090259098867,
+      "maximum_dense_minus_bm25": 0.2721571673255162,
+      "winner_stable": "dense"
+    }
+  },
+  "macro_difference_bounds": [
+    -0.12249164685890161,
+    0.15239706750569487
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "scope": "Descriptive counts; no filtering or reranking",
+  "near_empty_definition": "Body shorter than 200 Unicode characters, including empty bodies",
+  "duplicate_definition": "Additional identical title+body hashes within an engine/query top five",
+  "engines": {
+    "bm25": {
+      "top5_slots": 100,
+      "empty_body_slots": 0,
+      "body_under_200_characters_slots": 0,
+      "duplicate_content_slots_within_query": 5
+    },
+    "dense": {
+      "top5_slots": 100,
+      "empty_body_slots": 18,
+      "body_under_200_characters_slots": 20,
+      "duplicate_content_slots_within_query": 9
+    }
+  },
+  "assessed_pairs": 188,
+  "unique_document_ids": 185,
+  "unique_contents_hashes": 172
+}

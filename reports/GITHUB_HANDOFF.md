@@ -1,6 +1,6 @@
 # GitHub repositories and submission handoff
 
-**Public final-submission repository:** https://github.com/parthRag/news-ir-bm25-dense-final
+**Public final-submission repository:** https://github.com/parthRag/news-retrieval-study
 
 **Private development repository:** https://github.com/parthRag/news-ir-bm25-dense
 

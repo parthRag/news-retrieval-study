@@ -7,7 +7,7 @@
     "Confirm completed contribution: Hamsini G",
     "Confirm completed contribution: Kritika Pandey"
   ],
-  "repository_url": "https://github.com/parthRag/news-ir-bm25-dense-final",
+  "repository_url": "https://github.com/parthRag/news-retrieval-study",
   "repository_status": "created",
   "brief_pages": 4,
   "research_report_pages": 19,
@@ -36,7 +36,7 @@
     "https://arxiv.org/abs/2212.03533",
     "https://aclanthology.org/2024.eacl-long.139",
     "https://cormack.uwaterloo.ca/cormacksigir09-rrf.pdf",
-    "https://github.com/parthRag/news-ir-bm25-dense-final"
+    "https://github.com/parthRag/news-retrieval-study"
   ],
   "archive_sha256": null
 }

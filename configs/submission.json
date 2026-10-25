@@ -1,7 +1,7 @@
 {
   "group_number": "5",
   "members": "Parth Raghuvanshi (2023A7PS0574P); Sushruth Reddy Challa (2023A7PS0504P); Hamsini G (2023A7PS0006P); Kritika Pandey (2023A7PS0022P)",
-  "repository_url": "https://github.com/parthRag/news-ir-bm25-dense-final",
+  "repository_url": "https://github.com/parthRag/news-retrieval-study",
   "short_title": "NewsIR_BM25_Dense",
   "project_title": "News Retrieval under Vocabulary Mismatch: BM25, Dense Search and Linguistic Constraints",
   "contributions": [
@@ -37,7 +37,7 @@
   "course": "Information Retrieval",
   "faculty_mentor": "Abhinav Kumar",
   "github_username": "parthRag",
-  "repository_name": "news-ir-bm25-dense-final",
+  "repository_name": "news-retrieval-study",
   "repository_status": "created",
   "ownership_basis": "Assigned responsibility for completed team components; this allocation does not certify individual historical authorship or hours.",
   "member_details": [
@@ -60,7 +60,7 @@
   ],
   "repository_visibility": "public",
   "repository_default_branch": "main",
-  "repository_verified_at_utc": "2026-10-25T18:04:00.143459+00:00",
+  "repository_verified_at_utc": "2026-10-25T18:10:53.134118+00:00",
   "development_repository_url": "https://github.com/parthRag/news-ir-bm25-dense",
   "development_repository_visibility": "private",
   "public_repository_kind": "Final submission snapshot"

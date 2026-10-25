@@ -40,4 +40,4 @@ The student-ID correction is **2023A7PS0574P** for Parth; both regenerated PDFs 
 
 ## Outstanding information
 
-The public GitHub repository is created and verified at https://github.com/parthRag/news-ir-bm25-dense-final. Completed technical contributions for three members have not been confirmed. These remain accurately marked as pending; the PDF does not invent a repository or member work. The matrix identifies component responsibility without numerical effort shares. This document review does not remove those outstanding submission details.
+The public GitHub repository is created and verified at https://github.com/parthRag/news-retrieval-study. Completed technical contributions for three members have not been confirmed. These remain accurately marked as pending; the PDF does not invent a repository or member work. The matrix identifies component responsibility without numerical effort shares. This document review does not remove those outstanding submission details.

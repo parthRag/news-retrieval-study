@@ -101,7 +101,7 @@ Completed dates below follow saved artifact timestamps in India time. Remaining 
 
 Rows assign responsibility for completed team components; individual work is confirmed separately.
 
-**Working demo:** run `.venv/bin/python -m news_ir.demo` and open `http://127.0.0.1:8765`. Saved views show scores and evidence; new live queries are explicitly unjudged. No additional GPU job is needed. [GitHub repository](https://github.com/parthRag/news-ir-bm25-dense-final)
+**Working demo:** run `.venv/bin/python -m news_ir.demo` and open `http://127.0.0.1:8765`. Saved views show scores and evidence; new live queries are explicitly unjudged. No additional GPU job is needed. [GitHub repository](https://github.com/parthRag/news-retrieval-study)
 
 **Submission file:** `5_NewsIR_BM25_Dense.pdf`. Only one group member submits this single four-page PDF.
 

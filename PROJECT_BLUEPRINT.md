@@ -1,6 +1,6 @@
 # News Retrieval: BM25 vs. Neural Search under Vocabulary Mismatch
 
-Repository separation: the current public final snapshot is https://github.com/parthRag/news-ir-bm25-dense-final; the original development repository is now private. Earlier repository-status entries below are historical.
+Repository separation: the current public final snapshot is https://github.com/parthRag/news-retrieval-study; the original development repository is now private. Earlier repository-status entries below are historical.
 
 Current validation plan: preliminary custom comparisons use full-article AI judgments; human review is planned next and has not yet been completed. See [assessment method](reports/ASSESSMENT_METHOD.md). The dated milestones below retain their historical status.
 

@@ -1,6 +1,6 @@
 # Final deliverables and submission steps
 
-The local submission package is implemented and generated. Group 5, all four member names/IDs, Information Retrieval and faculty mentor Abhinav Kumar are filled. The public repository is https://github.com/parthRag/news-ir-bm25-dense-final. This public repository publishes a final source/report snapshot. The original development repository and history are private. The contribution matrix distinguishes assigned component responsibility of completed team components from confirmed personal work.
+The local submission package is implemented and generated. Group 5, all four member names/IDs, Information Retrieval and faculty mentor Abhinav Kumar are filled. The public repository is https://github.com/parthRag/news-retrieval-study. This public repository publishes a final source/report snapshot. The original development repository and history are private. The contribution matrix distinguishes assigned component responsibility of completed team components from confirmed personal work.
 
 | Deliverable | File / location | Purpose |
 | --- | --- | --- |
@@ -14,7 +14,7 @@ The local submission package is implemented and generated. Group 5, all four mem
 | Architecture and contributions | `deliverables/architecture.svg`, `configs/submission.json`, `deliverables/contribution_matrix.csv` | Editable figure and component responsibility / confirmed-contribution records |
 | Demo presentation sequence | `reports/DEMO_GUIDE.md` | Cases to show, controls, commands and live timing expectations |
 
-Public downloads are provided in the [GitHub submission release](https://github.com/parthRag/news-ir-bm25-dense-final/releases/latest). Submit the four-page PDF; the research report and ZIP are supporting artifacts.
+Public downloads are provided in the [GitHub submission release](https://github.com/parthRag/news-retrieval-study/releases/latest). Submit the four-page PDF; the research report and ZIP are supporting artifacts.
 
 ## Run the working demo
 

@@ -21,9 +21,9 @@ Course: **Information Retrieval**. Faculty mentor: **Abhinav Kumar**.
 | Hamsini G | 2023A7PS0006P | evaluation/judgment review |
 | Kritika Pandey | 2023A7PS0022P | demo/report |
 
-This allocation assigns ownership and review responsibility, not historical effort. [CONTRIBUTING.md](CONTRIBUTING.md) records the actual-work confirmation process. The public repository is [parthRag/news-ir-bm25-dense-final](https://github.com/parthRag/news-ir-bm25-dense-final); code, notebooks, preprocessing scripts and reports are published. See [the GitHub handoff](reports/GITHUB_HANDOFF.md).
+This allocation assigns ownership and review responsibility, not historical effort. [CONTRIBUTING.md](CONTRIBUTING.md) records the actual-work confirmation process. The public repository is [parthRag/news-retrieval-study](https://github.com/parthRag/news-retrieval-study); code, notebooks, preprocessing scripts and reports are published. See [the GitHub handoff](reports/GITHUB_HANDOFF.md).
 
-Download the four-page PDF, supporting research report and portable reproducibility archive from the [submission release](https://github.com/parthRag/news-ir-bm25-dense-final/releases/latest). The public snapshot and archive include saved rankings for numerical reproduction; corpus, model and indexes remain local dependencies. To verify a source checkout without the archive, run `PYTHONPATH=src python scripts/validate_final_deliverables.py`; its root `PACKAGE_MANIFEST.json` binds the exported files.
+Download the four-page PDF, supporting research report and portable reproducibility archive from the [submission release](https://github.com/parthRag/news-retrieval-study/releases/latest). The public snapshot and archive include saved rankings for numerical reproduction; corpus, model and indexes remain local dependencies. To verify a source checkout without the archive, run `PYTHONPATH=src python scripts/validate_final_deliverables.py`; its root `PACKAGE_MANIFEST.json` binds the exported files.
 
 ## Run the demo
 

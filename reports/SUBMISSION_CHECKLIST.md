@@ -7,7 +7,7 @@ The four-page brief and 19-page supporting research report are generated and pub
 | Single PDF, at most four pages | Generated and verified: 4 pages | `deliverables/5_NewsIR_BM25_Dense.pdf`; metadata filled; confirm individual attribution before upload |
 | Filename `<GroupNo>_<ShortProjectTitle>.pdf` | Filled | `5_NewsIR_BM25_Dense.pdf`; four pages verified |
 | Group number, title, all member names | Filled | Group 5; all four supplied names/IDs; Information Retrieval; mentor Abhinav Kumar |
-| GitHub repository link | Public; created and verified | `https://github.com/parthRag/news-ir-bm25-dense-final`; source, notebooks and reports published |
+| GitHub repository link | Public; created and verified | `https://github.com/parthRag/news-retrieval-study`; source, notebooks and reports published |
 | Basic README | Present | Root `README.md`, commands, setup, results and limitations |
 | Implementation status and architecture | Present in Markdown | `TASK_G_FINAL_DELIVERABLES.md`, the PDFs and diagram below; comparison interface and custom evaluation complete |
 | Executed preprocessing and retrieval details | Present | README, Task A/B/C reports; pinned E5 revision and no stemming/stopword removal documented |

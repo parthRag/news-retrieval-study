@@ -2,7 +2,7 @@
   "page_count" : 19,
   "pages" : [
     {
-      "characters" : 3111,
+      "characters" : 3107,
       "height" : 841.91998000000001,
       "links" : [
 
@@ -173,5 +173,5 @@
       "width" : 594.95996000000002
     }
   ],
-  "pdf_sha256" : "4f5c5dd785185c5730de92ad71d510b3a1773c3c25f8ec3da40f6367382d9a34"
+  "pdf_sha256" : "a26028f074e9af2c20eb3752efee4e4609406acd00dde6be4da6055f3330518a"
 }

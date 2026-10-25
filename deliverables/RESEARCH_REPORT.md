@@ -2,7 +2,7 @@
 **Group:** 5 · **Course:** Information Retrieval  
 **Faculty mentor:** Abhinav Kumar  
 **Members:** Parth Raghuvanshi (2023A7PS0574P); Sushruth Reddy Challa (2023A7PS0504P); Hamsini G (2023A7PS0006P); Kritika Pandey (2023A7PS0022P)  
-**GitHub repository:** https://github.com/parthRag/news-ir-bm25-dense-final (verified repository)
+**GitHub repository:** https://github.com/parthRag/news-retrieval-study (verified repository)
 
 <div class="meta">Research implementation report · 25 October 2026 · Local reproducible artifacts</div>
 

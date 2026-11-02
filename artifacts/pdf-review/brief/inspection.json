@@ -2,16 +2,18 @@
   "page_count" : 4,
   "pages" : [
     {
-      "characters" : 2945,
+      "characters" : 3065,
       "height" : 841.91998000000001,
       "links" : [
-        "https:\/\/huggingface.co\/datasets\/liuqi6777\/trec-news"
+        "https:\/\/huggingface.co\/datasets\/liuqi6777\/trec-news",
+        "https:\/\/trec.nist.gov\/data\/core2018.html",
+        "https:\/\/github.com\/HamsiniGururaj\/robust-news-retrieval"
       ],
       "page" : 1,
       "width" : 594.95996000000002
     },
     {
-      "characters" : 2775,
+      "characters" : 2781,
       "height" : 841.91998000000001,
       "links" : [
         "https:\/\/arxiv.org\/abs\/2104.08663",
@@ -26,7 +28,7 @@
       "width" : 594.95996000000002
     },
     {
-      "characters" : 2553,
+      "characters" : 2216,
       "height" : 841.91998000000001,
       "links" : [
 
@@ -35,7 +37,7 @@
       "width" : 594.95996000000002
     },
     {
-      "characters" : 2702,
+      "characters" : 2575,
       "height" : 841.91998000000001,
       "links" : [
         "https:\/\/github.com\/parthRag\/news-retrieval-study",
@@ -45,5 +47,5 @@
       "width" : 594.95996000000002
     }
   ],
-  "pdf_sha256" : "da92935decb4b1414b496458c7bb6e29f36738b7ae469d972fc845e312236e75"
+  "pdf_sha256" : "2b036998e9dfceac749260d40cdd4c8600391a5222aec137f2f814ecf95f76f1"
 }

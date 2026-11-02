@@ -81,6 +81,20 @@ def test_live_failure_and_busy_job_release_slot(demo):
     assert not demo.live_slot.locked()
 
 
+def test_rewrite_replay_returns_its_own_original_topic_metrics(demo):
+    for suite, qid, text, score in [("core18-title", "341-title", "Airport Security", .2),
+                                     ("core18-rewrite", "341-rewrite", "air travel passenger screening", .6)]:
+        demo.catalog[suite] = [{"_id": qid, "text": text, "topic_id": "341", "original_title": "Airport Security"}]
+        demo.runs[suite] = {e: {qid: []} for e in ["bm25", "dense", "rrf"]}
+        demo.scores[suite] = {e: {"aggregate": {}, "per_query": {qid: {"ndcg_at_5": score}}} for e in demo.runs[suite]}
+        demo.judgments[suite] = {}
+    result = demo.replay("core18-rewrite", "341-rewrite")
+    assert result["paired_original"]["query_id"] == "341-title"
+    assert result["paired_original"]["metrics"]["dense"]["ndcg_at_5"] == .2
+    assert result["engines"]["dense"]["metrics"]["ndcg_at_5"] == .6
+    assert demo.replay("core18-title", "341-title")["paired_original"] is None
+
+
 def call_http(service, method, path, body=b"", extra_headers=None):
     """Exercise actual HTTP parsing/routing without opening a sandbox port."""
     headers = {"Host": "127.0.0.1:8765", "Content-Type": "application/json", "Content-Length": str(len(body)), **(extra_headers or {})}

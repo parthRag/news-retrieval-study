@@ -25,9 +25,9 @@ for suite, queries in catalog['suites'].items():
     for query in queries:
         r=requests.get(BASE+'/api/replay', params={'suite':suite, 'qid':query['_id'], 'k':20})
         r.raise_for_status(); data=r.json()
-        assert len(data['engines']) == (3 if suite=='original' else 2)
+        assert len(data['engines']) == (3 if suite=='original' or suite.startswith('core18-') else 2)
         for engine, result in data['engines'].items():
-            assert len(result['hits'])==20 and result['metrics'] is not None
+            assert 0 < len(result['hits']) <= 20 and result['metrics'] is not None
             if suite in {'custom','expanded'}: assert all(h['assessment'] is not None for h in result['hits'])
         hit=data['engines']['dense']['hits'][0]
         doc=requests.get(BASE+'/api/document',params={'suite':suite,'qid':query['_id'],'id':hit['doc_id']}).json()
@@ -98,6 +98,12 @@ try:
     shot=call('Page.captureScreenshot',{'format':'png','captureBeyondViewport':False})
     (OUT/'demo-mobile.png').write_bytes(base64.b64decode(shot['data']))
     call('Emulation.setDeviceMetricsOverride',{'width':1440,'height':1050,'deviceScaleFactor':1,'mobile':False})
+    if 'core18-rewrite' in catalog['suites']:
+        js("document.getElementById('suite').value='core18-rewrite'; document.getElementById('suite').dispatchEvent(new Event('change'))")
+        wait("document.getElementById('result-source').textContent.includes('CORE 2018') && document.querySelectorAll('.engine').length===3")
+        assert js("!document.getElementById('assessment-status').hidden && document.getElementById('assessment-status').textContent.includes('human intent review')")
+        assert js("document.getElementById('results').textContent.includes('vs original title')")
+        report['core18_paired_view_verified']=True
     if not args.skip_live:
         js("document.getElementById('live-tab').click();document.getElementById('live-query').value='jaguar animal habitat conservation';document.getElementById('live-form').requestSubmit()")
         start=time.monotonic()

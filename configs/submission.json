@@ -21,10 +21,10 @@
     },
     {
       "member": "Hamsini G",
-      "ownership": "evaluation and judgment audit",
-      "completed": "Member review/completed work not yet confirmed.",
-      "completion_confirmed": false,
-      "completed_team_outputs": "Supplied-qrel audit, nDCG/MAP evaluator, symmetric candidate pooling and evidence-validation tooling."
+      "ownership": "controlled rewrite experiments and statistical analysis",
+      "completed": "Independently implemented the TREC-COVID retrieval/rewrite study, query-validation tooling and statistical analysis; repository snapshot and saved results verified and incorporated.",
+      "completion_confirmed": true,
+      "completed_team_outputs": "Controlled two-rewrite study on 50 TREC-COVID topics, rewrite-validation tooling, evaluation and paired statistics; preserved with source attribution."
     },
     {
       "member": "Kritika Pandey",

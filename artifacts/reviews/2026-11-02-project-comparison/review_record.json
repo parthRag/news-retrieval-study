@@ -1,0 +1,21 @@
+{
+  "review_date": "2026-11-02",
+  "peer_repository": "https://github.com/HamsiniGururaj/robust-news-retrieval",
+  "peer_commit": "7b73bb339d9ea3827375ec10aa2e1c4bb67bde06",
+  "peer_tests_passed": 100,
+  "saved_runs_recomputed": 15,
+  "per_topic_metric_values_compared": 7200,
+  "significance_tables_reproduced": 13,
+  "review_scope": "Static code/proposal/query review; lightweight tests; saved-run evaluation; RRF score reconstruction; significance reproduction; local Core 2018 identifier coverage. Official reference verification achieved scope is recorded in core18_coverage.json. Did not regenerate corpus embeddings or rerun full-corpus peer retrieval.",
+  "environment": "Isolated macOS Python 3.12 environment with pytest, PyYAML, NumPy, FAISS CPU and ir_measures 0.4.3; not a recreation of the pinned Colab environment.",
+  "findings": [
+    "RRF score reconstruction agrees within 5e-12; a few internal ranks differ near numerical ties after serialization, with identical top-1000 document sets. Saved-run evaluation reproduces.",
+    "Feature correlations/permutations pool 100 rewrites from 50 topics; use topic-level clustering. Each current phenomenon group contains distinct topic IDs, so this dependence concern should not be misapplied to every phenomenon-specific test.",
+    "Resume probe: replacing source document d1 with d2 and changing prefix in an existing shard directory silently reuses d1, because completion markers are checked without source/config identity. This is a future reuse risk, not proof the published encodings are invalid."
+  ],
+  "files": {
+    "peer_tests.xml": "8fac0cfdf83ad6bf5ac5f5caf17f8901a5596e210575a2d14715061ff3cf8b13",
+    "peer_numerical_review.json": "6400c0ee14d95ac9ea18dafede18eacc1c4342142d32d1b12bac3ed53310423a",
+    "core18_coverage.json": "05e4d5beae0eac4bcfe5663206e8408ac742ae87da8fbc4174a7c39d1686885d"
+  }
+}

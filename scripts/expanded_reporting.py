@@ -33,7 +33,9 @@ def load():
 
 
 def test_count():
-    return sum(int(s.attrib['tests']) for s in ET.parse(ROOT / 'artifacts/test-results-final.xml').getroot().iter('testsuite'))
+    path = ROOT / 'artifacts/test-results-integration.xml'
+    if not path.exists(): path = ROOT / 'artifacts/test-results-final.xml'
+    return sum(int(s.attrib['tests']) for s in ET.parse(path).getroot().iter('testsuite'))
 
 
 def tables(data, original, initial, table):

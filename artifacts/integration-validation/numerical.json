@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "imported_revision": "7b73bb339d9ea3827375ec10aa2e1c4bb67bde06",
+  "imported_files": 122,
+  "core18": {
+    "topics": 50,
+    "formulations": 3,
+    "engines": 3,
+    "independent_standard_metric_comparisons": 3600,
+    "metrics_and_paired_tests": "exact reproduction"
+  },
+  "covid": {
+    "topics": 50,
+    "formulations": 4,
+    "engines": 3,
+    "independent_standard_metric_comparisons": 4800,
+    "metrics_and_paired_tests": "exact reproduction"
+  }
+}

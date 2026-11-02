@@ -3,7 +3,7 @@
     "sections": [
       {
         "page": 1,
-        "height": 861.578125,
+        "height": 890.984375,
         "width": 673
       },
       {
@@ -13,12 +13,12 @@
       },
       {
         "page": 3,
-        "height": 872.796875,
+        "height": 697.3125,
         "width": 673
       },
       {
         "page": 4,
-        "height": 944.078125,
+        "height": 956.21875,
         "width": 673
       }
     ],
@@ -29,7 +29,7 @@
     "sections": [
       {
         "page": 1,
-        "height": 860.046875,
+        "height": 927.5625,
         "width": 673
       },
       {
@@ -99,26 +99,36 @@
       },
       {
         "page": 15,
-        "height": 841.890625,
+        "height": 910.21875,
         "width": 673
       },
       {
         "page": 16,
-        "height": 759.15625,
+        "height": 895.21875,
         "width": 673
       },
       {
         "page": 17,
-        "height": 735.171875,
+        "height": 841.890625,
         "width": 673
       },
       {
         "page": 18,
-        "height": 832.8125,
+        "height": 759.15625,
         "width": 673
       },
       {
         "page": 19,
+        "height": 735.171875,
+        "width": 673
+      },
+      {
+        "page": 20,
+        "height": 832.8125,
+        "width": 673
+      },
+      {
+        "page": 21,
         "height": 865.90625,
         "width": 673
       }

@@ -1,6 +1,8 @@
 Assessment status: the custom comparison currently uses full-article AI judgments, with human review planned next and not yet completed. See [assessment method and review plan](ASSESSMENT_METHOD.md).
 
-Current expansion: the default view contains40 custom queries, ten per category, with 1,444 preliminary article judgments. Original 20 remains a subset view; original 57 is separate. There are97 distinct evaluated queries across117 saved-view entries. For new examples, use V08 (displacement/article-content failure), N08 (completed versus pending Keystone decision), or V07 (E5 finds the risk-assessment alternative). Combined scores now favor BM25; the older examples below describe the preserved initial 20.
+Current integration: the demo retains the 40-query custom study and 57-topic background-linking adaptation, and adds 50 Core 2018 topics with title, description and provisional-rewrite views (150 new formulations). The three new suites each compare BM25, E5 and RRF. Together there are 247 distinct query formulations across 267 saved-view entries; this is not 247 independent information needs. New news rewrites await independent human intent review and reuse NIST human relevance labels conditionally on preserving the narrative. See [integrated results](INTEGRATED_STUDY.md).
+
+For a paired example, choose **Core 2018 · 50 provisional rewrites**. Each engine shows its nDCG@5 change from that topic’s original title. Select the corresponding original-title view to inspect the starting ranking. The official-description view changes length/detail and is a separate diagnostic. Hamsini’s scientific-domain study stays in the report and saved artifacts; its document IDs are not passed to the news article lookup.
 
 # Running and presenting the retrieval demo
 
@@ -21,7 +23,7 @@ The existing Python 3.12 environment, Java 21, corpus, model, indexes and saved 
 3. Click **Read article & evidence**. The dialog displays the full stored title and body, query-specific grade, rationale, self-rated confidence and literal supporting quotations. Evidence is highlighted at saved Unicode offsets.
 4. Check **Show only the text retained by E5** to compare the full article with its exact retained passage prefix. The 512-token budget includes the `passage: ` prefix and special tokens. This audit describes input availability, not model attention or a causal explanation of ranking.
 5. Select **57 benchmark topics** to compare BM25, E5 and the fixed k=60 RRF hybrid. These grades come from supplied benchmark qrels, separately from custom AI labels. Unjudged results remain visibly unjudged.
-6. Scroll to the experiment snapshot for aggregate scores. These are two separate evaluation sets and should not be averaged together.
+6. Scroll to the experiment snapshot for aggregate scores. These evaluation scopes and formulations should not be averaged together.
 
 Suggested demonstration cases:
 
@@ -62,3 +64,6 @@ To repeat the browser test, first start the server, then run:
 ```
 
 This optional check uses the installed Brave Chromium binary by default, creates and deletes a separate temporary browser profile, and runs one real CPU query. `--browser /path/to/chromium` selects a compatible Chromium executable; `--port` selects the demo port. It requires the locked `requests` and `websockets` dependencies and refuses existing output folders. The normal unit suite opens no browser and downloads no model.
+
+
+Integration browser verification is saved under `artifacts/integration-validation/browser/`. Earlier browser/live-search records remain historical checks; current saved-view coverage is recorded by the new check.

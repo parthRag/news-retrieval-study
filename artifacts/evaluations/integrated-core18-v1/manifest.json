@@ -1,0 +1,60 @@
+{
+  "dataset": "Core 2018 on available news mirror",
+  "topic_count": 50,
+  "query_count": 150,
+  "corpus_sha256": "82086c5dc9397700ca6682d19f1a1cace8ace5defa31f7990ca3c28314ec61a9",
+  "eligible_documents": 594589,
+  "official_corpus_equivalence": false,
+  "query_source_sha256": "e5b638a42befe74bd53f994aef69585a9956ebd14524fe9ff8b500b9ad21f67f",
+  "qrels_sha256": "bffba063a4f2a0bc0cd42c8bcc38ca57375c657dee539884b8efbf3da6e2f237",
+  "protocol_sha256": "412be2ad6715b4a3e366704e6baa6d5a55edbe5360b9609456ad63af76908c28",
+  "runs": {
+    "bm25": {
+      "path": "artifacts/runs/bm25-core18-v1",
+      "manifest_sha256": "6ac47f637b206c83e6005d277386e103d11ba84febd442c401cc890316f9c9fd"
+    },
+    "dense": {
+      "path": "artifacts/runs/dense-core18-v1",
+      "manifest_sha256": "254f7352f4d7d6893468ba3fb35bf3332d10ecd1cb053a0f1540abbf4d3b7c5b"
+    },
+    "rrf": {
+      "path": "artifacts/runs/rrf-core18-v1",
+      "manifest_sha256": "1bbbc16cbad95832eeea17ce319679f6fcc49d30fb20561a4f9fe388dc06177a"
+    }
+  },
+  "native_comparisons": 3213,
+  "interpretation": "Separate title baseline, official description query-form diagnostic and provisional AI rewrite experiment; human rewrite intent review pending. All qrels retained in primary denominator.",
+  "imported_source_commit": "7b73bb339d9ea3827375ec10aa2e1c4bb67bde06",
+  "files": {
+    "metrics.json": "aff32d7f6ffafd2b5ed7f0c03712ce2606f5f5f548aa117c8105789e6a3979c7",
+    "native_crosscheck.json": "ef4557f5bd3effa7adcd510a713c6eeca8c068cc57a1798b265de0d363650da7",
+    "paired_changes.json": "281e2b279817dae9414df99ec387af2a54677b43f95e96c3c4c2df1f7d086af8",
+    "native/rewrite-dense.trec_eval.txt": "4030cb6213f6690f608db4d3b78876d8c1b9094b2d53b89ca8f21750f926438e",
+    "native/rewrite-rrf.qrels": "481e8fde4a10dce783dfa9dbc359257430c050bdb56508dbaf8426013bcfb7ea",
+    "native/rewrite-dense.qrels": "481e8fde4a10dce783dfa9dbc359257430c050bdb56508dbaf8426013bcfb7ea",
+    "native/rewrite-dense.run": "afe0a2c761f89aee13a99c33219b1435c3f7e261c703376162825e4406355084",
+    "native/rewrite-rrf.run": "863bb976c25d8afc19bd9c912111827823db835ec1e822416b88020f5df69d61",
+    "native/title-bm25.qrels": "1eecd50b866e6580baf166d4a41c04a1b06888fae16616af1fe4c9e9af858b1e",
+    "native/title-rrf.run": "4782b5641ab96178ecbfc52e46d5a88b047ebb5b9075469ad66feb88d46b3059",
+    "native/title-dense.qrels": "1eecd50b866e6580baf166d4a41c04a1b06888fae16616af1fe4c9e9af858b1e",
+    "native/description-dense.run": "6f01134c617519eaf8f38d901aa3315832e8e646291cfd8755a9819dbc498452",
+    "native/description-rrf.qrels": "b3276870415a952842874f2ada739d46ad3b8625a49f5ab68045306d99698c39",
+    "native/rewrite-bm25.trec_eval.txt": "efe972bab9e0d346550f2408bea788e35b51e944f7ca4fc81f5672ffa30fb833",
+    "native/title-rrf.trec_eval.txt": "02a4b116ec928742791ea18ba0f55de5fe6938b25256c5fcc220d5d873b435a6",
+    "native/description-rrf.trec_eval.txt": "184b6f7d2bd7628e00eba1b8f3518d446108dff91465a6ac187d4d122ae397c2",
+    "native/title-rrf.qrels": "1eecd50b866e6580baf166d4a41c04a1b06888fae16616af1fe4c9e9af858b1e",
+    "native/description-rrf.run": "67ff7da8833eea102bff92deaec7f29fc2c31b9fdcd12afaef74ccb07e2fbc2d",
+    "native/description-bm25.trec_eval.txt": "932991355565bf16e4e1e12ea998010fdb24381e80aada963c5ba48179b4fe12",
+    "native/title-dense.trec_eval.txt": "086c729b0f47045320a8e789f17a984384a1e299d2159612ef140dfd5c8eef52",
+    "native/title-dense.run": "d03929d2230f322d482dd07529c0eefa5712acf4560d7d804e79e403c6f12878",
+    "native/title-bm25.run": "a20ede0137b4df1d7af1db03a82e27163d17e2df2033ea681f5549f6c2bea137",
+    "native/title-bm25.trec_eval.txt": "570d5c4585634fd87a801351d9bac953c26f14a71f11f6c7f5edc8f89241942c",
+    "native/rewrite-bm25.qrels": "481e8fde4a10dce783dfa9dbc359257430c050bdb56508dbaf8426013bcfb7ea",
+    "native/description-dense.qrels": "b3276870415a952842874f2ada739d46ad3b8625a49f5ab68045306d99698c39",
+    "native/rewrite-rrf.trec_eval.txt": "3988acf36732a779ce69245de795c1a962d440b910ebc8422e1d231cb7d006ed",
+    "native/description-bm25.qrels": "b3276870415a952842874f2ada739d46ad3b8625a49f5ab68045306d99698c39",
+    "native/description-bm25.run": "56ac88396ba2526b8b385c785c4113d6be992fab384fc822d39cbd2788cb17a7",
+    "native/rewrite-bm25.run": "5bf0c696220f436775faeaeeb276bbfa37bd572d7f2e18bb82c29130116e8293",
+    "native/description-dense.trec_eval.txt": "7693e76975c7d1d773f1e3d91101a2b69c0279c5e5f2270b52f3f276feddc137"
+  }
+}

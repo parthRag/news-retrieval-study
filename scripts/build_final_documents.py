@@ -6,6 +6,7 @@ from pathlib import Path
 from markdown_it import MarkdownIt
 from news_ir.data import sha256_file
 from submission_brief import build_brief
+import integrated_reporting
 from expanded_reporting import load as load_expanded, update_brief, expanded_pages, write_progress, figures, test_count, readable_prose
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -23,7 +24,7 @@ def architecture():
     s='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 270" role="img" aria-label="Shared corpus to BM25 and E5, saved runs, evaluation, demo and reports"><defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="#506c80"/></marker></defs><g font-family="Arial,sans-serif" font-size="14" fill="#16354b">'
     for a,b,c,d in [(178,135,232,135),(412,135,458,62),(412,135,458,200),(650,62,700,135),(650,200,700,135),(846,135,880,54),(846,135,880,135),(846,135,880,216)]:
         s+=f'<line x1="{a}" y1="{b}" x2="{c}" y2="{d}" stroke="#506c80" stroke-width="2" marker-end="url(#a)"/>'
-    for args in [(4,100,174,70,'News corpus\n594,977 records'),(232,100,180,70,'Shared title + body\n594,589 eligible'),(458,26,192,72,'BM25 inverted index\nFull article'),(458,164,192,72,'E5 → exact FAISS\nFirst 512 tokens'),(700,100,146,70,'Saved top 1,000\n+ fixed RRF'),(880,16,116,68,'57 original topics\n40 custom queries'),(880,101,116,68,'Local demo\n+ full articles'),(880,182,116,68,'Metrics, figures\n+ report')]: s+=box(*args)
+    for args in [(4,100,174,70,'News corpus\n594,977 records'),(232,100,180,70,'Shared title + body\n594,589 eligible'),(458,26,192,72,'BM25 inverted index\nFull article'),(458,164,192,72,'E5 → exact FAISS\nFirst 512 tokens'),(700,100,146,70,'Saved top 1,000\n+ fixed RRF'),(880,16,116,68,'50 paired news\n57 background\n40 challenges'),(880,101,116,68,'Local demo\n+ full articles'),(880,182,116,68,'Metrics, figures\n+ report')]: s+=box(*args)
     return s+'</g></svg>'
 
 CSS='''@page{size:A4;margin:15mm 16mm 16mm}*{box-sizing:border-box}body{margin:0;color:#172b3e;font:10.3pt/1.38 Georgia,"Times New Roman",serif}h1,h2,h3,h4,th,.meta{font-family:Arial,sans-serif}h1{font-size:23pt;line-height:1.12;margin:0 0 12pt;letter-spacing:-.4pt}h2{font-size:15pt;line-height:1.2;margin:0 0 10pt;padding-bottom:6pt;border-bottom:1pt solid #b5c6d0;color:#164f70}h3{font-size:11.5pt;margin:12pt 0 5pt}p{margin:0 0 8pt}table{border-collapse:collapse;width:100%;font-size:9pt;margin:9pt 0 12pt;break-inside:auto}th,td{text-align:left;vertical-align:top;padding:5pt 6pt;border-bottom:.5pt solid #d4dfe5}th{background:#edf3f6;font-weight:700}tr{break-inside:avoid}thead{display:table-header-group}ul,ol{padding-left:17pt;margin:5pt 0 10pt}li{margin:0 0 5pt}a{color:#185d80;overflow-wrap:anywhere;text-decoration:none}code{font:8.1pt/1.4 Menlo,monospace;overflow-wrap:anywhere}pre{white-space:pre-wrap;padding:8pt;background:#f1f4f6;overflow-wrap:anywhere}blockquote{margin:8pt 0;padding:4pt 10pt;border-left:2pt solid #acbfc9;color:#425768}img{display:block;max-width:100%;max-height:75mm;object-fit:contain;margin:10pt auto}section.page{break-after:page}section.page:last-child{break-after:auto}.meta{font-size:9pt;color:#4e6574;padding:7pt 0 12pt}.notice{background:#fff3db;border-left:3pt solid #c18b2f;padding:8pt 10pt;margin:9pt 0;font:9.2pt/1.4 Arial,sans-serif}.compact{font-size:10.2pt}.compact table{font-size:9pt}.architecture{width:100%;margin:12pt 0}strong{font-weight:bold}small{font-size:8pt}.caption{font-size:8.5pt;color:#506775} .query-page table{font-size:8.8pt}.query-page td:first-child{width:8%}.query-page td:nth-child(2){width:46%}.query-page td:nth-child(3){width:46%}'''
@@ -76,6 +77,9 @@ def main():
     brief = build_brief(meta, orig, custom, cats, ablation, paired, table, architecture)
     expanded = load_expanded()
     brief = update_brief(brief, expanded, orig, custom, table)
+    integrated = integrated_reporting.load()
+    if integrated:
+        brief = integrated_reporting.update_brief(brief, integrated, table)
     publish(meta['group_number']+'_'+meta['short_title'],brief,compact=True)
     paper=[f'''# {meta['project_title']}
 {identity}
@@ -284,6 +288,9 @@ The locked environment and `README.md` document setup, source/index construction
 **Evidence location.** The 737-decision appendix is `reports/CUSTOM_20_DEPTH20_EVIDENCE.md`; full article packets remain local under `artifacts/assessments/`. The longer appendix is not reproduced in the four-page brief. Selected article excerpts remain evidence for the judgments, rather than a substitute for full-document review.
 ''']
     paper.extend(expanded_pages(expanded, orig, custom, table))
+    if integrated:
+        paper.extend(integrated_reporting.paper_pages(integrated, table))
+        paper[0] = paper[0].replace('**Keywords:**', 'The integrated study additionally evaluates 50 Core 2018 topics in three formulations on the available news corpus and incorporates Hamsini G’s preserved TREC-COVID rewrite experiment. Sections 14–15 report these separately; news rewrite intent review remains pending.\n\n**Keywords:**')
     for half in [queries[:10],queries[10:]]:
         p='## Appendix A. Frozen custom queries'+(' (V01–N05)' if half[0]['_id']=='V01' else ' (H01–T05)')+'\n\n'
         p+='Each information need has the shared 0/1/2 rubric: fails a mandatory constraint; limited qualifying detail; substantive qualifying evidence. Exact exclusion rules and status/protocol fields are in the frozen JSONL. Temporal grading requires article-evidenced event bounds.\n\n'
@@ -316,6 +323,8 @@ The locked environment and `README.md` document setup, source/index construction
         paper.append('## Appendix C. Frozen follow-up queries (' + half[0]['_id'] + '–' + half[-1]['_id'] + ')\n\n' + 'Each new query uses the same strict0/1/2 rubric. Wording and bounds were frozen before retrieval; frozen pending-status fields are historical, with completion recorded separately.\n\n' + table(['ID','Query text','Inclusion rule'], [[q['_id'],q['text'],q['relevant_if']] for q in half]))
     replacements = {'initial20': 'initial 20', 'original20': 'original 20', 'all40 frozen': 'all 40 frozen', 'Section13': 'Section 13', 'Sections12': 'Sections 12', 'Sections7': 'Sections 7', 'March11': 'March 11', 'top20': 'top 20', 'at1000': 'at 1000', 'grade2': 'grade 2', 'grade0': 'grade 0', 'rank1': 'rank 1', 'vs0.3156': 'vs 0.3156', 'strict0/1/2': 'strict 0/1/2'}
     for i, page in enumerate(paper):
+        if integrated:
+            page = page.replace('across the project.', 'across the earlier news experiments.')
         for a, b in replacements.items():
             page = page.replace(a, b) if a not in {'initial20', 'original20', 'top20'} else page
         paper[i] = readable_prose(page)
@@ -339,6 +348,11 @@ The locked environment and `README.md` document setup, source/index construction
               "custom_paired_uncertainty":paired,"categories":cats,
               "source_manifests":{d:sha256_file(ROOT/f'artifacts/evaluations/{d}/manifest.json') for d in ['rrf-original-57','custom20-depth20-v1','quality-top20-v1','custom40-extension20-depth20-v2','custom40-depth20-v2']}}
     (OUT/'results_snapshot.json').write_text(json.dumps(snapshot,indent=2)+'\n')
+    if integrated:
+        snapshot['integrated'] = {name: {variant: {engine: result['aggregate'] for engine, result in systems.items()}
+                                  for variant, systems in content['variants'].items()} for name, content in integrated.items()}
+        snapshot['document_pages'] = {'brief':len(brief),'research':len(paper)}
+        (OUT/'results_snapshot.json').write_text(json.dumps(snapshot,indent=2)+'\n')
     print(json.dumps({'brief_source_pages':len(brief),'research_source_pages':len(paper),'output':str(OUT)},indent=2))
 
 if __name__=='__main__': main()

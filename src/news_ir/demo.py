@@ -26,6 +26,7 @@ class DemoService:
         self.live_runner = self._run_engine
         try:
             self._load_saved()
+            self._load_core18()
         except BaseException:
             self.store.close()
             raise
@@ -92,7 +93,50 @@ class DemoService:
                 "eligible_documents": self.store.manifest["documents"]["indexed"],
                 "custom_assessed_pairs": len(self.judgments.get("expanded", self.judgments["custom"])),
                 "evaluated_query_count": len({(q["_id"], q["text"]) for qs in self.catalog.values() for q in qs}),
-                "live_enabled": True}
+                "live_enabled": True,
+                "suite_labels": {"custom": "20 linguistic challenges · preliminary", "expanded": "40 linguistic challenges · preliminary",
+                    "original": "57 background-linking topics · supplied qrels",
+                    "core18-title": "Core 2018 · 50 original news queries",
+                    "core18-description": "Core 2018 · 50 official descriptions",
+                    "core18-rewrite": "Core 2018 · 50 provisional rewrites"}}
+
+    def _load_core18(self):
+        folder = self.root / "artifacts/evaluations/integrated-core18-v1"
+        if not (folder / "manifest.json").exists():
+            return
+        manifest = json.loads((folder / "manifest.json").read_text())
+        for name, digest in manifest["files"].items():
+            if sha256_file(folder / name) != digest:
+                raise ValueError("Core 2018 evaluation file changed")
+        queries_path = self.root / "annotations/core18_v1/queries.jsonl"
+        labels_path = self.root / "annotations/core18_v1/qrels.jsonl"
+        if (sha256_file(queries_path) != manifest["query_source_sha256"] or
+                sha256_file(labels_path) != manifest["qrels_sha256"]):
+            raise ValueError("Core 2018 inputs changed")
+        eligible = {r[0] for r in self.store._db.execute("SELECT doc_id FROM documents WHERE eligible=1")}
+        source = self.store.manifest["source"]["sha256"]
+        if manifest["corpus_sha256"] != source:
+            raise ValueError("Core 2018 corpus mismatch")
+        queries = [json.loads(l) for l in queries_path.read_text().splitlines()]
+        scores = json.loads((folder / "metrics.json").read_text())["variants"]
+        runs = {}
+        for engine, entry in manifest["runs"].items():
+            root = self.root / entry["path"]
+            if sha256_file(root / "manifest.json") != entry["manifest_sha256"]:
+                raise ValueError("Core 2018 run manifest changed")
+            load_run(root, queries_path, eligible, expected_source_sha256=source)
+            runs[engine] = {r["query_id"]: r["hits"] for r in map(json.loads, (root / "results.jsonl").read_text().splitlines())}
+        judgments = {(r["query-id"], r["corpus-id"]): {"grade": r["score"], "assessor_type": "supplied NIST Core 2018 qrels"}
+                     for r in map(json.loads, labels_path.read_text().splitlines())}
+        for variant, systems in scores.items():
+            suite = "core18-" + variant
+            selected = [dict(q, relevant_if=q["narrative"], exclude_if="Use the official topic narrative; the local corpus differs from full WaPo v2.")
+                        for q in queries if q["variant"] == variant]
+            ids = {q["_id"] for q in selected}
+            self.catalog[suite] = selected
+            self.scores[suite] = systems
+            self.runs[suite] = {e: {q: hits for q, hits in rows.items() if q in ids} for e, rows in runs.items()}
+            self.judgments[suite] = judgments
 
     @staticmethod
     def validate_query(query):
@@ -119,7 +163,13 @@ class DemoService:
         query = next(q for q in self.catalog[suite] if q["_id"] == qid)
         selected = {e: hits[qid] for e, hits in self.runs[suite].items()}
         overlap = set(h["doc_id"] for h in selected["bm25"][:k]) & set(h["doc_id"] for h in selected["dense"][:k])
+        paired = None
+        if suite in {"core18-rewrite", "core18-description"}:
+            original_id = query["topic_id"] + "-title"
+            paired = {"query_id": original_id, "query": query["original_title"],
+                      "metrics": {e: self.scores["core18-title"][e]["per_query"][original_id] for e in selected}}
         return {"mode": "saved", "suite": suite, "query_id": qid, "query": query["text"], "rubric": query,
+                "paired_original": paired,
                 "overlap": len(overlap), "k": k,
                 "engines": {e: {"hits": self._enrich(hits, suite, qid, k),
                                  "metrics": self.scores[suite][e]["per_query"][qid]} for e, hits in selected.items()}}

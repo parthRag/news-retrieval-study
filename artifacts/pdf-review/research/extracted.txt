@@ -22,6 +22,9 @@ nDCG@5, while E5 has higher word-sense pooled MAP. The follow-up was designed af
 were known. A bounded post-hoc empty-body filter raises E5 nDCG@5 to 0.5492. We supply a working local
 demo, independent native metric checks, explicit evidence provenance and reproducibility scripts. Findings are
 specific to these engines, queries, input budgets and incomplete relevance sets.
+The integrated study additionally evaluates 50 Core 2018 topics in three formulations on the available news
+corpus and incorporates Hamsini G’s preserved TREC-COVID rewrite experiment. Sections 14–15 report these
+separately; news rewrite intent review remains pending.
 Keywords: information retrieval; BM25; dense embeddings; E5; negation; pooled evaluation; news search.
 1. Introduction and research questions
 News queries often describe a concept using vocabulary absent from a headline, but may also impose exact
@@ -37,7 +40,7 @@ trained retrieval model. The supplied 57 topics provide a separate supporting be
 newly written information needs. The stress suite supplies assignment-specific evidence, with the assessment
 and validation plan in Section 5. The earlier proposal's hybrid and robustness ideas are retained as explicit
 extensions.
-News IR · Research report · 1 / 19
+News IR · Research report · 1 / 21
 
 === PAGE 2 ===
 2. Related work and retrieval foundations
@@ -73,7 +76,7 @@ review plan; supplied benchmark judgments remain a separate evidence source.
 All system conclusions are therefore conditional: the encoder, preprocessing, query design, available article
 text and reference labels jointly define the experiment. No causal account of an embedding's internal reasoning
 is inferred from a ranking alone.
-News IR · Research report · 2 / 19
+News IR · Research report · 2 / 21
 
 === PAGE 3 ===
 3. Corpus and query design
@@ -110,7 +113,7 @@ conservation, Apple’s device-unlocking dispute, and bounded event windows. A m
 its negation. Event windows concern dates evidenced in article text, not guessed publication dates. The suite is
 small and intentionally difficult; it is not a random sample of user traffic. Appendix A supplies all twenty texts
 and inclusion rules; full exclusion rules remain in the versioned JSONL.
-News IR · Research report · 3 / 19
+News IR · Research report · 3 / 21
 
 === PAGE 4 ===
 4. System architecture and implemented retrieval
@@ -124,8 +127,9 @@ E5 → exact FAISS
 First 512 tokens
 Saved top 1,000
 + fixed RRF
-57 original topics
-40 custom queries
+50 paired news
+57 background
+40 challenges
 Local demo
 + full articles
 Metrics, figures
@@ -156,7 +160,7 @@ parameters and content hashes. RRF scores each unique ID by sum(1/(60+rank)), ke
 resolves score ties by ID. Original indexes/runs are never silently overwritten. The demo uses the same search
 CLI and a read-only article store; saved evaluation replay is labeled separately from new retrieval. On this Mac,
 JVM, model encoding and FAISS execution are isolated to avoid memory/OpenMP conflicts.
-News IR · Research report · 4 / 19
+News IR · Research report · 4 / 21
 
 === PAGE 5 ===
 5. Assessment protocol and evaluation definitions
@@ -200,7 +204,7 @@ label-accuracy intervals. Native trec
 _
 eval [9] independently cross-checks seven measures per query and macro
 mean. Ordinal scores preserve published rank order, including tied original scores, during those checks.
-News IR · Research report · 5 / 19
+News IR · Research report · 5 / 21
 
 === PAGE 6 ===
 6. Results on the original 57 topics
@@ -236,7 +240,7 @@ _
 CASE
 _
 STUDIES.md.
-News IR · Research report · 6 / 19
+News IR · Research report · 6 / 21
 
 === PAGE 7 ===
 7. Results on the custom linguistic suite
@@ -266,7 +270,7 @@ Sensitivity. Exponential 0/1/3 gains yield nDCG@5=0.4350/0.4708. Removing medium
 credit gives 0.4181/0.4645; keeping only grade-2 positives gives 0.3797/0.4332. These specified scenarios
 preserve the average direction but do not bound label error, establish significance or validate high-confidence
 judgments.
-News IR · Research report · 7 / 19
+News IR · Research report · 7 / 21
 
 === PAGE 8 ===
 8. Failure analysis: linguistic boundaries and competing explanations
@@ -304,7 +308,7 @@ The audit records whether quoted support lies within E5's retained prefix. It ca
 but visibility does not establish use by the model. BM25's full-body coverage and E5's prefix coverage confound
 architecture with input budget. Neither causal attribution to truncation nor a general model-family claim is
 warranted without a controlled equal-input or passage-indexing experiment.
-News IR · Research report · 8 / 19
+News IR · Research report · 8 / 21
 
 === PAGE 9 ===
 9. Post-hoc content-quality ablation
@@ -341,7 +345,7 @@ rule on new queries, include longer refilling pools with proper labels, and comp
 while controlling input coverage.
 Outputs include every candidate/retained ID, per-query CSV, aggregate metrics and source-bound hashes in
 artifacts/evaluations/quality-top20-v1/.
-News IR · Research report · 9 / 19
+News IR · Research report · 9 / 21
 
 === PAGE 10 ===
 10. Engineering, efficiency and reproducibility
@@ -382,7 +386,7 @@ comparisons, 1,624 RRF comparisons and 588 custom comparisons. Native four-decim
 0.000051. The custom artifact validator recomputes saved scores and checks all 737 source/evidence records.
 Real-browser verification covers all 77 saved queries, article views, 390-pixel layout and actual BM25/E5/RRF
 retrieval, with no observed JavaScript exceptions.
-News IR · Research report · 10 / 19
+News IR · Research report · 10 / 21
 
 === PAGE 11 ===
 11. Limitations, conclusions and remaining review
@@ -436,7 +440,7 @@ team components; actual personal work is confirmed separately. The verified publ
 1, publishes source, notebooks, preprocessing scripts and reports. Assessment provenance and the next
 validation stage are described in Section 5. Submit the four-page brief; this longer report is supporting
 research material.
-News IR · Research report · 11 / 19
+News IR · Research report · 11 / 21
 
 === PAGE 12 ===
 References and reproduction index
@@ -501,7 +505,7 @@ _
 EVIDENCE.md; full article packets
 remain local under artifacts/assessments/. The longer appendix is not reproduced in the four-page brief.
 Selected article excerpts remain evidence for the judgments, rather than a substitute for full-document review.
-News IR · Research report · 12 / 19
+News IR · Research report · 12 / 21
 
 === PAGE 13 ===
 12. Expanded scope: 40-query follow-up and combined results
@@ -537,7 +541,7 @@ Temporal judgments require article-supported event dates. A report of a Brazilia
 without a calendar anchor can be topically appropriate but fail this evidence requirement. Such zeros should
 not all be interpreted as wrong-event retrieval. Relevance concerns the article's assertions and the frozen need;
 it does not certify every factual assertion in the source.
-News IR · Research report · 13 / 19
+News IR · Research report · 13 / 21
 
 === PAGE 14 ===
 13. Robustness of the expanded comparison
@@ -570,18 +574,108 @@ completed versus pending action. V07 is a counterexample: E5 leads 0.3392 vs 0.3
 risk-assessment article at rank 1; BM25's first discusses cash bail without establishing the required alternative.
 These evidence-backed distinctions describe observed rankings, without proving a causal model mechanism.
 Validation. Added and combined metrics contribute 588 + 1,148 independent native comparisons, giving
-7,196 across the project. The current test suite has 153 passing tests. The expanded report, saved demo, all
-40 frozen query texts, 1,444 decisions, targeted adjudication, source-run lineage and uncertainty artifacts are
-included in the local package. Full article packets, corpus, model and indexes are excluded from the portable
-archive and remain local dependencies.
+7,196 across the earlier news experiments. The current test suite has 159 passing tests. The expanded
+report, saved demo, all 40 frozen query texts, 1,444 decisions, targeted adjudication, source-run lineage and
+uncertainty artifacts are included in the local package. Full article packets, corpus, model and indexes are
+excluded from the portable archive and remain local dependencies.
 Next validation stage. Human review is planned, starting with a balanced sample of positives, hard
 negatives and date-unsupported cases. After review, we will test passage-based or equal-input retrieval with
 fresh judgments. Controlled polarity pairs would isolate negation better than these natural multi-constraint
 queries. The larger suite supplies more diagnostic cases, while the reversal warns against assuming a model-
 level winner from the first five examples per category.
-News IR · Research report · 14 / 19
+News IR · Research report · 14 / 21
 
 === PAGE 15 ===
+14. Integrated controlled robustness experiments
+The combined project retains the existing news engines and incorporates Hamsini G’s independently
+implemented controlled-rewrite study. A byte-preserved snapshot of her code, query sheet, tests, saved runs
+and results is stored under studies/hamsini
+_
+robustness/, with source commit and per-file hashes. Her
+pipeline/experiment work is credited directly; integration is a subsequent change.
+14.1 News-domain task and corpus audit
+Core 2018 supplies 50 ad-hoc news topics, each with a title, description and narrative. All 26,233 exported
+query–document grades match the official NIST file. The available corpus contains documents for 26,226 of
+those pairs. Eleven additional pairs refer to empty excluded records; just one of the total 18 unavailable pairs is
+positive. Primary scores retain every original judgment; an available-corpus sensitivity removes unavailable
+pairs without changing rankings.
+The mirror has 594,977 source records and is not established as text-equivalent to the full official WaPo v2
+collection. These results are explicitly a Core 2018 evaluation on the available news corpus, not an official full-
+corpus reproduction. Existing news vectors are reused; no model is retrained or tuned on the topics.
+14.2 Frozen query formulations and validity
+All 50 topics receive three formulations: official title, official description and one new provisional AI-authored
+rewrite. The exact 150 texts, narratives, length/overlap features and protocol were frozen before Core 2018
+retrieval. Independent human rewrite-intent review has not been completed. Reusing NIST labels for a rewrite
+is conditional on retaining its narrative’s relevance criteria. Official description comparisons change
+length/detail and are reported as a query-form diagnostic, not pure paraphrase robustness.
+14.3 Separate nDCG@5 results
+Separate experiment BM25 E5 RRF
+News · original titles 0.4454 0.3878 0.4453
+News · provisional rewrites 0.2868 0.4113 0.4447
+News · official descriptions 0.3796 0.3736 0.4129
+COVID · original keywords 0.6687 0.5746 0.7504
+COVID · rewrite A 0.3269 0.4208 0.4792
+COVID · rewrite B 0.2694 0.4303 0.4200
+The news difference in changes, E5 minus BM25, is +0.1820 nDCG@5 (paired 95% interval [+0.0784,
++0.2905], Holm p=0.0168). MAP and bpref point the same way; condensed-nDCG@10 uncertainty includes
+zero. News RRF is nearly stable (0.4453 → 0.4447), unlike its larger COVID declines. Dataset, rewrite and
+coverage differences prevent attributing this contrast to domain alone.
+COVID rows are an integrated rank-preserving re-evaluation of Hamsini’s saved runs, not newly generated
+retrieval runs. Original score-based CSVs reproduce and remain unchanged. Near-tie score serialization can
+produce small differences when an evaluator sorts scores; the integrated evaluation uses derived ordinal scores
+to retain published rank order. Exact @10, MAP, coverage, bpref and sensitivities are saved alongside @5.
+News IR · Research report · 15 / 21
+
+=== PAGE 16 ===
+15. Paired interpretation, integration and next validation
+15.1 Estimand and uncertainty
+For each engine and topic, change is score(rewrite) minus score(original). Dense robustness advantage is
+change(E5) minus change(BM25). A positive value means E5 lost less or gained more; it does not necessarily
+mean E5 has the higher absolute score. Paired tests use one observation per topic, 10,000 bootstrap/sign-flip
+draws and Holm adjustment within each declared metric family. Domains and formulation variants are never
+pooled into an overall performance average.
+Hamsini’s original feature analysis treated both rewrites as 100 observations from 50 topics. The integration
+adds a clearly different topic-mean association analysis: both feature and advantage are averaged within topic
+before permutation. This changes the estimand and is not presented as a retroactive rewrite of her original
+results. Each original phenomenon group already contains distinct topics, so this dependence concern is not
+used to dismiss every group-specific comparison.
+15.2 Incomplete judgments and rewrite validity
+Standard nDCG/MAP retain unjudged positions with zero contribution. Condensed nDCG and bpref provide
+sensitivity views but cannot recover unknown labels. The COVID query study has substantially lower judged
+coverage on rewrites. An omission sensitivity excludes topics 5 and 12, flagged during the pre-integration
+review for possible intent narrowing; original texts and primary results remain unchanged. This sensitivity
+does not certify the remaining rewrites.
+The news study now has a direct short-query ad-hoc benchmark in addition to the earlier
+headline/background-linking adaptation. The 40 custom needs remain a separate constraint diagnostic with
+preliminary full-article relevance labels. Neither the source study
+’s self-verification nor machine evidence
+checks are represented as independent human assessment.
+15.3 Engineering and demo integration
+The active engine preserves strict corpus/model identity and resume checks. Small batches encode new query
+vectors and submit them to exact FAISS search; runtime manifests record batch size and amortized
+throughput. This leaves the frozen document vectors and earlier experiments intact. Fake-encoder tests
+compare batched and sequential rankings, including empty queries and cutoff ties.
+The local demo exposes all three Core 2018 formulations. A rewritten/description query shows its original title
+and each engine’s nDCG@5 change, alongside article text and supplied grades. Scientific runs remain a
+separate saved study because their document text is not part of the local news corpus. No COVID ID is resolved
+through the news article store.
+15.4 Remaining work and reproducibility
+Prioritize an independent human check of news rewrite intent and the planned custom relevance review, then
+publish separately versioned reviewed results. Equal-input/passage retrieval and contrastive polarity tests
+remain extensions. Confirm remaining personal contributions with the members concerned.
+Run scripts/evaluate
+_
+integrated
+_
+study.py --study covid --output <new-directory> to reproduce the
+imported study, and use --study core18 --native for the new news runs. Existing outputs are refused.
+reports/INTEGRATED
+_
+STUDY.md records the current computed results and effect sizes; studies/README.md
+identifies the original contribution and source.
+News IR · Research report · 16 / 21
+
+=== PAGE 17 ===
 Appendix A. Frozen custom queries (V01–N05)
 Each information need has the shared 0/1/2 rubric: fails a mandatory constraint; limited qualifying detail;
 substantive qualifying evidence. Exact exclusion rules and status/protocol fields are in the frozen JSONL.
@@ -640,9 +734,9 @@ identifying the Zimmerman/Martin case.
 Scope: All pairs in the BM25/E5 top-20 union are assessed, with full-available-text evidence. Query labels are
 not transferred from the original 57 topics. Hard constraints remain part of the relevance decision; topically
 related contradictory or undated articles do not automatically qualify.
-News IR · Research report · 15 / 19
+News IR · Research report · 17 / 21
 
-=== PAGE 16 ===
+=== PAGE 18 ===
 Appendix A. Frozen custom queries (H01–T05)
 Each information need has the shared 0/1/2 rubric: fails a mandatory constraint; limited qualifying detail;
 substantive qualifying evidence. Exact exclusion rules and status/protocol fields are in the frozen JSONL.
@@ -696,9 +790,9 @@ A development dated December 18, 2014–July 19,
 Scope: All pairs in the BM25/E5 top-20 union are assessed, with full-available-text evidence. Query labels are
 not transferred from the original 57 topics. Hard constraints remain part of the relevance decision; topically
 related contradictory or undated articles do not automatically qualify.
-News IR · Research report · 16 / 19
+News IR · Research report · 18 / 21
 
-=== PAGE 17 ===
+=== PAGE 19 ===
 Appendix B. Traceable failure-analysis evidence
 These selected saved assessments connect the discussion to exact article IDs and literal source text. The grades
 evaluate the frozen query need, not the scientific or legal truth of every article assertion. Full rationales, all
@@ -752,9 +846,9 @@ V04 demonstrates a qualifying dense hit, not a failed lexical lead: BM25 rank 1 
 early ranks explain the query-level difference. For N03, the BM25 positive above has support far beyond the E5
 prefix; lexical specificity and coverage remain competing explanations. For T03, a qualifying date must be
 established from the full narrative; the brief quotation alone is not sufficient temporal proof.
-News IR · Research report · 17 / 19
+News IR · Research report · 19 / 21
 
-=== PAGE 18 ===
+=== PAGE 20 ===
 Appendix C. Frozen follow-up queries (V06–N10)
 Each new query uses the same strict 0/1/2 rubric. Wording and bounds were frozen before retrieval; frozen
 pending-status fields are historical, with completion recorded separately.
@@ -822,9 +916,9 @@ investigation.
 The article explicitly reports the FBI recommendation against
 criminal charges in the Clinton private-email-server case and
 supplies the stated reason.
-News IR · Research report · 18 / 19
+News IR · Research report · 20 / 21
 
-=== PAGE 19 ===
+=== PAGE 21 ===
 Appendix C. Frozen follow-up queries (H06–T10)
 Each new query uses the same strict 0/1/2 rubric. Wording and bounds were frozen before retrieval; frozen
 pending-status fields are historical, with completion recorded separately.
@@ -896,4 +990,4 @@ Brazilian authorities or public-health responders take a specific action in
 Brazil addressing Zika or its linked neurological or congenital risks. The
 action must occur during 2016-02-02–2016-03-02, inclusive, with its
 event date supported by the article text.
-News IR · Research report · 19 / 19
+News IR · Research report · 21 / 21

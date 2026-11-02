@@ -251,6 +251,40 @@ class DenseEngine:
     def get_document(self, doc_id):
         return self.store.get(doc_id)
 
+    def search_many(self, queries, top_k=1000, *, batch_size=8):
+        """Encode a small batch once; exact search still ranks every corpus vector.
+
+        Yield hits plus each query’s share of encoding and batch-search time.
+        This is a throughput protocol, not independent single-query latency.
+        """
+        import time
+        if self._closed:
+            raise ValueError("Dense engine is closed")
+        if type(batch_size) is not int or batch_size < 1 or batch_size > 64:
+            raise ValueError("Query batch size must be between 1 and 64")
+        if type(top_k) is not int or not 1 <= top_k <= 10000:
+            raise ValueError("top_k must be an integer between 1 and 10000")
+        if not isinstance(queries, (list, tuple)) or not all(isinstance(q, str) for q in queries):
+            raise TypeError("Queries must be a list of strings")
+        for offset in range(0, len(queries), batch_size):
+            batch = queries[offset:offset + batch_size]
+            active = [q for q in batch if q.strip()]
+            started = time.perf_counter()
+            if active:
+                vectors = validate_vectors(self.encoder.encode(active, kind="query"),
+                          dimension=self.manifest["model"]["dimension"], rows=len(active))
+                results = iter(self._worker.search_many(vectors, top_k))
+            else:
+                results = iter(())
+            encoding_ms = (time.perf_counter() - started) * 1000 / max(len(active), 1)
+            for query in batch:
+                if not query.strip():
+                    yield [], 0.0
+                    continue
+                candidates = next(results)
+                hits = [SearchHit(d, rank, score) for rank, (score, d) in enumerate(candidates, 1)]
+                yield hits, encoding_ms
+
     def close(self):
         if not self._closed:
             try:

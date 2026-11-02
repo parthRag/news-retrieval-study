@@ -1,0 +1,16 @@
+{
+  "purpose": "Exploratory identifier coverage only; does not establish corpus version or official-task equivalence",
+  "core18_total_judgments": 26233,
+  "unique_judged_docids": 24642,
+  "missing_judgments": 7,
+  "positive_judgments": 3948,
+  "eligible_positive_judgments_present": 3947,
+  "positive_coverage": 0.9997467071935157,
+  "missing_positive": 1,
+  "topics": 50,
+  "official_qrels_url": "https://trec.nist.gov/data/core/qrels2018.txt",
+  "official_nist_pair_grade_match": true,
+  "official_qrels_sha256": "ebe3b6c278adbb81d6b911e9869705828f90b6deb15c9399ae9437b5be67575e",
+  "peer_qrels_sha256": "ebe3b6c278adbb81d6b911e9869705828f90b6deb15c9399ae9437b5be67575e",
+  "local_corpus_source_sha256": "82086c5dc9397700ca6682d19f1a1cace8ace5defa31f7990ca3c28314ec61a9"
+}

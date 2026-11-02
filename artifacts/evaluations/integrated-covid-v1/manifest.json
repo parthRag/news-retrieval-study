@@ -1,0 +1,29 @@
+{
+  "dataset": "TREC-COVID",
+  "topic_count": 50,
+  "documents": 171331,
+  "recomputed_saved_csv_values": 3600,
+  "source_files": {
+    "studies/hamsini_robustness/runs/trec_covid/bm25_query.run": "74398501b8d32303c2241aef6f510b200b2b48a6568a4f4b309171ab4bb6f4bb",
+    "studies/hamsini_robustness/runs/trec_covid/dense_query.run": "3965f87157f386948b4081d76cc17397690a138491b2cdd5250737975061ff7f",
+    "studies/hamsini_robustness/runs/trec_covid/rrf_query.run": "c591c772f8c0335f3b535f65be994e22a4633fcac6ccfc640aeb6be3d582948b",
+    "studies/hamsini_robustness/runs/trec_covid/bm25_text.run": "16c4c2915f15cc9afdc8567230ddc62daa9e28e00e78cb966b03389d387d1a8b",
+    "studies/hamsini_robustness/runs/trec_covid/dense_text.run": "f1b403907d1e252ed4dbcf8f6de58c4775b83f73a592f2af611eb6638d86d6b0",
+    "studies/hamsini_robustness/runs/trec_covid/rrf_text.run": "97cf2824e45a9f31d6ebef0a9e21ef936c2c5486be4b0a77702813b34af1e361",
+    "studies/hamsini_robustness/runs/trec_covid/bm25_rewrite_a.run": "25c8ea25f7f4036d010a34c0e4d9d708e6eecfd9890f074304f672a7051f2260",
+    "studies/hamsini_robustness/runs/trec_covid/dense_rewrite_a.run": "5501749298733a3c7ff3b88f0a360864fe617b2ac87165c86cbebce88f4ba976",
+    "studies/hamsini_robustness/runs/trec_covid/rrf_rewrite_a.run": "4ab6751344313aa1a980e2f9741308e6f17a143f5ac925c78b7998af5490a011",
+    "studies/hamsini_robustness/runs/trec_covid/bm25_rewrite_b.run": "c7d044defe013c337fb22eaf0115b01332c50484277c42a0ae5b58d6a30d7123",
+    "studies/hamsini_robustness/runs/trec_covid/dense_rewrite_b.run": "95eac3cb5ddf3d488f515bf814ae4bd63e1056c2b31e8837720a622fcda485eb",
+    "studies/hamsini_robustness/runs/trec_covid/rrf_rewrite_b.run": "a18436c8db45bd2241aef108c69bf2de274ecc8b8b5d44a776be0c5bb4158b4b"
+  },
+  "interpretation": "Imported human qrels; rewrite equivalence was single-annotator verified in source study. Topics 5/12 flagged for independent review; exclusion is a sensitivity, not repaired ground truth.",
+  "attribution": "Controlled COVID rewrite study by Hamsini G; integrated re-evaluation/extra @5 metrics/topic-mean feature analysis added separately.",
+  "ranking_note": "Historical score-based CSVs reproduce. Integrated metrics use derived ordinal scores to preserve published rank order; near-tie handling can produce small differences. Both original files and original CSVs are preserved.",
+  "imported_source_commit": "7b73bb339d9ea3827375ec10aa2e1c4bb67bde06",
+  "files": {
+    "metrics.json": "70362ddbadb4a4aef52a325fb9e83451f76a33372b4e1b248eab063a81c0a295",
+    "paired_changes.json": "964d8274273eeb43b74b030984afb9726116aea77a89a6d79ebae4d1a1a9051a",
+    "topic_mean_features.json": "3d38d59315ea331f3baead9317a79076e756e16ac9e7b57d23efa2979bb29ca0"
+  }
+}

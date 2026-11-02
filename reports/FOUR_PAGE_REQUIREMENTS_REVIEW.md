@@ -40,4 +40,9 @@ The student-ID correction is **2023A7PS0574P** for Parth; both regenerated PDFs 
 
 ## Outstanding information
 
-The public GitHub repository is created and verified at https://github.com/parthRag/news-retrieval-study. Completed technical contributions for three members have not been confirmed. These remain accurately marked as pending; the PDF does not invent a repository or member work. The matrix identifies component responsibility without numerical effort shares. This document review does not remove those outstanding submission details.
+The public GitHub repository is created and verified at https://github.com/parthRag/news-retrieval-study. Hamsini’s independent rewrite study is now verified and incorporated. Completed technical contributions for Sushruth and Kritika have not been confirmed. These remain accurately marked as pending; the PDF does not invent a repository or member work. The matrix identifies component responsibility without numerical effort shares. This document review does not remove those outstanding submission details.
+
+
+## Integrated revision, 2 November 2026
+
+The brief now additionally covers Core 2018 on the available news corpus and Hamsini’s preserved TREC-COVID rewrite experiment. Its result table uses separate 50-topic rows, with paired news effects and reference-coverage sensitivities. All eight required sections remain present; the brief is exactly four PDF pages and the supporting paper is 21. Metadata keeps Parth’s corrected 0574 ID. Hamsini’s actual independent experiment is credited; Sushruth/Kritika personal confirmations and independent human review remain outstanding. Current verification is recorded in `deliverables/final_validation.json` and `artifacts/integration-validation/`.

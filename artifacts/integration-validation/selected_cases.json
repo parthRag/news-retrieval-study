@@ -1,0 +1,218 @@
+[
+  {
+    "topic_id": "814",
+    "variant": "title",
+    "engine": "bm25",
+    "rank": 1,
+    "grade": 2,
+    "doc_id": "f52d203c-51f4-11e3-9e2c-e1d01116fd98",
+    "title": "China should abolish its one-child policy altogether"
+  },
+  {
+    "topic_id": "814",
+    "variant": "title",
+    "engine": "bm25",
+    "rank": 2,
+    "grade": 0,
+    "doc_id": "c55cc80b-3b3d-49f7-827a-52416946c394",
+    "title": "State Department reprimands China over sex trafficking and forced labor"
+  },
+  {
+    "topic_id": "814",
+    "variant": "title",
+    "engine": "bm25",
+    "rank": 3,
+    "grade": 1,
+    "doc_id": "48d8845c-56b3-11e3-8304-caf30787c0a9",
+    "title": "Biden to attempt damage control in visit with Chinese leader"
+  },
+  {
+    "topic_id": "814",
+    "variant": "title",
+    "engine": "dense",
+    "rank": 1,
+    "grade": 2,
+    "doc_id": "f52d203c-51f4-11e3-9e2c-e1d01116fd98",
+    "title": "China should abolish its one-child policy altogether"
+  },
+  {
+    "topic_id": "814",
+    "variant": "title",
+    "engine": "dense",
+    "rank": 2,
+    "grade": 2,
+    "doc_id": "6c885b64-7f3f-11e5-b575-d8dcfedb4ea1",
+    "title": "China\u2019s lifting of its one-child policy can\u2019t undo the damage already done"
+  },
+  {
+    "topic_id": "814",
+    "variant": "title",
+    "engine": "dense",
+    "rank": 3,
+    "grade": 2,
+    "doc_id": "582c4702-8183-11e5-8bd2-680fff868306",
+    "title": "A taboo left unexplored in \u2018one-child\u2019 policy reporting"
+  },
+  {
+    "topic_id": "814",
+    "variant": "rewrite",
+    "engine": "bm25",
+    "rank": 1,
+    "grade": 2,
+    "doc_id": "f283a330-0292-11e3-bfc5-406b928603b2",
+    "title": "The loneliness of China\u2019s one-child rule"
+  },
+  {
+    "topic_id": "814",
+    "variant": "rewrite",
+    "engine": "bm25",
+    "rank": 2,
+    "grade": 2,
+    "doc_id": "bdfeff1e-9d7e-11e4-86a3-1b56f64925f6",
+    "title": "\u2018One is enough\u2019: Chinese families lukewarm over easing of one-child policy"
+  },
+  {
+    "topic_id": "814",
+    "variant": "rewrite",
+    "engine": "bm25",
+    "rank": 3,
+    "grade": 2,
+    "doc_id": "998c085d46b4af60be956d9f75ef5859",
+    "title": "The human suffering caused by China\u2019s one-child policy"
+  },
+  {
+    "topic_id": "814",
+    "variant": "rewrite",
+    "engine": "dense",
+    "rank": 1,
+    "grade": 2,
+    "doc_id": "f283a330-0292-11e3-bfc5-406b928603b2",
+    "title": "The loneliness of China\u2019s one-child rule"
+  },
+  {
+    "topic_id": "814",
+    "variant": "rewrite",
+    "engine": "dense",
+    "rank": 2,
+    "grade": 2,
+    "doc_id": "f52d203c-51f4-11e3-9e2c-e1d01116fd98",
+    "title": "China should abolish its one-child policy altogether"
+  },
+  {
+    "topic_id": "814",
+    "variant": "rewrite",
+    "engine": "dense",
+    "rank": 3,
+    "grade": 2,
+    "doc_id": "ad64af1c-4def-11e3-be6b-d3d28122e6d4",
+    "title": "Six questions on China\u2019s one-child policy, answered"
+  },
+  {
+    "topic_id": "825",
+    "variant": "title",
+    "engine": "bm25",
+    "rank": 1,
+    "grade": 2,
+    "doc_id": "2e0c4ffa3fb7089f43965bef7ee6d4d2",
+    "title": "Study: U.S. could put a big dent in corn prices by relaxing ethanol rules"
+  },
+  {
+    "topic_id": "825",
+    "variant": "title",
+    "engine": "bm25",
+    "rank": 2,
+    "grade": 2,
+    "doc_id": "d9cbfdd3a4593477feee99eb4f3a28be",
+    "title": "Amid a devastating drought, does it still make sense to use corn for fuel?"
+  },
+  {
+    "topic_id": "825",
+    "variant": "title",
+    "engine": "bm25",
+    "rank": 3,
+    "grade": 1,
+    "doc_id": "29fc87b8-b656-11e5-a76a-0b5145e8679a",
+    "title": "Mr. Cruz is right about ending the ethanol mandate"
+  },
+  {
+    "topic_id": "825",
+    "variant": "title",
+    "engine": "dense",
+    "rank": 1,
+    "grade": 2,
+    "doc_id": "2e0c4ffa3fb7089f43965bef7ee6d4d2",
+    "title": "Study: U.S. could put a big dent in corn prices by relaxing ethanol rules"
+  },
+  {
+    "topic_id": "825",
+    "variant": "title",
+    "engine": "dense",
+    "rank": 2,
+    "grade": 0,
+    "doc_id": "17346b08-08ef-11e3-8974-f97ab3b3c677",
+    "title": "Charles Lane: Ethanol mandates creating an economic pileup"
+  },
+  {
+    "topic_id": "825",
+    "variant": "title",
+    "engine": "dense",
+    "rank": 3,
+    "grade": 0,
+    "doc_id": "79fb5268-4e33-11e3-be6b-d3d28122e6d4",
+    "title": "Ethanol takes policy blow from the Environmental Protection Agency"
+  },
+  {
+    "topic_id": "825",
+    "variant": "rewrite",
+    "engine": "bm25",
+    "rank": 1,
+    "grade": "Unjudged",
+    "doc_id": "17058cd4ab0b3964b4174fcea0c8b338",
+    "title": "Study: Global crop production shows some signs of stagnating"
+  },
+  {
+    "topic_id": "825",
+    "variant": "rewrite",
+    "engine": "bm25",
+    "rank": 2,
+    "grade": 0,
+    "doc_id": "5dfcfec2-25af-11e5-b77f-eb13a215f593",
+    "title": "Think you know corn? Chew on this."
+  },
+  {
+    "topic_id": "825",
+    "variant": "rewrite",
+    "engine": "bm25",
+    "rank": 3,
+    "grade": "Unjudged",
+    "doc_id": "74660e7e-fb86-11e2-8752-b41d7ed1f685",
+    "title": "Mummies reveal coca, alcohol use in Incan ritual sacrifices"
+  },
+  {
+    "topic_id": "825",
+    "variant": "rewrite",
+    "engine": "dense",
+    "rank": 1,
+    "grade": 2,
+    "doc_id": "2e0c4ffa3fb7089f43965bef7ee6d4d2",
+    "title": "Study: U.S. could put a big dent in corn prices by relaxing ethanol rules"
+  },
+  {
+    "topic_id": "825",
+    "variant": "rewrite",
+    "engine": "dense",
+    "rank": 2,
+    "grade": 0,
+    "doc_id": "79fb5268-4e33-11e3-be6b-d3d28122e6d4",
+    "title": "Ethanol takes policy blow from the Environmental Protection Agency"
+  },
+  {
+    "topic_id": "825",
+    "variant": "rewrite",
+    "engine": "dense",
+    "rank": 3,
+    "grade": 2,
+    "doc_id": "16211a12-dcc8-11e1-9974-5c975ae4810f",
+    "title": "Congress\u2019s wrongheaded approach to drought relief"
+  }
+]

@@ -12,17 +12,18 @@ OUT=ROOT/'deliverables'
 
 def package_paths():
     files=set()
-    for name in ['src','scripts','tests','configs','notebooks','reports','annotations']:
+    for name in ['src','scripts','tests','configs','notebooks','reports','annotations','studies']:
         for path in (ROOT/name).rglob('*'):
             if path.is_file() and not path.is_symlink() and not any(p in {'__pycache__','.DS_Store'} for p in path.parts):
                 files.add(path)
     for name in ['README.md','DELIVERABLES.md','CONTRIBUTING.md','PROJECT_BLUEPRINT.md','pyproject.toml','requirements-lock.txt','.gitignore','queries.jsonl','qrel.jsonl','job_summary.json']:
         files.add(ROOT/name)
     for name in ['original-57','rrf-original-57','custom20-depth20-v1','custom20-top5-v1','quality-top20-v1',
-                 'custom40-extension20-depth20-v2','custom40-depth20-v2']:
+                 'custom40-extension20-depth20-v2','custom40-depth20-v2','integrated-core18-v1','integrated-covid-v1']:
         files.update(p for p in (ROOT/'artifacts/evaluations'/name).rglob('*') if p.is_file())
     for name in ['bm25-original-benchmark','dense-original','rrf-original-k60','bm25-custom-draft-depth1000','dense-custom-draft',
-                 'bm25-custom40-extension20-v2','dense-custom40-extension20-v2','bm25-custom40-v2','dense-custom40-v2']:
+                 'bm25-custom40-extension20-v2','dense-custom40-extension20-v2','bm25-custom40-v2','dense-custom40-v2',
+                 'bm25-core18-v1','dense-core18-v1','rrf-core18-v1']:
         files.update((ROOT/'artifacts/runs'/name/f) for f in ['manifest.json','run.trec','results.jsonl','queries.jsonl'])
     for name in ['test-results-final.xml','custom20_depth20_validation.json','original_benchmark_provenance.json',
                  'custom40_extension_validation.json','custom40_depth20_validation.json','github_publication.json']:
@@ -32,6 +33,10 @@ def package_paths():
         files.add(ROOT/'artifacts/assessments/custom40-v2'/name)
     for name in ['demo-validation','demo-validation-recheck','demo-validation-expanded40','demo-validation-assessment-plan']:
         files.update(p for p in (ROOT/'artifacts'/name).iterdir() if p.is_file())
+    for name in ['reviews/2026-11-02-project-comparison','integration-validation']:
+        files.update(p for p in (ROOT/'artifacts'/name).rglob('*') if p.is_file())
+    if (ROOT/'artifacts/test-results-integration.xml').exists():
+        files.add(ROOT/'artifacts/test-results-integration.xml')
     for name in ['brief','research']:
         files.update(ROOT/f'artifacts/pdf-review/{name}'/f for f in ['inspection.json','extracted.txt'])
     files.update(p for p in OUT.iterdir() if p.is_file() and p.suffix in {'.pdf','.md','.html','.svg','.csv','.json'}

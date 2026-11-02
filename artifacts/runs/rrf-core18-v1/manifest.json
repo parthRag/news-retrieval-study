@@ -1,0 +1,47 @@
+{
+  "created_at_utc": "2026-11-02T10:50:07.349378+00:00",
+  "engine": "rrf",
+  "run_tag": "rrf-k60",
+  "coverage": "full",
+  "corpus_sha256": "82086c5dc9397700ca6682d19f1a1cace8ace5defa31f7990ca3c28314ec61a9",
+  "eligible_documents": 594589,
+  "query_source_sha256": "e5b638a42befe74bd53f994aef69585a9956ebd14524fe9ff8b500b9ad21f67f",
+  "query_count": 150,
+  "top_k": 1000,
+  "total_hits": 150000,
+  "runtime_python": "3.12.9",
+  "retrieval_config": {
+    "k": 60,
+    "component_depth": 1000,
+    "weights": [
+      1,
+      1
+    ],
+    "tie_break": "ascending document ID",
+    "tuning": "none"
+  },
+  "components": {
+    "bm25": {
+      "path": "/Users/parthraghuvanshi/Desktop/IR/artifacts/runs/bm25-core18-v1",
+      "manifest_sha256": "6ac47f637b206c83e6005d277386e103d11ba84febd442c401cc890316f9c9fd",
+      "run_sha256": "62c7dabbb8f34b4fa02ee4f169d6880f0d44dbc4f88ed7381bc0477dffb099cc",
+      "engine": "lucene-bm25"
+    },
+    "dense": {
+      "path": "/Users/parthraghuvanshi/Desktop/IR/artifacts/runs/dense-core18-v1",
+      "manifest_sha256": "254f7352f4d7d6893468ba3fb35bf3332d10ecd1cb053a0f1540abbf4d3b7c5b",
+      "run_sha256": "01b211a531af238c468c2d87befd0fd8c3d9fc6570645d98885f4185e69081e1",
+      "engine": "e5-cosine"
+    }
+  },
+  "latency_ms": {
+    "mean": 0.6566478110228976,
+    "min": 0.33920793794095516,
+    "max": 2.589333103969693
+  },
+  "latency_protocol": "Fusion computation over saved rankings only; excludes both engine searches, file loading and startup",
+  "evaluation": "No relevance labels used in fusion; k=60 (default 60), not fitted by this command",
+  "run_sha256": "2988efad0eb31e3060ebd06cc6b0c4f5c158c2875b2ebb021ac47e9fd33f85cf",
+  "results_sha256": "a1b90db6e4aa8f9e8655299b11094160042317785364668261c42f3b8520a850",
+  "query_snapshot_sha256": "ba8eeef77f46e1d3d54b4461660664006576cb3ed2ded7c24df0d0c1fe7c8743"
+}

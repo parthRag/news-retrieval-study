@@ -17,7 +17,8 @@ from .retrieval import BM25Engine
 
 
 def run_queries(index_dir, queries_path, output, *, top_k=1000, run_tag=None, corpus=None,
-                engine_type="bm25", document_index=None, model_dir=None, device="auto", allow_partial=False):
+                engine_type="bm25", document_index=None, model_dir=None, device="auto", allow_partial=False,
+                query_batch_size=1):
     if type(top_k) is not int or not 1 <= top_k <= 10000:
         raise ValueError("top_k must be an integer between 1 and 10000")
     if run_tag is None:
@@ -30,6 +31,10 @@ def run_queries(index_dir, queries_path, output, *, top_k=1000, run_tag=None, co
     queries = read_queries(queries_path)
     if engine_type not in {"bm25", "dense"}:
         raise ValueError("engine_type must be bm25 or dense")
+    if type(query_batch_size) is not int or not 1 <= query_batch_size <= 64:
+        raise ValueError("Query batch size must be between 1 and 64")
+    if engine_type != "dense" and query_batch_size != 1:
+        raise ValueError("Batched query encoding applies to dense runs only")
     query_hash = sha256_file(queries_path)
     target.parent.mkdir(parents=True, exist_ok=True)
     working = Path(tempfile.mkdtemp(prefix=f".{target.name}.running-", dir=target.parent))
@@ -42,11 +47,16 @@ def run_queries(index_dir, queries_path, output, *, top_k=1000, run_tag=None, co
             context = DenseEngine(index_dir, document_index=document_index, model_dir=model_dir,
                                    corpus=corpus, device=device, allow_partial=allow_partial)
         with context as engine:
+            batches = (engine.search_many([q["text"] for q in queries], top_k, batch_size=query_batch_size)
+                       if engine_type == "dense" and query_batch_size > 1 else None)
             with (working / "run.trec").open("w") as trec, (working / "results.jsonl").open("w", encoding="utf-8") as results:
                 for query in queries:
                     started = time.perf_counter()
-                    hits = engine.search(query["text"], top_k)
-                    latency = (time.perf_counter() - started) * 1000
+                    if batches is None:
+                        hits = engine.search(query["text"], top_k)
+                        latency = (time.perf_counter() - started) * 1000
+                    else:
+                        hits, latency = next(batches)
                     latencies.append(latency)
                     if not hits:
                         empty.append(query["_id"])
@@ -91,6 +101,9 @@ def run_queries(index_dir, queries_path, output, *, top_k=1000, run_tag=None, co
                 "results_sha256": sha256_file(working / "results.jsonl"),
                 "evaluation": "No relevance metrics computed; this command exports retrieval runs only",
             }
+            if batches is not None:
+                summary["query_encoding_batch_size"] = query_batch_size
+                summary["latency_protocol"] = "Batched query encoding and exact FAISS IPC/search time divided among active batch queries; amortized throughput, not independent single-query latency; excludes startup/article lookup"
             if engine_type == "bm25":
                 summary["bm25"] = {"k1": engine.k1, "b": engine.b}
                 summary["analyzer"] = engine.store.manifest["analyzer"]

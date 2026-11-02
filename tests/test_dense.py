@@ -129,6 +129,23 @@ def test_pilot_requires_explicit_acknowledgement(tiny_index, tmp_path):
         assert engine.num_docs == 2
 
 
+def test_batched_queries_match_single_search_and_preserve_empty(tiny_index, encoded, tmp_path):
+    target = tmp_path / "dense-batched"
+    build_dense_index(encoded, target, document_index=tiny_index["index"], model_dir="unused")
+    encoder = FixtureEncoder()
+    with DenseEngine(target, encoder=encoder) as engine:
+        queries = ["cricket insect", " ", "cricket sport", "quasar"]
+        expected = [engine.search(q, 5) for q in queries]
+        before = encoder.calls
+        actual = list(engine.search_many(queries, 5, batch_size=2))
+        assert encoder.calls - before == 2
+        assert [hits for hits, _ in actual] == expected
+        assert actual[1] == ([], 0.0)
+        assert all(ms >= 0 for _, ms in actual)
+        with pytest.raises(ValueError):
+            list(engine.search_many(queries, batch_size=0))
+
+
 def test_incomplete_encoding_cannot_be_indexed(tiny_index, tmp_path):
     root = tmp_path / "incomplete"
     with pytest.raises(RuntimeError):

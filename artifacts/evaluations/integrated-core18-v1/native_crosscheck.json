@@ -1,0 +1,98 @@
+{
+  "title": {
+    "bm25": {
+      "status": "passed",
+      "comparisons": 357,
+      "max_absolute_difference": 4.97434079798631e-05,
+      "empty_query_zero_metrics_checked": 0,
+      "tolerance": 5.1e-05,
+      "precision_note": "trec_eval prints four decimal places",
+      "ranking_policy": "Derived scores 1001-rank preserve original published order, including score ties",
+      "version": "trec_eval version 9.0.4"
+    },
+    "dense": {
+      "status": "passed",
+      "comparisons": 357,
+      "max_absolute_difference": 4.949390637132289e-05,
+      "empty_query_zero_metrics_checked": 0,
+      "tolerance": 5.1e-05,
+      "precision_note": "trec_eval prints four decimal places",
+      "ranking_policy": "Derived scores 1001-rank preserve original published order, including score ties",
+      "version": "trec_eval version 9.0.4"
+    },
+    "rrf": {
+      "status": "passed",
+      "comparisons": 357,
+      "max_absolute_difference": 4.9367088607588094e-05,
+      "empty_query_zero_metrics_checked": 0,
+      "tolerance": 5.1e-05,
+      "precision_note": "trec_eval prints four decimal places",
+      "ranking_policy": "Derived scores 1001-rank preserve original published order, including score ties",
+      "version": "trec_eval version 9.0.4"
+    }
+  },
+  "description": {
+    "bm25": {
+      "status": "passed",
+      "comparisons": 357,
+      "max_absolute_difference": 4.959448307856329e-05,
+      "empty_query_zero_metrics_checked": 0,
+      "tolerance": 5.1e-05,
+      "precision_note": "trec_eval prints four decimal places",
+      "ranking_policy": "Derived scores 1001-rank preserve original published order, including score ties",
+      "version": "trec_eval version 9.0.4"
+    },
+    "dense": {
+      "status": "passed",
+      "comparisons": 357,
+      "max_absolute_difference": 4.9589221163326425e-05,
+      "empty_query_zero_metrics_checked": 0,
+      "tolerance": 5.1e-05,
+      "precision_note": "trec_eval prints four decimal places",
+      "ranking_policy": "Derived scores 1001-rank preserve original published order, including score ties",
+      "version": "trec_eval version 9.0.4"
+    },
+    "rrf": {
+      "status": "passed",
+      "comparisons": 357,
+      "max_absolute_difference": 4.994669828543852e-05,
+      "empty_query_zero_metrics_checked": 0,
+      "tolerance": 5.1e-05,
+      "precision_note": "trec_eval prints four decimal places",
+      "ranking_policy": "Derived scores 1001-rank preserve original published order, including score ties",
+      "version": "trec_eval version 9.0.4"
+    }
+  },
+  "rewrite": {
+    "bm25": {
+      "status": "passed",
+      "comparisons": 357,
+      "max_absolute_difference": 4.990003794802522e-05,
+      "empty_query_zero_metrics_checked": 0,
+      "tolerance": 5.1e-05,
+      "precision_note": "trec_eval prints four decimal places",
+      "ranking_policy": "Derived scores 1001-rank preserve original published order, including score ties",
+      "version": "trec_eval version 9.0.4"
+    },
+    "dense": {
+      "status": "passed",
+      "comparisons": 357,
+      "max_absolute_difference": 4.908245792924204e-05,
+      "empty_query_zero_metrics_checked": 0,
+      "tolerance": 5.1e-05,
+      "precision_note": "trec_eval prints four decimal places",
+      "ranking_policy": "Derived scores 1001-rank preserve original published order, including score ties",
+      "version": "trec_eval version 9.0.4"
+    },
+    "rrf": {
+      "status": "passed",
+      "comparisons": 357,
+      "max_absolute_difference": 4.968918034309322e-05,
+      "empty_query_zero_metrics_checked": 0,
+      "tolerance": 5.1e-05,
+      "precision_note": "trec_eval prints four decimal places",
+      "ranking_policy": "Derived scores 1001-rank preserve original published order, including score ties",
+      "version": "trec_eval version 9.0.4"
+    }
+  }
+}

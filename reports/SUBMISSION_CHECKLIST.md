@@ -1,6 +1,6 @@
 # Interim submission checklist
 
-The four-page brief and 19-page supporting research report are generated and published with the public GitHub link. The custom comparison uses thorough, full-article AI judgments as a preliminary reference; human review is planned next and has not yet been completed. See [assessment method and review plan](ASSESSMENT_METHOD.md) and `DELIVERABLES.md` for the current package.
+The four-page brief and 21-page supporting research report are generated and published with the public GitHub link. The custom comparison uses thorough, full-article AI judgments as a preliminary reference; human review is planned next and has not yet been completed. See [assessment method and review plan](ASSESSMENT_METHOD.md) and `DELIVERABLES.md` for the current package.
 
 | Required object | Current status | Evidence / remaining action |
 | --- | --- | --- |
@@ -70,3 +70,6 @@ The current four-member matrix is in `configs/submission.json`, `deliverables/co
 ## Original proposal requirements
 
 The latest four-page report also covers the original proposal checklist: primary objective, evaluation criteria, linked dataset, full related-paper titles/links and findings, approach/architecture with reasoning, key innovations, stretch work, and milestone/timeline estimates. See `FOUR_PAGE_REQUIREMENTS_REVIEW.md` for the page-by-page mapping and accuracy checks. The user requests four pages within the quoted six-page maximum.
+
+
+The 2 November integration preserves Hamsini’s controlled-rewrite study with attribution and adds 50 Core 2018 news topics in three formulations. See `reports/INTEGRATED_STUDY.md` for the computed results, query-intent review status and available-corpus caveat. Integration tests and the latest browser/numerical checks are recorded separately under `artifacts/integration-validation/` and `artifacts/test-results-integration.xml`.

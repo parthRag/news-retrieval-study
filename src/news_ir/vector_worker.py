@@ -63,3 +63,17 @@ class VectorWorker:
                     self.process.wait()
             self.process.stdin.close()
             self.process.stdout.close()
+
+    def search_many(self, vectors, top_k):
+        with self._lock:
+            if self.process.poll() is not None:
+                raise RuntimeError("FAISS worker is no longer running")
+            self.process.stdin.write(json.dumps({"method": "search_batch", "vectors": vectors.tolist(), "top_k": top_k}) + "\n")
+            self.process.stdin.flush()
+            line = self.process.stdout.readline()
+            if not line:
+                raise RuntimeError("FAISS worker stopped during batch search")
+            result = json.loads(line)
+            if "error" in result:
+                raise ValueError(result["error"])
+            return result["batches"]

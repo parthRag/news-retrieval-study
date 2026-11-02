@@ -48,7 +48,8 @@ def main():
     brief=metadata['group_number']+'_'+metadata['short_title']
     inspections={name:read(f'artifacts/pdf-review/{name}/inspection.json') for name in ['brief','research']}
     require(inspections['brief']['page_count']==4,'Brief must have four pages')
-    require(inspections['research']['page_count']==19,'Research report page count changed')
+    expected_research_pages = 21 if (ROOT/'artifacts/evaluations/integrated-core18-v1/manifest.json').exists() else 19
+    require(inspections['research']['page_count']==expected_research_pages,'Research report page count changed')
     for name in inspections:
         text=(ROOT/f'artifacts/pdf-review/{name}/extracted.txt').read_text()
         pdf=OUT/((brief if name=='brief' else 'RESEARCH_REPORT')+'.pdf')
@@ -91,6 +92,10 @@ def main():
         require(publication['status']=='published' and publication['visibility']=='public' and
                 publication['url']==metadata['repository_url'] and publication['owner']==metadata['github_username'] and
                 publication['default_branch']=='main','Repository publication evidence mismatch')
+    if expected_research_pages == 21:
+        required_urls += ['https://trec.nist.gov/data/core2018.html',
+                          'https://github.com/HamsiniGururaj/robust-news-retrieval']
+        require('covidandcustomqueries.' in condensed,'Truncated reference-scale explanation')
     require(set(required_urls) <= linked_urls,'Missing clickable dataset or paper links')
     text=(ROOT/'artifacts/pdf-review/research/extracted.txt').read_text()
     queries=[json.loads(l) for l in (ROOT/'annotations/ai_study_v1/queries.jsonl').read_text().splitlines()]
@@ -178,10 +183,17 @@ def main():
     native_total=sum(native_counts(read(f'artifacts/evaluations/{folder}/crosscheck.json'))
                      for folder in ['original-57','rrf-original-57','custom20-depth20-v1','custom40-extension20-depth20-v2','custom40-depth20-v2'])
     require(native_total==7196,'Native comparison count mismatch')
-    test=ET.parse(ROOT/'artifacts/test-results-final.xml').getroot()
+    test_path=ROOT/'artifacts/test-results-integration.xml'
+    test=ET.parse(test_path if test_path.exists() else ROOT/'artifacts/test-results-final.xml').getroot()
     suites=list(test.iter('testsuite'))
     tests=sum(int(s.attrib.get('tests',0)) for s in suites)
     require(tests>=153 and all(int(s.attrib.get('failures',0))==int(s.attrib.get('errors',0))==0 for s in suites),'Final test run failed')
+    integrated = None
+    if expected_research_pages == 21:
+        from validate_integrated_study import main as validate_integration
+        validate_integration()
+        integrated=read('artifacts/integration-validation/numerical.json')
+        native_total += native_counts(read('artifacts/evaluations/integrated-core18-v1/native_crosscheck.json'))
     pending=[]
     if metadata.get('repository_status') != 'created': pending.append('Create and verify the GitHub repository')
     pending += ['Confirm completed contribution: '+r['member'] for r in metadata['contributions'] if not r.get('completion_confirmed')]
@@ -193,7 +205,8 @@ def main():
             'remaining_metadata':pending,
             'repository_url':metadata['repository_url'],
             'repository_status':metadata['repository_status'],
-            'brief_pages':4,'research_report_pages':19,'automated_tests':tests,'native_metric_comparisons':native_total,
+            'brief_pages':4,'research_report_pages':expected_research_pages,'automated_tests':tests,'native_metric_comparisons':native_total,
+            'integrated_study':integrated,
             'expanded_queries':40,'custom_assessed_pairs':1444,'original_decisions_byte_preserved':737,
             'archive_files':manifest['file_count'],'archive_bytes':manifest['archive_bytes'],
             'numeric_reproduction':'Original primary metrics; initial20/added20/combined40 linear+exp2; both family bootstraps; four original20 quality policies. Per-query and macro values reproduce exactly.',

@@ -2,13 +2,27 @@
 
 The public repository linked below is a **final submission snapshot**. The working development repository and its existing history are kept private.
 
-Both BM25 and E5 dense search are complete over the same **594,589 articles**. The original **57-query benchmark** and all **40 custom linguistic queries** are evaluated. All **1,444 pairs** in the custom top-20 union have evidence-backed preliminary relevance judgments. A working local demo compares saved experiments, shows full articles and evidence, and supports live BM25/E5/RRF searches. The final local package includes a **four-page submission PDF**, a **19-page research report**, and reproducibility artifacts. See [DELIVERABLES.md](DELIVERABLES.md) for files, reproduction and the metadata still needed before upload.
+Both BM25 and E5 dense search are complete over the same **594,589 articles**. The original **57-query benchmark** and all **40 custom linguistic queries** are evaluated. All **1,444 pairs** in the custom top-20 union have evidence-backed preliminary relevance judgments. A working local demo compares saved experiments, shows full articles and evidence, and supports live BM25/E5/RRF searches. The final local package includes a **four-page submission PDF**, a **21-page research report**, and reproducibility artifacts. See [DELIVERABLES.md](DELIVERABLES.md) for files, reproduction and the metadata still needed before upload.
 
 **Assessment status:** custom comparisons currently use thorough, full-article AI judgments. Human review is planned next and has not yet been completed. See the [assessment method and review plan](reports/ASSESSMENT_METHOD.md).
 
 The post-hoc quality ablation is also complete: removing empty bodies within judged top-20 candidates raises E5 nDCG@5 from 0.4897 to 0.5492. This is separate from the unchanged baseline. See [the quality experiment](reports/QUALITY_ABLATION.md), [custom results](reports/CUSTOM_20_DEPTH20.md) and [hybrid experiment](reports/RRF_EXPERIMENT.md).
 
-The [completed 40-query study](reports/CUSTOM_40_DEPTH20.md) doubles each category from five to ten queries. Initial 20, added 20 and combined 40 results are separate: BM25/E5 combined nDCG@5 is **0.5133/0.4362**, pooled MAP **0.4428/0.4072**. This reverses the initial sample; descriptive query/family intervals still include zero. The original 57 supplied-qrels benchmark favors E5. All 737 initial decisions remain byte-identical. The demo exposes 97 distinct evaluated queries, with the old 20 retained as a subset view. See [the extension protocol](reports/CUSTOM_40_EXTENSION.md).
+The [completed 40-query study](reports/CUSTOM_40_DEPTH20.md) doubles each category from five to ten queries. Initial 20, added 20 and combined 40 results are separate: BM25/E5 combined nDCG@5 is **0.5133/0.4362**, pooled MAP **0.4428/0.4072**. This reverses the initial sample; descriptive query/family intervals still include zero. The original 57 supplied-qrels benchmark favors E5. All 737 initial decisions remain byte-identical. These earlier suites contain 97 distinct evaluated queries, with the old 20 retained as a subset view; the integrated demo adds 150 Core 2018 formulations. See [the extension protocol](reports/CUSTOM_40_EXTENSION.md).
+
+## Integrated controlled robustness study
+
+Hamsini G’s independently implemented [controlled-rewrite project](https://github.com/HamsiniGururaj/robust-news-retrieval) is now preserved under [studies/](studies/README.md), with its source revision and file hashes. The integration keeps its scientific-domain results separate and adds **50 Core 2018 news topics in three formulations**: original titles, official descriptions and provisional rewrites. Existing news document embeddings are reused.
+
+See [the integrated results and methods](reports/INTEGRATED_STUDY.md) and [paired ranking examples](reports/CORE18_CASE_STUDIES.md). New news rewrites are AI-authored and await independent human intent review; their evaluation conditionally reuses NIST human relevance labels. Official descriptions vary length/detail. The available corpus differs from full WaPo v2, so this is an adapted evaluation. Earlier 57-topic and custom40 results remain unchanged.
+
+```sh
+.venv/bin/python scripts/validate_integrated_study.py
+.venv/bin/python scripts/evaluate_integrated_study.py --study covid --output artifacts/evaluations/covid-recheck
+.venv/bin/python scripts/evaluate_integrated_study.py --study core18 --native --output artifacts/evaluations/core18-recheck
+```
+
+The `evaluation` extra supplies the pinned `ir_measures` backend; it is included in the updated lock. A 50-row news rewrite review template is under `annotations/core18_v1/`. The demo shows original-title score changes for each rewritten or description query.
 
 ## Group 5
 
@@ -18,7 +32,7 @@ Course: **Information Retrieval**. Faculty mentor: **Abhinav Kumar**.
 | --- | --- | --- |
 | Parth Raghuvanshi | 2023A7PS0574P | data/BM25 |
 | Sushruth Reddy Challa | 2023A7PS0504P | E5/FAISS |
-| Hamsini G | 2023A7PS0006P | evaluation/judgment review |
+| Hamsini G | 2023A7PS0006P | controlled rewrites/statistics |
 | Kritika Pandey | 2023A7PS0022P | demo/report |
 
 This allocation assigns ownership and review responsibility, not historical effort. [CONTRIBUTING.md](CONTRIBUTING.md) records the actual-work confirmation process. The public repository is [parthRag/news-retrieval-study](https://github.com/parthRag/news-retrieval-study); code, notebooks, preprocessing scripts and reports are published. See [the GitHub handoff](reports/GITHUB_HANDOFF.md).

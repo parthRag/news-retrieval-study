@@ -1,0 +1,128 @@
+{
+  "status": "passed_for_available_corpus_study",
+  "official_corpus_equivalence": false,
+  "corpus_sha256": "82086c5dc9397700ca6682d19f1a1cace8ace5defa31f7990ca3c28314ec61a9",
+  "documents": {
+    "total": 594977,
+    "indexed": 594589,
+    "excluded_empty": 388,
+    "empty_body": 16372,
+    "title_only": 15984
+  },
+  "official_qrels_pair_grade_match": true,
+  "official_qrels_sha256": "ebe3b6c278adbb81d6b911e9869705828f90b6deb15c9399ae9437b5be67575e",
+  "topics": 50,
+  "original_judgments": 26233,
+  "missing_judgments": [
+    {
+      "topic_id": "422",
+      "doc_id": "28003e18-cc63-11e1-8d21-45ee617a712a",
+      "grade": 0,
+      "reason": "empty"
+    },
+    {
+      "topic_id": "439",
+      "doc_id": "74ca2f03320df21995165b6bb9bb4ddb",
+      "grade": 0,
+      "reason": "absent"
+    },
+    {
+      "topic_id": "439",
+      "doc_id": "aaf444787011938dc645bdc1185a0716",
+      "grade": 0,
+      "reason": "absent"
+    },
+    {
+      "topic_id": "442",
+      "doc_id": "6f1c065141e1dea9ae66c34f92841170",
+      "grade": 0,
+      "reason": "absent"
+    },
+    {
+      "topic_id": "442",
+      "doc_id": "98791c1f1f74e7bd11e1369807be3a89",
+      "grade": 0,
+      "reason": "absent"
+    },
+    {
+      "topic_id": "626",
+      "doc_id": "02475047d615c46a006924f0e2317cca",
+      "grade": 0,
+      "reason": "absent"
+    },
+    {
+      "topic_id": "805",
+      "doc_id": "374357a0-7650-11e3-8963-b4b654bcc9b2",
+      "grade": 0,
+      "reason": "empty"
+    },
+    {
+      "topic_id": "805",
+      "doc_id": "3809dcc4-28be-11e4-958c-268a320a60ce",
+      "grade": 0,
+      "reason": "empty"
+    },
+    {
+      "topic_id": "805",
+      "doc_id": "4ea4cc4c-483d-11e5-8e7d-9c033e6745d8",
+      "grade": 0,
+      "reason": "empty"
+    },
+    {
+      "topic_id": "805",
+      "doc_id": "65dbf2a6-f150-11e1-adc6-87dfa8eff430",
+      "grade": 0,
+      "reason": "empty"
+    },
+    {
+      "topic_id": "805",
+      "doc_id": "688319c4-8ed5-11e4-a900-9960214d4cd7",
+      "grade": 0,
+      "reason": "empty"
+    },
+    {
+      "topic_id": "805",
+      "doc_id": "7429e7ee-86d9-11e3-833c-33098f9e5267",
+      "grade": 0,
+      "reason": "empty"
+    },
+    {
+      "topic_id": "805",
+      "doc_id": "7e56a756-65c0-11e2-9e1b-07db1d2ccd5b",
+      "grade": 0,
+      "reason": "empty"
+    },
+    {
+      "topic_id": "805",
+      "doc_id": "99201044-6a40-11e1-8970-1c405b6eaeac",
+      "grade": 0,
+      "reason": "empty"
+    },
+    {
+      "topic_id": "805",
+      "doc_id": "cc03b0e0-5e98-11e2-a389-ee565c81c565",
+      "grade": 0,
+      "reason": "empty"
+    },
+    {
+      "topic_id": "805",
+      "doc_id": "d3fd5106-4536-11e1-b1ce-439d22614758",
+      "grade": 0,
+      "reason": "empty"
+    },
+    {
+      "topic_id": "806",
+      "doc_id": "74ca2f03320df21995165b6bb9bb4ddb",
+      "grade": 1,
+      "reason": "absent"
+    },
+    {
+      "topic_id": "816",
+      "doc_id": "99d80076323444d17769330a2fc20e93",
+      "grade": 0,
+      "reason": "absent"
+    }
+  ],
+  "missing_positive_judgments": 1,
+  "scope": "Core 2018 topics on the available TREC-News mirror; not official WaPo v2 reproduction. ID coverage and sampled source identity cannot establish official text equivalence."
+}

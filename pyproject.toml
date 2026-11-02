@@ -12,6 +12,7 @@ dependencies = ["pyserini==1.5.0"]
 [project.optional-dependencies]
 test = ["pytest==8.4.2"]
 dense = ["faiss-cpu==1.13.2", "torch>=2.9", "transformers>=4.57", "huggingface-hub>=1"]
+evaluation = ["ir-measures==0.4.3"]
 
 [project.scripts]
 news-ir = "news_ir.cli:main"

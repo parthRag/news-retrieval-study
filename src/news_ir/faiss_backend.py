@@ -35,24 +35,29 @@ def serve(root):
             if message["method"] == "close":
                 print(json.dumps({"closed": True}), flush=True)
                 return
-            if message["method"] != "search":
+            if message["method"] not in {"search", "search_batch"}:
                 raise ValueError("Unknown FAISS worker operation")
-            vector = np.asarray([message["vector"]], dtype=np.float32)
-            if vector.shape != (1, index.d) or not np.isfinite(vector).all():
+            batched = message["method"] == "search_batch"
+            vector = np.asarray(message["vectors"] if batched else [message["vector"]], dtype=np.float32)
+            if vector.ndim != 2 or not 1 <= len(vector) <= 64 or vector.shape[1] != index.d or not np.isfinite(vector).all():
                 raise ValueError("Invalid query vector")
             k = message["top_k"]
             if type(k) is not int or not 1 <= k <= 10000:
                 raise ValueError("Invalid top_k")
             count = min(k, index.ntotal)
             requested = min(count + 1, index.ntotal)
-            while True:
-                scores, rows = index.search(vector, requested)
-                if requested == index.ntotal or scores[0, count - 1] != scores[0, -1]:
-                    break
-                requested = min(index.ntotal, requested * 2)
-            candidates = [(float(score), ids[int(row)]) for score, row in zip(scores[0], rows[0], strict=True)]
-            candidates.sort(key=lambda item: (-item[0], item[1]))
-            print(json.dumps({"hits": candidates[:count]}), flush=True)
+            scores, rows = index.search(vector, requested)
+            batches = []
+            for i in range(len(vector)):
+                row_scores, row_ids, take = scores[i], rows[i], requested
+                while take != index.ntotal and row_scores[count - 1] == row_scores[-1]:
+                    take = min(index.ntotal, take * 2)
+                    extra_scores, extra_ids = index.search(vector[i:i+1], take)
+                    row_scores, row_ids = extra_scores[0], extra_ids[0]
+                candidates = [(float(score), ids[int(row)]) for score, row in zip(row_scores, row_ids, strict=True)]
+                candidates.sort(key=lambda item: (-item[0], item[1]))
+                batches.append(candidates[:count])
+            print(json.dumps({"batches": batches} if batched else {"hits": batches[0]}), flush=True)
         except Exception as exc:
             print(json.dumps({"error": str(exc)}), flush=True)
 

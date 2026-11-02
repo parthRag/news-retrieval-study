@@ -1,0 +1,10 @@
+data/
+indexes/
+*.npy
+*.faiss
+__pycache__/
+.ipynb_checkpoints/
+.venv/
+.pytest_cache/
+docs/CODE_GUIDE.md
+.cache/

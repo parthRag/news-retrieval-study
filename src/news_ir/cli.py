@@ -66,6 +66,8 @@ def parser():
     run.add_argument("--model-dir", default="artifacts/models/e5-base-v2")
     run.add_argument("--device", choices=["auto", "cpu", "cuda", "mps"], default="auto")
     run.add_argument("--allow-partial", action="store_true")
+    run.add_argument("--query-batch-size", type=int, default=1,
+                     help="Dense query encoding batch size (1..64); >1 uses an amortized throughput timing protocol")
     run.set_defaults(index=None)
     evaluate = sub.add_parser("evaluate", help="Evaluate paired full-corpus runs against supplied original qrels")
     evaluate.add_argument("--queries", default="queries.jsonl")
@@ -130,7 +132,8 @@ def main(argv=None):
             result = run_queries(run_index, args.queries, args.output, top_k=args.top_k,
                                  run_tag=args.run_tag, corpus=args.corpus, engine_type=args.engine,
                                  document_index=args.document_index, model_dir=args.model_dir,
-                                 device=args.device, allow_partial=args.allow_partial)
+                                 device=args.device, allow_partial=args.allow_partial,
+                                 query_batch_size=args.query_batch_size)
         elif args.command == "verify":
             from .experiments import verify_index
             result = verify_index(args.index, corpus=args.corpus, sample_size=args.sample_size)

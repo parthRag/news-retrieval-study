@@ -1,0 +1,41 @@
+{
+  "status": "passed",
+  "query": "jaguar animal habitat conservation",
+  "elapsed_seconds": 33.51595754083246,
+  "all_live_metrics_and_judgments_absent": true,
+  "engines": {
+    "bm25": {
+      "top5": [
+        "10b2591e-6f5c-11e4-8808-afaa1e3a33ef",
+        "dd0713868eaccc976a7f94b98a74bd97",
+        "56f9d414-1102-11e4-9285-4243a40ddc97",
+        "87dcd8b6-caaf-11e5-ae11-57b6aeab993f",
+        "8ddd302aea7e482d48e22bf25370deaa"
+      ],
+      "engine_search_ms": 302.1891659591347,
+      "elapsed_ms_with_startup": 2624.7136250603944
+    },
+    "dense": {
+      "top5": [
+        "87dcd8b6-caaf-11e5-ae11-57b6aeab993f",
+        "10b2591e-6f5c-11e4-8808-afaa1e3a33ef",
+        "8115c95472a7e72752c525d7c7edea54",
+        "8ddd302aea7e482d48e22bf25370deaa",
+        "a066039b8f79624a7c904d43326561ae"
+      ],
+      "engine_search_ms": 14031.140666920692,
+      "elapsed_ms_with_startup": 29947.329791961238
+    },
+    "rrf": {
+      "top5": [
+        "10b2591e-6f5c-11e4-8808-afaa1e3a33ef",
+        "87dcd8b6-caaf-11e5-ae11-57b6aeab993f",
+        "dd0713868eaccc976a7f94b98a74bd97",
+        "8ddd302aea7e482d48e22bf25370deaa",
+        "a066039b8f79624a7c904d43326561ae"
+      ],
+      "engine_search_ms": null,
+      "elapsed_ms_with_startup": null
+    }
+  }
+}

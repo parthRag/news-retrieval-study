@@ -8,10 +8,10 @@ The current implementation is imported as an existing project snapshot. Implemen
 | --- | --- | --- |
 | Parth Raghuvanshi | 2023A7PS0574P | Data pipeline, BM25 and lexical validation |
 | Sushruth Reddy Challa | 2023A7PS0504P | E5 encoding, FAISS and dense-retrieval validation |
-| Hamsini G | 2023A7PS0006P | Metrics, custom-query rubrics and judgment audit |
+| Hamsini G | 2023A7PS0006P | Controlled rewrite experiments and statistical analysis |
 | Kritika Pandey | 2023A7PS0022P | Demo, figures, report and reproduction guide |
 
-Parth's dataset download, Kaggle execution and result handoff are documented in the project session. Specific completed technical work for the other members has not been supplied. Keep the completed-contribution column factual; a planned task becomes completed only after the member does it and records evidence.
+Parth's dataset download, Kaggle execution and result handoff are documented in the project session. Hamsini’s independently implemented controlled-rewrite study is now preserved under `studies/hamsini_robustness/` with its source commit and file hashes. Its saved scores and tests were verified before integration. Specific completed technical work for Sushruth and Kritika has not yet been confirmed. Keep the completed-contribution column factual; a planned task becomes completed only after the member does it and records evidence.
 
 ## Concrete work to complete now
 

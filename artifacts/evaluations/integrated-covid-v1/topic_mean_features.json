@@ -1,0 +1,35 @@
+{
+  "unit": "topic means of both rewrites; changed estimand from pooled rewrite correlation",
+  "samples": 2000,
+  "seed": 20261102,
+  "results": [
+    {
+      "feature": "content_overlap",
+      "topics": 50,
+      "spearman_rho": 0.14941280426517783,
+      "p_value": 0.29535232383808097,
+      "p_holm": 0.5907046476761619
+    },
+    {
+      "feature": "length_change",
+      "topics": 50,
+      "spearman_rho": 0.24867643989300262,
+      "p_value": 0.08095952023988005,
+      "p_holm": 0.3238380809595202
+    },
+    {
+      "feature": "mean_idf",
+      "topics": 50,
+      "spearman_rho": 0.09723889555822329,
+      "p_value": 0.5047476261869065,
+      "p_holm": 0.5907046476761619
+    },
+    {
+      "feature": "n_words",
+      "topics": 50,
+      "spearman_rho": 0.21975907802894556,
+      "p_value": 0.13093453273363317,
+      "p_holm": 0.3928035982008995
+    }
+  ]
+}

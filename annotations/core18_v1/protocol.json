@@ -1,0 +1,35 @@
+{
+  "created_at_utc": "2026-11-02T10:16:11.790572+00:00",
+  "query_count": 150,
+  "topic_count": 50,
+  "variants": [
+    "title",
+    "description",
+    "rewrite"
+  ],
+  "formulation_origin": {
+    "title": "Official NIST title; benchmark baseline",
+    "description": "Official NIST description; query-form diagnostic, confounded by length/detail, not controlled paraphrase",
+    "rewrite": "One provisional AI-authored paraphrase per topic; intended to retain narrative relevance, independent human review pending"
+  },
+  "primary_comparison": "Within-topic title vs rewrite; conditional on intent preservation. Description separate.",
+  "qrel_reuse": "Human NIST relevance labels reused only under the stated information need; no new human relevance or rewrite-verification claims.",
+  "selection": "All 50 topics, no selection by outcomes. Texts frozen before first Core 2018 retrieval. Existing news/COVID results were already known.",
+  "settings": "Existing full-corpus BM25 and pinned E5 indexes; RRF k=60; top 1000; no model training or parameter tuning",
+  "statistics": "Paired original/rewrite changes over 50 topics; 10000 bootstrap/sign-flip draws; Holm within each declared family. Never pool COVID/news/custom scores.",
+  "metrics": [
+    "nDCG@5",
+    "nDCG@10",
+    "MAP@1000",
+    "Recall@100",
+    "Judged@5/10",
+    "condensed nDCG@5/10",
+    "bpref"
+  ],
+  "missing_documents": "Retain all qrels in primary denominators/IDCG; separate available-corpus sensitivity",
+  "files": {
+    "corpus_audit.json": "11ac7ffccf440511779b11ccda8d5a24ec3405d9967b7ffd3598df976f11b762",
+    "queries.jsonl": "e5b638a42befe74bd53f994aef69585a9956ebd14524fe9ff8b500b9ad21f67f",
+    "qrels.jsonl": "bffba063a4f2a0bc0cd42c8bcc38ca57375c657dee539884b8efbf3da6e2f237"
+  }
+}

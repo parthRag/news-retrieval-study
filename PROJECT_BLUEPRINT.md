@@ -250,3 +250,8 @@ Completed expansion,25 October 2026: all707 follow-up pairs assessed, bringing t
 
 
 GitHub publication completed: the account identity parthRag was authenticated, public repository https://github.com/parthRag/news-ir-bm25-dense was created, and the existing main branch was pushed. The report now uses this verified link. Individual contribution confirmations remain distinct from equal component ownership. Earlier authentication-pending notes are historical.
+
+
+## 2 November 2026: integrated group study
+
+Hamsini’s independent controlled-rewrite repository is preserved at its original revision under `studies/`, with per-file provenance and actual contribution credit. New Core 2018 evaluation covers 50 topics in title, official-description and provisional-rewrite formulations, reusing the existing eligible news corpus and embeddings. Human intent review is pending. The imported scientific-domain study, news adaptation, background-linking benchmark and custom diagnostics remain separate. See `reports/INTEGRATED_STUDY.md` for results and `reports/CORE18_CASE_STUDIES.md` for selected ranking evidence. The four-page brief and 21-page supporting report reflect the integration.

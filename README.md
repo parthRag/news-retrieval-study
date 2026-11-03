@@ -12,7 +12,7 @@ The [completed 40-query study](reports/CUSTOM_40_DEPTH20.md) doubles each catego
 
 ## Integrated controlled robustness study
 
-Hamsini G’s independently implemented [controlled-rewrite project](https://github.com/HamsiniGururaj/robust-news-retrieval) is now preserved under [studies/](studies/README.md), with its source revision and file hashes. The integration keeps its scientific-domain results separate and adds **50 Core 2018 news topics in three formulations**: original titles, official descriptions and provisional rewrites. Existing news document embeddings are reused.
+The controlled-rewrite experiments are preserved under [studies/](studies/README.md), with source attribution, revision and file hashes. The integration keeps its scientific-domain results separate and adds **50 Core 2018 news topics in three formulations**: original titles, official descriptions and provisional rewrites. Existing news document embeddings are reused.
 
 See [the integrated results and methods](reports/INTEGRATED_STUDY.md) and [paired ranking examples](reports/CORE18_CASE_STUDIES.md). New news rewrites are AI-authored and await independent human intent review; their evaluation conditionally reuses NIST human relevance labels. Official descriptions vary length/detail. The available corpus differs from full WaPo v2, so this is an adapted evaluation. Earlier 57-topic and custom40 results remain unchanged.
 
@@ -28,14 +28,7 @@ The `evaluation` extra supplies the pinned `ir_measures` backend; it is included
 
 Course: **Information Retrieval**. Faculty mentor: **Abhinav Kumar**.
 
-| Member | Student ID | Assigned ownership |
-| --- | --- | --- |
-| Parth Raghuvanshi | 2023A7PS0574P | data/BM25 |
-| Sushruth Reddy Challa | 2023A7PS0504P | E5/FAISS |
-| Hamsini G | 2023A7PS0006P | controlled rewrites/statistics |
-| Kritika Pandey | 2023A7PS0022P | demo/report |
-
-This allocation assigns ownership and review responsibility, not historical effort. [CONTRIBUTING.md](CONTRIBUTING.md) records the actual-work confirmation process. The public repository is [parthRag/news-retrieval-study](https://github.com/parthRag/news-retrieval-study); code, notebooks, preprocessing scripts and reports are published. See [the GitHub handoff](reports/GITHUB_HANDOFF.md).
+Team members, student IDs, component responsibilities and the actual-work confirmation process are documented in [CONTRIBUTING.md](CONTRIBUTING.md). The public repository is [parthRag/news-retrieval-study](https://github.com/parthRag/news-retrieval-study); code, notebooks, preprocessing scripts and reports are published. See [the GitHub handoff](reports/GITHUB_HANDOFF.md).
 
 Download the four-page PDF, supporting research report and portable reproducibility archive from the [submission release](https://github.com/parthRag/news-retrieval-study/releases/latest). The public snapshot and archive include saved rankings for numerical reproduction; corpus, model and indexes remain local dependencies. To verify a source checkout without the archive, run `PYTHONPATH=src python scripts/validate_final_deliverables.py`; its root `PACKAGE_MANIFEST.json` binds the exported files.
 

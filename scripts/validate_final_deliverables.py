@@ -16,7 +16,7 @@ from news_ir.expanded_study import clustered_comparison
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'deliverables'
 
-def read(path): return json.loads((ROOT/path).read_text())
+def read(path): return json.loads((ROOT/path).read_text(encoding="utf-8"))
 def require(ok,message):
     if not ok: raise ValueError(message)
 
@@ -51,7 +51,7 @@ def main():
     expected_research_pages = 21 if (ROOT/'artifacts/evaluations/integrated-core18-v1/manifest.json').exists() else 19
     require(inspections['research']['page_count']==expected_research_pages,'Research report page count changed')
     for name in inspections:
-        text=(ROOT/f'artifacts/pdf-review/{name}/extracted.txt').read_text()
+        text=(ROOT/f'artifacts/pdf-review/{name}/extracted.txt').read_text(encoding="utf-8")
         pdf=OUT/((brief if name=='brief' else 'RESEARCH_REPORT')+'.pdf')
         require(sha256_file(pdf)==inspections[name]['pdf_sha256'],'PDF inspection is stale')
         require(all(p['characters']>500 for p in inspections[name]['pages']),'Unexpected blank PDF page')
@@ -70,9 +70,9 @@ def main():
             require(''.join(member['name'].split()) in normalized,'Missing member name in PDF')
         require(''.join(metadata.get('course','').split()) in normalized,'Missing course in PDF')
         require(''.join(metadata.get('faculty_mentor','').split()) in normalized,'Missing mentor in PDF')
-    html=(OUT/(brief+'.html')).read_text()
+    html=(OUT/(brief+'.html')).read_text(encoding="utf-8")
     require('<td>---</td>' not in html,'Broken Markdown table in PDF source')
-    brief_text=(ROOT/'artifacts/pdf-review/brief/extracted.txt').read_text()
+    brief_text=(ROOT/'artifacts/pdf-review/brief/extracted.txt').read_text(encoding="utf-8")
     condensed=''.join(brief_text.casefold().split())
     required_sections=['Primary objective','Dataset and evaluation criteria',
                        'Related research: approach, findings and relevance',
@@ -97,9 +97,9 @@ def main():
                           'https://github.com/HamsiniGururaj/robust-news-retrieval']
         require('covidandcustomqueries.' in condensed,'Truncated reference-scale explanation')
     require(set(required_urls) <= linked_urls,'Missing clickable dataset or paper links')
-    text=(ROOT/'artifacts/pdf-review/research/extracted.txt').read_text()
-    queries=[json.loads(l) for l in (ROOT/'annotations/ai_study_v1/queries.jsonl').read_text().splitlines()]
-    expanded_queries=[json.loads(l) for l in (ROOT/'annotations/custom40_v2/queries.all40.jsonl').read_text().splitlines()]
+    text=(ROOT/'artifacts/pdf-review/research/extracted.txt').read_text(encoding="utf-8")
+    queries=[json.loads(l) for l in (ROOT/'annotations/ai_study_v1/queries.jsonl').read_text(encoding="utf-8").splitlines()]
+    expanded_queries=[json.loads(l) for l in (ROOT/'annotations/custom40_v2/queries.all40.jsonl').read_text(encoding="utf-8").splitlines()]
     require(len(expanded_queries)==40 and all(q['_id'] in text for q in expanded_queries),'Missing query appendix')
     source='82086c5dc9397700ca6682d19f1a1cace8ace5defa31f7990ca3c28314ec61a9'
     original=read('artifacts/evaluations/rrf-original-57/metrics.json')['primary']
@@ -112,7 +112,7 @@ def main():
             path=ROOT/'artifacts/runs'/name
             # Restored-archive check of published ranks/hashes; original corpus ID coverage
             # was validated separately, not re-established from these retrieved IDs.
-            rows=[json.loads(l) for l in (path/'results.jsonl').read_text().splitlines()]
+            rows=[json.loads(l) for l in (path/'results.jsonl').read_text(encoding="utf-8").splitlines()]
             ids={h['doc_id'] for r in rows for h in r['hits']}
             rankings[suite][engine],_=load_run(path,ROOT/qfile,ids,expected_source_sha256=source)
     qids=list(original['bm25']['per_query'])
@@ -120,7 +120,7 @@ def main():
     for engine,run in rankings['original'].items():
         require(evaluate_rankings(run,labels)==original[engine],'Original metric mismatch: '+engine)
     qlabels={q['_id']:{} for q in queries}
-    assessment_rows=[json.loads(l) for l in (ROOT/'annotations/ai_study_v1/assessments.depth20.jsonl').read_text().splitlines()]
+    assessment_rows=[json.loads(l) for l in (ROOT/'annotations/ai_study_v1/assessments.depth20.jsonl').read_text(encoding="utf-8").splitlines()]
     require(len(assessment_rows)==737,'Assessment count')
     for r in assessment_rows: qlabels[r['query_id']][r['doc_id']]=r['grade']
     for mode in ['linear','exp2']:
@@ -138,9 +138,9 @@ def main():
     for suffix, queryfile, label_file, evaluation, count in [
         ('custom40-extension20-v2','queries.extension20.jsonl','assessments.extension20.jsonl','custom40-extension20-depth20-v2',707),
         ('custom40-v2','queries.all40.jsonl','assessments.all40.jsonl','custom40-depth20-v2',1444)]:
-        labels=[json.loads(l) for l in (ROOT/'annotations/custom40_v2'/label_file).read_text().splitlines()]
+        labels=[json.loads(l) for l in (ROOT/'annotations/custom40_v2'/label_file).read_text(encoding="utf-8").splitlines()]
         require(len(labels)==count and len({(r['query_id'],r['doc_id']) for r in labels})==count,'Expanded assessment count')
-        qs=[json.loads(l) for l in (ROOT/'annotations/custom40_v2'/queryfile).read_text().splitlines()]
+        qs=[json.loads(l) for l in (ROOT/'annotations/custom40_v2'/queryfile).read_text(encoding="utf-8").splitlines()]
         qlabels={q['_id']:{} for q in qs}
         for r in labels:
             require(r['assessor_type']=='AI' and r['full_article_read'],'Assessment disclosure changed')
@@ -149,7 +149,7 @@ def main():
         runs={}
         for engine in ['bm25','dense']:
             path=ROOT/f'artifacts/runs/{engine}-{suffix}'
-            rows=[json.loads(l) for l in (path/'results.jsonl').read_text().splitlines()]
+            rows=[json.loads(l) for l in (path/'results.jsonl').read_text(encoding="utf-8").splitlines()]
             ids={h['doc_id'] for r in rows for h in r['hits']}
             runs[engine],_=load_run(path,ROOT/'annotations/custom40_v2'/queryfile,ids,expected_source_sha256=source)
             for mode in ['linear','exp2']:
@@ -183,8 +183,10 @@ def main():
     native_total=sum(native_counts(read(f'artifacts/evaluations/{folder}/crosscheck.json'))
                      for folder in ['original-57','rrf-original-57','custom20-depth20-v1','custom40-extension20-depth20-v2','custom40-depth20-v2'])
     require(native_total==7196,'Native comparison count mismatch')
-    test_path=ROOT/'artifacts/test-results-integration.xml'
-    test=ET.parse(test_path if test_path.exists() else ROOT/'artifacts/test-results-final.xml').getroot()
+    test_path=next((ROOT/name for name in ['artifacts/test-results-native.xml','artifacts/test-results-portability.xml',
+                   'artifacts/test-results-integration.xml','artifacts/test-results-final.xml'] if (ROOT/name).exists()),None)
+    require(test_path is not None,'No test results available')
+    test=ET.parse(test_path).getroot()
     suites=list(test.iter('testsuite'))
     tests=sum(int(s.attrib.get('tests',0)) for s in suites)
     require(tests>=153 and all(int(s.attrib.get('failures',0))==int(s.attrib.get('errors',0))==0 for s in suites),'Final test run failed')
@@ -214,7 +216,7 @@ def main():
             'four_page_requirement_sections':required_sections,
             'verified_clickable_dataset_and_paper_links':required_urls,
             'archive_sha256':manifest['archive_sha256']}
-    (OUT/'final_validation.json').write_text(json.dumps(result,indent=2)+'\n')
+    (OUT/'final_validation.json').write_text(json.dumps(result,indent=2)+'\n', encoding="utf-8", newline="\n")
     print(json.dumps(result,indent=2))
 
 if __name__=='__main__': main()

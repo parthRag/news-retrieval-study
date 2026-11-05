@@ -137,7 +137,7 @@ def main():
     result = audit(args.data_dir)
     output = args.output or args.data_dir / "artifacts" / "dataset_audit.json"
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
+    output.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8", newline="\n")
     print(f"Audit saved to {output}")
     print(f"Documents: {result['corpus']['rows']:,}; queries: {result['queries']['rows']}; qrels: {result['qrels']['rows']:,}")
     print(f"Missing judged document IDs: {len(result['qrels']['missing_corpus_doc_ids'])}")

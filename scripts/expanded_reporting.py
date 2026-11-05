@@ -9,7 +9,7 @@ FOLDER = ROOT / 'artifacts/evaluations/custom40-depth20-v2'
 
 
 def read(path):
-    return json.loads(path.read_text())
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def readable_prose(markdown):
@@ -28,8 +28,8 @@ def load():
             "categories": read(FOLDER / 'by_category.json'),
             "paired": read(FOLDER / 'paired_comparison.json')['metrics'],
             "clustered": read(FOLDER / 'clustered_comparison.json'),
-            "labels": [json.loads(l) for l in (ROOT / 'annotations/custom40_v2/assessments.all40.jsonl').read_text().splitlines()],
-            "queries": [json.loads(l) for l in (ROOT / 'annotations/custom40_v2/queries.all40.jsonl').read_text().splitlines()]}
+            "labels": [json.loads(l) for l in (ROOT / 'annotations/custom40_v2/assessments.all40.jsonl').read_text(encoding="utf-8").splitlines()],
+            "queries": [json.loads(l) for l in (ROOT / 'annotations/custom40_v2/queries.all40.jsonl').read_text(encoding="utf-8").splitlines()]}
 
 
 def test_count():
@@ -122,7 +122,7 @@ def write_progress(data, original, initial, table):
     text += table(['ID','BM25 nDCG@5','E5 nDCG@5','BM25 pooled AP','E5 pooled AP'],[[q['_id']] + [f'{data["metrics"][e]["per_query"][q["_id"]][m]:.6f}' for m in ['ndcg_at_5','ap_at_1000'] for e in ['bm25','dense']] for q in data['queries']])
     text += '\n\nSee `annotations/custom40_v2/assessment_completion.json`, `adjudication.json`, `assessments.all40.jsonl`, and `artifacts/evaluations/custom40-depth20-v2/`. Original-20 quality ablations are preserved separately; no expanded ablation is claimed.\n'
     text += '\n\n![Expanded category comparison](figures/custom40-depth20/category_metrics.png)\n'
-    (ROOT/'reports/CUSTOM_40_DEPTH20.md').write_text(readable_prose(text))
+    (ROOT/'reports/CUSTOM_40_DEPTH20.md').write_text(readable_prose(text), encoding="utf-8", newline="\n")
 
 
 def figures(data):

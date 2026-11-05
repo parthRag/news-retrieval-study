@@ -2,11 +2,12 @@
 
 import hashlib
 import json
-import os
 import sqlite3
 import threading
 from dataclasses import asdict, dataclass
-from pathlib import Path
+from pathlib import Path, PurePosixPath
+
+from .platform_support import resolve_saved_path
 
 
 def valid_id(value):
@@ -48,7 +49,7 @@ def decode_document(raw, location="record"):
 
 def sha256_file(path):
     digest = hashlib.sha256()
-    with Path(path).open("rb") as stream:
+    with resolve_saved_path(path).open("rb") as stream:
         while chunk := stream.read(1024 * 1024):
             digest.update(chunk)
     return digest.hexdigest()
@@ -78,9 +79,19 @@ def read_queries(path):
 class DocumentStore:
     def __init__(self, index_dir, corpus=None):
         self.root = Path(index_dir).resolve()
-        self.manifest = json.loads((self.root / "manifest.json").read_text())
+        self.manifest = json.loads((self.root / "manifest.json").read_text(encoding="utf-8"))
         source = self.manifest["source"]
-        self.corpus = Path(corpus or source["path"]).resolve()
+        if corpus is not None:
+            self.corpus = Path(corpus).resolve()
+        else:
+            self.corpus = resolve_saved_path(source["path"])
+            if not self.corpus.is_file():
+                name = PurePosixPath(source["path"].replace("\\", "/")).name
+                for base in self.root.parents:
+                    candidate = base / name
+                    if candidate.is_file():
+                        self.corpus = candidate
+                        break
         stat = self.corpus.stat()
         if stat.st_size != source["bytes"]:
             raise ValueError("Corpus size differs from indexed source; rebuild the index")
@@ -92,7 +103,11 @@ class DocumentStore:
             (self.root / "documents.sqlite3").as_uri() + "?mode=ro", uri=True,
             check_same_thread=False,
         )
-        self._fd = os.open(self.corpus, os.O_RDONLY)
+        try:
+            self._stream = self.corpus.open("rb")
+        except BaseException:
+            self._db.close()
+            raise
         self._lock = threading.RLock()
         self._closed = False
 
@@ -105,7 +120,8 @@ class DocumentStore:
             ).fetchone()
             if row is None:
                 return None
-            raw = os.pread(self._fd, row[1], row[0])
+            self._stream.seek(row[0])
+            raw = self._stream.read(row[1])
         doc = decode_document(raw, f"offset {row[0]}")
         if doc.doc_id != doc_id:
             raise ValueError("Corpus/document offsets disagree; source may have changed")
@@ -119,7 +135,7 @@ class DocumentStore:
         with self._lock:
             if not self._closed:
                 self._db.close()
-                os.close(self._fd)
+                self._stream.close()
                 self._closed = True
 
     def __enter__(self):

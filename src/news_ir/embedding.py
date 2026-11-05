@@ -30,7 +30,7 @@ def download_model(output, *, revision="main"):
                       allow_patterns=["config.json", "model.safetensors", "tokenizer.json",
                                       "tokenizer_config.json", "special_tokens_map.json", "vocab.txt"],
                       max_workers=3)
-    config = json.loads((target / "config.json").read_text())
+    config = json.loads((target / "config.json").read_text(encoding="utf-8"))
     spec = {"model_id": DEFAULT_MODEL, "revision": info.sha,
             "dimension": config["hidden_size"], "max_length": 512,
             "query_prefix": "query: ", "passage_prefix": "passage: ",
@@ -40,14 +40,14 @@ def download_model(output, *, revision="main"):
     if "model.safetensors" not in spec["files"] or "tokenizer.json" not in spec["files"]:
         raise ValueError("Missing required E5 model/tokenizer files")
     temp = target / "encoder.json.tmp"
-    temp.write_text(json.dumps(spec, indent=2) + "\n")
+    temp.write_text(json.dumps(spec, indent=2) + "\n", encoding="utf-8", newline="\n")
     temp.replace(target / "encoder.json")
     return spec
 
 
 def read_model_spec(path, *, verify=True):
     root = Path(path)
-    spec = json.loads((root / "encoder.json").read_text())
+    spec = json.loads((root / "encoder.json").read_text(encoding="utf-8"))
     if spec["model_id"] != DEFAULT_MODEL or not re.fullmatch(r"[0-9a-f]{40}", spec["revision"]):
         raise ValueError("Unsupported or unpinned encoder")
     if spec["dimension"] != 768 or spec["max_length"] != 512:

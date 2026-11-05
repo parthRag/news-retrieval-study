@@ -1,0 +1,3 @@
+# Cross-platform environment; pip selects native wheels for the current OS.
+# Keep requirements-lock.txt as the historical ARM Mac environment snapshot.
+-e .[test,dense,evaluation,reporting]

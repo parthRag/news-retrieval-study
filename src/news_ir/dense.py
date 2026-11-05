@@ -11,6 +11,7 @@ from pathlib import Path
 
 import numpy as np
 
+from .platform_support import resolve_saved_path
 from .data import DocumentStore, decode_document, sha256_file, valid_id
 from .embedding import E5Encoder, validate_vectors
 from .retrieval import SearchHit
@@ -23,7 +24,7 @@ LOGGER = logging.getLogger(__name__)
 def write_json(path, value):
     path = Path(path)
     temporary = path.with_name(path.name + ".tmp")
-    temporary.write_text(json.dumps(value, indent=2) + "\n")
+    temporary.write_text(json.dumps(value, indent=2) + "\n", encoding="utf-8", newline="\n")
     temporary.replace(path)
 
 
@@ -33,7 +34,7 @@ def read_shards(root, config, *, verify=True):
     for folder in sorted((Path(root) / "shards").glob("shard-*")):
         if folder.name != f"shard-{len(shards):06d}":
             raise ValueError("Encoding shards are missing or out of sequence")
-        info = json.loads((folder / "manifest.json").read_text())
+        info = json.loads((folder / "manifest.json").read_text(encoding="utf-8"))
         if info["start_offset"] != offset or info["start_row"] != count or info["count"] <= 0:
             raise ValueError("Shard offsets/row counts are inconsistent")
         if verify:
@@ -42,7 +43,7 @@ def read_shards(root, config, *, verify=True):
                     raise ValueError(f"Corrupt encoding shard: {folder.name}/{name}")
             matrix = np.load(folder / "vectors.npy", allow_pickle=False)
             validate_vectors(matrix, dimension=config["model"]["dimension"], rows=info["count"])
-            ids = [json.loads(line) for line in (folder / "ids.jsonl").read_text().splitlines()]
+            ids = [json.loads(line) for line in (folder / "ids.jsonl").read_text(encoding="utf-8").splitlines()]
             if len(ids) != info["count"] or len(set(ids)) != len(ids) or not all(valid_id(x) for x in ids):
                 raise ValueError("Invalid shard document IDs")
         count += info["count"]
@@ -86,7 +87,7 @@ def encode_corpus(document_index, model_dir, output, *, corpus=None, batch_size=
             "precision": "float32", "shard_size": shard_size,
         }
         if resume:
-            if json.loads((root / "config.json").read_text()) != config:
+            if json.loads((root / "config.json").read_text(encoding="utf-8")) != config:
                 raise ValueError("Resume settings, model or corpus differ from the original job")
         else:
             root.mkdir(parents=True, exist_ok=False)
@@ -119,7 +120,7 @@ def encode_corpus(document_index, model_dir, output, *, corpus=None, batch_size=
                 try:
                     np.save(pending / "vectors.npy", matrix, allow_pickle=False)
                     (pending / "ids.jsonl").write_text(
-                        "".join(json.dumps(doc.doc_id, ensure_ascii=False) + "\n" for doc in docs), encoding="utf-8")
+                        "".join(json.dumps(doc.doc_id, ensure_ascii=False) + "\n" for doc in docs), encoding="utf-8", newline="\n")
                     info = {"start_row": count, "count": len(docs), "start_offset": start_offset,
                             "end_offset": stream.tell(), "runtime": encoder.runtime,
                             "batch_size": batch_size,
@@ -155,7 +156,7 @@ def build_dense_index(encodings, output, *, document_index, model_dir, corpus=No
     root, target = Path(encodings).resolve(), Path(output).resolve()
     if target.exists():
         raise FileExistsError("Refusing to overwrite an existing dense index")
-    config = json.loads((root / "config.json").read_text())
+    config = json.loads((root / "config.json").read_text(encoding="utf-8"))
     if config["coverage"] != "full" and not allow_partial:
         raise ValueError("Pilot encodings require explicit --allow-partial")
     shards, count, _ = read_shards(root, config)
@@ -170,9 +171,9 @@ def build_dense_index(encodings, output, *, document_index, model_dir, corpus=No
     pending = Path(tempfile.mkdtemp(prefix=f".{target.name}.building-", dir=target.parent))
     try:
         seen = set()
-        with (pending / "ids.jsonl").open("w", encoding="utf-8") as output_ids:
+        with (pending / "ids.jsonl").open("w", encoding="utf-8", newline="\n") as output_ids:
             for folder, info in shards:
-                ids = [json.loads(line) for line in (folder / "ids.jsonl").read_text().splitlines()]
+                ids = [json.loads(line) for line in (folder / "ids.jsonl").read_text(encoding="utf-8").splitlines()]
                 if seen.intersection(ids):
                     raise ValueError("Duplicate IDs across encoding shards")
                 if ids != expected_ids[len(seen):len(seen) + len(ids)]:
@@ -201,7 +202,7 @@ class DenseEngine:
     def __init__(self, index_dir, *, document_index=None, model_dir=None, corpus=None,
                  device="auto", allow_partial=False, encoder=None):
         self.root = Path(index_dir).resolve()
-        self.manifest = json.loads((self.root / "manifest.json").read_text())
+        self.manifest = json.loads((self.root / "manifest.json").read_text(encoding="utf-8"))
         manifest = self.manifest
         if manifest.get("schema_version") != 1 or manifest.get("engine") != "e5-cosine":
             raise ValueError("Unsupported dense index manifest")
@@ -210,7 +211,7 @@ class DenseEngine:
         for name, digest in manifest["files"].items():
             if Path(name).name != name or sha256_file(self.root / name) != digest:
                 raise ValueError(f"Dense index identity check failed: {name}")
-        self.ids = [json.loads(line) for line in (self.root / "ids.jsonl").read_text().splitlines()]
+        self.ids = [json.loads(line) for line in (self.root / "ids.jsonl").read_text(encoding="utf-8").splitlines()]
         if len(set(self.ids)) != len(self.ids) or not all(valid_id(x) for x in self.ids):
             raise ValueError("Invalid dense document IDs")
         self._worker, self.store, self._closed = None, None, False
@@ -221,10 +222,10 @@ class DenseEngine:
                 raise ValueError("Dense vector/ID counts disagree")
             if self._worker.info["dimension"] != manifest["model"]["dimension"]:
                 raise ValueError("Invalid dense index dimension")
-            self.store = DocumentStore(document_index or manifest["document_index_path"], corpus=corpus)
+            self.store = DocumentStore(document_index if document_index is not None else resolve_saved_path(manifest["document_index_path"]), corpus=corpus)
             if self.store.manifest["source"]["sha256"] != manifest["source_sha256"]:
                 raise ValueError("Dense and document indexes refer to different corpora")
-            self.encoder = encoder or E5Encoder(model_dir or manifest["model_path"], device=device)
+            self.encoder = encoder or E5Encoder(model_dir if model_dir is not None else resolve_saved_path(manifest["model_path"]), device=device)
             if self.encoder.spec != manifest["model"]:
                 raise ValueError("Query encoder differs from the document encoder")
         except BaseException:

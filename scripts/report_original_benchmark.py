@@ -77,9 +77,9 @@ def case_evidence(rows):
     """Select actual largest gains/losses; never invent a balanced outcome."""
     positive = sorted((r for r in rows if float(r["delta_ndcg_at_5"]) > 0), key=lambda r: -float(r["delta_ndcg_at_5"]))[:2]
     negative = sorted((r for r in rows if float(r["delta_ndcg_at_5"]) < 0), key=lambda r: float(r["delta_ndcg_at_5"]))[:2]
-    runs = {engine: {r["query_id"]: r for r in [json.loads(line) for line in (ROOT / path / "results.jsonl").read_text().splitlines()]}
+    runs = {engine: {r["query_id"]: r for r in [json.loads(line) for line in (ROOT / path / "results.jsonl").read_text(encoding="utf-8").splitlines()]}
             for engine, path in (("bm25", "artifacts/runs/bm25-original-benchmark"), ("dense", "artifacts/runs/dense-original"))}
-    queries = [json.loads(line) for line in (ROOT / "queries.jsonl").read_text().splitlines()]
+    queries = [json.loads(line) for line in (ROOT / "queries.jsonl").read_text(encoding="utf-8").splitlines()]
     qrels = load_qrels(ROOT / "qrel.jsonl", [q["_id"] for q in queries])
     from news_ir.runtime import initialize_jvm
     initialize_jvm()
@@ -112,7 +112,7 @@ def case_evidence(rows):
                 evidence["engines"][engine] = documents
             cases.append(evidence)
     ANALYSIS.mkdir(parents=True, exist_ok=True)
-    (ANALYSIS / "case_evidence.json").write_text(json.dumps(cases, indent=2, ensure_ascii=False) + "\n")
+    (ANALYSIS / "case_evidence.json").write_text(json.dumps(cases, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     lines = ["# Original benchmark: measured case studies", "",
              "Cases are the two largest positive and two largest negative E5-minus-BM25 nDCG@5 differences. "
              "Grades come from the original qrels; **unjudged is not a verified grade 0**. "
@@ -159,15 +159,15 @@ def case_evidence(rows):
               "They do not test whether either system obeys the 20 custom negation, homonym or temporal constraints. "
               "Article-level excerpts cannot establish why E5 assigned a score. Full-body versus 512-token input coverage "
               "and incomplete judgments remain competing explanations.", ""]
-    (ROOT / "reports/ORIGINAL_57_CASE_STUDIES.md").write_text("\n".join(lines))
+    (ROOT / "reports/ORIGINAL_57_CASE_STUDIES.md").write_text("\n".join(lines), encoding="utf-8", newline="\n")
     return cases
 
 
 def main():
-    metrics = json.loads((EVALUATION / "metrics.json").read_text())
-    manifest = json.loads((EVALUATION / "manifest.json").read_text())
-    paired = json.loads((EVALUATION / "paired_comparison.json").read_text())
-    with (EVALUATION / "per_query.csv").open() as stream:
+    metrics = json.loads((EVALUATION / "metrics.json").read_text(encoding="utf-8"))
+    manifest = json.loads((EVALUATION / "manifest.json").read_text(encoding="utf-8"))
+    paired = json.loads((EVALUATION / "paired_comparison.json").read_text(encoding="utf-8"))
+    with (EVALUATION / "per_query.csv").open(encoding="utf-8") as stream:
         rows = list(csv.DictReader(stream))
     make_figures(metrics["primary"], rows)
     cases = case_evidence(rows)
@@ -249,16 +249,16 @@ def main():
               "- Both runs used the local Mac, but retrieval overlapped development/testing and memory pressure on an 8 GiB machine. Saved latencies are operational observations, not a controlled speed comparison.",
               "- Higher aggregate scores do not demonstrate robustness to negation, ambiguous senses or explicit temporal constraints. Those claims require the deferred custom study.", "",
               "## Reproduce and inspect", "", "```sh",
-              ".venv/bin/news-ir run --queries queries.jsonl --output artifacts/runs/bm25-original-reproduced --top-k 1000",
-              ".venv/bin/news-ir run --engine dense --queries queries.jsonl --output artifacts/runs/dense-original-reproduced --top-k 1000 --device cpu",
-              ".venv/bin/news-ir evaluate --bm25-run artifacts/runs/bm25-original-reproduced --dense-run artifacts/runs/dense-original-reproduced --output artifacts/evaluations/original-57-reproduced",
-              ".venv/bin/python scripts/report_original_benchmark.py", "```", "",
+              "python -m news_ir run --queries queries.jsonl --output artifacts/runs/bm25-original-reproduced --top-k 1000",
+              "python -m news_ir run --engine dense --queries queries.jsonl --output artifacts/runs/dense-original-reproduced --top-k 1000 --device cpu",
+              "python -m news_ir evaluate --bm25-run artifacts/runs/bm25-original-reproduced --dense-run artifacts/runs/dense-original-reproduced --output artifacts/evaluations/original-57-reproduced",
+              "python scripts/report_original_benchmark.py", "```", "",
               "Existing run/evaluation directories are never silently overwritten. "
               "The report script regenerates figures and report text from `artifacts/evaluations/original-57/`.", "",
               "Machine-readable results: `metrics.json`, `per_query.csv`, `paired_comparison.json`, "
               "`crosscheck.json`, `unavailable_judgments.json` and `manifest.json` in that evaluation directory. "
               "Standalone SVG, PDF and PNG plots are under `reports/figures/original-57/`.", ""]
-    (ROOT / "reports/ORIGINAL_57_BENCHMARK.md").write_text("\n".join(lines))
+    (ROOT / "reports/ORIGINAL_57_BENCHMARK.md").write_text("\n".join(lines), encoding="utf-8", newline="\n")
     print("Generated reports/ORIGINAL_57_BENCHMARK.md, case evidence and 12 standalone figure files.")
 
 

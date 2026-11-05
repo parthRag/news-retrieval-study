@@ -9,6 +9,7 @@ import os
 from pathlib import Path
 import signal
 import subprocess
+from news_ir.platform_support import find_browser, process_options, terminate_process_tree
 import tempfile
 import time
 from urllib.request import urlopen
@@ -18,21 +19,21 @@ ROOT=Path(__file__).resolve().parents[1]
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--browser',default='/Applications/Brave Browser.app/Contents/MacOS/Brave Browser')
+    parser.add_argument('--browser',default=None, help='Chrome/Edge/Brave executable; auto-detected by default')
     args=parser.parse_args()
-    metadata=json.loads((ROOT/'configs/submission.json').read_text())
+    metadata=json.loads((ROOT/'configs/submission.json').read_text(encoding="utf-8"))
     stems=[metadata['group_number']+'_'+metadata['short_title'],'RESEARCH_REPORT']
     with tempfile.TemporaryDirectory(prefix='news-ir-pdf-') as profile:
-        process=subprocess.Popen([args.browser,'--headless','--disable-gpu','--no-first-run','--no-default-browser-check',
+        process=subprocess.Popen([find_browser(args.browser),'--headless','--disable-gpu','--no-first-run','--no-default-browser-check',
                                   '--disable-background-networking','--remote-debugging-address=127.0.0.1',
                                   '--remote-debugging-port=0','--user-data-dir='+profile,'about:blank'],
-                                 stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,start_new_session=True)
+                                 stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,**process_options())
         try:
             portfile=Path(profile)/'DevToolsActivePort'
             for _ in range(100):
                 if portfile.exists(): break
                 time.sleep(.2)
-            port=portfile.read_text().splitlines()[0]
+            port=portfile.read_text(encoding="utf-8").splitlines()[0]
             with urlopen(f'http://127.0.0.1:{port}/json/list') as response:
                 target=next(t for t in json.load(response) if t['type']=='page')
             with connect(target['webSocketDebuggerUrl'],max_size=50_000_000) as ws:
@@ -70,11 +71,8 @@ def main():
                     output.write_bytes(base64.b64decode(pdf['data']))
                     audits[stem]=audit
                     print(f'Rendered {output.name} ({output.stat().st_size:,} bytes)',flush=True)
-                (ROOT/'deliverables/pdf_layout_audit.json').write_text(json.dumps(audits,indent=2)+'\n')
+                (ROOT/'deliverables/pdf_layout_audit.json').write_text(json.dumps(audits,indent=2)+'\n', encoding="utf-8", newline="\n")
         finally:
-            os.killpg(process.pid,signal.SIGTERM)
-            try: process.wait(timeout=10)
-            except subprocess.TimeoutExpired:
-                os.killpg(process.pid,signal.SIGKILL); process.wait()
+            terminate_process_tree(process)
 
 if __name__=='__main__':main()

@@ -1,3 +1,5 @@
+For native Windows commands, see [the Windows guide](WINDOWS_SETUP.md). Commands below use Python from the project environment.
+
 Assessment status: the custom comparison currently uses full-article AI judgments, with human review planned next and not yet completed. See [assessment method and review plan](ASSESSMENT_METHOD.md).
 
 Current integration: the demo retains the 40-query custom study and 57-topic background-linking adaptation, and adds 50 Core 2018 topics with title, description and provisional-rewrite views (150 new formulations). The three new suites each compare BM25, E5 and RRF. Together there are 247 distinct query formulations across 267 saved-view entries; this is not 247 independent information needs. New news rewrites await independent human intent review and reuse NIST human relevance labels conditionally on preserving the narrative. See [integrated results](INTEGRATED_STUDY.md).
@@ -9,7 +11,7 @@ For a paired example, choose **Core 2018 · 50 provisional rewrites**. Each engi
 Run this from the repository root:
 
 ```sh
-.venv/bin/python -m news_ir.demo
+python -m news_ir.demo
 ```
 
 Open **http://127.0.0.1:8765**. Stop the server with Ctrl+C. If that port is occupied, use `--port 8766` and open the corresponding address. `--root /absolute/path/to/IR` supports launching from another directory. The server listens only on this machine. After reinstalling the editable package, `news-ir-demo` is an equivalent entry point.
@@ -60,7 +62,7 @@ If startup reports a hash mismatch, inspect the changed artifact and regenerate 
 To repeat the browser test, first start the server, then run:
 
 ```sh
-.venv/bin/python scripts/verify_demo_browser.py --output artifacts/demo-validation-recheck
+python scripts/verify_demo_browser.py --output artifacts/demo-validation-recheck
 ```
 
 This optional check uses the installed Brave Chromium binary by default, creates and deletes a separate temporary browser profile, and runs one real CPU query. `--browser /path/to/chromium` selects a compatible Chromium executable; `--port` selects the demo port. It requires the locked `requests` and `websockets` dependencies and refuses existing output folders. The normal unit suite opens no browser and downloads no model.

@@ -12,7 +12,8 @@ dependencies = ["pyserini==1.5.0"]
 [project.optional-dependencies]
 test = ["pytest==8.4.2"]
 dense = ["faiss-cpu==1.13.2", "torch>=2.9", "transformers>=4.57", "huggingface-hub>=1"]
-evaluation = ["ir-measures==0.4.3"]
+evaluation = ["ir-measures==0.4.3", "pytrec-eval-terrier==0.5.11"]
+reporting = ["markdown-it-py>=4,<5", "matplotlib>=3.10,<4", "requests>=2.32,<3", "websockets>=15,<18", "pypdf>=6,<7"]
 
 [project.scripts]
 news-ir = "news_ir.cli:main"

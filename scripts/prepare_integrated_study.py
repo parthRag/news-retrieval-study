@@ -41,14 +41,14 @@ REWRITES = {
 
 
 def write(path, value):
- path.write_text(json.dumps(value, indent=2, ensure_ascii=False)+'\n')
+ path.write_text(json.dumps(value, indent=2, ensure_ascii=False)+'\n', encoding="utf-8", newline="\n")
 
 
 def main():
  if OUT.exists(): raise FileExistsError('Frozen protocol exists; choose a new version')
- topics=[json.loads(l) for l in (SOURCE/'queries/core18_topics.jsonl').read_text().splitlines()]
+ topics=[json.loads(l) for l in (SOURCE/'queries/core18_topics.jsonl').read_text(encoding="utf-8").splitlines()]
  assert len(topics)==50 and {t['query_id'] for t in topics}==set(REWRITES)
- proof=json.loads((ROOT/'artifacts/reviews/2026-11-02-project-comparison/core18_coverage.json').read_text())
+ proof=json.loads((ROOT/'artifacts/reviews/2026-11-02-project-comparison/core18_coverage.json').read_text(encoding="utf-8"))
  assert proof['official_nist_pair_grade_match']
  assert sha256_file(SOURCE/'queries/core18.qrels')==proof['peer_qrels_sha256']
  rows=[]
@@ -63,12 +63,12 @@ def main():
      'length_change_words':len(text.split())-len(topic['title'].split()),
      'surface_token_jaccard':len(a&b)/len(a|b) if a|b else 1.0})
  OUT.mkdir(parents=True)
- (OUT/'queries.jsonl').write_text(''.join(json.dumps(r,ensure_ascii=False)+'\n' for r in rows))
+ (OUT/'queries.jsonl').write_text(''.join(json.dumps(r,ensure_ascii=False)+'\n' for r in rows), encoding="utf-8", newline="\n")
  raw=[]
- for line in (SOURCE/'queries/core18.qrels').read_text().splitlines():
+ for line in (SOURCE/'queries/core18.qrels').read_text(encoding="utf-8").splitlines():
   q,_,d,g=line.split();raw.append((q,d,int(g)))
  labels=[{'query-id':f'{q}-{v}','corpus-id':d,'score':g} for q,d,g in raw for v in ['title','description','rewrite']]
- (OUT/'qrels.jsonl').write_text(''.join(json.dumps(r)+'\n' for r in labels))
+ (OUT/'qrels.jsonl').write_text(''.join(json.dumps(r)+'\n' for r in labels), encoding="utf-8", newline="\n")
  with DocumentStore(ROOT/'artifacts/indexes/bm25') as store:
   actual=sha256_file(store.corpus)
   assert actual==store.manifest['source']['sha256']==proof['local_corpus_source_sha256']
@@ -76,7 +76,7 @@ def main():
   for q,d,g in raw:
    hit=store._db.execute('SELECT eligible FROM documents WHERE doc_id=?',(d,)).fetchone()
    if not hit or not hit[0]:missing.append({'topic_id':q,'doc_id':d,'grade':g,'reason':'absent' if not hit else 'empty'})
-  dense=json.loads((ROOT/'artifacts/indexes/dense/manifest.json').read_text())
+  dense=json.loads((ROOT/'artifacts/indexes/dense/manifest.json').read_text(encoding="utf-8"))
   assert dense.get('corpus_sha256',dense.get('source_sha256'))==actual
   assert dense['coverage']=='full' and dense['indexed_documents']==store.manifest['documents']['indexed']
   audit={'status':'passed_for_available_corpus_study','official_corpus_equivalence':False,

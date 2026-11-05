@@ -8,7 +8,7 @@ ROOT=Path(__file__).resolve().parents[1]
 def load():
  base=ROOT/'artifacts/evaluations'
  if not (base/'integrated-core18-v1/manifest.json').exists():return None
- return {name:json.loads((base/f'integrated-{name}-v1/metrics.json').read_text()) for name in ['core18','covid']}
+ return {name:json.loads((base/f'integrated-{name}-v1/metrics.json').read_text(encoding="utf-8")) for name in ['core18','covid']}
 
 
 def comparison_table(data,table,metric='ndcg_at_5'):

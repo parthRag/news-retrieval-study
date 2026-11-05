@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_twenty_draft_queries_and_temporal_rubrics():
-    rows = [json.loads(line) for line in (ROOT / "annotations/custom_queries.draft.jsonl").read_text().splitlines()]
+    rows = [json.loads(line) for line in (ROOT / "annotations/custom_queries.draft.jsonl").read_text(encoding="utf-8").splitlines()]
     assert len(rows) == len({row["_id"] for row in rows}) == 20
     assert Counter(row["category"] for row in rows) == {
         "negation": 5, "homonym": 5, "temporal": 5, "vocabulary_mismatch": 5}
@@ -31,7 +31,7 @@ def test_twenty_draft_queries_and_temporal_rubrics():
 
 
 def test_colab_notebook_code_and_checkpoint_controls():
-    notebook = json.loads((ROOT / "notebooks/News_IR_Dense_Encoding.ipynb").read_text())
+    notebook = json.loads((ROOT / "notebooks/News_IR_Dense_Encoding.ipynb").read_text(encoding="utf-8"))
     assert notebook["nbformat"] == 4
     code = []
     for cell in notebook["cells"]:
@@ -76,7 +76,7 @@ def test_colab_source_relocation_cell_writes_valid_metadata(tiny_index, tmp_path
         shutil.copy2(tiny_index["index"] / name, metadata / name)
     monkeypatch.setattr(huggingface_hub, "hf_hub_download", lambda **kwargs: str(corpus))
     monkeypatch.setattr(news_ir.embedding, "download_model", lambda *args, **kwargs: {"files": {}})
-    notebook = json.loads((ROOT / "notebooks/News_IR_Dense_Encoding.ipynb").read_text())
+    notebook = json.loads((ROOT / "notebooks/News_IR_Dense_Encoding.ipynb").read_text(encoding="utf-8"))
     source = next("".join(cell["source"]) for cell in notebook["cells"]
                   if cell["cell_type"] == "code" and "manifest_path.write_text" in "".join(cell["source"]))
     context = {"Path": Path, "json": json, "ROOT": tmp_path,
@@ -93,8 +93,8 @@ def test_model_configuration_tampering_is_rejected(tmp_path, field, value):
     model = ROOT / "artifacts/models/e5-base-v2/encoder.json"
     if not model.exists():
         pytest.skip("Model not downloaded")
-    spec = json.loads(model.read_text())
+    spec = json.loads(model.read_text(encoding="utf-8"))
     spec[field] = value
-    (tmp_path / "encoder.json").write_text(json.dumps(spec))
+    (tmp_path / "encoder.json").write_text(json.dumps(spec), encoding="utf-8", newline="\n")
     with pytest.raises(ValueError):
         read_model_spec(tmp_path, verify=False)

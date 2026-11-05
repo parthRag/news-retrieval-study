@@ -20,7 +20,8 @@ def vector_audit(index_dir):
 
     root = Path(index_dir)
     request = json.load(sys.stdin)
-    index = faiss.read_index(str(root / "vectors.faiss"))
+    with (root / "vectors.faiss").open("rb") as stream:
+        index = faiss.read_index(faiss.PyCallbackIOReader(stream.read))
     if not isinstance(index, faiss.IndexFlatIP) or index.metric_type != faiss.METRIC_INNER_PRODUCT:
         raise ValueError("Expected exact IndexFlatIP cosine index")
     assert index.ntotal == request["count"] and index.d == request["dimension"]
@@ -36,7 +37,7 @@ def vector_audit(index_dir):
         scores[offset:offset + len(block)] = block @ queries.T
     if max_error > 1e-4:
         raise ValueError("Document embeddings are not L2-normalized")
-    ids = [json.loads(line) for line in (root / "ids.jsonl").read_text().splitlines()]
+    ids = [json.loads(line) for line in (root / "ids.jsonl").read_text(encoding="utf-8").splitlines()]
     positions = {doc_id: row for row, doc_id in enumerate(ids)}
     checks = []
     for number, probe in enumerate(probes):
@@ -61,9 +62,9 @@ def verify(args):
     from news_ir.embedding import read_model_spec
 
     index, run = Path(args.index), Path(args.run)
-    summary = json.loads(Path(args.summary).read_text())
-    manifest = json.loads((index / "manifest.json").read_text())
-    run_manifest = json.loads((run / "manifest.json").read_text())
+    summary = json.loads(Path(args.summary).read_text(encoding="utf-8"))
+    manifest = json.loads((index / "manifest.json").read_text(encoding="utf-8"))
+    run_manifest = json.loads((run / "manifest.json").read_text(encoding="utf-8"))
     assert summary["completed"] is True and summary["coverage"] == manifest["coverage"] == "full"
     assert sha256_file(args.archive) == summary["results_sha256"]
     for name, digest in manifest["files"].items():
@@ -79,7 +80,7 @@ def verify(args):
     assert run_manifest["query_source_sha256"] == sha256_file(args.queries)
     queries = read_queries(args.queries)
     assert queries == read_queries(run / "queries.jsonl")
-    ids = [json.loads(line) for line in (index / "ids.jsonl").read_text().splitlines()]
+    ids = [json.loads(line) for line in (index / "ids.jsonl").read_text(encoding="utf-8").splitlines()]
     with DocumentStore(args.document_index) as store:
         assert sha256_file(store.corpus) == manifest["source_sha256"] == summary["source_sha256"] == run_manifest["corpus_sha256"]
         expected_ids = [row[0] for row in store._db.execute(
@@ -90,9 +91,9 @@ def verify(args):
         assert count == store.manifest["documents"]["indexed"] == summary["encoded_documents"] == summary["target_documents"]
         assert manifest["source_bytes"] == store.corpus.stat().st_size
         eligible = set(ids)
-        results = [json.loads(line) for line in (run / "results.jsonl").read_text().splitlines()]
+        results = [json.loads(line) for line in (run / "results.jsonl").read_text(encoding="utf-8").splitlines()]
         assert len(results) == len(queries) == summary["query_count"] == run_manifest["query_count"]
-        trec = (run / "run.trec").read_text().splitlines()
+        trec = (run / "run.trec").read_text(encoding="utf-8").splitlines()
         line_number, lookup_ids = 0, set(random.Random(42).sample(ids, min(1000, count)))
         for query, result in zip(queries, results, strict=True):
             assert (result["query_id"], result["query"]) == (query["_id"], query["text"])
@@ -116,7 +117,7 @@ def verify(args):
     print(f"Verified archive, source/model identity, all {count} IDs and {line_number} hits", flush=True)
     probes, examples = [], []
     # First query in each pre-existing category, chosen without observing rankings.
-    drafts = [json.loads(line) for line in Path(args.queries).read_text().splitlines()]
+    drafts = [json.loads(line) for line in Path(args.queries).read_text(encoding="utf-8").splitlines()]
     seen = set()
     selected = []
     for row in drafts:
@@ -146,7 +147,7 @@ def verify(args):
               "kaggle_runtime": summary["progress"]["runtime"], "local_query_runtime": local_runtime,
               "local_search_examples": examples,
               "evaluation": "Integrity and mathematical integration checks only; human relevance labels and effectiveness metrics pending"}
-    Path(args.output).write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n")
+    Path(args.output).write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     print(json.dumps({"status": "passed", "report": str(Path(args.output).resolve()),
                       "documents": count, "hits": line_number, "vector_checks": vector_checks}, indent=2))
 

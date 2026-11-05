@@ -1,0 +1,3 @@
+# Preserve byte-bound research artifacts when cloning with core.autocrlf=true.
+# New text exports explicitly use UTF-8 and LF in the application.
+* -text

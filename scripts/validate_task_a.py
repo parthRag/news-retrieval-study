@@ -10,16 +10,16 @@ from news_ir.data import DocumentStore, read_queries, sha256_file
 
 
 def validate(index, run_dir, repeat_dir):
-    summary = json.loads((run_dir / "manifest.json").read_text())
-    repeat = json.loads((repeat_dir / "manifest.json").read_text())
+    summary = json.loads((run_dir / "manifest.json").read_text(encoding="utf-8"))
+    repeat = json.loads((repeat_dir / "manifest.json").read_text(encoding="utf-8"))
     assert summary["run_sha256"] == sha256_file(run_dir / "run.trec")
     assert summary["run_sha256"] == repeat["run_sha256"] == sha256_file(repeat_dir / "run.trec")
     assert summary["results_sha256"] == sha256_file(run_dir / "results.jsonl")
     assert summary["index_manifest_sha256"] == sha256_file(index / "manifest.json")
     assert summary["query_snapshot_sha256"] == sha256_file(run_dir / "queries.jsonl")
     queries = read_queries(run_dir / "queries.jsonl")
-    trec_lines = (run_dir / "run.trec").read_text().splitlines()
-    results = [json.loads(line) for line in (run_dir / "results.jsonl").read_text().splitlines()]
+    trec_lines = (run_dir / "run.trec").read_text(encoding="utf-8").splitlines()
+    results = [json.loads(line) for line in (run_dir / "results.jsonl").read_text(encoding="utf-8").splitlines()]
     assert len(queries) == len(results) == summary["query_count"]
     offset, unique_ids = 0, set()
     with DocumentStore(index) as store:
@@ -73,7 +73,7 @@ def main():
     args = parser.parse_args()
     result = validate(args.index, args.run, args.repeat)
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(result, indent=2) + "\n")
+    args.output.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8", newline="\n")
     print(json.dumps(result, indent=2))
 
 

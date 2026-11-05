@@ -17,9 +17,9 @@ The controlled-rewrite experiments are preserved under [studies/](studies/README
 See [the integrated results and methods](reports/INTEGRATED_STUDY.md) and [paired ranking examples](reports/CORE18_CASE_STUDIES.md). New news rewrites are AI-authored and await independent human intent review; their evaluation conditionally reuses NIST human relevance labels. Official descriptions vary length/detail. The available corpus differs from full WaPo v2, so this is an adapted evaluation. Earlier 57-topic and custom40 results remain unchanged.
 
 ```sh
-.venv/bin/python scripts/validate_integrated_study.py
-.venv/bin/python scripts/evaluate_integrated_study.py --study covid --output artifacts/evaluations/covid-recheck
-.venv/bin/python scripts/evaluate_integrated_study.py --study core18 --native --output artifacts/evaluations/core18-recheck
+python scripts/validate_integrated_study.py
+python scripts/evaluate_integrated_study.py --study covid --output artifacts/evaluations/covid-recheck
+python scripts/evaluate_integrated_study.py --study core18 --native --output artifacts/evaluations/core18-recheck
 ```
 
 The `evaluation` extra supplies the pinned `ir_measures` backend; it is included in the updated lock. A 50-row news rewrite review template is under `annotations/core18_v1/`. The demo shows original-title score changes for each rewritten or description query.
@@ -37,12 +37,14 @@ Download the four-page PDF, supporting research report and portable reproducibil
 From this repository, with the existing corpus, indexes and model files:
 
 ```sh
-.venv/bin/python -m news_ir.demo
+python -m news_ir.demo
 ```
 
 Open **http://127.0.0.1:8765**. Saved experiments load immediately; a new CPU search can take around a minute including model startup. No new GPU job or API credentials are required. Read [the demo guide](reports/DEMO_GUIDE.md) for presentation examples, required files and timing limits. Live queries are unjudged and never change the frozen experiments.
 
 ## Environment
+
+For Windows PowerShell/Command Prompt, follow [Windows setup and verification](reports/WINDOWS_SETUP.md). Native Windows/Linux checks passed; see [the verification report](reports/PORTABILITY_VERIFICATION.md). It covers the native environment, Java 21, copied data, browser/PDF tools and CI checks. The commands below use `python` from an activated environment.
 
 Use Python 3.12 and Java 21. The application automatically selects an installed Java 21 on macOS if `JAVA_HOME` is unset; it does not modify your shell configuration. An explicit `JAVA_HOME` is respected. The JVM heap is capped at 2 GiB.
 
@@ -50,22 +52,23 @@ The project environment lives in `.venv`. To recreate it:
 
 ```sh
 python3.12 -m venv .venv
-.venv/bin/python -m pip install -r requirements-lock.txt
-.venv/bin/python -m pip install --no-deps --no-build-isolation -e .
+source .venv/bin/activate
+python -m pip install --upgrade pip setuptools wheel
+python -m pip install -r requirements-portable.txt
 ```
 
-The lock records the tested dependency versions on this ARM Mac. Other operating systems may require platform-specific dependency adjustments. A first installation can instead use `pip install -e '.[test,dense]'`; the lock is preferred for reproducing this environment.
+`requirements-portable.txt` installs the active project extras and selects wheels for the current OS. `requirements-lock.txt` preserves the earlier ARM Mac environment for historical reproduction. On Windows, use the environment executable under `.venv\Scripts\python.exe` as shown in the linked guide.
 
 ## Build and search
 
 Run commands from the project root:
 
 ```sh
-.venv/bin/news-ir index --corpus corpus.jsonl --output artifacts/indexes/bm25
-.venv/bin/news-ir search "cricket insect lifecycle" --top-k 5
-.venv/bin/news-ir analyze "events that did NOT happen without warning in 2016"
-.venv/bin/news-ir document b2e89334-33f9-11e1-825f-dabc29fd7071
-.venv/bin/news-ir verify --sample-size 1000
+python -m news_ir index --corpus corpus.jsonl --output artifacts/indexes/bm25
+python -m news_ir search "cricket insect lifecycle" --top-k 5
+python -m news_ir analyze "events that did NOT happen without warning in 2016"
+python -m news_ir document b2e89334-33f9-11e1-825f-dabc29fd7071
+python -m news_ir verify --sample-size 1000
 ```
 
 Indexing streams directly from the source JSONL into Lucene and a SQLite byte-offset table. It does not create a second copy of the article text. Titles and full bodies are concatenated with a newline, with no title boost. Documents with both fields whitespace-empty are excluded from retrieval but remain available by ID; title-only and body-only documents are retained. IDs are strings and must be unique.
@@ -79,7 +82,7 @@ Single-query output is JSON containing ranked IDs, scores, titles, leading-body 
 Queries are JSONL objects with unique string `_id` and string `text` fields. Empty query text is allowed and produces an explicit empty result record. For the downloaded 57-query supporting benchmark:
 
 ```sh
-.venv/bin/news-ir run --queries queries.jsonl --output artifacts/runs/bm25-original --top-k 1000
+python -m news_ir run --queries queries.jsonl --output artifacts/runs/bm25-original --top-k 1000
 ```
 
 The output directory contains:
@@ -106,8 +109,8 @@ E5 has higher averages on this benchmark, while BM25 wins 21 of 57 nDCG@5 compar
 To evaluate the saved runs into a new directory:
 
 ```sh
-.venv/bin/news-ir evaluate --output artifacts/evaluations/original-57-rechecked
-.venv/bin/python scripts/report_original_benchmark.py
+python -m news_ir evaluate --output artifacts/evaluations/original-57-rechecked
+python scripts/report_original_benchmark.py
 ```
 
 The evaluator retains unavailable positives in its main denominators, reports alternative gains and available-corpus sensitivity, and cross-checks all scores against native `trec_eval` bundled with Anserini. Original runs, qrels and corpus are preserved. Run and evaluation outputs have manifests and hashes; existing output directories are never silently overwritten.
@@ -115,9 +118,9 @@ The evaluator retains unavailable positives in its main denominators, reports al
 The hybrid combines saved ranks using `1/(60+rank)` from each engine, without tuning or another encoding job. Its nDCG difference interval against E5 includes zero, despite higher means. See [the hybrid report](reports/RRF_EXPERIMENT.md) for uncertainty and four evaluation policies. Reproduce it into fresh directories:
 
 ```sh
-.venv/bin/news-ir fuse --output artifacts/runs/rrf-original-k60-new
-.venv/bin/python scripts/evaluate_fusion.py --fusion-run artifacts/runs/rrf-original-k60-new --output artifacts/evaluations/rrf-original-57-new
-.venv/bin/python scripts/report_current_study.py
+python -m news_ir fuse --output artifacts/runs/rrf-original-k60-new
+python scripts/evaluate_fusion.py --fusion-run artifacts/runs/rrf-original-k60-new --output artifacts/evaluations/rrf-original-57-new
+python scripts/report_current_study.py
 ```
 
 The custom study uses its own preliminary reference, separate from the original qrels; the assessment status and review plan are linked above. [The assessment protocol](annotations/README.md) records full-article evidence, source hashes, confidence and coverage. The preserved initial 20 top-20 union contains 737 assessed pairs. Historical initial results are:
@@ -131,9 +134,9 @@ The custom study uses its own preliminary reference, separate from the original 
 Both paired difference intervals include zero. MAP uses known positives in the shallow pool; only about 3% of each top-1,000 ranking is judged. V05 has no positive in the pool and remains in the macro average. E5 wins three negation queries and BM25 two at nDCG@5; BM25 has higher negation pooled MAP and higher temporal category means. See [the complete results and limitations](reports/CUSTOM_20_DEPTH20.md) and [all 737 evidence-backed decisions](reports/CUSTOM_20_DEPTH20_EVIDENCE.md).
 
 ```sh
-.venv/bin/python scripts/validate_custom_depth20.py
-.venv/bin/python scripts/evaluate_custom_depth20.py --output artifacts/evaluations/custom20-depth20-rechecked
-.venv/bin/python scripts/report_custom_depth20.py
+python scripts/validate_custom_depth20.py
+python scripts/evaluate_custom_depth20.py --output artifacts/evaluations/custom20-depth20-rechecked
+python scripts/report_custom_depth20.py
 ```
 
 The evaluator requires complete designated-pool coverage, validates every evidence span, and preserves all 188 earlier decisions. All 588 native metric comparisons passed. The [earlier top-five result](reports/CUSTOM_20_TOP5.md) is preserved: its nDCG differs because deeper judgments change the ideal-ranking denominator; the top-five grades, ranks and P@5 are unchanged. Group 5, member IDs, course and mentor are filled. The GitHub repository is public; confirm individual completed-work attribution before submission.
@@ -141,9 +144,9 @@ The evaluator requires complete designated-pool coverage, validates every eviden
 ## Verification
 
 ```sh
-.venv/bin/python -m pytest -q
-.venv/bin/python -m pip check
-.venv/bin/news-ir verify --sample-size 1000
+python -m pytest -q
+python -m pip check
+python -m news_ir verify --sample-size 1000
 ```
 
 Tests exercise real Lucene indexes, an independent BM25 score calculation, analyzer behavior, ranking/ties, Unicode byte offsets, concurrent document reads, malformed data, duplicate IDs, failed-build cleanup, source identity, run export, and the CLI. They require the Java/Pyserini environment; they do not download models or access the network.
@@ -161,21 +164,21 @@ Use [COLAB_SETUP.md](reports/COLAB_SETUP.md) with [News_IR_Dense_Encoding.ipynb]
 The local real-model pilot is usable explicitly as a pilot:
 
 ```sh
-.venv/bin/news-ir dense-search "Virginia Tech Sugar Bowl receivers" --index artifacts/indexes/dense-pilot --allow-partial --device cpu
+python -m news_ir dense-search "Virginia Tech Sugar Bowl receivers" --index artifacts/indexes/dense-pilot --allow-partial --device cpu
 ```
 
 The complete index is installed at `artifacts/indexes/dense`. To search or create a fresh local run, use:
 
 ```sh
-.venv/bin/news-ir dense-search "cricket insect lifecycle" --top-k 5
-.venv/bin/news-ir run --engine dense --queries annotations/custom_queries.draft.jsonl --output artifacts/runs/dense-custom-draft-local --top-k 1000 --device cpu
+python -m news_ir dense-search "cricket insect lifecycle" --top-k 5
+python -m news_ir run --engine dense --queries annotations/custom_queries.draft.jsonl --output artifacts/runs/dense-custom-draft-local --top-k 1000 --device cpu
 ```
 
 For a full local encoding run, `news-ir encode` defaults to the entire eligible corpus. `--limit` explicitly creates a pilot, and pilot indexes require `--allow-partial` to build/search. `--resume` verifies committed shards and continues their source offsets. Example full commands:
 
 ```sh
-.venv/bin/news-ir encode --output artifacts/encodings/e5-base-v2 --batch-size 8
-.venv/bin/news-ir dense-index --encodings artifacts/encodings/e5-base-v2 --output artifacts/indexes/dense
+python -m news_ir encode --output artifacts/encodings/e5-base-v2 --batch-size 8
+python -m news_ir dense-index --encodings artifacts/encodings/e5-base-v2 --output artifacts/indexes/dense
 ```
 
 The model uses pinned E5 weights, query/passage prefixes, a 512-token total budget, masked mean pooling, and L2 normalization. FAISS performs exact inner-product search over normalized vectors. It runs in an isolated process to avoid PyTorch/FAISS OpenMP conflicts on macOS; no unsafe duplicate-library overrides are used. Query encoding and FAISS IPC/search are included in dense run latency.
@@ -188,8 +191,8 @@ The original draft, blank query-review sheet, frozen assessment protocol and pil
 The expanded artifacts preserve source ranks, scores and the original 737 judgments. The added707 preliminary decisions include literal evidence and a targeted audit; human review follows the plan linked above. Check against local full articles and recompute both gain modes and topic-family intervals:
 
 ```sh
-.venv/bin/python scripts/validate_custom40_extension.py
-.venv/bin/python scripts/validate_expanded_study.py
+python scripts/validate_custom40_extension.py
+python scripts/validate_expanded_study.py
 ```
 
 `artifacts/evaluations/custom40-depth20-v2/` contains combined metrics, category results, sensitivities and family intervals; the separate `custom40-extension20-depth20-v2/` folder contains follow-up-only scores. Saved combined runs preserve both component rankings and hashes. `scripts/evaluate_expanded_study.py` refuses to overwrite existing evaluations.

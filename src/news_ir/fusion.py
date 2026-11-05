@@ -8,6 +8,7 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
+from .platform_support import resolve_saved_path
 from .data import DocumentStore, read_queries, sha256_file
 from .evaluation import load_run
 
@@ -31,6 +32,36 @@ def reciprocal_rank_fusion(rankings, *, k=60, depth=1000):
                 sorted(scores.items(), key=lambda item: (-item[1], item[0]))[:depth], 1)]
 
 
+def explain_fusion_hits(hits, components, *, k=60):
+    """Attach source ranks without changing a published hit's rank or score.
+
+    Components are named, complete saved candidate lists, not display slices.
+    A missing rank means absent from that component list, not absent from the
+    corpus or irrelevant. No relevance labels enter these explanations.
+    """
+    if type(k) is not int or k < 1 or len(components) < 2:
+        raise ValueError("Fusion explanations require positive integer k and two components")
+    positions = {}
+    for name, ranking in components.items():
+        ranking = list(ranking)
+        positions[name] = {doc_id: rank for rank, doc_id in enumerate(ranking, 1)}
+        if len(positions[name]) != len(ranking):
+            raise ValueError("Duplicate document in component ranking")
+    output = []
+    for hit in hits:
+        ranks = {name: index.get(hit["doc_id"]) for name, index in positions.items()}
+        if all(rank is None for rank in ranks.values()):
+            raise ValueError("Fusion hit is absent from every component")
+        contributions = {name: 1 / (k + rank) if rank is not None else 0.0
+                         for name, rank in ranks.items()}
+        output.append({**hit, "fusion": {
+            "k": k, "component_ranks": ranks,
+            "component_depths": {name: len(index) for name, index in positions.items()},
+            "contributions": contributions, "reconstructed_score": sum(contributions.values()),
+        }})
+    return output
+
+
 def fuse_runs(*, queries_path, bm25_run, dense_run, document_index, output, k=60):
     target = Path(output).resolve()
     if target.exists():
@@ -43,10 +74,10 @@ def fuse_runs(*, queries_path, bm25_run, dense_run, document_index, output, k=60
         rankings, manifest = load_run(path, queries_path, eligible, expected_source_sha256=source_hash)
         if manifest["engine"] != engine:
             raise ValueError("Fusion component engine arguments are swapped or incorrect")
-        index_manifest = Path(manifest["index_path"]) / "manifest.json"
+        index_manifest = resolve_saved_path(manifest["index_path"]) / "manifest.json"
         if sha256_file(index_manifest) != manifest["index_manifest_sha256"]:
             raise ValueError("Component index manifest changed since retrieval")
-        metadata = json.loads(index_manifest.read_text())
+        metadata = json.loads(index_manifest.read_text(encoding="utf-8"))
         count = metadata["documents"]["indexed"] if name == "bm25" else metadata["indexed_documents"]
         if count != len(eligible):
             raise ValueError("Component index does not cover the shared eligible corpus")
@@ -56,7 +87,7 @@ def fuse_runs(*, queries_path, bm25_run, dense_run, document_index, output, k=60
     working = Path(tempfile.mkdtemp(prefix=f".{target.name}.fusing-", dir=target.parent))
     try:
         total, elapsed = 0, []
-        with (working / "run.trec").open("w") as trec, (working / "results.jsonl").open("w") as results:
+        with (working / "run.trec").open("w", encoding="utf-8", newline="\n") as trec, (working / "results.jsonl").open("w", encoding="utf-8", newline="\n") as results:
             for query in queries:
                 started = time.perf_counter()
                 hits = reciprocal_rank_fusion([value[0][query["_id"]] for value in components.values()], k=k)
@@ -91,7 +122,7 @@ def fuse_runs(*, queries_path, bm25_run, dense_run, document_index, output, k=60
                or sha256_file(queries_path) != meta["query_source_sha256"]
                for name, (_, meta, path) in components.items()):
             raise ValueError("Fusion inputs changed during computation")
-        (working / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
+        (working / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8", newline="\n")
         load_run(working, queries_path, eligible, expected_source_sha256=source_hash)
         working.rename(target)
         return manifest
@@ -159,7 +190,7 @@ def evaluate_fusion(*, queries_path, qrels_path, bm25_run, dense_run, fusion_run
         write_json(working / "paired_comparison.json", {"samples": samples, "seed": seed,
                    "interpretation": "Descriptive paired query bootstrap; exploratory third-system comparison", "comparisons": paired})
         write_json(working / "crosscheck.json", checks)
-        with (working / "per_query.csv").open("w", newline="") as stream:
+        with (working / "per_query.csv").open("w", newline="", encoding="utf-8") as stream:
             columns = ["query_id", "query"] + [f"{e}_{m}" for e in runs for m in METRICS]
             writer = csv.DictWriter(stream, fieldnames=columns)
             writer.writeheader()

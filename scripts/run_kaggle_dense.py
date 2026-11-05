@@ -15,7 +15,7 @@ import subprocess
 import sys
 import tempfile
 import zipfile
-from pathlib import Path, PurePosixPath
+from pathlib import Path, PurePosixPath, PureWindowsPath
 
 
 def find_bundle(input_root):
@@ -34,8 +34,9 @@ def unpack_checked(archive_path, destination):
     destination = Path(destination).resolve()
     with zipfile.ZipFile(archive_path) as archive:
         for entry in archive.infolist():
-            name = PurePosixPath(entry.filename)
-            if (name.is_absolute() or ".." in name.parts or "\\" in entry.filename
+            original = entry.orig_filename
+            name = PurePosixPath(original)
+            if (name.is_absolute() or PureWindowsPath(original).drive or ".." in name.parts or "\\" in original or "\0" in original
                     or stat.S_ISLNK(entry.external_attr >> 16)
                     or not (destination / entry.filename).resolve().is_relative_to(destination)):
                 raise ValueError(f"Unsafe archive member: {entry.filename}")
@@ -49,13 +50,13 @@ def relocate_metadata(metadata, corpus, bundle):
     if corpus.stat().st_size != bundle["source_bytes"] or sha256_file(corpus) != bundle["source_sha256"]:
         raise ValueError("Downloaded corpus differs from the BM25 source; refusing to encode")
     path = metadata / "manifest.json"
-    manifest = json.loads(path.read_text())
+    manifest = json.loads(path.read_text(encoding="utf-8"))
     if (manifest["source"]["sha256"] != bundle["source_sha256"]
             or manifest["documents"]["indexed"] != bundle["eligible_documents"]):
         raise ValueError("Bundled document metadata disagrees with bundle identity")
     manifest["source"]["path"] = str(corpus.resolve())
     manifest["source"]["mtime_ns"] = corpus.stat().st_mtime_ns
-    path.write_text(json.dumps(manifest, indent=2) + "\n")
+    path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8", newline="\n")
 
 
 def restore_checkpoint(archive, encodings):
@@ -79,7 +80,7 @@ def restore_checkpoint(archive, encodings):
         if not (source / "config.json").is_file() or not (source / "shards").is_dir():
             raise ValueError("Resume archive must contain encodings/config.json and encodings/shards")
         from news_ir.dense import read_shards
-        read_shards(source, json.loads((source / "config.json").read_text()))
+        read_shards(source, json.loads((source / "config.json").read_text(encoding="utf-8")))
         source.rename(encodings)
     finally:
         shutil.rmtree(staging)
@@ -97,7 +98,7 @@ def export_checkpoint(encodings, output):
         for folder in sorted((encodings / "shards").glob("shard-*")):
             for name in ("manifest.json", "ids.jsonl", "vectors.npy"):
                 path = folder / name
-                archive.write(path, "encodings/" + str(path.relative_to(encodings)))
+                archive.write(path, "encodings/" + path.relative_to(encodings).as_posix())
     temporary.replace(output)
     return output
 
@@ -122,7 +123,7 @@ def run_job(args):
     os.environ["PYTHONPATH"] = str(payload / "src") + os.pathsep + os.environ.get("PYTHONPATH", "")
     os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
     os.environ.setdefault("USE_TF", "0")
-    bundle = json.loads((payload / "bundle.json").read_text())
+    bundle = json.loads((payload / "bundle.json").read_text(encoding="utf-8"))
 
     from huggingface_hub import hf_hub_download
     from news_ir.data import sha256_file
@@ -164,7 +165,7 @@ def run_job(args):
         if (encodings / "config.json").is_file():
             checkpoint = export_checkpoint(encodings, output / "dense-checkpoints.zip")
             print(f"Checkpoint export: {checkpoint}", flush=True)
-    config = json.loads((encodings / "config.json").read_text())
+    config = json.loads((encodings / "config.json").read_text(encoding="utf-8"))
     _, count, _ = read_shards(encodings, config)
     if config["coverage"] != "full" or config["target_documents"] != bundle["eligible_documents"]:
         raise ValueError("This job must select the entire shared eligible corpus")
@@ -187,8 +188,8 @@ def run_job(args):
         run_queries(dense, queries, run, engine_type="dense", document_index=metadata, model_dir=model_dir,
                     corpus=corpus, device="cuda", top_k=1000, run_tag="e5-kaggle-draft")
     # Check even previously completed outputs before exporting them.
-    index_manifest = json.loads((dense / "manifest.json").read_text())
-    run_manifest = json.loads((run / "manifest.json").read_text())
+    index_manifest = json.loads((dense / "manifest.json").read_text(encoding="utf-8"))
+    run_manifest = json.loads((run / "manifest.json").read_text(encoding="utf-8"))
     if (index_manifest["source_sha256"] != bundle["source_sha256"]
             or index_manifest["model"] != config["model"]
             or index_manifest["indexed_documents"] != bundle["eligible_documents"]
@@ -208,7 +209,7 @@ def run_job(args):
         for folder in (dense, run):
             for path in sorted(folder.rglob("*")):
                 if path.is_file():
-                    archive.write(path, str(path.relative_to(job)))
+                    archive.write(path, path.relative_to(job).as_posix())
         archive.write(job / "gpu_benchmark.json", "gpu_benchmark_kaggle.json")
     temporary.replace(results)
     summary.update(results_archive=str(results), results_sha256=sha256_file(results),

@@ -11,7 +11,7 @@ from news_ir.embedding import validate_vectors
 
 def main():
     encodings = Path("artifacts/encodings/e5-pilot")
-    config = json.loads((encodings / "config.json").read_text())
+    config = json.loads((encodings / "config.json").read_text(encoding="utf-8"))
     shards, count, _ = read_shards(encodings, config)
     matrix = np.concatenate([np.load(folder / "vectors.npy", allow_pickle=False) for folder, _ in shards])
     validate_vectors(matrix, dimension=768, rows=count)
@@ -33,7 +33,7 @@ def main():
               "document_lookups_checked": count, "faiss_vs_brute_force_queries": len(examples),
               "max_unit_norm_error": float(np.max(np.abs(np.linalg.norm(matrix, axis=1) - 1))),
               "examples": examples, "note": "512-article integration pilot; no full-corpus effectiveness claim."}
-    Path("artifacts/task_b_pilot_validation.json").write_text(json.dumps(result, indent=2) + "\n")
+    Path("artifacts/task_b_pilot_validation.json").write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8", newline="\n")
     print(json.dumps(result, indent=2))
 
 

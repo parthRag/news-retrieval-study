@@ -2,7 +2,6 @@
 import argparse
 import json
 import os
-import signal
 import subprocess
 import sys
 import threading
@@ -14,7 +13,8 @@ from urllib.parse import parse_qs, urlparse
 
 from .data import DocumentStore, sha256_file, valid_id
 from .evaluation import load_run
-from .fusion import reciprocal_rank_fusion
+from .fusion import explain_fusion_hits, reciprocal_rank_fusion
+from .platform_support import configure_text_streams, process_options, terminate_process_tree
 
 
 class DemoService:
@@ -44,9 +44,9 @@ class DemoService:
                                           {"bm25": "bm25-custom40-v2", "dense": "dense-custom40-v2"})
         for suite, (queryfile, evaluation, policy, runnames) in configurations.items():
             querypath = self.root / queryfile
-            queries = list(map(json.loads, querypath.read_text().splitlines()))
+            queries = list(map(json.loads, querypath.read_text(encoding="utf-8").splitlines()))
             folder = self.root / "artifacts/evaluations" / evaluation
-            manifest = json.loads((folder / "manifest.json").read_text())
+            manifest = json.loads((folder / "manifest.json").read_text(encoding="utf-8"))
             for f, digest in manifest["files"].items():
                 if sha256_file(folder / f) != digest:
                     raise ValueError(f"Saved evaluation artifact changed: {f}")
@@ -55,7 +55,7 @@ class DemoService:
             expected_queries = manifest.get("query_source_sha256", manifest.get("queries_sha256"))
             if sha256_file(querypath) != expected_queries:
                 raise ValueError("Demo queries differ from evaluated snapshot")
-            self.scores[suite] = json.loads((folder / "metrics.json").read_text())[policy]
+            self.scores[suite] = json.loads((folder / "metrics.json").read_text(encoding="utf-8"))[policy]
             self.catalog[suite] = queries
             self.runs[suite] = {}
             for engine, runname in runnames.items():
@@ -65,27 +65,27 @@ class DemoService:
                     raise ValueError("Demo run differs from evaluated snapshot")
                 load_run(runfolder, querypath, eligible, expected_source_sha256=source)
                 self.runs[suite][engine] = {r["query_id"]: r["hits"] for r in
-                    map(json.loads, (runfolder / "results.jsonl").read_text().splitlines())}
+                    map(json.loads, (runfolder / "results.jsonl").read_text(encoding="utf-8").splitlines())}
             if suite in {"custom", "expanded"}:
                 labels = self.root / ("annotations/custom40_v2/assessments.all40.jsonl" if suite == "expanded"
                                       else "annotations/ai_study_v1/assessments.depth20.jsonl")
                 if sha256_file(labels) != manifest["assessments_sha256"]:
                     raise ValueError("Custom labels differ from evaluated snapshot")
-                self.judgments[suite] = {(r["query_id"], r["doc_id"]): r for r in map(json.loads, labels.read_text().splitlines())}
+                self.judgments[suite] = {(r["query_id"], r["doc_id"]): r for r in map(json.loads, labels.read_text(encoding="utf-8").splitlines())}
             else:
                 qrels = self.root / "qrel.jsonl"
                 # Original evaluation manifest uses qrels_sha256.
                 if sha256_file(qrels) != manifest["qrels_sha256"]:
                     raise ValueError("Original qrels differ from evaluated snapshot")
                 self.judgments[suite] = {(r["query-id"], r["corpus-id"]): {"grade": int(r["score"]), "assessor_type": "supplied benchmark qrels"}
-                                         for r in map(json.loads, qrels.read_text().splitlines())}
+                                         for r in map(json.loads, qrels.read_text(encoding="utf-8").splitlines())}
         visibility = self.root / "annotations/ai_study_v1/evidence_visibility.depth20.json"
         if visibility.exists():
-            audit = json.loads(visibility.read_text())
+            audit = json.loads(visibility.read_text(encoding="utf-8"))
             self.visibility = {(r["query_id"], r["doc_id"]): r for r in audit["documents"]}
         expanded_visibility = self.root / "annotations/custom40_v2/evidence_visibility.all40.json"
         if expanded_visibility.exists():
-            audit = json.loads(expanded_visibility.read_text())
+            audit = json.loads(expanded_visibility.read_text(encoding="utf-8"))
             self.visibility.update({(r["query_id"], r["doc_id"]): r for r in audit["documents"]})
 
     def catalog_data(self):
@@ -104,7 +104,7 @@ class DemoService:
         folder = self.root / "artifacts/evaluations/integrated-core18-v1"
         if not (folder / "manifest.json").exists():
             return
-        manifest = json.loads((folder / "manifest.json").read_text())
+        manifest = json.loads((folder / "manifest.json").read_text(encoding="utf-8"))
         for name, digest in manifest["files"].items():
             if sha256_file(folder / name) != digest:
                 raise ValueError("Core 2018 evaluation file changed")
@@ -117,17 +117,17 @@ class DemoService:
         source = self.store.manifest["source"]["sha256"]
         if manifest["corpus_sha256"] != source:
             raise ValueError("Core 2018 corpus mismatch")
-        queries = [json.loads(l) for l in queries_path.read_text().splitlines()]
-        scores = json.loads((folder / "metrics.json").read_text())["variants"]
+        queries = [json.loads(l) for l in queries_path.read_text(encoding="utf-8").splitlines()]
+        scores = json.loads((folder / "metrics.json").read_text(encoding="utf-8"))["variants"]
         runs = {}
         for engine, entry in manifest["runs"].items():
             root = self.root / entry["path"]
             if sha256_file(root / "manifest.json") != entry["manifest_sha256"]:
                 raise ValueError("Core 2018 run manifest changed")
             load_run(root, queries_path, eligible, expected_source_sha256=source)
-            runs[engine] = {r["query_id"]: r["hits"] for r in map(json.loads, (root / "results.jsonl").read_text().splitlines())}
+            runs[engine] = {r["query_id"]: r["hits"] for r in map(json.loads, (root / "results.jsonl").read_text(encoding="utf-8").splitlines())}
         judgments = {(r["query-id"], r["corpus-id"]): {"grade": r["score"], "assessor_type": "supplied NIST Core 2018 qrels"}
-                     for r in map(json.loads, labels_path.read_text().splitlines())}
+                     for r in map(json.loads, labels_path.read_text(encoding="utf-8").splitlines())}
         for variant, systems in scores.items():
             suite = "core18-" + variant
             selected = [dict(q, relevant_if=q["narrative"], exclude_if="Use the official topic narrative; the local corpus differs from full WaPo v2.")
@@ -162,6 +162,9 @@ class DemoService:
             raise ValueError("Display depth must be between 1 and 20")
         query = next(q for q in self.catalog[suite] if q["_id"] == qid)
         selected = {e: hits[qid] for e, hits in self.runs[suite].items()}
+        if "rrf" in selected:
+            selected["rrf"] = explain_fusion_hits(selected["rrf"][:k], {
+                e: [h["doc_id"] for h in selected[e]] for e in ("bm25", "dense")})
         overlap = set(h["doc_id"] for h in selected["bm25"][:k]) & set(h["doc_id"] for h in selected["dense"][:k])
         paired = None
         if suite in {"core18-rewrite", "core18-description"}:
@@ -198,16 +201,13 @@ class DemoService:
         command += ["--", query]
         environment = {**os.environ, "TOKENIZERS_PARALLELISM": "false", "HF_HUB_OFFLINE": "1", "TRANSFORMERS_OFFLINE": "1"}
         with subprocess.Popen(command, cwd=self.root, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                              text=True, env=environment, start_new_session=True) as process:
+                              text=True, encoding="utf-8", env={**environment, "PYTHONUTF8": "1", "PYTHONIOENCODING": "utf-8"},
+                              **process_options()) as process:
             try:
                 stdout, stderr = process.communicate(timeout=300)
             except subprocess.TimeoutExpired:
-                os.killpg(process.pid, signal.SIGTERM)
-                try:
-                    process.communicate(timeout=5)
-                except subprocess.TimeoutExpired:
-                    os.killpg(process.pid, signal.SIGKILL)
-                    process.communicate()
+                terminate_process_tree(process)
+                process.communicate()
                 raise ValueError(f"{engine} exceeded its five-minute live-search limit")
             if process.returncode:
                 raise ValueError(f"{engine} search failed: {stderr[-1200:]}")
@@ -238,7 +238,8 @@ class DemoService:
                 results[engine] = {"hits": hits, "engine_search_ms": raw["search_latency_ms"],
                                    "elapsed_ms_with_startup": (time.perf_counter()-stage_start)*1000, "metrics": None}
             fused = reciprocal_rank_fusion([[h["doc_id"] for h in results[e]["hits"]] for e in ("bm25", "dense")])
-            results["rrf"] = {"hits": fused, "metrics": None}
+            results["rrf"] = {"hits": explain_fusion_hits(fused[:20], {
+                e: [h["doc_id"] for h in results[e]["hits"]] for e in ("bm25", "dense")}), "metrics": None}
             overlap = len(set(h["doc_id"] for h in results["bm25"]["hits"][:5]) & set(h["doc_id"] for h in results["dense"]["hits"][:5]))
             for result in results.values():
                 result["hits"] = self._enrich(result["hits"], k=20)
@@ -340,6 +341,7 @@ def make_handler(service):
 
 
 def main(argv=None):
+    configure_text_streams()
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", default=".")
     parser.add_argument("--port", type=int, default=8765)

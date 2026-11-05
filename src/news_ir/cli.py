@@ -89,6 +89,8 @@ def parser():
 
 
 def main(argv=None):
+    from .platform_support import configure_text_streams
+    configure_text_streams()
     args = parser().parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s", stream=sys.stderr)
     try:

@@ -81,7 +81,7 @@ def test_reject_resume_configuration_changes(tiny_index, encoded):
 
 
 def test_corrupt_shard_is_detected(encoded):
-    config = json.loads((encoded / "config.json").read_text())
+    config = json.loads((encoded / "config.json").read_text(encoding="utf-8"))
     shard = next((encoded / "shards").glob("shard-*"))
     with (shard / "vectors.npy").open("ab") as stream:
         stream.write(b"corruption")
@@ -97,7 +97,7 @@ def test_exact_cosine_ranks_and_cutoff_ties(tiny_index, encoded, tmp_path):
         assert engine.search("cricket insect")[0].doc_id == "insect"
         assert engine.search("cricket sport")[0].doc_id == "sport"
         query = FixtureEncoder().encode(["completely unseen terms"], kind="query")[0]
-        config = json.loads((encoded / "config.json").read_text())
+        config = json.loads((encoded / "config.json").read_text(encoding="utf-8"))
         shards, _, _ = read_shards(encoded, config)
         vectors = np.concatenate([np.load(folder / "vectors.npy") for folder, _ in shards])
         reference = sorted(zip((vectors @ query).tolist(), engine.ids), key=lambda pair: (-pair[0], pair[1]))
@@ -162,7 +162,7 @@ def test_timed_stop_retains_full_target_and_resumes_exactly(tiny_index, tmp_path
     assert result["completed"] is False
     assert result["coverage"] == "full"
     assert result["encoded_documents"] == 3 and result["target_documents"] == 9
-    config = json.loads((root / "config.json").read_text())
+    config = json.loads((root / "config.json").read_text(encoding="utf-8"))
     assert config["target_documents"] == 9 and config["coverage"] == "full"
     with pytest.raises(ValueError, match="incomplete"):
         build_dense_index(root, tmp_path / "index", document_index=tiny_index["index"], model_dir="unused")
@@ -170,7 +170,7 @@ def test_timed_stop_retains_full_target_and_resumes_exactly(tiny_index, tmp_path
                             encoder=FixtureEncoder(), resume=True)
     assert resumed["completed"] is True and resumed["documents_this_session"] == 6
     ids = [json.loads(line) for path in sorted((root / "shards").glob("*/ids.jsonl"))
-           for line in path.read_text().splitlines()]
+           for line in path.read_text(encoding="utf-8").splitlines()]
     assert ids == [row["_id"] for row in tiny_index["rows"] if row["_id"] != "empty"]
 
 
@@ -199,3 +199,12 @@ def test_real_e5_prefix_normalization_padding_and_truncation():
     assert len(long["input_ids"]) == 512
     assert encoder.encode([], kind="query").shape == (0, 768)
     assert encoder.model.training is False
+
+
+def test_faiss_pipeline_with_spaces_and_unicode_in_index_path(encoded, tiny_index, tmp_path):
+    target = tmp_path / "FAISS café 東京" / "index"
+    build_dense_index(encoded, target, document_index=tiny_index["index"], model_dir="unused")
+    with DenseEngine(target, encoder=FixtureEncoder()) as engine:
+        hits = engine.search("cricket insect", 100)
+        assert hits[0].doc_id == "insect"
+        assert "0007-é" in {hit.doc_id for hit in hits}

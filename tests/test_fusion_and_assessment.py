@@ -37,7 +37,7 @@ def fixture_runs(tiny_index, tmp_path):
     source_hash = tiny_index["manifest"]["source"]["sha256"]
     dense_index = tmp_path / "dense-index"
     dense_index.mkdir()
-    (dense_index / "manifest.json").write_text(json.dumps({"indexed_documents": 9}))
+    (dense_index / "manifest.json").write_text(json.dumps({"indexed_documents": 9}), encoding="utf-8", newline="\n")
     paths = {}
     for name, engine, index, ids in (("bm25", "lucene-bm25", tiny_index["index"], ["sport", "insect"]),
                                      ("dense", "e5-cosine", dense_index, ["insect", "sport"])):
@@ -47,14 +47,14 @@ def fixture_runs(tiny_index, tmp_path):
         hits = [{"doc_id": doc, "rank": rank, "score": 3.0 - rank} for rank, doc in enumerate(ids, 1)]
         write_jsonl(path / "results.jsonl", [{"query_id": "q", "query": "cricket insect", "hits": hits}])
         write_jsonl(path / "queries.jsonl", [{"_id": "q", "text": "cricket insect"}])
-        (path / "run.trec").write_text("".join(f"q Q0 {h['doc_id']} {h['rank']} {h['score']:.9g} {name}\n" for h in hits))
+        (path / "run.trec").write_text("".join(f"q Q0 {h['doc_id']} {h['rank']} {h['score']:.9g} {name}\n" for h in hits), encoding="utf-8", newline="\n")
         (path / "manifest.json").write_text(json.dumps({
             "engine": engine, "coverage": "full", "run_tag": name, "top_k": 1000,
             "query_count": 1, "total_hits": 2, "corpus_sha256": source_hash,
             "query_source_sha256": sha256_file(queries), "index_path": str(index),
             "index_manifest_sha256": sha256_file(index / "manifest.json"),
             **{key: sha256_file(path / file) for file, key in
-               (("queries.jsonl", "query_snapshot_sha256"), ("results.jsonl", "results_sha256"), ("run.trec", "run_sha256"))}}))
+               (("queries.jsonl", "query_snapshot_sha256"), ("results.jsonl", "results_sha256"), ("run.trec", "run_sha256"))}}), encoding="utf-8", newline="\n")
     return dict(queries_path=queries, bm25_run=paths["bm25"], dense_run=paths["dense"], document_index=tiny_index["index"])
 
 
@@ -75,9 +75,9 @@ def test_saved_fusion_evaluation_and_provenance(tiny_index, tmp_path):
     assert result["primary"]["rrf"]["ndcg_at_5"] == 1  # ID tie-break puts insect first.
     with pytest.raises(FileExistsError):
         evaluate_fusion(**arguments, qrels_path=qrels, fusion_run=output, output=tmp_path / "eval")
-    meta = json.loads((output / "manifest.json").read_text())
+    meta = json.loads((output / "manifest.json").read_text(encoding="utf-8"))
     meta["components"]["dense"]["run_sha256"] = "wrong"
-    (output / "manifest.json").write_text(json.dumps(meta))
+    (output / "manifest.json").write_text(json.dumps(meta), encoding="utf-8", newline="\n")
     with pytest.raises(ValueError, match="components"):
         evaluate_fusion(**arguments, qrels_path=qrels, fusion_run=output, output=tmp_path / "bad")
     assert not (tmp_path / "bad").exists()
@@ -90,7 +90,7 @@ def test_pool_membership_blinding_and_evidence_validation(tiny_index, tmp_path):
     assert protocol["pooled_pairs"] == protocol["priority_top5_pairs"] == 2
     with pytest.raises(FileExistsError):
         prepare_pool(**arguments, output=pool)
-    packets = [json.loads(line) for line in (pool / "articles.blinded.jsonl").read_text().splitlines()]
+    packets = [json.loads(line) for line in (pool / "articles.blinded.jsonl").read_text(encoding="utf-8").splitlines()]
     assert all(set(p) == {"query_id", "doc_id", "title", "text", "contents_sha256"} for p in packets)
     rows = []
     for packet in packets:
@@ -124,7 +124,7 @@ def test_pool_membership_blinding_and_evidence_validation(tiny_index, tmp_path):
     write_jsonl(labels, rows + rows[:1])
     with pytest.raises(ValueError, match="Duplicate"):
         validate_assessments(pool, labels)
-    (pool / "articles.blinded.jsonl").write_text("corrupted")
+    (pool / "articles.blinded.jsonl").write_text("corrupted", encoding="utf-8", newline="\n")
     with pytest.raises(ValueError, match="hash mismatch"):
         validate_assessments(pool, labels)
 

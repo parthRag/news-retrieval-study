@@ -53,7 +53,7 @@ def test_cutoff_and_missing_positive_policy():
 @pytest.mark.parametrize("grade", [True, "1.5", -1, 5, None])
 def test_bad_qrel_grades_are_rejected(tmp_path, grade):
     path = tmp_path / "qrels.jsonl"
-    path.write_text(json.dumps({"query-id": "q", "corpus-id": "d", "score": grade}))
+    path.write_text(json.dumps({"query-id": "q", "corpus-id": "d", "score": grade}), encoding="utf-8", newline="\n")
     with pytest.raises(ValueError):
         load_qrels(path, ["q"])
 
@@ -61,10 +61,10 @@ def test_bad_qrel_grades_are_rejected(tmp_path, grade):
 def test_qrel_pairs_and_expected_query_coverage(tmp_path):
     path = tmp_path / "qrels.jsonl"
     row = {"query-id": "q", "corpus-id": "d", "score": "1"}
-    path.write_text(json.dumps(row) + "\n" + json.dumps(row))
+    path.write_text(json.dumps(row) + "\n" + json.dumps(row), encoding="utf-8", newline="\n")
     with pytest.raises(ValueError, match="Duplicate"):
         load_qrels(path, ["q"])
-    path.write_text(json.dumps(row))
+    path.write_text(json.dumps(row), encoding="utf-8", newline="\n")
     with pytest.raises(ValueError, match="Every query"):
         load_qrels(path, ["q", "missing"])
     with pytest.raises(ValueError, match="Invalid"):
@@ -96,13 +96,13 @@ def test_run_loader_rejects_corruption(tiny_index, tmp_path):
     from news_ir.experiments import run_queries
 
     queries = tmp_path / "queries.jsonl"
-    queries.write_text(json.dumps({"_id": "q", "text": "cricket"}) + "\n")
+    queries.write_text(json.dumps({"_id": "q", "text": "cricket"}) + "\n", encoding="utf-8", newline="\n")
     output = tmp_path / "run"
     run_queries(tiny_index["index"], queries, output, top_k=1000)
     eligible = {r["_id"] for r in tiny_index["rows"] if r["_id"] != "empty"}
     rankings, _ = load_run(output, queries, eligible, expected_source_sha256=tiny_index["manifest"]["source"]["sha256"])
     assert len(rankings["q"]) == 2
-    with (output / "run.trec").open("a") as stream:
+    with (output / "run.trec").open("a", encoding="utf-8", newline="\n") as stream:
         stream.write("invalid")
     with pytest.raises(ValueError, match="hash"):
         load_run(output, queries, eligible, expected_source_sha256=tiny_index["manifest"]["source"]["sha256"])
@@ -121,10 +121,10 @@ def test_complete_comparison_publishes_only_after_independent_checks(tiny_index,
     monkeypatch.setattr(news_ir.dense, "E5Encoder", Encoder)
     queries, qrels = tmp_path / "queries.jsonl", tmp_path / "qrels.jsonl"
     queries.write_text('\n'.join(json.dumps(row) for row in [
-        {"_id": "q1", "text": "cricket insect"}, {"_id": "q2", "text": "quasar"}]))
+        {"_id": "q1", "text": "cricket insect"}, {"_id": "q2", "text": "quasar"}]), encoding="utf-8", newline="\n")
     qrels.write_text('\n'.join(json.dumps({"query-id": qid, "corpus-id": doc, "score": grade})
                               for qid, doc, grade in [("q1", "insect", 2), ("q1", "sport", 1),
-                                                      ("q1", "absent", 3), ("q2", "title-only", 3)]))
+                                                      ("q1", "absent", 3), ("q2", "title-only", 3)]), encoding="utf-8", newline="\n")
     encode_corpus(tiny_index["index"], "unused", tmp_path / "encodings", encoder=Encoder())
     build_dense_index(tmp_path / "encodings", tmp_path / "dense", document_index=tiny_index["index"], model_dir="unused")
     run_queries(tiny_index["index"], queries, tmp_path / "bm25-run", top_k=1000)
@@ -135,9 +135,9 @@ def test_complete_comparison_publishes_only_after_independent_checks(tiny_index,
     output = tmp_path / "evaluation"
     result = news_ir.benchmark.compare_benchmark(**arguments, output=output)
     assert result["query_count"] == 2 and result["independent_crosscheck"] == "passed"
-    manifest = json.loads((output / "manifest.json").read_text())
+    manifest = json.loads((output / "manifest.json").read_text(encoding="utf-8"))
     assert manifest["unavailable_positive_judgments"] == 1
-    metrics = json.loads((output / "metrics.json").read_text())
+    metrics = json.loads((output / "metrics.json").read_text(encoding="utf-8"))
     assert metrics["available_corpus"]["dense"]["aggregate"]["ap_at_1000"] > metrics["primary"]["dense"]["aggregate"]["ap_at_1000"]
     with pytest.raises(FileExistsError):
         news_ir.benchmark.compare_benchmark(**arguments, output=output)
@@ -147,3 +147,16 @@ def test_complete_comparison_publishes_only_after_independent_checks(tiny_index,
     with pytest.raises(ValueError, match="independent"):
         news_ir.benchmark.compare_benchmark(**arguments, output=tmp_path / "failed")
     assert not (tmp_path / "failed").exists() and not list(tmp_path.glob(".failed.evaluating-*"))
+
+
+@pytest.mark.parametrize("mode", ["linear", "exp2", "news2019"])
+def test_windows_compiled_reference_retains_ranks_and_empty_topics(tmp_path, monkeypatch, mode):
+    import news_ir.benchmark as benchmark
+    monkeypatch.setattr(benchmark, "WINDOWS", True)
+    labels = {"q1": {"a": 3, "b": 1, "missing": 2, "z": 0}, "q2": {"x": 1}}
+    rankings = {"q1": ["unjudged", "b", "a", "z"], "q2": []}
+    expected = evaluate_rankings(rankings, labels, gain_mode=mode)
+    result = benchmark.crosscheck(labels, rankings, expected, tmp_path, name="windows", gain_mode=mode)
+    assert result["comparisons"] == 14
+    assert result["empty_query_zero_metrics_checked"] == 7
+    assert "pytrec-eval-terrier" in result["version"]

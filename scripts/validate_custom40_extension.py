@@ -17,7 +17,7 @@ POOL = ROOT / "artifacts/assessments/custom40-extension20-v2"
 
 
 def read(path):
-    return json.loads(path.read_text())
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def require(condition, message):
@@ -37,8 +37,8 @@ def main():
     combined_path = DESIGN / "queries.all40.jsonl"
     require(combined_path.read_bytes() == original.read_bytes() + new_path.read_bytes(),
             "Combined suite must preserve exact original bytes")
-    new = [json.loads(line) for line in new_path.read_text().splitlines()]
-    combined = [json.loads(line) for line in combined_path.read_text().splitlines()]
+    new = [json.loads(line) for line in new_path.read_text(encoding="utf-8").splitlines()]
+    combined = [json.loads(line) for line in combined_path.read_text(encoding="utf-8").splitlines()]
     require(len(read_queries(combined_path)) == 40, "Expected 40 unique query IDs")
     require(len({r["text"] for r in combined}) == 40, "Repeated query text")
     require(Counter(r["category"] for r in new) ==
@@ -78,7 +78,7 @@ def main():
             runs[engine] = rankings
         expected = {(q["_id"], doc) for q in new for run in runs.values() for doc in run[q["_id"]][:20]}
         expected_top5 = {(q["_id"], doc) for q in new for run in runs.values() for doc in run[q["_id"]][:5]}
-        articles = [json.loads(line) for line in (POOL / "articles.blinded.jsonl").read_text().splitlines()]
+        articles = [json.loads(line) for line in (POOL / "articles.blinded.jsonl").read_text(encoding="utf-8").splitlines()]
         require(len(articles) == len(expected), "Duplicate or missing pool articles")
         require({(r["query_id"], r["doc_id"]) for r in articles} == expected, "Asymmetric candidate pool")
         for article in articles:
@@ -86,7 +86,7 @@ def main():
             require(doc is not None and doc.eligible and doc.title == article["title"] and
                     doc.text == article["text"] and text_hash(doc.contents) == article["contents_sha256"],
                     "Article packet differs from corpus")
-    provenance = [json.loads(line) for line in (POOL / "pool.provenance.jsonl").read_text().splitlines()]
+    provenance = [json.loads(line) for line in (POOL / "pool.provenance.jsonl").read_text(encoding="utf-8").splitlines()]
     require(len(provenance) == len(expected), "Provenance count mismatch")
     require({(r["query_id"], r["doc_id"]) for r in provenance} == expected, "Provenance membership mismatch")
     for row in provenance:
@@ -102,7 +102,7 @@ def main():
               "original20_queries_and_737_assessments": "byte-identical",
               "design_protocol_sha256": sha256_file(DESIGN / "protocol.json"),
               "pool_protocol_sha256": sha256_file(POOL / "protocol.json")}
-    (ROOT / "artifacts/custom40_extension_validation.json").write_text(json.dumps(result, indent=2) + "\n")
+    (ROOT / "artifacts/custom40_extension_validation.json").write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8", newline="\n")
     print(json.dumps(result, indent=2))
 
 

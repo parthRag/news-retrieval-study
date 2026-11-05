@@ -58,7 +58,7 @@ def test_relocated_corpus_is_hashed(tiny_index, tmp_path):
     [{"_id": "bad id", "text": "q"}], [{"_id": "x", "text": "a"}, {"_id": "x", "text": "b"}]])
 def test_reject_invalid_query_suites(tmp_path, rows):
     path = tmp_path / "queries.jsonl"
-    path.write_text("".join(json.dumps(row) + "\n" for row in rows))
+    path.write_text("".join(json.dumps(row) + "\n" for row in rows), encoding="utf-8", newline="\n")
     with pytest.raises(ValueError):
         read_queries(path)
 

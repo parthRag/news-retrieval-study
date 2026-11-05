@@ -44,7 +44,7 @@ Open **http://127.0.0.1:8765**. Saved experiments load immediately; a new CPU se
 
 ## Environment
 
-For Windows PowerShell/Command Prompt, follow [Windows setup and verification](reports/WINDOWS_SETUP.md). It covers the native environment, Java 21, copied data, browser/PDF tools and CI checks. The commands below use `python` from an activated environment.
+For Windows PowerShell/Command Prompt, follow [Windows setup and verification](reports/WINDOWS_SETUP.md). Native Windows/Linux checks passed; see [the verification report](reports/PORTABILITY_VERIFICATION.md). It covers the native environment, Java 21, copied data, browser/PDF tools and CI checks. The commands below use `python` from an activated environment.
 
 Use Python 3.12 and Java 21. The application automatically selects an installed Java 21 on macOS if `JAVA_HOME` is unset; it does not modify your shell configuration. An explicit `JAVA_HOME` is respected. The JVM heap is capped at 2 GiB.
 

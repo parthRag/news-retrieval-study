@@ -1,3 +1,5 @@
+For native Windows commands, see [the Windows guide](reports/WINDOWS_SETUP.md). Commands below use Python from the project environment.
+
 # Final deliverables and submission steps
 
 The local submission package is implemented and generated. Group 5, all four member names/IDs, Information Retrieval and faculty mentor Abhinav Kumar are filled. The public repository is https://github.com/parthRag/news-retrieval-study. This public repository publishes a final source/report snapshot. The original development repository and history are private. The contribution matrix distinguishes assigned component responsibility of completed team components from confirmed personal work.
@@ -21,7 +23,7 @@ Public downloads are provided in the [GitHub submission release](https://github.
 From this repository with its existing environment and local data:
 
 ```sh
-.venv/bin/python -m news_ir.demo
+python -m news_ir.demo
 ```
 
 Open **http://127.0.0.1:8765**. Use `--port 8766` if another server already occupies the default port. Saved comparisons cover97 distinct queries:57 supplied topics and 40 custom needs; the original 20 custom view is also retained. Live queries search both full indexes and fuse their rankings; they receive no inferred relevance labels or evaluation metrics. No additional GPU job or API key is needed. Stop with Ctrl+C.
@@ -31,23 +33,23 @@ Open **http://127.0.0.1:8765**. Use `--port 8766` if another server already occu
 Group/member/course/mentor details are already set in `configs/submission.json`. The public GitHub repository is created and verified, with `repository_status` set to `created`. Have each member confirm individual completed-work attribution after doing the assigned review. See `CONTRIBUTING.md` and `reports/GITHUB_HANDOFF.md`. Component responsibility is recorded separately from confirmed individual work. Then regenerate:
 
 ```sh
-.venv/bin/python scripts/build_final_documents.py
-.venv/bin/python scripts/render_final_pdfs.py
+python scripts/build_final_documents.py
+python scripts/render_final_pdfs.py
 ```
 
-Rendering uses the installed Brave Chromium binary by default; `--browser /path/to/chromium` selects a compatible browser. It uses a separate temporary browser profile and local files. Editable HTML can also be opened and printed with A4 paper, background graphics enabled and 100% scale, but the automated render is the verified route. Do not rename an unchanged placeholder PDF and assume its internal metadata has been replaced.
+Rendering detects Chrome, Edge or Brave; `--browser /path/to/chromium` selects a compatible browser. It uses a separate temporary browser profile and local files. Editable HTML can also be opened and printed with A4 paper, background graphics enabled and 100% scale, but the automated render is the verified route. Do not rename an unchanged placeholder PDF and assume its internal metadata has been replaced.
 
-On macOS, inspect the regenerated PDF's page count/text and render previews with:
+Inspect the regenerated PDF's page count, text and links on any supported OS with:
 
 ```sh
-CLANG_MODULE_CACHE_PATH=/private/tmp/news-ir-clang-cache SWIFT_MODULECACHE_PATH=/private/tmp/news-ir-swift-cache swift scripts/inspect_pdf.swift deliverables/5_NewsIR_BM25_Dense.pdf artifacts/pdf-review/brief
+python scripts/inspect_pdf.py deliverables/5_NewsIR_BM25_Dense.pdf artifacts/pdf-review/brief
 ```
 
 The Group 5 filename is already set. The brief must remain at most four pages. Rebuild/recheck the release archive after any final changes:
 
 ```sh
-.venv/bin/python scripts/package_final_deliverables.py
-.venv/bin/python scripts/validate_final_deliverables.py
+python scripts/package_final_deliverables.py
+python scripts/validate_final_deliverables.py
 ```
 
 Only one group member should submit the **four-page brief**, using the actual `<GroupNo>_<ShortProjectTitle>.pdf` name. The longer report is supporting material; it exceeds the stated submission limit. The submission PDF includes all required section types; individual completed-work confirmations remain outstanding before upload.
@@ -63,7 +65,7 @@ The archive is sufficient to review code and audit numerical results from the sa
 After extracting the archive, numerical and file-integrity checks can run from its root with Python 3.12, without the corpus, Java, GPU or model:
 
 ```sh
-PYTHONPATH=src python3.12 scripts/validate_final_deliverables.py
+python scripts/validate_final_deliverables.py
 ```
 
 This verifies the extracted members against `PACKAGE_MANIFEST.json` and reproduces the reported numerical results. It uses the packaged PDFKit inspection evidence for PDF structure/text; it does not rerender the PDFs or re-establish full-corpus ID coverage without the data files.
@@ -76,7 +78,7 @@ The final code suite has 159 passing tests. Independent native metric checks tot
 
 ## Versioned query extension
 
-[The extension plan and current status](reports/CUSTOM_40_EXTENSION.md) expand the custom suite to 40 queries, ten in each category. The archive includes all 40 query/rubric records, the 20 new-query runs, and candidate IDs with rank provenance. Full article packets remain local. All707 added pairs are assessed; PDFs and the demo now include combined 40 results. The original 20 results remain available separately. Run `.venv/bin/python scripts/validate_custom40_extension.py` with the local corpus and indexes to check extension provenance and full-text pool coverage.
+[The extension plan and current status](reports/CUSTOM_40_EXTENSION.md) expand the custom suite to 40 queries, ten in each category. The archive includes all 40 query/rubric records, the 20 new-query runs, and candidate IDs with rank provenance. Full article packets remain local. All707 added pairs are assessed; PDFs and the demo now include combined 40 results. The original 20 results remain available separately. Run `python scripts/validate_custom40_extension.py` with the local corpus and indexes to check extension provenance and full-text pool coverage.
 
 
 The 2 November integration preserves Hamsini’s controlled-rewrite study with attribution and adds 50 Core 2018 news topics in three formulations. See `reports/INTEGRATED_STUDY.md` for the computed results, query-intent review status and available-corpus caveat. Integration tests and the latest browser/numerical checks are recorded separately under `artifacts/integration-validation/` and `artifacts/test-results-integration.xml`.

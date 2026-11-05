@@ -1,0 +1,62 @@
+{
+  "status": "passed",
+  "verified_on": "2026-11-05",
+  "tested_commit": "6144083bfb2f83dfd85be97f0e01d9528df81612",
+  "native_ci_url": "https://github.com/parthRag/news-retrieval-study/actions/runs/42075124081",
+  "platforms": {
+    "windows": {
+      "test_counts": {
+        "tests": 200,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 4,
+        "passed": 196
+      },
+      "platform": "Windows-2025Server-10.0.26100-SP0",
+      "python": "3.12.10",
+      "cli_and_browser_smoke": "passed",
+      "reference_evaluator": "pytrec-eval-terrier",
+      "saved_benchmark_reproduction": "passed",
+      "historical_native_metric_comparisons_verified": 10409
+    },
+    "linux": {
+      "test_counts": {
+        "tests": 200,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 4,
+        "passed": 196
+      },
+      "platform": "Linux-7.0.0-1017-azure-x86_64-with-glibc2.43",
+      "python": "3.12.15",
+      "cli_and_browser_smoke": "passed",
+      "reference_evaluator": "Anserini trec_eval wrapper",
+      "saved_benchmark_reproduction": "passed",
+      "historical_native_metric_comparisons_verified": 10409
+    },
+    "macos": {
+      "test_counts": {
+        "tests": 200,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 200
+      },
+      "platform": "macOS-14.6.1-arm64-arm-64bit",
+      "cli_and_browser_smoke": "passed",
+      "live_bm25_e5_rrf": "passed",
+      "saved_demo_views_checked": 267,
+      "article_endpoints_checked": 267
+    }
+  },
+  "native_skips": "Four checks require locally downloaded E5 weights; CI uses synthetic vectors for FAISS pipeline tests and never downloads model weights. The Mac has those weights and ran all 200 cases.",
+  "research_inputs_sha256": {
+    "queries.jsonl": "e0a8d8ec3b80cc06f07cbd1a72a48b7da30a7a7e00bda085e2701cb4dfc9737f",
+    "qrel.jsonl": "88b1da4ce3ec808287528218020199cd7c3c795b4690ab33acca4e4aca762a9a",
+    "annotations/core18_v1/queries.jsonl": "e5b638a42befe74bd53f994aef69585a9956ebd14524fe9ff8b500b9ad21f67f",
+    "annotations/core18_v1/qrels.jsonl": "bffba063a4f2a0bc0cd42c8bcc38ca57375c657dee539884b8efbf3da6e2f237",
+    "annotations/ai_study_v1/assessments.depth20.jsonl": "d23c2fbd4b0b85f49420a0d65a4af1e7da19eb4eb9418a1da212aefecbc52536",
+    "annotations/custom40_v2/assessments.extension20.jsonl": "0565cbb609fa69caefaf2cb7e5d64f40b4a935be660fd7d955cf143a3dc73022",
+    "annotations/custom40_v2/assessments.all40.jsonl": "0ed2607ff66264666a32745a518afa589b00b97c45c05a94c0e6429622abfe64"
+  }
+}

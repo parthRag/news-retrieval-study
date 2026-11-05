@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "query": "jaguar animal habitat conservation",
+  "elapsed_seconds": 51.374031875049695,
+  "engines": [
+    "bm25",
+    "dense",
+    "rrf"
+  ],
+  "unjudged": true,
+  "hybrid_explanations": 20,
+  "source_candidate_depths": {
+    "bm25": 1000,
+    "dense": 1000
+  }
+}

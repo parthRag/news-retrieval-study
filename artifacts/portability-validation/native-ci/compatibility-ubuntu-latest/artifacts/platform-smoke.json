@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "platform": "Linux-7.0.0-1017-azure-x86_64-with-glibc2.43",
+  "python": "3.12.15",
+  "cli_index_search_document_run": "passed",
+  "crlf_binary_offsets": "passed",
+  "unicode_and_space_paths": "passed",
+  "utf8_mode_disabled_in_cli": true,
+  "indexed_documents": 2,
+  "native_metric_crosscheck": {
+    "status": "passed",
+    "comparisons": 14,
+    "max_absolute_difference": 0.0,
+    "empty_query_zero_metrics_checked": 0,
+    "tolerance": 5.1e-05,
+    "precision_note": "trec_eval prints four decimal places",
+    "ranking_policy": "Derived scores 1001-rank preserve original published order, including score ties",
+    "version": "trec_eval version 9.0.4",
+    "reference_backend": "Anserini trec_eval wrapper"
+  },
+  "browser": {
+    "status": "passed",
+    "executable": "/usr/bin/google-chrome",
+    "pdf_pages": 2,
+    "unicode_html": true,
+    "pdf_links_verified": true
+  }
+}

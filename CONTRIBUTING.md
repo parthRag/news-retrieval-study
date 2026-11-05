@@ -2,7 +2,7 @@
 
 Course: **Information Retrieval**. Faculty mentor: **Abhinav Kumar**.
 
-The current implementation is imported as an existing project snapshot. Implementation assistance is recorded. The custom comparison uses full-article AI judgments as a preliminary reference; human review is planned next under the [assessment plan](reports/ASSESSMENT_METHOD.md). The following table assigns **component ownership and final-review responsibility**; individual completed work is confirmed separately.
+The current implementation is imported as an existing project snapshot. Implementation assistance is recorded. The custom comparison uses full-article AI judgments as a preliminary reference; human review is planned next under the [assessment plan](reports/ASSESSMENT_METHOD.md). The following table assigns **component ownership and final-review responsibility**, individual completed work is confirmed separately.
 
 | Member | Student ID | Component responsibility |
 | --- | --- | --- |

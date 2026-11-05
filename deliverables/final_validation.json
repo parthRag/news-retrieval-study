@@ -34,7 +34,7 @@
   "expanded_queries": 40,
   "custom_assessed_pairs": 1444,
   "original_decisions_byte_preserved": 737,
-  "archive_files": 600,
+  "archive_files": 622,
   "archive_bytes": null,
   "numeric_reproduction": "Original primary metrics; initial20/added20/combined40 linear+exp2; both family bootstraps; four original20 quality policies. Per-query and macro values reproduce exactly.",
   "pdf_checks": "PDFKit page counts/text tied to PDF SHA256; current HTML contains no malformed table separator rows",

@@ -15,7 +15,7 @@ import subprocess
 import sys
 import tempfile
 import zipfile
-from pathlib import Path, PurePosixPath
+from pathlib import Path, PurePosixPath, PureWindowsPath
 
 
 def find_bundle(input_root):
@@ -34,8 +34,9 @@ def unpack_checked(archive_path, destination):
     destination = Path(destination).resolve()
     with zipfile.ZipFile(archive_path) as archive:
         for entry in archive.infolist():
-            name = PurePosixPath(entry.filename)
-            if (name.is_absolute() or ".." in name.parts or "\\" in entry.filename
+            original = entry.orig_filename
+            name = PurePosixPath(original)
+            if (name.is_absolute() or PureWindowsPath(original).drive or ".." in name.parts or "\\" in original or "\0" in original
                     or stat.S_ISLNK(entry.external_attr >> 16)
                     or not (destination / entry.filename).resolve().is_relative_to(destination)):
                 raise ValueError(f"Unsafe archive member: {entry.filename}")

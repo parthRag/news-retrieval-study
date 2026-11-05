@@ -20,7 +20,8 @@ def vector_audit(index_dir):
 
     root = Path(index_dir)
     request = json.load(sys.stdin)
-    index = faiss.read_index(str(root / "vectors.faiss"))
+    with (root / "vectors.faiss").open("rb") as stream:
+        index = faiss.read_index(faiss.PyCallbackIOReader(stream.read))
     if not isinstance(index, faiss.IndexFlatIP) or index.metric_type != faiss.METRIC_INNER_PRODUCT:
         raise ValueError("Expected exact IndexFlatIP cosine index")
     assert index.ntotal == request["count"] and index.d == request["dimension"]

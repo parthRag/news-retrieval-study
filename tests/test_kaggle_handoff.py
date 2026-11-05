@@ -90,12 +90,17 @@ def test_environment_creation_works_with_ensurepip_unavailable(tmp_path):
     assert str(target) in probe.stdout
 
 
-@pytest.mark.parametrize("member", ["../escape", "/absolute", "safe/../../escape", "bad\\path"])
+@pytest.mark.parametrize("member", ["../escape", "/absolute", "safe/../../escape", "bad\\path",
+                                    "C:/escape", "C:relative", "//host/share/escape", "bad\0name"])
 def test_zip_path_traversal_rejected_before_extracting(tmp_path, member):
     archive = tmp_path / "bad.zip"
     with zipfile.ZipFile(archive, "w") as output:
         output.writestr("first.txt", "must not be written")
-        output.writestr(member, "invalid")
+        entry = zipfile.ZipInfo("placeholder")
+        # Construct the raw member verbatim: ZipInfo's constructor normalizes
+        # Windows separators, which otherwise hides this test input on Windows.
+        entry.filename = member
+        output.writestr(entry, "invalid")
     with pytest.raises(ValueError, match="Unsafe"):
         driver.unpack_checked(archive, tmp_path / "destination")
     assert not (tmp_path / "destination/first.txt").exists()

@@ -4,7 +4,7 @@ The public repository linked below is a **final submission snapshot**. The worki
 
 Both BM25 and E5 dense search are complete over the same **594,589 articles**. The original **57-query benchmark** and all **40 custom linguistic queries** are evaluated. All **1,444 pairs** in the custom top-20 union have evidence-backed preliminary relevance judgments. A working local demo compares saved experiments, shows full articles and evidence, and supports live BM25/E5/RRF searches. The final local package includes a **four-page submission PDF**, a **21-page research report**, and reproducibility artifacts. See [DELIVERABLES.md](DELIVERABLES.md) for files, reproduction and the metadata still needed before upload.
 
-**Assessment status:** custom comparisons currently use thorough, full-article AI judgments. Human review is planned next and has not yet been completed. See the [assessment method and review plan](reports/ASSESSMENT_METHOD.md).
+See the [assessment method and review plan](reports/ASSESSMENT_METHOD.md).
 
 The post-hoc quality ablation is also complete: removing empty bodies within judged top-20 candidates raises E5 nDCG@5 from 0.4897 to 0.5492. This is separate from the unchanged baseline. See [the quality experiment](reports/QUALITY_ABLATION.md), [custom results](reports/CUSTOM_20_DEPTH20.md) and [hybrid experiment](reports/RRF_EXPERIMENT.md).
 

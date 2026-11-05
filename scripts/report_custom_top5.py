@@ -31,7 +31,7 @@ COLORS = {"bm25": "#3477a8", "dense": "#d97a29"}
 
 
 def dump(path, value):
-    path.write_text(json.dumps(value, indent=2, ensure_ascii=False) + "\n")
+    path.write_text(json.dumps(value, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
 
 
 def save(fig, name):
@@ -43,20 +43,20 @@ def save(fig, name):
 def main():
     labels_path = ANNOTATION / "assessments.top5.jsonl"
     validation = validate_assessments(POOL, labels_path)
-    manifest = json.loads((EVALUATION / "manifest.json").read_text())
+    manifest = json.loads((EVALUATION / "manifest.json").read_text(encoding="utf-8"))
     if manifest["assessments_sha256"] != sha256_file(labels_path):
         raise ValueError("Assessments differ from the evaluated snapshot")
     for name, digest in manifest["files"].items():
         if sha256_file(EVALUATION / name) != digest:
             raise ValueError(f"Evaluation file hash mismatch: {name}")
-    metrics = json.loads((EVALUATION / "metrics.json").read_text())
-    paired = json.loads((EVALUATION / "paired_comparison.json").read_text())
-    uncertainty = json.loads((EVALUATION / "grade_uncertainty.json").read_text())
-    labels = list(map(json.loads, labels_path.read_text().splitlines()))
+    metrics = json.loads((EVALUATION / "metrics.json").read_text(encoding="utf-8"))
+    paired = json.loads((EVALUATION / "paired_comparison.json").read_text(encoding="utf-8"))
+    uncertainty = json.loads((EVALUATION / "grade_uncertainty.json").read_text(encoding="utf-8"))
+    labels = list(map(json.loads, labels_path.read_text(encoding="utf-8").splitlines()))
     lookup = {(r["query_id"], r["doc_id"]): r for r in labels}
-    articles = {(r["query_id"], r["doc_id"]): r for r in map(json.loads, (POOL / "articles.blinded.jsonl").read_text().splitlines())}
-    provenance = {(r["query_id"], r["doc_id"]): r for r in map(json.loads, (POOL / "pool.provenance.jsonl").read_text().splitlines())}
-    queries = list(map(json.loads, (ANNOTATION / "queries.jsonl").read_text().splitlines()))
+    articles = {(r["query_id"], r["doc_id"]): r for r in map(json.loads, (POOL / "articles.blinded.jsonl").read_text(encoding="utf-8").splitlines())}
+    provenance = {(r["query_id"], r["doc_id"]): r for r in map(json.loads, (POOL / "pool.provenance.jsonl").read_text(encoding="utf-8").splitlines())}
+    queries = list(map(json.loads, (ANNOTATION / "queries.jsonl").read_text(encoding="utf-8").splitlines()))
     visibility = visibility_audit(labels, scope="top-five study")
     dump(ANNOTATION / "evidence_visibility.top5.json", visibility)
     quality = {}
@@ -184,7 +184,7 @@ def main():
               "The assessment appendix links every decision to exact stored evidence. The next required stage is the remaining "
               "549 depth-20 candidates, followed by pooled MAP and the comparison demo. A later controlled negation minimal-pair "
               "test and a symmetric content-quality/deduplication ablation can help isolate causes; neither has been applied to these scores.", ""]
-    (ROOT / "reports/CUSTOM_20_TOP5.md").write_text("\n".join(lines))
+    (ROOT / "reports/CUSTOM_20_TOP5.md").write_text("\n".join(lines), encoding="utf-8", newline="\n")
 
     appendix = ["# Custom top-five assessment evidence appendix", "",
                 "188 full-article AI decisions for preliminary comparison; human review is planned next ([review plan](ASSESSMENT_METHOD.md)); exact duplicates were read once and retained by ID. "
@@ -202,7 +202,7 @@ def main():
                          f"E5 rank: {ranks.get('dense', 'outside pool')}.", "", decision["rationale"], ""]
             for span in decision["evidence"]:
                 appendix += ["> " + span["quote"].replace("\n", " "), ""]
-    (ROOT / "reports/CUSTOM_20_ASSESSMENT_EVIDENCE.md").write_text("\n".join(appendix))
+    (ROOT / "reports/CUSTOM_20_ASSESSMENT_EVIDENCE.md").write_text("\n".join(appendix), encoding="utf-8", newline="\n")
     print(json.dumps({"report": "reports/CUSTOM_20_TOP5.md", "appendix": "reports/CUSTOM_20_ASSESSMENT_EVIDENCE.md",
                       "validated_pairs": validation["assessed_pairs"], "content_quality": quality,
                       "truncated_pairs": visibility["truncated_pairs"], "figures": str(FIGURES)}, indent=2))

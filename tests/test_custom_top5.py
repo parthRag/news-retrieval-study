@@ -18,8 +18,8 @@ def test_native_top5_check_retains_zero_positive_query(tmp_path, mode):
     measured = {q: evaluate_query(ds, labels[q], gain_mode=mode) for q, ds in ranked.items()}
     checked = crosscheck_top5(labels, ranked, measured, tmp_path, name="fixture", gain_mode=mode)
     assert checked["comparisons"] == 6
-    assert "map" not in (tmp_path / "fixture.trec_eval.txt").read_text()
-    assert ["ndcg_cut_5", "q2", "0.0000"] in [line.split() for line in (tmp_path / "fixture.trec_eval.txt").read_text().splitlines()]
+    assert "map" not in (tmp_path / "fixture.trec_eval.txt").read_text(encoding="utf-8")
+    assert ["ndcg_cut_5", "q2", "0.0000"] in [line.split() for line in (tmp_path / "fixture.trec_eval.txt").read_text(encoding="utf-8").splitlines()]
 
 
 def test_grade_bounds_are_extreme_scenarios_not_new_labels():
@@ -37,7 +37,7 @@ def make_pool_and_labels(tiny_index, tmp_path):
     pool = tmp_path / "pool"
     prepare_pool(**args, output=pool)
     rows = []
-    for a in map(json.loads, (pool / "articles.blinded.jsonl").read_text().splitlines()):
+    for a in map(json.loads, (pool / "articles.blinded.jsonl").read_text(encoding="utf-8").splitlines()):
         rows.append({"query_id": "q", "doc_id": a["doc_id"], "grade": 2 if a["doc_id"] == "insect" else 0,
                      "assessor_type": "AI", "full_article_read": True, "confidence": "high",
                      "assessed_at_utc": "2026-10-25T00:00:00Z", "rationale": "Fixture",
@@ -54,7 +54,7 @@ def test_complete_top5_evaluation_does_not_publish_map(tiny_index, tmp_path):
     assert result["query_count"] == 1
     assert result["independent_metric_comparisons"] == 16
     assert result["aggregate"]["dense"]["ndcg_at_5"] == 1
-    metrics = json.loads((tmp_path / "evaluation/metrics.json").read_text())
+    metrics = json.loads((tmp_path / "evaluation/metrics.json").read_text(encoding="utf-8"))
     assert "Withheld" in metrics["map_status"]
     assert "ap_at_1000" not in json.dumps(metrics)
     assert metrics["by_category"]["homonym"]["query_count"] == 1
@@ -88,7 +88,7 @@ def test_decision_recorder_validates_quotes_and_preserves_existing_decisions(tin
     annotation = tmp_path / "annotations/ai_study_v1"
     annotation.mkdir(parents=True)
     write_jsonl(annotation / "assessments.pilot.jsonl", [])
-    articles = list(map(json.loads, (destination / "articles.blinded.jsonl").read_text().splitlines()))
+    articles = list(map(json.loads, (destination / "articles.blinded.jsonl").read_text(encoding="utf-8").splitlines()))
     request = {"query_id": "q", "decisions": [{"position": 0, "grade": 2, "rationale": "Explicit fixture decision",
                "confidence": "high", "full_article_read": True, "quotes": [articles[0]["title"]]}]}
     monkeypatch.chdir(tmp_path)

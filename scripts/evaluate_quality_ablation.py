@@ -29,7 +29,7 @@ def main():
         raise ValueError("Complete candidate judgments required")
     source = pool / "articles.blinded.jsonl"
     articles, input_hashes = {}, {str(p.relative_to(ROOT)): sha256_file(p) for p in (source, labels)}
-    for row in map(json.loads, source.read_text().splitlines()):
+    for row in map(json.loads, source.read_text(encoding="utf-8").splitlines()):
         articles.setdefault(row["query_id"], {})[row["doc_id"]] = row
     variants = {"baseline": (False, False), "no_empty_body": (True, False),
                 "deduplicate": (False, True), "no_empty_body_and_deduplicate": (True, True)}
@@ -69,8 +69,8 @@ def main():
                 "files": {}}
     try:
         dump(working / "metrics.json", metrics)
-        (working / "rankings.jsonl").write_text("".join(json.dumps(r)+"\n" for r in outputs))
-        with (working / "per_query.csv").open("w", newline="") as stream:
+        (working / "rankings.jsonl").write_text("".join(json.dumps(r)+"\n" for r in outputs), encoding="utf-8", newline="\n")
+        with (working / "per_query.csv").open("w", newline="", encoding="utf-8") as stream:
             writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
             writer.writeheader(); writer.writerows(rows)
         manifest["files"] = {p.name: sha256_file(p) for p in working.iterdir() if p.is_file()}

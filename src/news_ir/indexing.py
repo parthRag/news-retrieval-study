@@ -105,7 +105,7 @@ def build_index(corpus, output, *, threads=4, batch_size=256):
                       "elapsed_seconds": round(time.perf_counter() - started, 3)},
         }
         manifest["build"]["index_bytes"] = sum(p.stat().st_size for p in working.rglob("*") if p.is_file())
-        (working / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
+        (working / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8", newline="\n")
         # rename() refuses a nonempty existing target; never replace a previous build.
         if target.exists():
             raise FileExistsError(f"Index appeared during build: {target}")

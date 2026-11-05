@@ -18,13 +18,13 @@ def main():
     args = parser.parse_args()
     root = Path("artifacts/assessments/custom20-v1")
     priority = {(r["query_id"], r["doc_id"]) for r in
-                map(json.loads, (root / "pool.provenance.jsonl").read_text().splitlines()) if r["priority_top5"]}
-    rows = [r for r in map(json.loads, (root / "articles.blinded.jsonl").read_text().splitlines())
+                map(json.loads, (root / "pool.provenance.jsonl").read_text(encoding="utf-8").splitlines()) if r["priority_top5"]}
+    rows = [r for r in map(json.loads, (root / "articles.blinded.jsonl").read_text(encoding="utf-8").splitlines())
             if r["query_id"] == args.query_id and (args.scope == "depth20" or (r["query_id"], r["doc_id"]) in priority)]
     labels = Path(f"annotations/ai_study_v1/assessments.{args.scope}.jsonl")
     if not labels.exists() and args.scope == "depth20":
         labels = labels.with_name("assessments.top5.jsonl")
-    assessed = {(r["query_id"], r["doc_id"]) for r in map(json.loads, labels.read_text().splitlines())} if labels.exists() else set()
+    assessed = {(r["query_id"], r["doc_id"]) for r in map(json.loads, labels.read_text(encoding="utf-8").splitlines())} if labels.exists() else set()
     seen = {}
     printed_chars = 0
     for position, row in enumerate(rows):

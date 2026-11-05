@@ -11,12 +11,13 @@ from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 
+from .platform_support import resolve_saved_path
 from .data import DocumentStore, read_queries, sha256_file
 from .evaluation import METRICS, evaluate_rankings, gain, load_qrels, load_run, paired_comparison
 
 
 def write_json(path, value):
-    Path(path).write_text(json.dumps(value, indent=2, ensure_ascii=False) + "\n")
+    Path(path).write_text(json.dumps(value, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
 
 
 def crosscheck(qrels, rankings, evaluation, folder, *, name, gain_mode="linear"):
@@ -26,30 +27,30 @@ def crosscheck(qrels, rankings, evaluation, folder, *, name, gain_mode="linear")
     Integer ordinal scores in a DERIVED file preserve our published ranking.
     Original model scores and source run files remain untouched.
     """
-    from .runtime import configure_java
+    from .runtime import configure_java, java_classpath, java_executable
 
     folder = Path(folder)
     folder.mkdir(parents=True, exist_ok=True)
     qrels_path, run_path = folder / f"{name}.qrels", folder / f"{name}.run"
-    with qrels_path.open("w") as stream:
+    with qrels_path.open("w", encoding="utf-8", newline="\n") as stream:
         for qid, judgments in qrels.items():
             for doc_id, grade in judgments.items():
                 stream.write(f"{qid} 0 {doc_id} {gain(grade, gain_mode)}\n")
-    with run_path.open("w") as stream:
+    with run_path.open("w", encoding="utf-8", newline="\n") as stream:
         for qid, ids in rankings.items():
             for rank, doc_id in enumerate(ids, 1):
                 stream.write(f"{qid} Q0 {doc_id} {rank} {1001-rank} rank-order-check\n")
     configure_java()
-    java = str(Path(os.environ["JAVA_HOME"]) / "bin/java") if os.environ.get("JAVA_HOME") else "java"
+    java = java_executable()
     jars = [p for p in importlib.resources.files("pyserini.resources.jars").iterdir() if p.name.endswith(".jar")]
     if len(jars) != 1:
         raise ValueError("Expected the single installed Anserini evaluator JAR")
     jar = jars[0]
-    command = [java, "-cp", str(jar), "trec_eval", "-q", "-c", "-m", "ndcg_cut.5,10",
+    command = [java, "-cp", java_classpath(jar), "trec_eval", "-q", "-c", "-m", "ndcg_cut.5,10",
                "-m", "map_cut.1000", "-m", "recall.1000", "-m", "P.5,10", "-m", "recip_rank",
                str(qrels_path), str(run_path)]
     result = subprocess.run(command, capture_output=True, text=True, check=True)
-    (folder / f"{name}.trec_eval.txt").write_text(result.stdout)
+    (folder / f"{name}.trec_eval.txt").write_text(result.stdout, encoding="utf-8", newline="\n")
     observed = {}
     for line in result.stdout.splitlines():
         metric, qid, value = line.split()
@@ -73,7 +74,7 @@ def crosscheck(qrels, rankings, evaluation, folder, *, name, gain_mode="linear")
                 raise ValueError(f"Independent evaluator disagreement for {name}/{qid}/{ours}: {difference}")
             maximum = max(maximum, difference)
             comparisons += 1
-    version = subprocess.run([java, "-cp", str(jar), "trec_eval", "-v"], capture_output=True, text=True, check=True)
+    version = subprocess.run([java, "-cp", java_classpath(jar), "trec_eval", "-v"], capture_output=True, text=True, check=True)
     return {"status": "passed", "comparisons": comparisons, "max_absolute_difference": maximum,
             "empty_query_zero_metrics_checked": omitted_empty,
             "tolerance": 0.000051, "precision_note": "trec_eval prints four decimal places",
@@ -98,10 +99,10 @@ def compare_benchmark(*, queries_path, qrels_path, bm25_run, dense_run, document
     if bm_manifest["engine"] != "lucene-bm25" or dense_manifest["engine"] != "e5-cosine":
         raise ValueError("Engine run arguments are swapped or incorrect")
     for manifest in (bm_manifest, dense_manifest):
-        index_manifest = Path(manifest["index_path"]) / "manifest.json"
+        index_manifest = resolve_saved_path(manifest["index_path"]) / "manifest.json"
         if sha256_file(index_manifest) != manifest["index_manifest_sha256"]:
             raise ValueError("Index manifest changed since retrieval")
-        metadata = json.loads(index_manifest.read_text())
+        metadata = json.loads(index_manifest.read_text(encoding="utf-8"))
         count = metadata["documents"]["indexed"] if manifest["engine"] == "lucene-bm25" else metadata["indexed_documents"]
         if count != len(eligible):
             raise ValueError("Ranked index does not cover the complete shared eligible corpus")

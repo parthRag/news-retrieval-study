@@ -30,23 +30,23 @@ def main():
                       expected_source_sha256=source_hash)
     require(run["query_count"] == 57 and run["total_hits"] == 57000, "Hybrid ranking coverage changed")
     evaluation = root / "artifacts/evaluations/rrf-original-57"
-    manifest = json.loads((evaluation / "manifest.json").read_text())
+    manifest = json.loads((evaluation / "manifest.json").read_text(encoding="utf-8"))
     for name, digest in manifest["files"].items():
         require(sha256_file(evaluation / name) == digest, f"Evaluation hash mismatch: {name}")
-    metrics = json.loads((evaluation / "metrics.json").read_text())
-    original = json.loads((root / "artifacts/evaluations/original-57/metrics.json").read_text())
+    metrics = json.loads((evaluation / "metrics.json").read_text(encoding="utf-8"))
+    original = json.loads((root / "artifacts/evaluations/original-57/metrics.json").read_text(encoding="utf-8"))
     require(all(original[p][e] == metrics[p][e] for p in original for e in ("bm25", "dense")),
             "An original baseline evaluation changed")
-    checks = json.loads((evaluation / "crosscheck.json").read_text())
+    checks = json.loads((evaluation / "crosscheck.json").read_text(encoding="utf-8"))
     require(all(c["status"] == "passed" for c in checks.values()), "Hybrid native evaluation did not pass")
     pool, annotation = root / "artifacts/assessments/custom20-v1", root / "annotations/ai_study_v1"
     for name in ("queries.jsonl", "protocol.json"):
         require(sha256_file(annotation / name) == sha256_file(pool / name), f"Portable pool metadata differs: {name}")
     labels = annotation / "assessments.pilot.jsonl"
     validated = validate_assessments(pool, labels)
-    require(assessed_top5_metrics(pool, labels) == json.loads((annotation / "metrics.pilot.json").read_text()),
+    require(assessed_top5_metrics(pool, labels) == json.loads((annotation / "metrics.pilot.json").read_text(encoding="utf-8")),
             "Pilot metrics do not reproduce")
-    rows = list(map(json.loads, (annotation / "qrels.pilot.jsonl").read_text().splitlines()))
+    rows = list(map(json.loads, (annotation / "qrels.pilot.jsonl").read_text(encoding="utf-8").splitlines()))
     expected_qrels = {(q, d): g for q, ds in validated["qrels"].items() for d, g in ds.items()}
     require(len(rows) == len(expected_qrels) and {(r["query-id"], r["corpus-id"]): r["score"] for r in rows} == expected_qrels,
             "Pilot qrels differ from evidence-backed decisions")
@@ -66,7 +66,7 @@ def main():
                                   "pip_check": "No broken requirements found", "figures": "Both PNG figures visually inspected"},
               "sha256": {str(p.relative_to(root)): sha256_file(p) for p in files},
               "scope": "First custom-assessment stage; full custom evaluation, demo and submission PDF remain incomplete"}
-    (root / "artifacts/task_d_validation.json").write_text(json.dumps(result, indent=2) + "\n")
+    (root / "artifacts/task_d_validation.json").write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8", newline="\n")
     print(json.dumps({k: v for k, v in result.items() if k not in {"sha256", "original_input_hashes"}}, indent=2))
 
 

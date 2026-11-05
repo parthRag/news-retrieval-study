@@ -27,9 +27,9 @@ def test_failed_build_is_not_published(tmp_path, kind):
     if kind == "duplicate":
         write_corpus(corpus, [row, row])
     elif kind == "malformed":
-        corpus.write_text(json.dumps(row) + "\nnot-json")
+        corpus.write_text(json.dumps(row) + "\nnot-json", encoding="utf-8", newline="\n")
     elif kind == "empty":
-        corpus.write_text("")
+        corpus.write_text("", encoding="utf-8", newline="\n")
     else:
         write_corpus(corpus, [{"_id": "empty", "title": "", "text": " "}])
     with pytest.raises(ValueError):
@@ -49,7 +49,7 @@ def test_export_complete_reproducible_trec_runs(tiny_index, tmp_path):
     queries = tmp_path / "queries.jsonl"
     queries.write_text('\n'.join(json.dumps(row) for row in [
         {"_id": "q1", "text": "cricket"}, {"_id": "q2", "text": ""},
-        {"_id": "q3", "text": "quasar"}]))
+        {"_id": "q3", "text": "quasar"}]), encoding="utf-8", newline="\n")
     output = tmp_path / "run"
     result = run_queries(tiny_index["index"], queries, output, top_k=5)
     assert result["query_count"] == 3
@@ -57,10 +57,10 @@ def test_export_complete_reproducible_trec_runs(tiny_index, tmp_path):
     assert result["total_hits"] == 3
     assert result["run_sha256"] == sha256_file(output / "run.trec")
     assert result["corpus_sha256"] == tiny_index["manifest"]["source"]["sha256"]
-    rows = [json.loads(line) for line in (output / "results.jsonl").read_text().splitlines()]
+    rows = [json.loads(line) for line in (output / "results.jsonl").read_text(encoding="utf-8").splitlines()]
     assert [row["query_id"] for row in rows] == ["q1", "q2", "q3"]
     assert rows[1]["hits"] == []
-    for line in (output / "run.trec").read_text().splitlines():
+    for line in (output / "run.trec").read_text(encoding="utf-8").splitlines():
         qid, iteration, docid, rank, score, tag = line.split()
         assert iteration == "Q0" and tag == "bm25"
         assert int(rank) > 0 and float(score) > 0
@@ -73,7 +73,7 @@ def test_export_complete_reproducible_trec_runs(tiny_index, tmp_path):
 
 def test_reject_bad_queries_before_publishing_run(tiny_index, tmp_path):
     queries = tmp_path / "bad.jsonl"
-    queries.write_text('{"_id":"x", "text":"term"}\n{"_id":"x", "text":"other"}')
+    queries.write_text('{"_id":"x", "text":"term"}\n{"_id":"x", "text":"other"}', encoding="utf-8", newline="\n")
     with pytest.raises(ValueError, match="duplicate"):
         run_queries(tiny_index["index"], queries, tmp_path / "bad-run")
     assert not (tmp_path / "bad-run").exists()
@@ -107,14 +107,14 @@ def test_reject_inconsistent_manifest(tiny_index, tmp_path, change):
     index = tmp_path / "copy"
     shutil.copytree(tiny_index["index"], index)
     path = index / "manifest.json"
-    manifest = json.loads(path.read_text())
+    manifest = json.loads(path.read_text(encoding="utf-8"))
     if change == "analyzer":
         manifest["analyzer"]["stemming"] = True
     elif change == "count":
         manifest["documents"]["indexed"] += 1
     else:
         manifest["schema_version"] = 999
-    path.write_text(json.dumps(manifest))
+    path.write_text(json.dumps(manifest), encoding="utf-8", newline="\n")
     with pytest.raises(ValueError):
         BM25Engine(index)
 

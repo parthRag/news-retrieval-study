@@ -9,7 +9,7 @@ from pathlib import Path
 
 
 def worker_environment():
-    env = dict(os.environ)
+    env = {**os.environ, "PYTHONUTF8": "1", "PYTHONIOENCODING": "utf-8"}
     package_root = str(Path(__file__).resolve().parents[1])
     env["PYTHONPATH"] = package_root + os.pathsep + env.get("PYTHONPATH", "")
     return env
@@ -17,7 +17,7 @@ def worker_environment():
 
 def build_faiss(encodings, output):
     result = subprocess.run([sys.executable, "-m", "news_ir.faiss_backend", "--build", str(encodings),
-                             "--output", str(output)], capture_output=True, text=True,
+                             "--output", str(output)], capture_output=True, text=True, encoding="utf-8",
                             env=worker_environment(), check=False)
     if result.returncode:
         raise RuntimeError(f"FAISS build failed: {result.stderr[-3000:]}")
@@ -29,7 +29,7 @@ class VectorWorker:
         self._lock = threading.Lock()
         self.process = subprocess.Popen(
             [sys.executable, "-u", "-m", "news_ir.faiss_backend", "--index", str(index_dir)],
-            stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True, env=worker_environment(),
+            stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True, encoding="utf-8", env=worker_environment(),
         )
         line = self.process.stdout.readline()
         if not line:

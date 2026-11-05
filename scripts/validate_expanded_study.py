@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def read(path):
-    return json.loads(path.read_text())
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def require(ok, reason):
@@ -45,13 +45,13 @@ def main():
             qids=set(validation['qrels'])
             rankings={e:{q:[h['doc_id'] for h in hits] for q,hits in rows.items() if q in qids}
                       for e,rows in service.runs['expanded'].items()}
-            provenance=[json.loads(x) for x in (pool/'pool.provenance.jsonl').read_text().splitlines()]
+            provenance=[json.loads(x) for x in (pool/'pool.provenance.jsonl').read_text(encoding="utf-8").splitlines()]
             check_pool(provenance,rankings,20)
             metrics=read(ROOT/'artifacts/evaluations'/evaluation/'metrics.json')
             for mode, engines in metrics.items():
                 for engine, result in engines.items():
                     require(evaluate_rankings(rankings[engine],validation['qrels'],gain_mode=mode)==result,'Expanded metric mismatch')
-        rows=[json.loads(x) for x in (ann/'assessments.all40.jsonl').read_text().splitlines()]
+        rows=[json.loads(x) for x in (ann/'assessments.all40.jsonl').read_text(encoding="utf-8").splitlines()]
         grades={}
         for row in rows:
             doc=service.document(row['doc_id'],'expanded',row['query_id'])
@@ -79,7 +79,7 @@ def main():
             'extension_pairs':707,'original_pairs_byte_preserved':737,'distinct_demo_queries':97,
             'saved_view_rows':117,'gain_modes_recomputed':['linear','exp2'],'family_bootstrap_recomputed':[37,35],
             'assessment_completion_sha256':sha256_file(ann/'assessment_completion.json')}
-    (ROOT/'artifacts/custom40_depth20_validation.json').write_text(json.dumps(result,indent=2)+'\n')
+    (ROOT/'artifacts/custom40_depth20_validation.json').write_text(json.dumps(result,indent=2)+'\n', encoding="utf-8", newline="\n")
     print(json.dumps(result,indent=2))
 
 

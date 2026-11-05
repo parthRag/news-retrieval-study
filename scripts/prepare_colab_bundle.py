@@ -13,7 +13,7 @@ def prepare_bundle(output, *, extra_files=()):
     output = Path(output)
     output.parent.mkdir(parents=True, exist_ok=True)
     model = read_model_spec(root / "artifacts/models/e5-base-v2")
-    source = json.loads((root / "artifacts/indexes/bm25/manifest.json").read_text())
+    source = json.loads((root / "artifacts/indexes/bm25/manifest.json").read_text(encoding="utf-8"))
     info = {"source_sha256": source["source"]["sha256"], "source_bytes": source["source"]["bytes"],
             "eligible_documents": source["documents"]["indexed"], "model_revision": model["revision"],
             "model_files": model["files"], "query_sha256": sha256_file(root / "annotations/custom_queries.draft.jsonl"),

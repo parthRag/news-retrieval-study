@@ -9,12 +9,12 @@ ROOT=Path(__file__).resolve().parents[1]
 
 
 def main():
- data=json.loads((ROOT/'artifacts/evaluations/integrated-core18-v1/metrics.json').read_text())['variants']
- queries={r['_id']:r for r in map(json.loads,(ROOT/'annotations/core18_v1/queries.jsonl').read_text().splitlines())}
+ data=json.loads((ROOT/'artifacts/evaluations/integrated-core18-v1/metrics.json').read_text(encoding="utf-8"))['variants']
+ queries={r['_id']:r for r in map(json.loads,(ROOT/'annotations/core18_v1/queries.jsonl').read_text(encoding="utf-8").splitlines())}
  labels={}
- for r in map(json.loads,(ROOT/'annotations/core18_v1/qrels.jsonl').read_text().splitlines()):
+ for r in map(json.loads,(ROOT/'annotations/core18_v1/qrels.jsonl').read_text(encoding="utf-8").splitlines()):
   labels.setdefault(r['query-id'],{})[r['corpus-id']]=r['score']
- runs={e:{r['query_id']:r['hits'] for r in map(json.loads,(ROOT/f'artifacts/runs/{e}-core18-v1/results.jsonl').read_text().splitlines())} for e in ['bm25','dense']}
+ runs={e:{r['query_id']:r['hits'] for r in map(json.loads,(ROOT/f'artifacts/runs/{e}-core18-v1/results.jsonl').read_text(encoding="utf-8").splitlines())} for e in ['bm25','dense']}
  differences=[]
  for q in data['title']['bm25']['per_query']:
   tid=q.rsplit('-',1)[0];other=tid+'-rewrite'
@@ -41,8 +41,8 @@ def main():
     '\nThe table establishes changes in observed ranking and reference grades. It does not establish a causal account of model reasoning; inspect the article text and retained E5 prefix in the demo.\n']
    if tid=='814':parts.append('E5 stays at 1.0000 in both formulations. Its negative differential advantage comes from BM25 improving, rather than from E5 failing. Absolute quality and robustness change are different quantities.\n')
    if tid=='825':parts.append('BM25 loses its known-positive top-five results after the rewrite, while E5 keeps the same grade-2 lead article. Some BM25 rewrite hits are unjudged, so a zero reference score does not establish that all retrieved articles are irrelevant.\n')
- (ROOT/'reports/CORE18_CASE_STUDIES.md').write_text('\n\n'.join(parts)+'\n')
- (ROOT/'artifacts/integration-validation/selected_cases.json').write_text(json.dumps(records,indent=2)+'\n')
+ (ROOT/'reports/CORE18_CASE_STUDIES.md').write_text('\n\n'.join(parts)+'\n', encoding="utf-8", newline="\n")
+ (ROOT/'artifacts/integration-validation/selected_cases.json').write_text(json.dumps(records,indent=2)+'\n', encoding="utf-8", newline="\n")
  print('Wrote two selected paired cases and 24 top-three ranking observations.')
 
 if __name__=='__main__':main()

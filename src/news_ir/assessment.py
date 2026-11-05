@@ -17,7 +17,7 @@ def text_hash(text):
 
 
 def write_jsonl(path, rows):
-    Path(path).write_text("".join(json.dumps(row, ensure_ascii=False) + "\n" for row in rows), encoding="utf-8")
+    Path(path).write_text("".join(json.dumps(row, ensure_ascii=False) + "\n" for row in rows), encoding="utf-8", newline="\n")
 
 
 def prepare_pool(*, queries_path, bm25_run, dense_run, document_index, output, depth=20):
@@ -32,7 +32,7 @@ def prepare_pool(*, queries_path, bm25_run, dense_run, document_index, output, d
     if target.exists():
         raise FileExistsError("Assessment pool exists; choose a new version")
     queries = read_queries(queries_path)
-    records = [json.loads(line) for line in Path(queries_path).read_text().splitlines()]
+    records = [json.loads(line) for line in Path(queries_path).read_text(encoding="utf-8").splitlines()]
     for record in records:
         if any(not record.get(key) for key in ("category", "relevant_if", "exclude_if", "grade_0", "grade_1", "grade_2")):
             raise ValueError("Each query needs category, inclusion/exclusion rules and a grading rubric")
@@ -100,7 +100,7 @@ def prepare_pool(*, queries_path, bm25_run, dense_run, document_index, output, d
         }
         if sha256_file(queries_path) != protocol["query_source_sha256"]:
             raise ValueError("Query source changed while preparing pool")
-        (working / "protocol.json").write_text(json.dumps(protocol, indent=2, ensure_ascii=False) + "\n")
+        (working / "protocol.json").write_text(json.dumps(protocol, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
         working.rename(target)
         return protocol
     except BaseException:
@@ -111,16 +111,16 @@ def prepare_pool(*, queries_path, bm25_run, dense_run, document_index, output, d
 def validate_assessments(pool_dir, assessments_path):
     """Check provenance, exact evidence spans, grade types and pool membership."""
     pool = Path(pool_dir)
-    protocol = json.loads((pool / "protocol.json").read_text())
+    protocol = json.loads((pool / "protocol.json").read_text(encoding="utf-8"))
     for name, digest in protocol["files"].items():
         if sha256_file(pool / name) != digest:
             raise ValueError(f"Assessment pool hash mismatch: {name}")
     articles = {(r["query_id"], r["doc_id"]): r for r in
-                map(json.loads, (pool / "articles.blinded.jsonl").read_text().splitlines())}
+                map(json.loads, (pool / "articles.blinded.jsonl").read_text(encoding="utf-8").splitlines())}
     priority = {(r["query_id"], r["doc_id"]) for r in
-                map(json.loads, (pool / "pool.provenance.jsonl").read_text().splitlines()) if r["priority_top5"]}
+                map(json.loads, (pool / "pool.provenance.jsonl").read_text(encoding="utf-8").splitlines()) if r["priority_top5"]}
     qrels, seen = {}, set()
-    for row in map(json.loads, Path(assessments_path).read_text().splitlines()):
+    for row in map(json.loads, Path(assessments_path).read_text(encoding="utf-8").splitlines()):
         pair = row.get("query_id"), row.get("doc_id")
         if pair in seen or pair not in articles:
             raise ValueError("Duplicate assessment or pair outside frozen pool")
@@ -164,7 +164,7 @@ def assessed_top5_metrics(pool_dir, assessments_path):
     completed = validation["complete_top5_query_ids"]
     if not completed:
         raise ValueError("No query has a completely assessed top-five union")
-    provenance = list(map(json.loads, (pool / "pool.provenance.jsonl").read_text().splitlines()))
+    provenance = list(map(json.loads, (pool / "pool.provenance.jsonl").read_text(encoding="utf-8").splitlines()))
     per_query, exp2_sensitivity = {}, {}
     for qid in completed:
         per_query[qid], exp2_sensitivity[qid] = {}, {}

@@ -12,7 +12,7 @@ from expanded_reporting import load as load_expanded, update_brief, expanded_pag
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'deliverables'
 
-def read(path): return json.loads((ROOT/path).read_text())
+def read(path): return json.loads((ROOT/path).read_text(encoding="utf-8"))
 def table(headers, rows):
     def cell(x): return str(x).replace('|',' / ').replace('\n',' ')
     return '\n'.join(['| '+' | '.join(map(cell,headers))+' |','| '+' | '.join(['---']*len(headers))+' |']+['| '+' | '.join(map(cell,r))+' |' for r in rows])
@@ -31,11 +31,11 @@ CSS='''@page{size:A4;margin:15mm 16mm 16mm}*{box-sizing:border-box}body{margin:0
 
 def publish(stem,pages,*,compact=False):
     md='\n\n<!-- PAGE -->\n\n'.join(pages)+'\n'
-    (OUT/(stem+'.md')).write_text(md)
+    (OUT/(stem+'.md')).write_text(md, encoding="utf-8", newline="\n")
     parser=MarkdownIt('commonmark',{'html':True}).enable('table')
     sections=''.join('<section class="page">'+parser.render(p)+'</section>' for p in pages)
     document='<!doctype html><html lang="en"><head><meta charset="utf-8"><title>'+html.escape(stem)+'</title><style>'+CSS+'</style></head><body class="'+('compact' if compact else 'paper')+'">'+sections+'</body></html>'
-    (OUT/(stem+'.html')).write_text(document)
+    (OUT/(stem+'.html')).write_text(document, encoding="utf-8", newline="\n")
 
 
 def main():
@@ -47,8 +47,8 @@ def main():
     cats=read('artifacts/evaluations/custom20-depth20-v1/by_category.json')
     ablation=read('artifacts/evaluations/quality-top20-v1/metrics.json')
     sensitivity=read('artifacts/evaluations/custom20-depth20-v1/sensitivity.json')['scenarios']
-    queries=list(map(json.loads,(ROOT/'annotations/ai_study_v1/queries.jsonl').read_text().splitlines()))
-    labels=list(map(json.loads,(ROOT/'annotations/ai_study_v1/assessments.depth20.jsonl').read_text().splitlines()))
+    queries=list(map(json.loads,(ROOT/'annotations/ai_study_v1/queries.jsonl').read_text(encoding="utf-8").splitlines()))
+    labels=list(map(json.loads,(ROOT/'annotations/ai_study_v1/assessments.depth20.jsonl').read_text(encoding="utf-8").splitlines()))
     baseline=read('artifacts/evaluations/custom20-depth20-v1/manifest.json')
     # Refuse writing reports based on altered quantitative output.
     for folder in ['custom20-depth20-v1','rrf-original-57','quality-top20-v1','custom40-extension20-depth20-v2','custom40-depth20-v2']:
@@ -331,9 +331,9 @@ The locked environment and `README.md` document setup, source/index construction
     publish('RESEARCH_REPORT',paper)
     write_progress(expanded, orig, custom, table)
     figures(expanded)
-    (OUT/'architecture.svg').write_text(architecture())
-    (OUT/'references.md').write_text(references)
-    with (OUT/'contribution_matrix.csv').open('w', newline='') as stream:
+    (OUT/'architecture.svg').write_text(architecture(), encoding="utf-8", newline="\n")
+    (OUT/'references.md').write_text(references, encoding="utf-8", newline="\n")
+    with (OUT/'contribution_matrix.csv').open('w', newline='', encoding="utf-8") as stream:
         writer = csv.writer(stream, lineterminator="\n")
         writer.writerow(['member', 'assigned_ownership', 'completed_team_outputs', 'confirmed_individual_work', 'individual_completion_confirmed'])
         writer.writerows([r['member'], r['ownership'], r.get('completed_team_outputs', ''), r['completed'],
@@ -347,12 +347,12 @@ The locked environment and `README.md` document setup, source/index construction
               "quality_ablation":{v:{e:r['aggregate'] for e,r in es.items()} for v,es in ablation.items()},
               "custom_paired_uncertainty":paired,"categories":cats,
               "source_manifests":{d:sha256_file(ROOT/f'artifacts/evaluations/{d}/manifest.json') for d in ['rrf-original-57','custom20-depth20-v1','quality-top20-v1','custom40-extension20-depth20-v2','custom40-depth20-v2']}}
-    (OUT/'results_snapshot.json').write_text(json.dumps(snapshot,indent=2)+'\n')
+    (OUT/'results_snapshot.json').write_text(json.dumps(snapshot,indent=2)+'\n', encoding="utf-8", newline="\n")
     if integrated:
         snapshot['integrated'] = {name: {variant: {engine: result['aggregate'] for engine, result in systems.items()}
                                   for variant, systems in content['variants'].items()} for name, content in integrated.items()}
         snapshot['document_pages'] = {'brief':len(brief),'research':len(paper)}
-        (OUT/'results_snapshot.json').write_text(json.dumps(snapshot,indent=2)+'\n')
+        (OUT/'results_snapshot.json').write_text(json.dumps(snapshot,indent=2)+'\n', encoding="utf-8", newline="\n")
     print(json.dumps({'brief_source_pages':len(brief),'research_source_pages':len(paper),'output':str(OUT)},indent=2))
 
 if __name__=='__main__': main()

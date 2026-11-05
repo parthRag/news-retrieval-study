@@ -62,6 +62,9 @@ def test_live_engine_isolation_fusion_and_no_relevance_fabrication(demo):
     assert result["status"] == "complete"
     assert calls == [("bm25", "cricket insect"), ("dense", "cricket insect")]
     assert len(result["result"]["engines"]["rrf"]["hits"]) == 2
+    fused = result["result"]["engines"]["rrf"]["hits"][0]
+    assert fused["fusion"]["component_ranks"] == {"bm25": None, "dense": 1}
+    assert fused["fusion"]["reconstructed_score"] == pytest.approx(fused["score"])
     assert all(h["assessment"] is None for e in result["result"]["engines"].values() for h in e["hits"])
     assert all(e["metrics"] is None for e in result["result"]["engines"].values())
     assert not demo.live_slot.locked()
@@ -93,6 +96,22 @@ def test_rewrite_replay_returns_its_own_original_topic_metrics(demo):
     assert result["paired_original"]["metrics"]["dense"]["ndcg_at_5"] == .2
     assert result["engines"]["dense"]["metrics"]["ndcg_at_5"] == .6
     assert demo.replay("core18-title", "341-title")["paired_original"] is None
+
+
+def test_replay_explains_fusion_from_full_source_rankings_without_mutation(demo):
+    from news_ir.fusion import reciprocal_rank_fusion
+    source = demo.runs["custom"]
+    source["bm25"]["q"] = [{"doc_id": "sport", "rank": 1, "score": 2.},
+                            {"doc_id": "insect", "rank": 2, "score": 1.}]
+    source["rrf"] = {"q": reciprocal_rank_fusion([["sport", "insect"], ["insect"]])}
+    demo.scores["custom"]["rrf"] = demo.scores["custom"]["dense"]
+    result = demo.replay("custom", "q", k=1)
+    hit = result["engines"]["rrf"]["hits"][0]
+    assert hit["doc_id"] == "insect"
+    assert hit["fusion"]["component_ranks"] == {"bm25": 2, "dense": 1}
+    assert hit["fusion"]["component_depths"] == {"bm25": 2, "dense": 1}
+    assert hit["fusion"]["reconstructed_score"] == pytest.approx(hit["score"])
+    assert "fusion" not in source["rrf"]["q"][0]
 
 
 def call_http(service, method, path, body=b"", extra_headers=None):

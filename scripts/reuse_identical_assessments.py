@@ -13,11 +13,11 @@ from news_ir.assessment import validate_assessments, write_jsonl
 
 def reuse_identical(pool: Path, source: Path, destination: Path):
     validation = validate_assessments(pool, source)
-    rows = list(map(json.loads, source.read_text().splitlines()))
+    rows = list(map(json.loads, source.read_text(encoding="utf-8").splitlines()))
     lookup = {(r["query_id"], r["contents_sha256"]): r for r in rows}
     done = {(r["query_id"], r["doc_id"]) for r in rows}
     added = 0
-    for article in map(json.loads, (pool / "articles.blinded.jsonl").read_text().splitlines()):
+    for article in map(json.loads, (pool / "articles.blinded.jsonl").read_text(encoding="utf-8").splitlines()):
         key = article["query_id"], article["doc_id"]
         parent = lookup.get((article["query_id"], article["contents_sha256"]))
         if key in done or parent is None:

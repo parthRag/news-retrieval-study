@@ -11,7 +11,7 @@ async function api(path, options) {const response = await fetch(path, options); 
 function fillQueries() {const suite = $("suite").value; $("query").replaceChildren(); for(const q of catalog.suites[suite]) {const option = node("option", `${q._id} · ${q.category ? q.category.replaceAll("_", " ") + " · " : ""}${q.text}`); option.value = q._id; $("query").append(option);}}
 function metric(value, label) {const n = node("span", label); n.prepend(node("b", value.toFixed(3))); return n;}
 function render(data) {
- current = data; $("assessment-status").hidden = !(data.mode === "saved" && (isCustom(data.suite) || data.suite === "core18-rewrite")); $("assessment-status").textContent = data.suite === "core18-rewrite" ? "These rewrites are AI-authored and await independent human intent review. Scores reuse NIST human relevance labels conditionally on preserving the original information need." : "Custom comparisons use full-article AI judgments. Human review is planned next and has not yet been completed."; $("comparison").hidden = false; $("result-query").textContent = data.query;
+ current = data; $("assessment-status").hidden = !(data.mode === "saved" && (isCustom(data.suite) || data.suite === "core18-rewrite")); $("assessment-status").textContent = data.suite === "core18-rewrite" ? "These rewrites are AI-authored and await independent human intent review. Scores reuse NIST human relevance labels conditionally on preserving the original information need." : "Custom comparisons use full-article AI judgments. Human review is deferred and has not yet been completed."; $("comparison").hidden = false; $("result-query").textContent = data.query;
  $("result-source").textContent = data.mode === "live" ? "LIVE SEARCH · NEW QUERY · UNJUDGED" : isCustom(data.suite) ? `${data.query_id} · PRELIMINARY CUSTOM EXPERIMENT` : `${data.query_id} · ${isCore(data.suite) ? "CORE 2018 · AVAILABLE NEWS CORPUS" : "ORIGINAL BENCHMARK"} · SUPPLIED QRELS`;
  $("overlap").textContent = `${data.overlap} shared IDs in top ${data.k}`;
  $("rubric").hidden = !data.rubric?.relevant_if;
@@ -26,7 +26,13 @@ function render(data) {
   for(const hit of result.hits.slice(0, data.k)) {
    const card = node("article", undefined, "card"), top = node("div", undefined, "card-top"); top.append(node("span", `RANK ${hit.rank}`));
    top.append(node("span", hit.assessment ? `grade ${hit.assessment.grade}` : "Unjudged", `grade${hit.assessment ? " g"+hit.assessment.grade : ""}`)); card.append(top, node("h4", hit.title), node("p", hit.empty_body ? "This record has no article body. The title is the available source content." : hit.snippet + (hit.snippet.length === 450 ? "…" : ""), "snippet"));
-   const button = node("button", "Read article & evidence ↗"); button.type = "button"; button.addEventListener("click", () => openArticle(hit.doc_id)); card.append(button, node("div", `${engine === "dense" ? "Cosine" : engine === "rrf" ? "RRF" : "BM25"} score ${hit.score.toFixed(6)}`, "score")); column.append(card);
+   const button = node("button", "Read article & evidence ↗"); button.type = "button"; button.addEventListener("click", () => openArticle(hit.doc_id)); card.append(button, node("div", `${engine === "dense" ? "Cosine" : engine === "rrf" ? "RRF" : "BM25"} score ${hit.score.toFixed(6)}`, "score"));
+   if(hit.fusion) {
+    const f = hit.fusion, rankLabel = e => f.component_ranks[e] === null ? `outside top ${f.component_depths[e].toLocaleString()}` : `#${f.component_ranks[e]}`;
+    const explanation = node("details", undefined, "fusion-explanation"); explanation.append(node("summary", `BM25 ${rankLabel("bm25")} · E5 ${rankLabel("dense")}`));
+    explanation.append(node("p", `Each source contributes 1 / (${f.k} + rank). BM25 contributes ${f.contributions.bm25.toFixed(6)}; E5 contributes ${f.contributions.dense.toFixed(6)}. A record outside a source's saved list contributes zero. These source ranks use the complete candidate lists, not just the displayed results.`, "hint")); card.append(explanation);
+   }
+   column.append(card);
   }
   results.append(column);
  }

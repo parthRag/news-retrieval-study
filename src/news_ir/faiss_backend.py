@@ -12,7 +12,7 @@ import numpy as np
 
 def build(encodings, output):
     root = Path(encodings)
-    config = json.loads((root / "config.json").read_text())
+    config = json.loads((root / "config.json").read_text(encoding="utf-8"))
     index = faiss.IndexFlatIP(config["model"]["dimension"])
     for shard in sorted((root / "shards").glob("shard-*")):
         vectors = np.load(shard / "vectors.npy", allow_pickle=False)
@@ -25,7 +25,7 @@ def serve(root):
     root = Path(root)
     faiss.omp_set_num_threads(4)
     index = faiss.read_index(str(root / "vectors.faiss"))
-    ids = [json.loads(line) for line in (root / "ids.jsonl").read_text().splitlines()]
+    ids = [json.loads(line) for line in (root / "ids.jsonl").read_text(encoding="utf-8").splitlines()]
     if index.ntotal != len(ids) or index.metric_type != faiss.METRIC_INNER_PRODUCT:
         raise ValueError("Invalid FAISS index/ID mapping")
     print(json.dumps({"ready": True, "count": index.ntotal, "dimension": index.d}), flush=True)

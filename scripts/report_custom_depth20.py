@@ -28,20 +28,20 @@ CATEGORIES = {"vocabulary_mismatch": "Vocabulary mismatch", "negation": "Negatio
 def main():
     labels_path = ANN / "assessments.depth20.jsonl"
     validation = validate_assessments(POOL, labels_path)
-    manifest = json.loads((EVAL / "manifest.json").read_text())
+    manifest = json.loads((EVAL / "manifest.json").read_text(encoding="utf-8"))
     if not validation["complete_pool"] or manifest["assessments_sha256"] != sha256_file(labels_path):
         raise ValueError("Complete labels must match the evaluated assessment snapshot")
     for f, digest in manifest["files"].items():
         if sha256_file(EVAL / f) != digest:
             raise ValueError(f"Evaluation artifact changed: {f}")
-    metrics = json.loads((EVAL / "metrics.json").read_text())
-    groups = json.loads((EVAL / "by_category.json").read_text())
-    paired = json.loads((EVAL / "paired_comparison.json").read_text())
-    sensitivity = json.loads((EVAL / "sensitivity.json").read_text())
-    labels = list(map(json.loads, labels_path.read_text().splitlines()))
-    articles = {(r["query_id"], r["doc_id"]): r for r in map(json.loads, (POOL / "articles.blinded.jsonl").read_text().splitlines())}
-    provenance = {(r["query_id"], r["doc_id"]): r for r in map(json.loads, (POOL / "pool.provenance.jsonl").read_text().splitlines())}
-    queries = list(map(json.loads, (ANN / "queries.jsonl").read_text().splitlines()))
+    metrics = json.loads((EVAL / "metrics.json").read_text(encoding="utf-8"))
+    groups = json.loads((EVAL / "by_category.json").read_text(encoding="utf-8"))
+    paired = json.loads((EVAL / "paired_comparison.json").read_text(encoding="utf-8"))
+    sensitivity = json.loads((EVAL / "sensitivity.json").read_text(encoding="utf-8"))
+    labels = list(map(json.loads, labels_path.read_text(encoding="utf-8").splitlines()))
+    articles = {(r["query_id"], r["doc_id"]): r for r in map(json.loads, (POOL / "articles.blinded.jsonl").read_text(encoding="utf-8").splitlines())}
+    provenance = {(r["query_id"], r["doc_id"]): r for r in map(json.loads, (POOL / "pool.provenance.jsonl").read_text(encoding="utf-8").splitlines())}
+    queries = list(map(json.loads, (ANN / "queries.jsonl").read_text(encoding="utf-8").splitlines()))
     primary = metrics["linear"]
     visibility = visibility_audit(labels, scope="complete depth-20 pool")
     dump(ANN / "evidence_visibility.depth20.json", visibility)
@@ -176,7 +176,7 @@ def main():
               "See [all 737 decisions](CUSTOM_20_DEPTH20_EVIDENCE.md), `artifacts/evaluations/custom20-depth20-v1/per_query.csv`, "
               "the versioned JSONL labels, and generated PNG/SVG/PDF figures. The original 57-query benchmark and RRF experiment remain separate. "
               "Group details, contribution ownership and GitHub URL remain placeholders; PDF creation remains deferred."]
-    (ROOT / "reports/CUSTOM_20_DEPTH20.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    (ROOT / "reports/CUSTOM_20_DEPTH20.md").write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
     appendix = ["# Complete custom-pool AI assessment evidence", "", "737 fixed query–article decisions, grades 0–2. "
                 "Full-article AI judgments support this preliminary reference; human review is planned next. See [assessment method](ASSESSMENT_METHOD.md). Evidence offsets are Unicode characters into `(title + newline + body).strip()`. "
                 "Titles/quotes below support the saved rationale; full-available-text reading was used. Original 188 records are preserved.", ""]
@@ -190,7 +190,7 @@ def main():
                 appendix += [f"> {ev['quote']}", "", f"Source character offsets: [{ev['start']}, {ev['end']}).", ""]
             if "judgment_reuse" in row:
                 appendix += [f"Exact-content decision reused under the same query from `{row['judgment_reuse']['source_doc_id']}`.", ""]
-    (ROOT / "reports/CUSTOM_20_DEPTH20_EVIDENCE.md").write_text("\n".join(appendix), encoding="utf-8")
+    (ROOT / "reports/CUSTOM_20_DEPTH20_EVIDENCE.md").write_text("\n".join(appendix), encoding="utf-8", newline="\n")
     print(json.dumps({"assessed_pairs": len(labels), "quality": quality, "truncated_pairs": visibility["truncated_pairs"]}, indent=2))
 
 

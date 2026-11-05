@@ -66,8 +66,8 @@ def main():
     except BaseException:
         temporary.unlink(missing_ok=True);raise
     manifest={**inner,'archive':target.name,'archive_bytes':target.stat().st_size,'archive_sha256':sha256_file(target),
-              'file_count':len(files),'metadata':json.loads((ROOT/'configs/submission.json').read_text())}
-    (OUT/'release_manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
+              'file_count':len(files),'metadata':json.loads((ROOT/'configs/submission.json').read_text(encoding="utf-8"))}
+    (OUT/'release_manifest.json').write_text(json.dumps(manifest,indent=2)+'\n', encoding="utf-8", newline="\n")
     print(json.dumps({k:manifest[k] for k in ['archive','archive_bytes','archive_sha256','file_count']},indent=2))
 
 if __name__=='__main__': main()

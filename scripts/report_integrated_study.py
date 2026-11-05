@@ -23,7 +23,7 @@ def main():
   '\n**MAP@1000**\n'+comparison_table(data,table,'ap_at_1000')]
  for dataset in ['core18','covid']:
   folder=ROOT/f'artifacts/evaluations/integrated-{dataset}-v1'
-  changes=json.loads((folder/'paired_changes.json').read_text())
+  changes=json.loads((folder/'paired_changes.json').read_text(encoding="utf-8"))
   parts.append(f'\n## {dataset}: paired changes and uncertainty\n')
   for metric in ['ndcg_at_5','ndcg_at_10','ap_at_1000','condensed_ndcg_at_10','bpref']:
    parts.append(f'\n**{metric}**\n'+table(['Comparison (A − B)','Mean change','95% interval','p Holm','Wins/ties/losses'],
@@ -58,9 +58,9 @@ Integration adds Core 2018 news formulations/audit/runs, explicit @5 metrics, in
 
 Install the pinned lock or the `evaluation` optional dependencies. Saved-run numerical verification does not require corpus/model downloads; fresh retrieval and article lookup do. Existing evaluation directories are refused. New human reviews should be saved separately, never silently substituted into frozen results.
 ''')
- (ROOT/'reports/INTEGRATED_STUDY.md').write_text('\n\n'.join(parts)+'\n')
+ (ROOT/'reports/INTEGRATED_STUDY.md').write_text('\n\n'.join(parts)+'\n', encoding="utf-8", newline="\n")
  summary={dataset:{v:{e:r['aggregate'] for e,r in systems.items()} for v,systems in d['variants'].items()} for dataset,d in data.items()}
- (ROOT/'deliverables/integrated_results.json').write_text(json.dumps(summary,indent=2)+'\n')
+ (ROOT/'deliverables/integrated_results.json').write_text(json.dumps(summary,indent=2)+'\n', encoding="utf-8", newline="\n")
  print(json.dumps(summary,indent=2))
 
 if __name__=='__main__':main()

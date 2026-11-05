@@ -24,29 +24,29 @@ def main():
     folder = ROOT / "artifacts/evaluations/custom20-depth20-v1"
     ann = ROOT / "annotations/ai_study_v1"
     pool = ROOT / "artifacts/assessments/custom20-v1"
-    manifest = json.loads((folder / "manifest.json").read_text())
+    manifest = json.loads((folder / "manifest.json").read_text(encoding="utf-8"))
     for path, digest in manifest["input_hashes"].items():
         require(sha256_file(path) == digest, f"Input changed: {path}")
     for path, digest in manifest["files"].items():
         require(sha256_file(folder / path) == digest, f"Output changed: {path}")
     validated = validate_assessments(pool, ann / "assessments.depth20.jsonl")
     require(validated["complete_pool"] and validated["pooled_pairs"] == 737, "Incomplete pool")
-    labels = list(map(json.loads, (ann / "assessments.depth20.jsonl").read_text().splitlines()))
-    earlier = list(map(json.loads, (ann / "assessments.top5.jsonl").read_text().splitlines()))
+    labels = list(map(json.loads, (ann / "assessments.depth20.jsonl").read_text(encoding="utf-8").splitlines()))
+    earlier = list(map(json.loads, (ann / "assessments.top5.jsonl").read_text(encoding="utf-8").splitlines()))
     check_seed(labels, earlier)
     require(len(earlier) == 188, "Earlier snapshot count changed")
     service = DemoService(ROOT)  # Checks all saved run/evaluation/query/qrels hashes and eligible IDs.
     try:
         rankings = {e: {q: [h["doc_id"] for h in hits] for q, hits in rows.items()}
                     for e, rows in service.runs["custom"].items()}
-        provenance = list(map(json.loads, (pool / "pool.provenance.jsonl").read_text().splitlines()))
+        provenance = list(map(json.loads, (pool / "pool.provenance.jsonl").read_text(encoding="utf-8").splitlines()))
         check_pool(provenance, rankings, 20)
-        metrics = json.loads((folder / "metrics.json").read_text())
+        metrics = json.loads((folder / "metrics.json").read_text(encoding="utf-8"))
         for mode, engines in metrics.items():
             for engine, result in engines.items():
                 require(evaluate_rankings(rankings[engine], validated["qrels"], gain_mode=mode) == result,
                         f"Recomputed metrics differ: {mode}/{engine}")
-        visibility = json.loads((ann / "evidence_visibility.depth20.json").read_text())
+        visibility = json.loads((ann / "evidence_visibility.depth20.json").read_text(encoding="utf-8"))
         require(len(visibility["documents"]) == 737 and len(service.visibility) >= 737, "Visibility coverage")
         seen, hashes = set(), defaultdict(set)
         for row in labels:
@@ -64,7 +64,7 @@ def main():
         require(len(seen) == 737 and all(len(g) == 1 for g in hashes.values()), "Duplicate grade conflict")
     finally:
         service.close()
-    checks = json.loads((folder / "crosscheck.json").read_text())
+    checks = json.loads((folder / "crosscheck.json").read_text(encoding="utf-8"))
     require(all(c["status"] == "passed" for es in checks.values() for c in es.values()), "Native check failure")
     comparisons = sum(c["comparisons"] for es in checks.values() for c in es.values())
     require(comparisons == 588, "Native comparison count")

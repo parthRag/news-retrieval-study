@@ -6,10 +6,11 @@ folders are refused. requests/websockets are available in requirements-lock.txt.
 import argparse
 import base64, json, os, pathlib, signal, subprocess, tempfile, time
 import requests
+from news_ir.platform_support import find_browser, process_options, terminate_process_tree
 from websockets.sync.client import connect
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser(description=__doc__)
-parser.add_argument('--browser', default='/Applications/Brave Browser.app/Contents/MacOS/Brave Browser')
+parser.add_argument('--browser', default=None, help='Chrome/Edge/Brave executable; auto-detected by default')
 parser.add_argument('--skip-live', action='store_true', help='Keep the prior live smoke result; check saved views and UI only')
 parser.add_argument('--port', type=int, default=8765)
 parser.add_argument('--output', type=pathlib.Path, default=ROOT / 'artifacts/demo-validation-recheck')
@@ -18,6 +19,7 @@ OUT = args.output
 OUT.mkdir(parents=True, exist_ok=False)
 BASE = f'http://127.0.0.1:{args.port}'
 report = {'base_url': BASE, 'saved_queries_checked': 0, 'article_endpoints_checked': 0}
+report['fusion_explanations_checked'] = 0
 catalog = requests.get(BASE+'/api/catalog').json()
 assert catalog['custom_assessed_pairs']==(1444 if 'expanded' in catalog['suites'] else 737)
 report['distinct_queries_checked']=catalog['evaluated_query_count']
@@ -29,6 +31,18 @@ for suite, queries in catalog['suites'].items():
         for engine, result in data['engines'].items():
             assert 0 < len(result['hits']) <= 20 and result['metrics'] is not None
             if suite in {'custom','expanded'}: assert all(h['assessment'] is not None for h in result['hits'])
+            if engine == 'rrf':
+                for h in result['hits']:
+                    f = h['fusion']
+                    assert set(f['component_ranks']) == {'bm25', 'dense'}
+                    expected = 0.0
+                    for component, rank in f['component_ranks'].items():
+                        assert rank is None or 1 <= rank <= f['component_depths'][component]
+                        contribution = 1 / (60 + rank) if rank is not None else 0.0
+                        assert abs(f['contributions'][component] - contribution) < 1e-12
+                        expected += contribution
+                    assert abs(expected - h['score']) < 1e-12
+                    report['fusion_explanations_checked'] += 1
         hit=data['engines']['dense']['hits'][0]
         doc=requests.get(BASE+'/api/document',params={'suite':suite,'qid':query['_id'],'id':hit['doc_id']}).json()
         assert doc['doc_id']==hit['doc_id']
@@ -37,13 +51,13 @@ for suite, queries in catalog['suites'].items():
         report['saved_queries_checked']+=1
 print(f"Verified all {report['saved_queries_checked']} saved queries and article endpoints",flush=True)
 profile=tempfile.TemporaryDirectory(prefix='news-ir-browser-')
-process=subprocess.Popen([args.browser, '--headless','--disable-gpu','--no-first-run','--no-default-browser-check', '--remote-debugging-address=127.0.0.1','--remote-debugging-port=0', '--user-data-dir='+profile.name, BASE], stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,start_new_session=True)
+process=subprocess.Popen([find_browser(args.browser), '--headless','--disable-gpu','--no-first-run','--no-default-browser-check', '--remote-debugging-address=127.0.0.1','--remote-debugging-port=0', '--user-data-dir='+profile.name, BASE], stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,**process_options())
 try:
     active=pathlib.Path(profile.name)/'DevToolsActivePort'
     for _ in range(100):
         if active.exists(): break
         time.sleep(.2)
-    port=active.read_text().splitlines()[0]
+    port=active.read_text(encoding="utf-8").splitlines()[0]
     targets=requests.get('http://127.0.0.1:'+port+'/json/list').json()
     target=next(t for t in targets if t['type']=='page')
     ws=connect(target['webSocketDebuggerUrl'],max_size=20_000_000,legacy=True)
@@ -69,7 +83,7 @@ try:
     call('Runtime.enable'); call('Page.enable')
     call('Emulation.setDeviceMetricsOverride',{'width':1440,'height':1050,'deviceScaleFactor':1,'mobile':False})
     wait("document.querySelectorAll('.engine').length===2 && document.querySelectorAll('#query option').length==="+str(40 if 'expanded' in catalog['suites'] else 20))
-    assert js("!document.getElementById('assessment-status').hidden && document.getElementById('assessment-status').textContent.includes('AI judgments') && document.getElementById('assessment-status').textContent.includes('Human review is planned')")
+    assert js("!document.getElementById('assessment-status').hidden && document.getElementById('assessment-status').textContent.includes('AI judgments') && document.getElementById('assessment-status').textContent.includes('Human review is deferred')")
     js("document.getElementById('query').value='H02'; document.getElementById('saved-form').requestSubmit()")
     wait("document.getElementById('result-source').textContent.startsWith('H02')")
     assert js("document.querySelectorAll('.card').length")==10
@@ -93,6 +107,10 @@ try:
     assert js("document.getElementById('assessment-status').hidden"), 'Original qrels must not be labeled as preliminary custom judgments'
     js("document.getElementById('depth').value='20';document.getElementById('depth').dispatchEvent(new Event('change'))")
     wait("document.querySelectorAll('.card').length===60")
+    assert js("document.querySelectorAll('.engine.rrf .fusion-explanation').length===20")
+    js("document.querySelector('.engine.rrf .fusion-explanation').open=true")
+    assert js("document.querySelector('.engine.rrf .fusion-explanation').textContent.includes('Each source contributes')")
+    report['fusion_explanation_ui_verified'] = True
     call('Emulation.setDeviceMetricsOverride',{'width':390,'height':844,'deviceScaleFactor':1,'mobile':True})
     assert js("document.documentElement.scrollWidth<=window.innerWidth"), 'mobile page overflow'
     shot=call('Page.captureScreenshot',{'format':'png','captureBeyondViewport':False})
@@ -116,21 +134,21 @@ try:
         assert js("current.mode==='live' && Object.keys(current.engines).length===3")
         assert js("Object.values(current.engines).every(e=>e.metrics===null && e.hits.every(h=>h.assessment===null))")
         assert js("document.querySelectorAll('.metric-row').length===0")
+        assert js("current.engines.rrf.hits.every(h=>h.fusion && Math.abs(h.fusion.reconstructed_score-h.score)<1e-12)")
         report['live_elapsed_seconds']=time.monotonic()-start
         report['live_result']=js("({query:current.query, engines:Object.fromEntries(Object.entries(current.engines).map(([e,r])=>[e,{top5:r.hits.slice(0,5).map(h=>h.doc_id),engine_search_ms:r.engine_search_ms,elapsed_ms_with_startup:r.elapsed_ms_with_startup}]))})")
     report['browser_exceptions']=errors
     assert not errors
     report['ui_checks']=['two-engine custom comparison','evidence highlights equal literal quotes','full body equals source','512-token retained text toggle','three-engine original comparison','20 results per engine','390px responsive layout without horizontal overflow','live form retrieves BM25/E5/RRF with no inferred grades or metrics']
+    report['ui_checks'].append('hybrid source-rank explanations use full candidate lists and reconstruct RRF scores')
     if args.skip_live:
         report['ui_checks'] = [c for c in report['ui_checks'] if not c.startswith('live form')]
     report['live_test_this_run']=not args.skip_live
     report['assessment_status_checks']=['one context notice for preliminary full-article AI judgments and planned human review', 'assessor provenance retained in article details', 'custom notice hidden for supplied-qrels benchmark']
     report['status']='passed'
-    (OUT/'validation.json').write_text(json.dumps(report,indent=2)+'\n')
+    (OUT/'validation.json').write_text(json.dumps(report,indent=2)+'\n', encoding="utf-8", newline="\n")
     print(json.dumps(report,indent=2),flush=True)
     ws.close()
 finally:
-    os.killpg(process.pid,signal.SIGTERM)
-    try: process.wait(timeout=10)
-    except subprocess.TimeoutExpired: os.killpg(process.pid,signal.SIGKILL);process.wait()
+    terminate_process_tree(process)
     profile.cleanup()

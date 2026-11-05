@@ -49,7 +49,7 @@ def run_queries(index_dir, queries_path, output, *, top_k=1000, run_tag=None, co
         with context as engine:
             batches = (engine.search_many([q["text"] for q in queries], top_k, batch_size=query_batch_size)
                        if engine_type == "dense" and query_batch_size > 1 else None)
-            with (working / "run.trec").open("w") as trec, (working / "results.jsonl").open("w", encoding="utf-8") as results:
+            with (working / "run.trec").open("w", encoding="utf-8", newline="\n") as trec, (working / "results.jsonl").open("w", encoding="utf-8", newline="\n") as results:
                 for query in queries:
                     started = time.perf_counter()
                     if batches is None:
@@ -77,7 +77,7 @@ def run_queries(index_dir, queries_path, output, *, top_k=1000, run_tag=None, co
                 raise ValueError("Queries changed while the run was executing")
             (working / "queries.jsonl").write_text(
                 "".join(json.dumps(row, ensure_ascii=False) + "\n" for row in queries), encoding="utf-8",
-            )
+             newline="\n")
             summary = {
                 "created_at_utc": datetime.now(timezone.utc).isoformat(),
                 "engine": "lucene-bm25" if engine_type == "bm25" else "e5-cosine", "run_tag": run_tag,
@@ -107,7 +107,7 @@ def run_queries(index_dir, queries_path, output, *, top_k=1000, run_tag=None, co
             if engine_type == "bm25":
                 summary["bm25"] = {"k1": engine.k1, "b": engine.b}
                 summary["analyzer"] = engine.store.manifest["analyzer"]
-        (working / "manifest.json").write_text(json.dumps(summary, indent=2) + "\n")
+        (working / "manifest.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8", newline="\n")
         if target.exists():
             raise FileExistsError(f"Run appeared while executing: {target}")
         working.rename(target)

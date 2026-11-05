@@ -21,15 +21,15 @@ ALL_POOL = ROOT / "artifacts/assessments/custom40-v2"
 
 
 def read(path):
-    return json.loads(path.read_text())
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def records(path):
-    return [json.loads(line) for line in path.read_text().splitlines()]
+    return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()]
 
 
 def write(path, value):
-    path.write_text(json.dumps(value, indent=2, ensure_ascii=False) + "\n")
+    path.write_text(json.dumps(value, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
 
 
 def prepare():

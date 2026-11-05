@@ -10,5 +10,5 @@ if __name__ == "__main__":
     root = Path(__file__).resolve().parents[1]
     info = prepare_bundle(root / "artifacts/bundles/news_ir_kaggle.zip",
                           extra_files=("scripts/run_kaggle_dense.py",))
-    (root / "artifacts/kaggle_bundle_manifest.json").write_text(json.dumps(info, indent=2) + "\n")
+    (root / "artifacts/kaggle_bundle_manifest.json").write_text(json.dumps(info, indent=2) + "\n", encoding="utf-8", newline="\n")
     print(json.dumps(info, indent=2))

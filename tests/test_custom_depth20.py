@@ -24,7 +24,7 @@ def test_complete_pool_native_metrics_and_earlier_labels(tiny_index, tmp_path):
     assert result["aggregate"]["bm25"]["ap_at_1000"] == .5
     assert result["independent_metric_comparisons"] == 56
     assert "1-query" in result["paired"]["unit"]
-    manifest = json.loads((output / "manifest.json").read_text())
+    manifest = json.loads((output / "manifest.json").read_text(encoding="utf-8"))
     assert all(sha256_file(output / f) == digest for f, digest in manifest["files"].items())
     with pytest.raises(FileExistsError):
         evaluate_depth20_study(pool, labels, labels, tiny_index["index"], output)
@@ -79,7 +79,7 @@ def install_reading_fixture(tiny_index, tmp_path):
     pool.rename(destination)
     annotation = tmp_path / "annotations/ai_study_v1"
     annotation.mkdir(parents=True)
-    packets = list(map(json.loads, (destination / "articles.blinded.jsonl").read_text().splitlines()))
+    packets = list(map(json.loads, (destination / "articles.blinded.jsonl").read_text(encoding="utf-8").splitlines()))
     lookup = {r["doc_id"]: r for r in rows}
     write_jsonl(annotation / "assessments.top5.jsonl", [lookup[packets[0]["doc_id"]]])
     return destination, annotation, packets
@@ -122,20 +122,20 @@ def test_reader_stops_before_long_body_and_explicit_chunks(tiny_index, tmp_path,
 
 def test_identical_reuse_requires_same_query_and_exact_contents(tiny_index, tmp_path):
     pool, labels, rows = make_pool_and_labels(tiny_index, tmp_path)
-    packets = list(map(json.loads, (pool / "articles.blinded.jsonl").read_text().splitlines()))
+    packets = list(map(json.loads, (pool / "articles.blinded.jsonl").read_text(encoding="utf-8").splitlines()))
     source = packets[0]
     identical = {**source, "doc_id": "duplicate"}
     other_query = {**source, "query_id": "different-query", "doc_id": "other-query-copy"}
     write_jsonl(pool / "articles.blinded.jsonl", packets + [identical, other_query])
-    protocol = json.loads((pool / "protocol.json").read_text())
+    protocol = json.loads((pool / "protocol.json").read_text(encoding="utf-8"))
     protocol["files"]["articles.blinded.jsonl"] = sha256_file(pool / "articles.blinded.jsonl")
-    (pool / "protocol.json").write_text(json.dumps(protocol))
+    (pool / "protocol.json").write_text(json.dumps(protocol), encoding="utf-8", newline="\n")
     spec = importlib.util.spec_from_file_location("reuse", SCRIPTS / "reuse_identical_assessments.py")
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     output = tmp_path / "reused.jsonl"
     result = module.reuse_identical(pool, labels, output)
-    copied = list(map(json.loads, output.read_text().splitlines()))
+    copied = list(map(json.loads, output.read_text(encoding="utf-8").splitlines()))
     assert result["reused_pairs_added"] == 1
     assert copied[-1]["doc_id"] == "duplicate"
     assert copied[-1]["judgment_reuse"]["source_doc_id"] == source["doc_id"]

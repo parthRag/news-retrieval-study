@@ -44,5 +44,5 @@ if __name__ == "__main__":
     args = parser.parse_args()
     result = benchmark(args.model_dir, args.document_index, count=args.count,
                        batch_size=args.batch_size, device=args.device, corpus=args.corpus)
-    Path(args.output).write_text(json.dumps(result, indent=2) + "\n")
+    Path(args.output).write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8", newline="\n")
     print(json.dumps(result, indent=2))

@@ -100,7 +100,7 @@ def evaluate_rankings(rankings, qrels, *, gain_mode="linear"):
 
 def load_run(run_dir, queries_path, eligible_ids, *, expected_source_sha256):
     root = Path(run_dir)
-    manifest = json.loads((root / "manifest.json").read_text())
+    manifest = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
     if manifest["engine"] not in {"lucene-bm25", "e5-cosine", "rrf"}:
         raise ValueError("Unknown run engine")
     # Early BM25 manifests predate the coverage field; full BM25 source/count is bound below.
@@ -117,10 +117,10 @@ def load_run(run_dir, queries_path, eligible_ids, *, expected_source_sha256):
     queries = read_queries(queries_path)
     if queries != read_queries(root / "queries.jsonl"):
         raise ValueError("Run query snapshot differs from requested suite")
-    rows = [json.loads(line) for line in (root / "results.jsonl").read_text().splitlines()]
+    rows = [json.loads(line) for line in (root / "results.jsonl").read_text(encoding="utf-8").splitlines()]
     if len(rows) != len(queries) or manifest["query_count"] != len(queries):
         raise ValueError("Run must explicitly represent every query")
-    trec_lines = (root / "run.trec").read_text().splitlines()
+    trec_lines = (root / "run.trec").read_text(encoding="utf-8").splitlines()
     position, rankings = 0, {}
     for query, row in zip(queries, rows, strict=True):
         if row["query_id"] != query["_id"] or row["query"] != query["text"]:

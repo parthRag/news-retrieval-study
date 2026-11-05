@@ -28,7 +28,7 @@ COLORS = ["#3477a8", "#d97a29", "#368b65"]
 
 
 def dump(path, value):
-    path.write_text(json.dumps(value, indent=2, ensure_ascii=False) + "\n")
+    path.write_text(json.dumps(value, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
 
 
 def figures(metrics, pilot):
@@ -66,7 +66,7 @@ def visibility_audit(labels, *, scope="pilot"):
     spec = read_model_spec(model)
     tokenizer = AutoTokenizer.from_pretrained(str(model), local_files_only=True, trust_remote_code=False)
     articles = {(r["query_id"], r["doc_id"]): r for r in
-                map(json.loads, (POOL / "articles.blinded.jsonl").read_text().splitlines())}
+                map(json.loads, (POOL / "articles.blinded.jsonl").read_text(encoding="utf-8").splitlines())}
     documents = []
     for row in labels:
         article = articles[row["query_id"], row["doc_id"]]
@@ -98,11 +98,11 @@ def main():
     annotation = LABELS.parent
     dump(annotation / "metrics.pilot.json", pilot)
     dump(annotation / "validation.pilot.json", {k: v for k, v in validation.items() if k != "qrels"})
-    labels = list(map(json.loads, LABELS.read_text().splitlines()))
+    labels = list(map(json.loads, LABELS.read_text(encoding="utf-8").splitlines()))
     audit = visibility_audit(labels)
     dump(annotation / "evidence_visibility.pilot.json", audit)
-    metrics = json.loads((EVALUATION / "metrics.json").read_text())
-    paired = json.loads((EVALUATION / "paired_comparison.json").read_text())
+    metrics = json.loads((EVALUATION / "metrics.json").read_text(encoding="utf-8"))
+    paired = json.loads((EVALUATION / "paired_comparison.json").read_text(encoding="utf-8"))
     figures(metrics, pilot)
 
     lines = ["# Fixed reciprocal-rank fusion: original 57-query benchmark", "",
@@ -143,11 +143,11 @@ def main():
               ".venv/bin/python scripts/report_current_study.py", "```", "",
               "The report script reads the canonical saved evaluation. Evaluation and retrieval commands refuse to overwrite existing outputs.", "",
               "Method reference: [Cormack, Clarke and Buettcher, SIGIR 2009](https://cormack.uwaterloo.ca/cormacksigir09-rrf.pdf).", ""]
-    (ROOT / "reports/RRF_EXPERIMENT.md").write_text("\n".join(lines))
+    (ROOT / "reports/RRF_EXPERIMENT.md").write_text("\n".join(lines), encoding="utf-8", newline="\n")
 
     lookup = {(r["query_id"], r["doc_id"]): r for r in labels}
-    protocol = json.loads((POOL / "protocol.json").read_text())
-    queries = {r["_id"]: r for r in map(json.loads, (POOL / "queries.jsonl").read_text().splitlines())}
+    protocol = json.loads((POOL / "protocol.json").read_text(encoding="utf-8"))
+    queries = {r["_id"]: r for r in map(json.loads, (POOL / "queries.jsonl").read_text(encoding="utf-8").splitlines())}
     lines = ["# Custom query AI assessment: calibration pilot", "",
              "**Two of 20 queries, 16 of 737 pooled pairs assessed.** The assistant read every available title and full body "
              "for these 16 records and stored a grade, confidence, rationale, exact source quotations and character offsets. "
@@ -176,7 +176,7 @@ def main():
         lines += [f"## {qid}: {queries[qid]['text']}", "", "| Engine | Rank | Grade | Article ID |", "| --- | ---: | ---: | --- |"]
         for engine in ("bm25", "dense"):
             run = Path(protocol["runs"][engine]["path"])
-            row = next(r for r in map(json.loads, (run / "results.jsonl").read_text().splitlines()) if r["query_id"] == qid)
+            row = next(r for r in map(json.loads, (run / "results.jsonl").read_text(encoding="utf-8").splitlines()) if r["query_id"] == qid)
             for hit in row["hits"][:5]:
                 lines.append(f"| {NAMES[engine]} | {hit['rank']} | {lookup[qid, hit['doc_id']]['grade']} | `{hit['doc_id']}` |")
         if qid == "H01":
@@ -203,7 +203,7 @@ def main():
               "content deduplication, and passage coverage. Each needs separate runs and compatible labels; none is silently applied to these baselines.", "",
               "AI-assessment limitation: [Ian Soboroff (2025), Don't Use LLMs to Make Relevance Judgments](https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=958495). "
               "Assistant labels enable an exploratory study but do not establish human agreement or unbiased system preference.", ""]
-    (ROOT / "reports/CUSTOM_AI_PILOT.md").write_text("\n".join(lines))
+    (ROOT / "reports/CUSTOM_AI_PILOT.md").write_text("\n".join(lines), encoding="utf-8", newline="\n")
     print(json.dumps({"hybrid_report": "reports/RRF_EXPERIMENT.md", "pilot_report": "reports/CUSTOM_AI_PILOT.md",
                       "validated_assessments": validation["assessed_pairs"], "tokenizer_audited_pairs": len(audit["documents"]),
                       "figures": str(FIGURES)}, indent=2))

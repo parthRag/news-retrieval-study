@@ -16,7 +16,7 @@ def main():
     supplied = {(qid, doc_id): grade for qid, labels in qrels.items() for doc_id, grade in labels.items()}
     official = {}
     qrel_path = reference / "newsir19-qrels-background.txt"
-    for line in qrel_path.read_text().splitlines():
+    for line in qrel_path.read_text(encoding="utf-8").splitlines():
         qid, _, doc_id, grade = line.split()
         if (qid, doc_id) in official:
             raise ValueError("Duplicate official qrel pair")
@@ -27,7 +27,7 @@ def main():
         raise ValueError("Official gain mapping differs from expected 0/2/4/8/16")
     topics_path = reference / "newsir19-background-linking-topics.xml"
     # NIST publishes consecutive <top> elements, rather than a single XML root.
-    topics = ET.fromstring("<topics>" + topics_path.read_text() + "</topics>")
+    topics = ET.fromstring("<topics>" + topics_path.read_text(encoding="utf-8") + "</topics>")
     source = {top.findtext("num").split(":")[-1].strip(): top.findtext("docid").strip()
               for top in topics.findall("top")}
     if not set(qrels).issubset(source):
@@ -49,7 +49,7 @@ def main():
         "scope": "Judgment/topic provenance verified; this does not establish full corpus or official protocol equivalence",
     }
     output = root / "artifacts/original_benchmark_provenance.json"
-    output.write_text(json.dumps(report, indent=2) + "\n")
+    output.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8", newline="\n")
     print(json.dumps(report, indent=2))
 
 

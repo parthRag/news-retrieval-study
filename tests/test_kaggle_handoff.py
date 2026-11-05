@@ -25,7 +25,7 @@ spec.loader.exec_module(driver)
 
 
 def test_notebook_is_executable_and_uses_background_safe_inputs():
-    notebook = json.loads((ROOT / "notebooks/News_IR_Kaggle_Encoding.ipynb").read_text())
+    notebook = json.loads((ROOT / "notebooks/News_IR_Kaggle_Encoding.ipynb").read_text(encoding="utf-8"))
     code = []
     for cell in notebook["cells"]:
         if cell["cell_type"] == "code":
@@ -44,7 +44,7 @@ def test_setup_bypasses_ensurepip_and_bootstraps_before_installing(monkeypatch, 
     """Execute the actual setup cell without remote package installs or a GPU."""
     import urllib.request
 
-    notebook = json.loads((ROOT / "notebooks/News_IR_Kaggle_Encoding.ipynb").read_text())
+    notebook = json.loads((ROOT / "notebooks/News_IR_Kaggle_Encoding.ipynb").read_text(encoding="utf-8"))
     source = next("".join(cell["source"]) for cell in notebook["cells"]
                   if cell["cell_type"] == "code" and '"-m", "venv"' in "".join(cell["source"]))
     commands, downloads = [], []
@@ -72,7 +72,7 @@ def test_environment_creation_works_with_ensurepip_unavailable(tmp_path):
 
     blocker = tmp_path / "blocked"
     blocker.mkdir()
-    (blocker / "ensurepip.py").write_text("raise RuntimeError('ensurepip intentionally unavailable')\n")
+    (blocker / "ensurepip.py").write_text("raise RuntimeError('ensurepip intentionally unavailable')\n", encoding="utf-8", newline="\n")
     env = {**os.environ, "PYTHONPATH": str(blocker)}
     unavailable = subprocess.run([sys.executable, "-m", "ensurepip"], env=env,
                                  capture_output=True, text=True)
@@ -110,7 +110,7 @@ def test_bundle_discovery_handles_zip_and_automatic_extraction(tmp_path):
     archive.unlink()
     payload = tmp_path / "dataset"
     (payload / "scripts").mkdir(parents=True)
-    (payload / "bundle.json").write_text("{}")
+    (payload / "bundle.json").write_text("{}", encoding="utf-8", newline="\n")
     (payload / "scripts/run_kaggle_dense.py").touch()
     assert driver.find_bundle(tmp_path) == payload
     archive.touch()
@@ -130,7 +130,7 @@ def test_checkpoint_roundtrip_excludes_uncommitted_shards(tiny_index, tmp_path):
         assert not any(".writing" in name for name in contents.namelist())
     restored = tmp_path / "restored"
     driver.restore_checkpoint(archive, restored)
-    config = json.loads((restored / "config.json").read_text())
+    config = json.loads((restored / "config.json").read_text(encoding="utf-8"))
     assert read_shards(restored, config)[1] == 3
     # A changed batch size is permitted, and the original full selection is retained.
     result = encode_corpus(tiny_index["index"], "unused", restored, shard_size=3,
@@ -183,12 +183,12 @@ def test_driver_timed_export_then_resume_build_and_run(tiny_index, tmp_path, mon
     for name in ("manifest.json", "documents.sqlite3"):
         shutil.copy2(tiny_index["index"] / name, payload / "corpus_metadata" / name)
     query = payload / "annotations/custom_queries.draft.jsonl"
-    query.write_text(json.dumps({"_id": "test", "text": "cricket insect"}) + "\n")
+    query.write_text(json.dumps({"_id": "test", "text": "cricket insect"}) + "\n", encoding="utf-8", newline="\n")
     bundle = {"source_bytes": tiny_index["corpus"].stat().st_size,
               "source_sha256": sha256_file(tiny_index["corpus"]), "eligible_documents": 9,
               "corpus_repository": "fixture", "model_revision": "fixture", "model_files": {},
               "query_sha256": sha256_file(query)}
-    (payload / "bundle.json").write_text(json.dumps(bundle))
+    (payload / "bundle.json").write_text(json.dumps(bundle), encoding="utf-8", newline="\n")
     monkeypatch.setattr(torch.cuda, "is_available", lambda: True)
     monkeypatch.setattr(torch.cuda, "get_device_name", lambda *args: "fixture-no-real-gpu")
     monkeypatch.setattr(huggingface_hub, "hf_hub_download", lambda **kwargs: str(tiny_index["corpus"]))
@@ -204,7 +204,7 @@ def test_driver_timed_export_then_resume_build_and_run(tiny_index, tmp_path, mon
     original_run = subprocess.run
     def mock_benchmark(command, **kwargs):
         if len(command) > 1 and command[1].endswith("benchmark_dense.py"):
-            Path(command[-1]).write_text(json.dumps({"fixture_only": True}))
+            Path(command[-1]).write_text(json.dumps({"fixture_only": True}), encoding="utf-8", newline="\n")
             return subprocess.CompletedProcess(command, 0)
         return original_run(command, **kwargs)
     monkeypatch.setattr(subprocess, "run", mock_benchmark)

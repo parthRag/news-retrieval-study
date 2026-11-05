@@ -34,7 +34,7 @@ def join_saved_runs(queries_path, components, index_dir, eligible_ids, output):
         root = Path(run_dir).resolve()
         manifest_path = root / "manifest.json"
         before = sha256_file(manifest_path)
-        manifest = json.loads(manifest_path.read_text())
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
         _, manifest = load_run(root, source_queries, eligible_ids,
                                expected_source_sha256=manifest["corpus_sha256"])
         identity = (manifest["engine"], manifest["corpus_sha256"],
@@ -42,7 +42,7 @@ def join_saved_runs(queries_path, components, index_dir, eligible_ids, output):
         if reference is not None and identity != reference:
             raise ValueError("Source runs differ in engine, corpus, index or retrieval configuration")
         reference = identity
-        for row in map(json.loads, (root / "results.jsonl").read_text().splitlines()):
+        for row in map(json.loads, (root / "results.jsonl").read_text(encoding="utf-8").splitlines()):
             if row["query_id"] in rows:
                 raise ValueError("Query IDs overlap between component runs")
             rows[row["query_id"]] = row
@@ -69,7 +69,7 @@ def join_saved_runs(queries_path, components, index_dir, eligible_ids, output):
         write_jsonl(working / "results.jsonl", ordered)
         write_jsonl(working / "queries.jsonl", queries)
         tag = "joined-custom40"
-        with (working / "run.trec").open("w") as stream:
+        with (working / "run.trec").open("w", encoding="utf-8", newline="\n") as stream:
             for row in ordered:
                 for hit in row["hits"]:
                     stream.write(f"{row['query_id']} Q0 {hit['doc_id']} {hit['rank']} {hit['score']:.9g} {tag}\n")
@@ -87,7 +87,7 @@ def join_saved_runs(queries_path, components, index_dir, eligible_ids, output):
                         ("run.trec", "run_sha256")]}}
         if reference[0] == "lucene-bm25":
             manifest["analyzer"] = reference[3]["analyzer"]
-        (working / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
+        (working / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8", newline="\n")
         load_run(working, queries_path, eligible_ids, expected_source_sha256=reference[1])
         if any(sha256_file(path) != digest for path, digest in source_hashes.items()):
             raise ValueError("Source bytes changed while joining runs")

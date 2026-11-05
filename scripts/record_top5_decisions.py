@@ -30,10 +30,10 @@ def main():
         seed = "assessments.top5.jsonl" if args.scope == "depth20" else "assessments.pilot.jsonl"
         shutil.copyfile(destination.with_name(seed), destination)
     priority = {(r["query_id"], r["doc_id"]) for r in
-                map(json.loads, (pool / "pool.provenance.jsonl").read_text().splitlines()) if r["priority_top5"]}
-    articles = [r for r in map(json.loads, (pool / "articles.blinded.jsonl").read_text().splitlines())
+                map(json.loads, (pool / "pool.provenance.jsonl").read_text(encoding="utf-8").splitlines()) if r["priority_top5"]}
+    articles = [r for r in map(json.loads, (pool / "articles.blinded.jsonl").read_text(encoding="utf-8").splitlines())
                 if r["query_id"] == supplied["query_id"] and (args.scope == "depth20" or (r["query_id"], r["doc_id"]) in priority)]
-    existing = list(map(json.loads, destination.read_text().splitlines()))
+    existing = list(map(json.loads, destination.read_text(encoding="utf-8").splitlines()))
     for decision in supplied["decisions"]:
         position = decision["position"]
         if type(position) is not int or not 0 <= position < len(articles):

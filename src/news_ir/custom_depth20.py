@@ -10,12 +10,13 @@ from pathlib import Path
 
 from .assessment import validate_assessments, write_jsonl
 from .benchmark import crosscheck
+from .platform_support import resolve_saved_path
 from .data import DocumentStore, sha256_file
 from .evaluation import METRICS, evaluate_rankings, load_run, paired_comparison
 
 
 def dump(path, value):
-    path.write_text(json.dumps(value, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    path.write_text(json.dumps(value, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
 
 
 def check_seed(assessments, seed):
@@ -54,18 +55,18 @@ def evaluate_depth20_study(pool_dir, assessments_path, seed_path, document_index
     validated = validate_assessments(pool, assessments_path)
     if not validated["complete_pool"]:
         raise ValueError("Pooled MAP requires the complete designated pool")
-    protocol = json.loads((pool / "protocol.json").read_text())
-    queries = list(map(json.loads, (pool / "queries.jsonl").read_text().splitlines()))
+    protocol = json.loads((pool / "protocol.json").read_text(encoding="utf-8"))
+    queries = list(map(json.loads, (pool / "queries.jsonl").read_text(encoding="utf-8").splitlines()))
     qids = [q["_id"] for q in queries]
     if (protocol["pool_depth_per_engine"] != 20 or protocol["query_count"] != len(qids)
             or protocol["pooled_pairs"] != validated["pooled_pairs"]
             or protocol["priority_top5_pairs"] != validated["priority_top5_pairs"]
             or set(validated["qrels"]) != set(qids)):
         raise ValueError("Protocol, complete labels and query coverage disagree")
-    assessments = list(map(json.loads, Path(assessments_path).read_text().splitlines()))
-    earlier = list(map(json.loads, Path(seed_path).read_text().splitlines()))
+    assessments = list(map(json.loads, Path(assessments_path).read_text(encoding="utf-8").splitlines()))
+    earlier = list(map(json.loads, Path(seed_path).read_text(encoding="utf-8").splitlines()))
     check_seed(assessments, earlier)
-    provenance = list(map(json.loads, (pool / "pool.provenance.jsonl").read_text().splitlines()))
+    provenance = list(map(json.loads, (pool / "pool.provenance.jsonl").read_text(encoding="utf-8").splitlines()))
     priority = {(r["query_id"], r["doc_id"]) for r in provenance if r["priority_top5"]}
     if {(r["query_id"], r["doc_id"]) for r in earlier} != priority:
         raise ValueError("Earlier labels must be exactly the frozen top-five union")
@@ -80,7 +81,7 @@ def evaluate_depth20_study(pool_dir, assessments_path, seed_path, document_index
         raise ValueError("Shared eligible corpus count changed")
     rankings, run_metadata = {}, {}
     for engine, component in protocol["runs"].items():
-        root = Path(component["path"])
+        root = resolve_saved_path(component["path"])
         if sha256_file(root / "manifest.json") != component["manifest_sha256"]:
             raise ValueError("Frozen run manifest changed")
         ranked, meta = load_run(root, pool / "queries.jsonl", eligible,

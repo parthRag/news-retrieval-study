@@ -70,7 +70,7 @@ def main():
               "local_h02_reproduction": {"same_ids_and_order": True, "maximum_score_difference": max_score_difference},
               "recorded_stage_checks": {"pytest": "121 passed in 29.09s; not rerun by this artifact verifier",
                                         "figures": "Both PNGs visually inspected"},
-              "sha256": {str(p.relative_to(root)): sha256_file(p) for p in files},
+              "sha256": {p.relative_to(root).as_posix(): sha256_file(p) for p in files},
               "scope": "All 20 top-five unions; deeper pool, MAP and demo incomplete; AI assessments disclosed"}
     (root / "artifacts/custom20_top5_validation.json").write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8", newline="\n")
     print(json.dumps({k: v for k, v in result.items() if k != "sha256"}, indent=2))

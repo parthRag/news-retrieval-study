@@ -64,7 +64,7 @@ def main():
               "assessment_validation": {k: v for k, v in validated.items() if k != "qrels"},
               "executed_checks": {"full_pytest": "115 passed in 32.42s", "final_scoped_pytest": "8 passed in 5.52s",
                                   "pip_check": "No broken requirements found", "figures": "Both PNG figures visually inspected"},
-              "sha256": {str(p.relative_to(root)): sha256_file(p) for p in files},
+              "sha256": {p.relative_to(root).as_posix(): sha256_file(p) for p in files},
               "scope": "First custom-assessment stage; full custom evaluation, demo and submission PDF remain incomplete"}
     (root / "artifacts/task_d_validation.json").write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8", newline="\n")
     print(json.dumps({k: v for k, v in result.items() if k not in {"sha256", "original_input_hashes"}}, indent=2))

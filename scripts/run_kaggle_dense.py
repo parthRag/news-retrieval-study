@@ -97,7 +97,7 @@ def export_checkpoint(encodings, output):
         for folder in sorted((encodings / "shards").glob("shard-*")):
             for name in ("manifest.json", "ids.jsonl", "vectors.npy"):
                 path = folder / name
-                archive.write(path, "encodings/" + str(path.relative_to(encodings)))
+                archive.write(path, "encodings/" + path.relative_to(encodings).as_posix())
     temporary.replace(output)
     return output
 
@@ -208,7 +208,7 @@ def run_job(args):
         for folder in (dense, run):
             for path in sorted(folder.rglob("*")):
                 if path.is_file():
-                    archive.write(path, str(path.relative_to(job)))
+                    archive.write(path, path.relative_to(job).as_posix())
         archive.write(job / "gpu_benchmark.json", "gpu_benchmark_kaggle.json")
     temporary.replace(results)
     summary.update(results_archive=str(results), results_sha256=sha256_file(results),

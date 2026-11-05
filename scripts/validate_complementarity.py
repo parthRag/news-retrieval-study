@@ -11,14 +11,18 @@ from news_ir.diagnostics import DEPTHS
 from analyze_complementarity import ROOT, analyze, load_inputs, write
 
 
-def validate(folder):
+def validate(folder, *, allow_code_changes=False):
     manifest = json.loads((folder / "manifest.json").read_text(encoding="utf-8"))
     for name, digest in manifest["files"].items():
         if sha256_file(folder / name) != digest:
             raise ValueError("Diagnostic output changed: " + name)
-    for name, digest in {**manifest["inputs"], **manifest["code"]}.items():
+    for name, digest in manifest["inputs"].items():
         if sha256_file(ROOT / name) != digest:
             raise ValueError("Diagnostic source changed: " + name)
+    changed_code = {name: {"recorded_sha256": digest, "current_sha256": sha256_file(ROOT / name)}
+                    for name, digest in manifest["code"].items() if sha256_file(ROOT / name) != digest}
+    if changed_code and not allow_code_changes:
+        raise ValueError("Diagnostic code changed; choose a new analysis version or use --allow-code-changes for an explicit numerical regression check")
     # Portable mode deliberately does not require corpus/models/indexes.
     scopes, raw, inputs, _, _ = load_inputs()
     if inputs != manifest["inputs"]:
@@ -55,7 +59,7 @@ def validate(folder):
             raise ValueError("An input changed during validation: " + name)
     return {"status": "passed", "checked_at_utc": datetime.now(timezone.utc).isoformat(),
             "diagnostic_manifest_sha256": sha256_file(folder / "manifest.json"),
-            "recomputed_outputs": 5, "input_files_verified": len(inputs),
+            "recomputed_outputs": 5, "input_files_verified": len(inputs), "changed_code": changed_code,
             "independent_backend": "ir_measures " + ir_measures.__version__,
             "independent_candidate_oracle_and_recall_values": comparisons,
             "max_independent_absolute_difference": maximum,
@@ -68,10 +72,11 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input", type=Path, default=ROOT / "artifacts/evaluations/complementarity-v1")
     parser.add_argument("--output", type=Path, default=ROOT / "artifacts/complementarity-validation/numerical.json")
+    parser.add_argument("--allow-code-changes", action="store_true", help="Record source changes; still require unchanged inputs and exact numerical reproduction")
     args = parser.parse_args()
     if args.output.exists():
         raise FileExistsError("Validation output exists; choose a new path")
-    result = validate(args.input.resolve())
+    result = validate(args.input.resolve(), allow_code_changes=args.allow_code_changes)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     write(args.output, result)
     print(json.dumps(result, indent=2))

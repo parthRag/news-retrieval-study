@@ -199,3 +199,12 @@ def test_real_e5_prefix_normalization_padding_and_truncation():
     assert len(long["input_ids"]) == 512
     assert encoder.encode([], kind="query").shape == (0, 768)
     assert encoder.model.training is False
+
+
+def test_faiss_pipeline_with_spaces_and_unicode_in_index_path(encoded, tiny_index, tmp_path):
+    target = tmp_path / "FAISS café 東京" / "index"
+    build_dense_index(encoded, target, document_index=tiny_index["index"], model_dir="unused")
+    with DenseEngine(target, encoder=FixtureEncoder()) as engine:
+        hits = engine.search("cricket insect", 100)
+        assert hits[0].doc_id == "insect"
+        assert "0007-é" in {hit.doc_id for hit in hits}

@@ -28,7 +28,7 @@ def main():
     if not valid["complete_pool"]:
         raise ValueError("Complete candidate judgments required")
     source = pool / "articles.blinded.jsonl"
-    articles, input_hashes = {}, {str(p.relative_to(ROOT)): sha256_file(p) for p in (source, labels)}
+    articles, input_hashes = {}, {p.relative_to(ROOT).as_posix(): sha256_file(p) for p in (source, labels)}
     for row in map(json.loads, source.read_text(encoding="utf-8").splitlines()):
         articles.setdefault(row["query_id"], {})[row["doc_id"]] = row
     variants = {"baseline": (False, False), "no_empty_body": (True, False),

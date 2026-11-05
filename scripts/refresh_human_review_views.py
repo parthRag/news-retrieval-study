@@ -43,13 +43,13 @@ def main():
         'suggested_rewrite':'optional', 'uncertainty':'saved separately, not counted as resolved'}
     manifest['presentation_views'] = {name:len(tasks) for name,_,tasks in review_views(payload['tasks'])}
     manifest['assessment_blinding'] = 'Per-article task views omit engine identity, rank, score, AI grade and rationale. Manifest describes the selection protocol; prior exposure to study results may limit blinding.'
-    manifest['files'] = {str(p.relative_to(folder)):sha256_file(p) for p in folder.rglob('*') if p.is_file() and p.name!='manifest.json'}
+    manifest['files'] = {p.relative_to(folder).as_posix():sha256_file(p) for p in folder.rglob('*') if p.is_file() and p.name!='manifest.json'}
     (folder/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n', encoding="utf-8", newline="\n")
     archive = folder.with_suffix('.zip')
     pending = archive.with_suffix('.zip.building')
     with zipfile.ZipFile(pending,'w',zipfile.ZIP_DEFLATED) as z:
         for path in folder.rglob('*'):
-            if path.is_file():z.write(path,arcname=str(path.relative_to(folder)))
+            if path.is_file():z.write(path,arcname=path.relative_to(folder).as_posix())
     pending.replace(archive)
     print(json.dumps({'frozen_tasks_unchanged':True,'archive_bytes':archive.stat().st_size,'views':manifest['presentation_views']},indent=2))
 

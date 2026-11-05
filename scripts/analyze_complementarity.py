@@ -32,7 +32,7 @@ def load_inputs(document_index=None):
 
     def bind(path):
         path = Path(path)
-        files[str(path.relative_to(ROOT))] = sha256_file(path)
+        files[path.relative_to(ROOT).as_posix()] = sha256_file(path)
         return path
 
     def frozen_metrics(folder):
@@ -288,7 +288,7 @@ def main():
                     "news_eligible_membership_rechecked": corpus_checked,
                     "human_review": "deferred; existing review pack preserved; no human responses created",
                     "imported_source_commit": commit, "inputs": inputs,
-                    "code": {str(p.relative_to(ROOT)): sha256_file(p) for p in
+                    "code": {p.relative_to(ROOT).as_posix(): sha256_file(p) for p in
                              (Path(__file__), ROOT / "src/news_ir/diagnostics.py", ROOT / "src/news_ir/fusion.py",
                               ROOT / "src/news_ir/evaluation.py", ROOT / "src/news_ir/paired_stats.py",
                               ROOT / "scripts/evaluate_integrated_study.py")},

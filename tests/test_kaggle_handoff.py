@@ -56,7 +56,7 @@ def test_setup_bypasses_ensurepip_and_bootstraps_before_installing(monkeypatch, 
     monkeypatch.setenv("USE_TF", "0")
     monkeypatch.setenv("TOKENIZERS_PARALLELISM", "false")
     # Relocate only the notebook's temporary root for execution in the local sandbox.
-    source = source.replace('/kaggle/temp', str(tmp_path))
+    source = source.replace('/kaggle/temp', tmp_path.as_posix())
     context = {}
     exec(compile(source, "kaggle_dependency_cell", "exec"), context)
     assert commands[0][1:4] == ["-m", "venv", "--without-pip"]
@@ -79,7 +79,7 @@ def test_environment_creation_works_with_ensurepip_unavailable(tmp_path):
     assert unavailable.returncode != 0 and "intentionally unavailable" in unavailable.stderr
     target = tmp_path / "isolated"
     subprocess.run([sys.executable, "-m", "venv", "--without-pip", str(target)], env=env, check=True)
-    python = target / "bin/python"
+    python = target / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
     probe = subprocess.run([str(python), "-m", "pip", "--version"], capture_output=True, text=True)
     assert probe.returncode != 0
     # Use an already installed Python distribution's wheel to avoid networking in tests.

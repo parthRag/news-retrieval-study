@@ -44,7 +44,7 @@ def main():
                       'priority': 'required', 'batch': 'ABCD'[i % 4], 'topic_id': row['topic_id'],
                       'original': row['original_title'], 'rewrite': row['text'],
                       'description': row['description'], 'narrative': row['narrative']})
-    source_hashes[str(core_path.relative_to(ROOT))] = sha256_file(core_path)
+    source_hashes[core_path.relative_to(ROOT).as_posix()] = sha256_file(core_path)
     covid_path = ROOT / 'studies/hamsini_robustness/queries/variants/trec_covid_rewrites.csv'
     raw = covid_path.read_text(encoding='cp1252')
     import io
@@ -55,11 +55,11 @@ def main():
                       'priority': 'required', 'batch': 'ABCD'[i], 'topic_id': qid,
                       'original': row['original'], 'rewrite': row['rewrite_' + variant],
                       'description': row['question'], 'narrative': row['narrative'], 'variant': variant})
-    source_hashes[str(covid_path.relative_to(ROOT))] = sha256_file(covid_path)
+    source_hashes[covid_path.relative_to(ROOT).as_posix()] = sha256_file(covid_path)
     queries_path = ROOT / 'annotations/custom40_v2/queries.all40.jsonl'
     queries = read_jsonl(queries_path)
     qlookup = {q['_id']: q for q in queries}
-    source_hashes[str(queries_path.relative_to(ROOT))] = sha256_file(queries_path)
+    source_hashes[queries_path.relative_to(ROOT).as_posix()] = sha256_file(queries_path)
     provenance = []
     with DocumentStore(ROOT / 'artifacts/indexes/bm25') as store:
         eligible = {r[0] for r in store._db.execute('SELECT doc_id FROM documents WHERE eligible=1')}
@@ -69,7 +69,7 @@ def main():
             folder = ROOT / f'artifacts/runs/{engine}-custom40-v2'
             rankings[engine], _ = load_run(folder, queries_path, eligible, expected_source_sha256=source_sha)
             for name in ['manifest.json', 'run.trec', 'results.jsonl', 'queries.jsonl']:
-                source_hashes[str((folder/name).relative_to(ROOT))] = sha256_file(folder/name)
+                source_hashes[(folder/name).relative_to(ROOT).as_posix()] = sha256_file(folder/name)
         choices = select_article_pairs(queries, rankings)
         # Keep waves distinct; no existing AI grade or rationale enters selection or payload.
         for wave in [1, 2]:
@@ -145,7 +145,7 @@ def main():
                     'response_requirements':{'reviewer_name':'required','rewrite_verdict':'required for resolved meaning checks',
                         'article_grade':'required for resolved relevance judgments','full_article_read':'required for grades 0/1/2',
                         'reason':'optional','evidence_quote':'optional; literal if supplied','suggested_rewrite':'optional'},
-                    'files':{str(p.relative_to(working)):sha256_file(p) for p in working.rglob('*') if p.is_file()}}
+                    'files':{p.relative_to(working).as_posix():sha256_file(p) for p in working.rglob('*') if p.is_file()}}
         (working/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n', encoding="utf-8", newline="\n")
         working.rename(TARGET)
         # Keep engine-origin mapping outside the portable reviewer package.
@@ -153,7 +153,7 @@ def main():
         archive = TARGET.with_suffix('.zip')
         with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED) as z:
             for path in TARGET.rglob('*'):
-                if path.is_file():z.write(path,arcname=str(path.relative_to(TARGET)))
+                if path.is_file():z.write(path,arcname=path.relative_to(TARGET).as_posix())
         print(json.dumps({'folder':str(TARGET),'archive':str(archive),'required_tasks':len(required),'required_articles':40,'required_article_words':word_count,'optional_articles':40,'batches':manifest['required_batches']},indent=2))
     except BaseException:
         shutil.rmtree(working,ignore_errors=True)

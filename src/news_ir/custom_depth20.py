@@ -162,7 +162,7 @@ def evaluate_depth20_study(pool_dir, assessments_path, seed_path, document_index
                                  "unjudged": "Zero metric contribution at original rank; not confirmed irrelevant",
                                  "zero_positive": "Keep all queries in macro average with zero scores",
                                  "baseline": "Frozen queries, labels and rankings; no filtering, deduplication or tuning"},
-                    "files": {str(p.relative_to(working)): sha256_file(p) for p in working.rglob("*") if p.is_file()}}
+                    "files": {p.relative_to(working).as_posix(): sha256_file(p) for p in working.rglob("*") if p.is_file()}}
         dump(working / "manifest.json", manifest)
         working.rename(target)
         return {"output": str(target), "assessment_pairs": len(assessments),

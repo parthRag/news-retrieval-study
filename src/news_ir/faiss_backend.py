@@ -17,14 +17,17 @@ def build(encodings, output):
     for shard in sorted((root / "shards").glob("shard-*")):
         vectors = np.load(shard / "vectors.npy", allow_pickle=False)
         index.add(vectors)
-    faiss.write_index(index, output)
+    # Python file I/O also supports Windows paths outside the system code page.
+    with Path(output).open("wb") as stream:
+        faiss.write_index(index, faiss.PyCallbackIOWriter(stream.write))
     return {"count": index.ntotal, "dimension": index.d, "faiss_version": importlib.metadata.version("faiss-cpu")}
 
 
 def serve(root):
     root = Path(root)
     faiss.omp_set_num_threads(4)
-    index = faiss.read_index(str(root / "vectors.faiss"))
+    with (root / "vectors.faiss").open("rb") as stream:
+        index = faiss.read_index(faiss.PyCallbackIOReader(stream.read))
     ids = [json.loads(line) for line in (root / "ids.jsonl").read_text(encoding="utf-8").splitlines()]
     if index.ntotal != len(ids) or index.metric_type != faiss.METRIC_INNER_PRODUCT:
         raise ValueError("Invalid FAISS index/ID mapping")

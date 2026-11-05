@@ -49,7 +49,7 @@ def decode_document(raw, location="record"):
 
 def sha256_file(path):
     digest = hashlib.sha256()
-    with Path(path).open("rb") as stream:
+    with resolve_saved_path(path).open("rb") as stream:
         while chunk := stream.read(1024 * 1024):
             digest.update(chunk)
     return digest.hexdigest()

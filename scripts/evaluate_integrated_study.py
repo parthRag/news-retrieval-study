@@ -51,7 +51,7 @@ def covid(out):
    path=source/f'runs/trec_covid/{engine}_{suffix}.run'
    result=evaluate_extended(read_trec(path),labels)
    variants[variant][engine]=result
-   files[str(path.relative_to(ROOT))]=sha256_file(path)
+   files[path.relative_to(ROOT).as_posix()]=sha256_file(path)
    saved=list(csv.DictReader((source/f'results/trec_covid/{engine}_{suffix}.csv').open(encoding="utf-8")))
    mapping={'nDCG@10':'ndcg_at_10','AP(rel=1)':'ap_at_1000','R(rel=1)@100':'recall_at_100',
     'Judged@10':'judged_at_10','nDCG(judged_only=True)@10':'condensed_ndcg_at_10','Bpref':'bpref'}
@@ -103,7 +103,7 @@ def core18(out,native):
  for engine in ['bm25','dense','rrf']:
   path=ROOT/f'artifacts/runs/{engine}-core18-v1'
   runs[engine],manifest=load_run(path,folder/'queries.jsonl',eligible,expected_source_sha256=corpus_sha)
-  manifests[engine]={'path':str(path.relative_to(ROOT)),'manifest_sha256':sha256_file(path/'manifest.json')}
+  manifests[engine]={'path':path.relative_to(ROOT).as_posix(),'manifest_sha256':sha256_file(path/'manifest.json')}
  variants={};available={};checks={}
  for variant in protocol['variants']:
   ids=[q['_id'] for q in queries if q['variant']==variant]
@@ -136,7 +136,7 @@ def main():
  working=Path(tempfile.mkdtemp(prefix='.integrated-evaluation-',dir=target.parent))
  try:
   meta=covid(working) if args.study=='covid' else core18(working,args.native)
-  meta.update(imported_source_commit=source['commit'],files={str(p.relative_to(working)):sha256_file(p) for p in working.rglob('*') if p.is_file()})
+  meta.update(imported_source_commit=source['commit'],files={p.relative_to(working).as_posix():sha256_file(p) for p in working.rglob('*') if p.is_file()})
   write(working/'manifest.json',meta);working.rename(target)
   print(json.dumps({'output':str(target),**{k:v for k,v in meta.items() if k not in ['files','source_files','runs']}},indent=2))
  except BaseException:shutil.rmtree(working);raise

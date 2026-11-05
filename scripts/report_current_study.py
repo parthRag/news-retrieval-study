@@ -138,9 +138,9 @@ def main():
               "file loading and article lookup; it is not end-to-end hybrid latency. Live hybrid search still incurs both engines' costs. "
               "No extra vector index is required; the existing BM25 and dense index folders occupy approximately 367.6 MiB "
               "and 1.72 GiB on disk, respectively. Disk size is not peak RAM.", "",
-              "## Reproduce", "", "```sh", ".venv/bin/news-ir fuse --output artifacts/runs/rrf-original-k60-new",
-              ".venv/bin/python scripts/evaluate_fusion.py --fusion-run artifacts/runs/rrf-original-k60-new --output artifacts/evaluations/rrf-original-57-new",
-              ".venv/bin/python scripts/report_current_study.py", "```", "",
+              "## Reproduce", "", "```sh", "python -m news_ir fuse --output artifacts/runs/rrf-original-k60-new",
+              "python scripts/evaluate_fusion.py --fusion-run artifacts/runs/rrf-original-k60-new --output artifacts/evaluations/rrf-original-57-new",
+              "python scripts/report_current_study.py", "```", "",
               "The report script reads the canonical saved evaluation. Evaluation and retrieval commands refuse to overwrite existing outputs.", "",
               "Method reference: [Cormack, Clarke and Buettcher, SIGIR 2009](https://cormack.uwaterloo.ca/cormacksigir09-rrf.pdf).", ""]
     (ROOT / "reports/RRF_EXPERIMENT.md").write_text("\n".join(lines), encoding="utf-8", newline="\n")

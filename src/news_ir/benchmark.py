@@ -11,7 +11,7 @@ from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 
-from .platform_support import resolve_saved_path
+from .platform_support import WINDOWS, resolve_saved_path
 from .data import DocumentStore, read_queries, sha256_file
 from .evaluation import METRICS, evaluate_rankings, gain, load_qrels, load_run, paired_comparison
 
@@ -40,16 +40,25 @@ def crosscheck(qrels, rankings, evaluation, folder, *, name, gain_mode="linear")
         for qid, ids in rankings.items():
             for rank, doc_id in enumerate(ids, 1):
                 stream.write(f"{qid} Q0 {doc_id} {rank} {1001-rank} rank-order-check\n")
-    configure_java()
-    java = java_executable()
-    jars = [p for p in importlib.resources.files("pyserini.resources.jars").iterdir() if p.name.endswith(".jar")]
-    if len(jars) != 1:
-        raise ValueError("Expected the single installed Anserini evaluator JAR")
-    jar = jars[0]
-    command = [java, "-cp", java_classpath(jar), "trec_eval", "-q", "-c", "-m", "ndcg_cut.5,10",
-               "-m", "map_cut.1000", "-m", "recall.1000", "-m", "P.5,10", "-m", "recip_rank",
-               str(qrels_path), str(run_path)]
-    result = subprocess.run(command, capture_output=True, text=True, check=True)
+    if WINDOWS:
+        from .reference_eval import windows_reference
+        result = windows_reference(qrels, rankings, {
+            "ndcg_cut_5", "ndcg_cut_10", "map_cut_1000", "recall_1000", "P_5", "P_10", "recip_rank"}, gain_mode=gain_mode)
+        version_text = result.version
+    else:
+        configure_java()
+        java = java_executable()
+        jars = [p for p in importlib.resources.files("pyserini.resources.jars").iterdir() if p.name.endswith(".jar")]
+        if len(jars) != 1:
+            raise ValueError("Expected the single installed Anserini evaluator JAR")
+        jar = jars[0]
+        command = [java, "-cp", java_classpath(jar), "trec_eval", "-q", "-c", "-m", "ndcg_cut.5,10",
+                   "-m", "map_cut.1000", "-m", "recall.1000", "-m", "P.5,10", "-m", "recip_rank",
+                   str(qrels_path), str(run_path)]
+        result = subprocess.run(command, capture_output=True, text=True, encoding="utf-8", check=True)
+        version = subprocess.run([java, "-cp", java_classpath(jar), "trec_eval", "-v"], capture_output=True,
+                                 text=True, encoding="utf-8", check=True)
+        version_text = (version.stdout + version.stderr).strip()
     (folder / f"{name}.trec_eval.txt").write_text(result.stdout, encoding="utf-8", newline="\n")
     observed = {}
     for line in result.stdout.splitlines():
@@ -74,12 +83,12 @@ def crosscheck(qrels, rankings, evaluation, folder, *, name, gain_mode="linear")
                 raise ValueError(f"Independent evaluator disagreement for {name}/{qid}/{ours}: {difference}")
             maximum = max(maximum, difference)
             comparisons += 1
-    version = subprocess.run([java, "-cp", java_classpath(jar), "trec_eval", "-v"], capture_output=True, text=True, check=True)
     return {"status": "passed", "comparisons": comparisons, "max_absolute_difference": maximum,
             "empty_query_zero_metrics_checked": omitted_empty,
             "tolerance": 0.000051, "precision_note": "trec_eval prints four decimal places",
             "ranking_policy": "Derived scores 1001-rank preserve original published order, including score ties",
-            "version": (version.stdout + version.stderr).strip()}
+            "version": version_text,
+            "reference_backend": "pytrec-eval-terrier" if WINDOWS else "Anserini trec_eval wrapper"}
 
 
 def compare_benchmark(*, queries_path, qrels_path, bm25_run, dense_run, document_index, output,

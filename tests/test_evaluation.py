@@ -147,3 +147,16 @@ def test_complete_comparison_publishes_only_after_independent_checks(tiny_index,
     with pytest.raises(ValueError, match="independent"):
         news_ir.benchmark.compare_benchmark(**arguments, output=tmp_path / "failed")
     assert not (tmp_path / "failed").exists() and not list(tmp_path.glob(".failed.evaluating-*"))
+
+
+@pytest.mark.parametrize("mode", ["linear", "exp2", "news2019"])
+def test_windows_compiled_reference_retains_ranks_and_empty_topics(tmp_path, monkeypatch, mode):
+    import news_ir.benchmark as benchmark
+    monkeypatch.setattr(benchmark, "WINDOWS", True)
+    labels = {"q1": {"a": 3, "b": 1, "missing": 2, "z": 0}, "q2": {"x": 1}}
+    rankings = {"q1": ["unjudged", "b", "a", "z"], "q2": []}
+    expected = evaluate_rankings(rankings, labels, gain_mode=mode)
+    result = benchmark.crosscheck(labels, rankings, expected, tmp_path, name="windows", gain_mode=mode)
+    assert result["comparisons"] == 14
+    assert result["empty_query_zero_metrics_checked"] == 7
+    assert "pytrec-eval-terrier" in result["version"]

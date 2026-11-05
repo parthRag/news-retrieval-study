@@ -249,10 +249,10 @@ def main():
               "- Both runs used the local Mac, but retrieval overlapped development/testing and memory pressure on an 8 GiB machine. Saved latencies are operational observations, not a controlled speed comparison.",
               "- Higher aggregate scores do not demonstrate robustness to negation, ambiguous senses or explicit temporal constraints. Those claims require the deferred custom study.", "",
               "## Reproduce and inspect", "", "```sh",
-              ".venv/bin/news-ir run --queries queries.jsonl --output artifacts/runs/bm25-original-reproduced --top-k 1000",
-              ".venv/bin/news-ir run --engine dense --queries queries.jsonl --output artifacts/runs/dense-original-reproduced --top-k 1000 --device cpu",
-              ".venv/bin/news-ir evaluate --bm25-run artifacts/runs/bm25-original-reproduced --dense-run artifacts/runs/dense-original-reproduced --output artifacts/evaluations/original-57-reproduced",
-              ".venv/bin/python scripts/report_original_benchmark.py", "```", "",
+              "python -m news_ir run --queries queries.jsonl --output artifacts/runs/bm25-original-reproduced --top-k 1000",
+              "python -m news_ir run --engine dense --queries queries.jsonl --output artifacts/runs/dense-original-reproduced --top-k 1000 --device cpu",
+              "python -m news_ir evaluate --bm25-run artifacts/runs/bm25-original-reproduced --dense-run artifacts/runs/dense-original-reproduced --output artifacts/evaluations/original-57-reproduced",
+              "python scripts/report_original_benchmark.py", "```", "",
               "Existing run/evaluation directories are never silently overwritten. "
               "The report script regenerates figures and report text from `artifacts/evaluations/original-57/`.", "",
               "Machine-readable results: `metrics.json`, `per_query.csv`, `paired_comparison.json`, "

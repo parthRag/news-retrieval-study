@@ -171,8 +171,8 @@ def main():
               "All **588** native `trec_eval` comparisons passed: both engines × linear/exp2 × 20 queries plus macro × seven measures. "
               "Input hashes, pool membership/component ranks, all evidence spans and preservation of the earlier 188 records are checked before publication. "
               "Evaluation writes atomically to a fresh directory and requires complete designated-pool coverage.", "", "```sh",
-              ".venv/bin/python scripts/evaluate_custom_depth20.py --output artifacts/evaluations/custom20-depth20-recheck",
-              ".venv/bin/python scripts/report_custom_depth20.py", ".venv/bin/python -m pytest -q", "```", "",
+              "python scripts/evaluate_custom_depth20.py --output artifacts/evaluations/custom20-depth20-recheck",
+              "python scripts/report_custom_depth20.py", "python -m pytest -q", "```", "",
               "See [all 737 decisions](CUSTOM_20_DEPTH20_EVIDENCE.md), `artifacts/evaluations/custom20-depth20-v1/per_query.csv`, "
               "the versioned JSONL labels, and generated PNG/SVG/PDF figures. The original 57-query benchmark and RRF experiment remain separate. "
               "Group details, contribution ownership and GitHub URL remain placeholders; PDF creation remains deferred."]

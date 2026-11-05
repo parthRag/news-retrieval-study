@@ -1,6 +1,7 @@
 """Configure this process's JVM without modifying the user's shell settings."""
 
 import os
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -16,6 +17,12 @@ def java_classpath(*paths):
 
 
 def java_executable():
+    if WINDOWS and not os.environ.get("JAVA_HOME"):
+        found = shutil.which("java")
+        if found:
+            home = Path(found).resolve().parent.parent
+            if (home / "bin/server/jvm.dll").is_file():
+                os.environ["JAVA_HOME"] = str(home)
     if os.environ.get("JAVA_HOME"):
         home = Path(os.environ["JAVA_HOME"].strip('"'))
         java = home / "bin" / ("java.exe" if WINDOWS else "java")

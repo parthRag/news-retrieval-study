@@ -50,10 +50,10 @@ Hamsini G: independently developed the controlled COVID rewrite experiment, rewr
 Integration adds Core 2018 news formulations/audit/runs, explicit @5 metrics, incomplete-judgment sensitivities, rank-preserving evaluation, topic-mean feature analysis, batched query-only retrieval, and demo/report integration. The existing document embeddings and frozen earlier experiments are reused without changing their results.
 
 ```sh
-.venv/bin/python scripts/evaluate_integrated_study.py --study covid --output artifacts/evaluations/covid-recheck
-.venv/bin/python scripts/evaluate_integrated_study.py --study core18 --native --output artifacts/evaluations/core18-recheck
-.venv/bin/python scripts/validate_integrated_study.py
-.venv/bin/python -m news_ir.demo
+python scripts/evaluate_integrated_study.py --study covid --output artifacts/evaluations/covid-recheck
+python scripts/evaluate_integrated_study.py --study core18 --native --output artifacts/evaluations/core18-recheck
+python scripts/validate_integrated_study.py
+python -m news_ir.demo
 ```
 
 Install the pinned lock or the `evaluation` optional dependencies. Saved-run numerical verification does not require corpus/model downloads; fresh retrieval and article lookup do. Existing evaluation directories are refused. New human reviews should be saved separately, never silently substituted into frozen results.

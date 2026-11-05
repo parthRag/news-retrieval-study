@@ -27,6 +27,8 @@ $env:JAVA_HOME = "C:\Program Files\Eclipse Adoptium\your-jdk-21-folder"
 
 Use `;` between multiple Java classpath entries on Windows. The code constructs classpaths with `os.pathsep`; a drive-letter colon such as `C:` must remain part of its path. Arguments are passed as a subprocess list, so spaces in the JDK or project path do not require manual command-string assembly.
 
+The bundled Anserini `trec_eval` executable does not include a Windows binary. Windows cross-checks therefore use the separately compiled `pytrec-eval-terrier==0.5.11` extension, installed by the evaluation extra. This retains ordinal rank scores, gain conventions and empty-topic denominators. Mac and Linux keep the existing Java-wrapper route; new evaluation metadata identifies which reference backend ran.
+
 ## Run the project
 
 ```powershell

@@ -183,8 +183,10 @@ def main():
     native_total=sum(native_counts(read(f'artifacts/evaluations/{folder}/crosscheck.json'))
                      for folder in ['original-57','rrf-original-57','custom20-depth20-v1','custom40-extension20-depth20-v2','custom40-depth20-v2'])
     require(native_total==7196,'Native comparison count mismatch')
-    test_path=ROOT/'artifacts/test-results-integration.xml'
-    test=ET.parse(test_path if test_path.exists() else ROOT/'artifacts/test-results-final.xml').getroot()
+    test_path=next((ROOT/name for name in ['artifacts/test-results-native.xml','artifacts/test-results-portability.xml',
+                   'artifacts/test-results-integration.xml','artifacts/test-results-final.xml'] if (ROOT/name).exists()),None)
+    require(test_path is not None,'No test results available')
+    test=ET.parse(test_path).getroot()
     suites=list(test.iter('testsuite'))
     tests=sum(int(s.attrib.get('tests',0)) for s in suites)
     require(tests>=153 and all(int(s.attrib.get('failures',0))==int(s.attrib.get('errors',0))==0 for s in suites),'Final test run failed')

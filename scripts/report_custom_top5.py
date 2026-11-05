@@ -178,8 +178,8 @@ def main():
               "Several grade-0 records are topically relevant but lack enough text to verify the window. "
               "Such grades express failure of the evidence requirement, not proof that the actual historical event was outside the window. "
               "No dates were inferred from UUIDs or an assumed publication date. Review medium-confidence date bounds before treating temporal scores as definitive.", "",
-              "## Reproduce and continue", "", "```sh", ".venv/bin/python scripts/evaluate_custom_top5.py --output artifacts/evaluations/custom20-top5-rechecked",
-              ".venv/bin/python scripts/report_custom_top5.py", ".venv/bin/python -m pytest -q", "```", "",
+              "## Reproduce and continue", "", "```sh", "python scripts/evaluate_custom_top5.py --output artifacts/evaluations/custom20-top5-rechecked",
+              "python scripts/report_custom_top5.py", "python -m pytest -q", "```", "",
               "The report reads the canonical evaluation; evaluator outputs are versioned and refuse overwrites. "
               "The assessment appendix links every decision to exact stored evidence. The next required stage is the remaining "
               "549 depth-20 candidates, followed by pooled MAP and the comparison demo. A later controlled negation minimal-pair "

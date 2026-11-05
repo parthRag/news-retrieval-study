@@ -274,11 +274,11 @@ Group 5 member and mentor details appear on the first page. The brief records re
 Use Python 3.12 and Java 21. In the existing environment, from the repository root:
 
 ```sh
-.venv/bin/python -m news_ir.demo
-.venv/bin/python -m pytest -q
-.venv/bin/python scripts/validate_custom_depth20.py
-.venv/bin/python scripts/evaluate_quality_ablation.py --output artifacts/evaluations/quality-recheck
-.venv/bin/python scripts/build_final_documents.py
+python -m news_ir.demo
+python -m pytest -q
+python scripts/validate_custom_depth20.py
+python scripts/evaluate_quality_ablation.py --output artifacts/evaluations/quality-recheck
+python scripts/build_final_documents.py
 ```
 
 The locked environment and `README.md` document setup, source/index construction, Kaggle encoding, independent evaluation and saved-run reproduction. `reports/DEMO_GUIDE.md` provides the presentation sequence. `DELIVERABLES.md` maps submission artifacts and local data dependencies.

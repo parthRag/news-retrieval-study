@@ -45,6 +45,8 @@ jobs:
         run: python -m pytest -q --junitxml=artifacts/test-results-native.xml
       - name: Real CLI and browser smoke test
         run: python scripts/smoke_portability.py --output artifacts/platform-smoke.json
+      - name: Reproduce packaged benchmark results
+        run: python scripts/validate_final_deliverables.py
       - name: Save platform evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -53,4 +55,5 @@ jobs:
           path: |
             artifacts/test-results-native.xml
             artifacts/platform-smoke.json
+            deliverables/final_validation.json
           if-no-files-found: warn

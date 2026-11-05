@@ -11,7 +11,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from .assessment import assessed_top5_metrics, validate_assessments, write_jsonl
-from .platform_support import resolve_saved_path
+from .platform_support import WINDOWS, resolve_saved_path
 from .data import sha256_file
 from .evaluation import evaluate_query, gain
 
@@ -25,13 +25,18 @@ def crosscheck_top5(qrels, rankings, metrics, output, *, name, gain_mode="linear
     labels, run = folder / f"{name}.qrels", folder / f"{name}.run"
     labels.write_text("".join(f"{q} 0 {d} {gain(g, gain_mode)}\n" for q, ds in qrels.items() for d, g in ds.items()), encoding="utf-8", newline="\n")
     run.write_text("".join(f"{q} Q0 {d} {r} {1001-r} top5-check\n" for q, ds in rankings.items() for r, d in enumerate(ds[:5], 1)), encoding="utf-8", newline="\n")
-    configure_java()
-    java = java_executable()
-    jars = [p for p in importlib.resources.files("pyserini.resources.jars").iterdir() if p.name.endswith(".jar")]
-    if len(jars) != 1:
-        raise ValueError("Expected a single installed evaluator JAR")
-    result = subprocess.run([java, "-cp", java_classpath(jars[0]), "trec_eval", "-q", "-c", "-m", "ndcg_cut.5", "-m", "P.5",
-                             str(labels), str(run)], check=True, capture_output=True, text=True)
+    if WINDOWS:
+        from .reference_eval import windows_reference
+        result = windows_reference(qrels, {q: ids[:5] for q, ids in rankings.items()},
+                                   {"ndcg_cut_5", "P_5"}, gain_mode=gain_mode)
+    else:
+        configure_java()
+        java = java_executable()
+        jars = [p for p in importlib.resources.files("pyserini.resources.jars").iterdir() if p.name.endswith(".jar")]
+        if len(jars) != 1:
+            raise ValueError("Expected a single installed evaluator JAR")
+        result = subprocess.run([java, "-cp", java_classpath(jars[0]), "trec_eval", "-q", "-c", "-m", "ndcg_cut.5", "-m", "P.5",
+                                 str(labels), str(run)], check=True, capture_output=True, text=True, encoding="utf-8")
     (folder / f"{name}.trec_eval.txt").write_text(result.stdout, encoding="utf-8", newline="\n")
     observed = {(q, m): float(v) for m, q, v in (line.split() for line in result.stdout.splitlines())}
     checked, max_error = 0, 0.0
@@ -48,7 +53,8 @@ def crosscheck_top5(qrels, rankings, metrics, output, *, name, gain_mode="linear
             checked, max_error = checked + 1, max(max_error, error)
     return {"status": "passed", "comparisons": checked, "max_absolute_difference": max_error,
             "measures": ["ndcg_cut_5", "P_5"], "gain_mode": gain_mode,
-            "policy": "Only top-five metrics; ordinal scores preserve published order; zero-positive topics retained"}
+            "policy": "Only top-five metrics; ordinal scores preserve published order; zero-positive topics retained",
+            "reference_backend": "pytrec-eval-terrier" if WINDOWS else "Anserini trec_eval wrapper"}
 
 
 def uncertainty_bounds(qrels, rankings, assessments):
